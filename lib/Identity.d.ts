@@ -17,11 +17,11 @@ export declare type Identity<A> = A;
 /**
  * @since 2.0.0
  */
-export declare const getShow: <A>(S: Show<A>) => Show<A>;
+export declare const getShow: <A>(S: Show<A>) => Show<Identity<A>>;
 /**
  * @since 2.0.0
  */
-export declare const getEq: <A>(E: Eq<A>) => Eq<A>;
+export declare const getEq: <A>(E: Eq<A>) => Eq<Identity<A>>;
 /**
  * @since 2.0.0
  */

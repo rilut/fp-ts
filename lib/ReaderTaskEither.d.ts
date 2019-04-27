@@ -83,7 +83,7 @@ export declare function fromIOEither<L, A>(ma: IOEither<L, A>): ReaderTaskEither
 /**
  * @since 2.0.0
  */
-export declare function fromPredicate<L, A, B extends A>(predicate: Refinement<A, B>, onFalse: (a: A) => L): ((a: A) => ReaderTaskEither<unknown, L, B>);
+export declare function fromPredicate<L, A, B extends A>(refinement: Refinement<A, B>, onFalse: (a: A) => L): ((a: A) => ReaderTaskEither<unknown, L, B>);
 export declare function fromPredicate<L, A>(predicate: Predicate<A>, onFalse: (a: A) => L): ((a: A) => ReaderTaskEither<unknown, L, A>);
 /**
  * @since 2.0.0

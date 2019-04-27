@@ -195,21 +195,12 @@ export declare function orElse<L, A, M>(ma: Either<L, A>, f: (l: L) => Either<M,
 /**
  * @since 2.0.0
  */
-export declare function getOrElse<L, A>(ma: Either<L, A>, a: A): A;
+export declare function getOrElse<L, A>(ma: Either<L, A>, f: (l: L) => A): A;
 /**
  * @since 2.0.0
  */
-export declare function getOrElseL<L, A>(ma: Either<L, A>, f: (l: L) => A): A;
-/**
- * @since 2.0.0
- */
-export declare function filterOrElse<L, A, B extends A>(ma: Either<L, A>, refinement: Refinement<A, B>, zero: L): Either<L, B>;
-export declare function filterOrElse<L, A>(ma: Either<L, A>, predicate: Predicate<A>, zero: L): Either<L, A>;
-/**
- * @since 2.0.0
- */
-export declare function filterOrElseL<L, A, B extends A>(ma: Either<L, A>, refinement: Refinement<A, B>, zero: (a: A) => L): Either<L, B>;
-export declare function filterOrElseL<L, A>(ma: Either<L, A>, predicate: Predicate<A>, zero: (a: A) => L): Either<L, A>;
+export declare function filterOrElse<L, A, B extends A>(ma: Either<L, A>, refinement: Refinement<A, B>, zero: (a: A) => L): Either<L, B>;
+export declare function filterOrElse<L, A>(ma: Either<L, A>, predicate: Predicate<A>, zero: (a: A) => L): Either<L, A>;
 /**
  * Converts a JavaScript Object Notation (JSON) string into an object.
  *

@@ -23,7 +23,7 @@ export declare function seek<S, A>(sa: Store<S, A>, s: S): Store<S, A>;
  *
  * @since 2.0.0
  */
-export declare const peeks: <S>(f: Endomorphism<S>) => <A>(sa: Store<S, A>) => (s: S) => A;
+export declare const peeks: <S>(f: Endomorphism<S>) => <A>(sa: Store<S, A>) => (_: S) => A;
 /**
  * Reposition the focus at the specified position, which depends on the current position
  *

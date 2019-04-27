@@ -1,10 +1,10 @@
 import { Category2 } from './Category';
-import { Monad2 } from './Monad';
-import { Profunctor2 } from './Profunctor';
-import { Strong2 } from './Strong';
 import { Choice2 } from './Choice';
-import { Semigroup } from './Semigroup';
+import { Monad2 } from './Monad';
 import { Monoid } from './Monoid';
+import { Profunctor2 } from './Profunctor';
+import { Semigroup } from './Semigroup';
+import { Strong2 } from './Strong';
 declare module './HKT' {
     interface URI2HKT2<L, A> {
         Reader: Reader<L, A>;

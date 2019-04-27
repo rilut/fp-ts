@@ -1,5 +1,5 @@
-import { Functor, Functor1, Functor2, Functor2C, Functor3, Functor3C } from './Functor';
-import { HKT, Type, Type2, Type3, URIS, URIS2, URIS3 } from './HKT';
+import { Functor, Functor1, Functor2, Functor2C, Functor3, Functor3C, Functor4 } from './Functor';
+import { HKT, Type, Type2, Type3, Type4, URIS, URIS2, URIS3, URIS4 } from './HKT';
 /**
  * @since 2.0.0
  */
@@ -20,6 +20,9 @@ export interface Apply2C<F extends URIS2, L> extends Functor2C<F, L> {
 }
 export interface Apply3C<F extends URIS3, U, L> extends Functor3C<F, U, L> {
     readonly ap: <A, B>(fab: Type3<F, U, L, (a: A) => B>, fa: Type3<F, U, L, A>) => Type3<F, U, L, B>;
+}
+export interface Apply4<F extends URIS4> extends Functor4<F> {
+    readonly ap: <X, U, L, A, B>(fab: Type4<F, X, U, L, (a: A) => B>, fa: Type4<F, X, U, L, A>) => Type4<F, X, U, L, B>;
 }
 /**
  * Tuple sequencing, i.e., take a tuple of monadic actions and does them from left-to-right, returning the resulting tuple.

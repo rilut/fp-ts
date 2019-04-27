@@ -41,7 +41,7 @@ export declare const put: <S>(s: S) => State<S, void>;
  *
  * @since 2.0.0
  */
-export declare const modify: <S>(f: (s: S) => S) => State<S, undefined>;
+export declare const modify: <S>(f: (s: S) => S) => State<S, void>;
 /**
  * Get a value which depends on the current state
  *

@@ -137,12 +137,7 @@ export declare const isNone: <A>(fa: Option<A>) => fa is None;
 /**
  * @since 2.0.0
  */
-export declare function fold<A, R>(ma: Option<A>, onNone: R, onSome: (a: A) => R): R;
-/**
- * Lazy version of `fold`
- * @since 2.0.0
- */
-export declare function foldL<A, R>(ma: Option<A>, onNone: () => R, onSome: (a: A) => R): R;
+export declare function fold<A, R>(ma: Option<A>, onNone: () => R, onSome: (a: A) => R): R;
 /**
  * Constructs a new `Option` from a nullable type. If the value is `null` or `undefined`, returns `None`, otherwise
  * returns the value wrapped in a `Some`
@@ -168,11 +163,7 @@ export declare function toUndefined<A>(ma: Option<A>): A | undefined;
 /**
  * @since 2.0.0
  */
-export declare function getOrElse<A>(ma: Option<A>, a: A): A;
-/**
- * @since 2.0.0
- */
-export declare function getOrElseL<A>(ma: Option<A>, f: () => A): A;
+export declare function getOrElse<A>(ma: Option<A>, f: () => A): A;
 /**
  * @since 2.0.0
  */

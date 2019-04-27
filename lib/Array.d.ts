@@ -31,7 +31,7 @@ export declare type URI = typeof URI;
 /**
  * @since 2.0.0
  */
-export declare function getShow<L, A>(S: Show<A>): Show<Array<A>>;
+export declare function getShow<A>(S: Show<A>): Show<Array<A>>;
 /**
  *
  * @example
@@ -141,30 +141,18 @@ export declare function flatten<A>(mma: Array<Array<A>>): Array<A>;
  * @example
  * import { fold } from 'fp-ts/lib/Array'
  *
- * const len = <A>(as: Array<A>): number => fold(as, 0, (_, tail) => 1 + len(tail))
+ * const len = <A>(as: Array<A>): number => fold(as, () => 0, (_, tail) => 1 + len(tail))
  * assert.strictEqual(len([1, 2, 3]), 3)
  *
  * @since 2.0.0
  */
-export declare function fold<A, B>(as: Array<A>, onNil: B, onCons: (head: A, tail: Array<A>) => B): B;
-/**
- * Lazy version of `fold`
- *
- * @since 2.0.0
- */
-export declare function foldL<A, B>(as: Array<A>, onNil: () => B, onCons: (head: A, tail: Array<A>) => B): B;
+export declare function fold<A, B>(as: Array<A>, onNil: () => B, onCons: (head: A, tail: Array<A>) => B): B;
 /**
  * Break an array into its initial elements and the last element
  *
  * @since 2.0.0
  */
-export declare function foldr<A, B>(as: Array<A>, onNil: B, onCons: (init: Array<A>, last: A) => B): B;
-/**
- * Lazy version of `foldr`
- *
- * @since 2.0.0
- */
-export declare function foldrL<A, B>(as: Array<A>, onNil: () => B, onCons: (init: Array<A>, last: A) => B): B;
+export declare function foldr<A, B>(as: Array<A>, onNil: () => B, onCons: (init: Array<A>, last: A) => B): B;
 /**
  * Same as `reduce` but it carries over the intermediate steps
  *
@@ -682,7 +670,6 @@ export declare function uniq<A>(E: Eq<A>): ((as: Array<A>) => Array<A>);
  * etc...
  *
  * @example
- * import { isSome } from 'fp-ts/lib/Option'
  * import { sortBy } from 'fp-ts/lib/Array'
  * import { contramap, ordString, ordNumber } from 'fp-ts/lib/Ord'
  *
@@ -695,35 +682,6 @@ export declare function uniq<A>(E: Eq<A>): ((as: Array<A>) => Array<A>);
  *
  * const sortByNameByAge = sortBy([byName, byAge])
  *
- * if (isSome(sortByNameByAge)) {
- *   const persons = [{ name: 'a', age: 1 }, { name: 'b', age: 3 }, { name: 'c', age: 2 }, { name: 'b', age: 2 }]
- *   assert.deepStrictEqual(sortByNameByAge.value(persons), [
- *     { name: 'a', age: 1 },
- *     { name: 'b', age: 2 },
- *     { name: 'b', age: 3 },
- *     { name: 'c', age: 2 }
- *   ])
- * }
- *
- *
- * @since 2.0.0
- */
-export declare function sortBy<A>(ords: Array<Ord<A>>): Option<Endomorphism<Array<A>>>;
-/**
- * Non failing version of `sortBy`
- * @example
- * import { sortBy1 } from 'fp-ts/lib/Array'
- * import { contramap, ordString, ordNumber } from 'fp-ts/lib/Ord'
- *
- * interface Person {
- *   name: string
- *   age: number
- * }
- * const byName = contramap(ordString, (p: Person) => p.name)
- * const byAge = contramap(ordNumber, (p: Person) => p.age)
- *
- * const sortByNameByAge = sortBy1(byName, [byAge])
- *
  * const persons = [{ name: 'a', age: 1 }, { name: 'b', age: 3 }, { name: 'c', age: 2 }, { name: 'b', age: 2 }]
  * assert.deepStrictEqual(sortByNameByAge(persons), [
  *   { name: 'a', age: 1 },
@@ -732,10 +690,9 @@ export declare function sortBy<A>(ords: Array<Ord<A>>): Option<Endomorphism<Arra
  *   { name: 'c', age: 2 }
  * ])
  *
- *
  * @since 2.0.0
  */
-export declare function sortBy1<A>(head: Ord<A>, tail: Array<Ord<A>>): Endomorphism<Array<A>>;
+export declare function sortBy<A>(ords: Array<Ord<A>>): Endomorphism<Array<A>>;
 /**
  * A useful recursion pattern for processing an array to produce a new array, often used for "chopping" up the input
  * array. Typically chop is called with some function that will consume an initial prefix of the array and produce a
