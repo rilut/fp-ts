@@ -156,15 +156,7 @@ export const isNone = <A>(fa: Option<A>): fa is None => {
 /**
  * @since 2.0.0
  */
-export function fold<A, R>(ma: Option<A>, onNone: R, onSome: (a: A) => R): R {
-  return isNone(ma) ? onNone : onSome(ma.value)
-}
-
-/**
- * Lazy version of `fold`
- * @since 2.0.0
- */
-export function foldL<A, R>(ma: Option<A>, onNone: () => R, onSome: (a: A) => R): R {
+export function fold<A, R>(ma: Option<A>, onNone: () => R, onSome: (a: A) => R): R {
   return isNone(ma) ? onNone() : onSome(ma.value)
 }
 
@@ -202,14 +194,7 @@ export function toUndefined<A>(ma: Option<A>): A | undefined {
 /**
  * @since 2.0.0
  */
-export function getOrElse<A>(ma: Option<A>, a: A): A {
-  return isNone(ma) ? a : ma.value
-}
-
-/**
- * @since 2.0.0
- */
-export function getOrElseL<A>(ma: Option<A>, f: () => A): A {
+export function getOrElse<A>(ma: Option<A>, f: () => A): A {
   return isNone(ma) ? f() : ma.value
 }
 
@@ -312,7 +297,7 @@ export function getRefinement<A, B extends A>(getOption: (a: A) => Option<B>): R
  * @since 2.0.0
  */
 export function mapNullable<A, B>(ma: Option<A>, f: (a: A) => B | null | undefined): Option<B> {
-  return isNone(ma) ? ma : fromNullable(f(ma.value))
+  return isNone(ma) ? none : fromNullable(f(ma.value))
 }
 
 /**
@@ -499,7 +484,7 @@ const partition = <A>(fa: Option<A>, predicate: Predicate<A>): Separated<Option<
 }
 
 const chain = <A, B>(fa: Option<A>, f: (a: A) => Option<B>): Option<B> => {
-  return isNone(fa) ? fa : f(fa.value)
+  return isNone(fa) ? none : f(fa.value)
 }
 
 const traverse = <F>(F: Applicative<F>) => <A, B>(ta: Option<A>, f: (a: A) => HKT<F, B>): HKT<F, Option<B>> => {
@@ -513,7 +498,7 @@ const sequence = <F>(F: Applicative<F>) => <A>(ta: Option<HKT<F, A>>): HKT<F, Op
 const defaultSeparate = { left: none, right: none }
 
 const map = <A, B>(ma: Option<A>, f: (a: A) => B): Option<B> => {
-  return isNone(ma) ? ma : some(f(ma.value))
+  return isNone(ma) ? none : some(f(ma.value))
 }
 
 const separate = <RL, RR>(ma: Option<Either<RL, RR>>): Separated<Option<RL>, Option<RR>> => {
@@ -522,7 +507,7 @@ const separate = <RL, RR>(ma: Option<Either<RL, RR>>): Separated<Option<RL>, Opt
       left: getLeft(e),
       right: getRight(e)
     })),
-    defaultSeparate
+    () => defaultSeparate
   )
 }
 
@@ -533,7 +518,7 @@ const wilt = <F>(F: Applicative<F>) => <RL, RR, A>(
   fa: Option<A>,
   f: (a: A) => HKT<F, Either<RL, RR>>
 ): HKT<F, Separated<Option<RL>, Option<RR>>> => {
-  return getOrElseL(
+  return getOrElse(
     map(fa, a =>
       F.map(f(a), e => ({
         left: getLeft(e),
@@ -563,7 +548,7 @@ export const option: Monad1<URI> &
   URI,
   map,
   of: some,
-  ap: (mab, ma) => (isNone(mab) ? mab : isNone(ma) ? ma : some(mab.value(ma.value))),
+  ap: (mab, ma) => (isNone(mab) ? none : isNone(ma) ? none : some(mab.value(ma.value))),
   chain,
   reduce: (fa, b, f) => (isNone(fa) ? b : f(b, fa.value)),
   foldMap: M => (fa, f) => (isNone(fa) ? M.empty : f(fa.value)),
@@ -572,7 +557,7 @@ export const option: Monad1<URI> &
   sequence,
   zero: () => none,
   alt: (ma, f) => (isNone(ma) ? f() : ma),
-  extend: (wa, f) => (isNone(wa) ? wa : some(f(wa))),
+  extend: (wa, f) => (isNone(wa) ? none : some(f(wa))),
   compact: ma => chain(ma, identity),
   separate,
   filter,
