@@ -1,15 +1,11 @@
 import * as assert from 'assert'
 import {
   and,
-  apply,
-  applyFlipped,
-  compose,
   constFalse,
   constNull,
   constTrue,
   constUndefined,
   constVoid,
-  curry,
   decrement,
   flip,
   identity,
@@ -23,103 +19,16 @@ import {
 
 const f = (n: number) => n + 1
 const g = (n: number) => n * 2
-const h = (a: number) => (b: number) => a - b
 
 describe('function', () => {
   it('flip', () => {
-    assert.strictEqual(flip(h)(5)(2), -3)
+    const f = (a: number, b: string) => a - b.length
+    assert.strictEqual(flip(f)('aaa', 2), -1)
   })
 
   it('on', () => {
-    const stringH = on((a: number, b: number) => a - b)((s: string) => s.length)
-    assert.strictEqual(stringH('abcde', 'ab'), 3)
-  })
-
-  it('compose', () => {
-    assert.strictEqual(
-      compose(
-        f,
-        g
-      )(2),
-      5
-    )
-    assert.strictEqual(
-      compose(
-        f,
-        g,
-        f
-      )(2),
-      7
-    )
-    assert.strictEqual(
-      compose(
-        f,
-        g,
-        f,
-        g
-      )(2),
-      11
-    )
-    assert.strictEqual(
-      compose(
-        f,
-        g,
-        f,
-        g,
-        f
-      )(2),
-      15
-    )
-    assert.strictEqual(
-      compose(
-        f,
-        g,
-        f,
-        g,
-        f,
-        g
-      )(2),
-      23
-    )
-    assert.strictEqual(
-      compose(
-        f,
-        g,
-        f,
-        g,
-        f,
-        g,
-        f
-      )(2),
-      31
-    )
-    assert.strictEqual(
-      compose(
-        f,
-        g,
-        f,
-        g,
-        f,
-        g,
-        f,
-        g
-      )(2),
-      47
-    )
-    assert.strictEqual(
-      compose(
-        f,
-        g,
-        f,
-        g,
-        f,
-        g,
-        f,
-        g,
-        f
-      )(2),
-      63
-    )
+    const sub = on((a: number, b: number) => a - b, (s: string) => s.length)
+    assert.strictEqual(sub('abcde', 'ab'), 3)
   })
 
   it('pipe', () => {
@@ -209,17 +118,6 @@ describe('function', () => {
     )
   })
 
-  it('curry', () => {
-    const h2 = curry((a: number, b: number): number => a + b)
-    assert.strictEqual(h2(1)(2), 3)
-    const h3 = curry((a: number, b: number, c: number): number => a + b + c)
-    assert.strictEqual(h3(1)(2)(3), 6)
-    const h5 = curry((a: number, b: number, c: number, d: number, e: number): number => a + b + c + d + e)
-    assert.strictEqual(h5(1)(2)(3)(4)(5), 15)
-    const snoc = (as: Array<number>, a: number) => as.concat(a)
-    assert.deepStrictEqual(curry(snoc)([1, 2, 3])(4), [1, 2, 3, 4])
-  })
-
   it('not', () => {
     const n = not(Boolean)
     assert.strictEqual(n(false), true)
@@ -266,15 +164,6 @@ describe('function', () => {
     assert.strictEqual(between2and3(1), false)
     assert.strictEqual(between2and3(4), false)
     assert.strictEqual(between2and3(2.5), true)
-  })
-
-  it('apply', () => {
-    const double = (n: number) => n * 2
-    assert.strictEqual(apply(double)(2), 4)
-  })
-
-  it('applyFlipped', () => {
-    assert.strictEqual(applyFlipped(2)(n => n * 2), 4)
   })
 
   it('unsafeCoerce', () => {

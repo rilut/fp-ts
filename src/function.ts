@@ -1,21 +1,22 @@
-import { HKT } from './HKT'
-
 /**
+ * For use with phantom fields
+ *
  * @since 2.0.0
  */
-export const identity = <A>(a: A): A => {
-  return a
-}
-
-/**
- * @since 2.0.0
- */
-export const unsafeCoerce: <A, B>(a: A) => B = identity as any
+export const phantom: any = undefined
 
 /**
  * Thunk type
  */
 export type Lazy<A> = () => A
+
+export type Predicate<A> = (a: A) => boolean
+
+export type Refinement<A, B extends A> = (a: A) => a is B
+
+export type Endomorphism<A> = (a: A) => A
+
+export type BinaryOperation<A, B> = (a1: A, a2: A) => B
 
 /**
  * @example
@@ -27,35 +28,28 @@ export type Lazy<A> = () => A
  */
 export type FunctionN<A extends Array<unknown>, B> = (...args: A) => B
 
-export type Curried2<A, B, C> = (a: A) => (b: B) => C
-export type Curried3<A, B, C, D> = (a: A) => (b: B) => (c: C) => D
-export type Curried4<A, B, C, D, E> = (a: A) => (b: B) => (c: C) => (d: D) => E
-export type Curried5<A, B, C, D, E, F> = (a: A) => (b: B) => (c: C) => (d: D) => (e: E) => F
-export type Curried6<A, B, C, D, E, F, G> = (a: A) => (b: B) => (c: C) => (d: D) => (e: E) => (f: F) => G
-export type Curried7<A, B, C, D, E, F, G, H> = (a: A) => (b: B) => (c: C) => (d: D) => (e: E) => (f: F) => (g: G) => H
-export type Curried8<A, B, C, D, E, F, G, H, I> = (
-  a: A
-) => (b: B) => (c: C) => (d: D) => (e: E) => (f: F) => (g: G) => (h: H) => I
-export type Curried9<A, B, C, D, E, F, G, H, I, J> = (
-  a: A
-) => (b: B) => (c: C) => (d: D) => (e: E) => (f: F) => (g: G) => (h: H) => (i: I) => J
-
-export type Predicate<A> = (a: A) => boolean
-
-export type Refinement<A, B extends A> = (a: A) => a is B
+/**
+ * @since 2.0.0
+ */
+export function identity<A>(a: A): A {
+  return a
+}
 
 /**
  * @since 2.0.0
  */
-export const not = <A>(predicate: Predicate<A>): Predicate<A> => {
+export const unsafeCoerce: <A, B>(a: A) => B = identity as any
+
+/**
+ * @since 2.0.0
+ */
+export function not<A>(predicate: Predicate<A>): Predicate<A> {
   return a => !predicate(a)
 }
 
 /**
  * @since 2.0.0
  */
-export function or<A, B1 extends A, B2 extends A>(p1: Refinement<A, B1>, p2: Refinement<A, B2>): Refinement<A, B1 | B2>
-export function or<A>(p1: Predicate<A>, p2: Predicate<A>): Predicate<A>
 export function or<A>(p1: Predicate<A>, p2: Predicate<A>): Predicate<A> {
   return a => p1(a) || p2(a)
 }
@@ -63,21 +57,14 @@ export function or<A>(p1: Predicate<A>, p2: Predicate<A>): Predicate<A> {
 /**
  * @since 2.0.0
  */
-export const and = <A>(p1: Predicate<A>, p2: Predicate<A>): Predicate<A> => {
+export function and<A>(p1: Predicate<A>, p2: Predicate<A>): Predicate<A> {
   return a => p1(a) && p2(a)
 }
-
-export type Endomorphism<A> = (a: A) => A
-
-export type BinaryOperation<A, B> = (a1: A, a2: A) => B
-
-export type Kleisli<F, A, B> = (a: A) => HKT<F, B>
-export type Cokleisli<F, A, B> = (fa: HKT<F, A>) => B
 
 /**
  * @since 2.0.0
  */
-export const constant = <A>(a: A): Lazy<A> => {
+export function constant<A>(a: A): Lazy<A> {
   return () => a
 }
 
@@ -127,12 +114,12 @@ export const constVoid = (): void => {
 }
 
 /**
- * Flips the order of the arguments to a function of two arguments.
+ * Flips the order of the arguments of a function of two arguments.
  *
  * @since 2.0.0
  */
-export const flip = <A, B, C>(f: Curried2<A, B, C>): Curried2<B, A, C> => {
-  return b => a => f(a)(b)
+export function flip<A, B, C>(f: (a: A, b: B) => C): ((b: B, a: A) => C) {
+  return (b, a) => f(a, b)
 }
 
 /**
@@ -140,70 +127,8 @@ export const flip = <A, B, C>(f: Curried2<A, B, C>): Curried2<B, A, C> => {
  *
  * @since 2.0.0
  */
-export const on = <B, C>(op: BinaryOperation<B, C>) => <A>(f: (a: A) => B): BinaryOperation<A, C> => {
-  return (x, y) => op(f(x), f(y))
-}
-
-/**
- * @since 2.0.0
- */
-export function compose<A, B, C>(bc: (b: B) => C, ab: (a: A) => B): (a: A) => C
-export function compose<A, B, C, D>(cd: (c: C) => D, bc: (b: B) => C, ab: (a: A) => B): (a: A) => D
-export function compose<A, B, C, D, E>(de: (d: D) => E, cd: (c: C) => D, bc: (b: B) => C, ab: (a: A) => B): (a: A) => E
-export function compose<A, B, C, D, E, F>(
-  ef: (e: E) => F,
-  de: (d: D) => E,
-  cd: (c: C) => D,
-  bc: (b: B) => C,
-  ab: (a: A) => B
-): (a: A) => F
-export function compose<A, B, C, D, E, F, G>(
-  fg: (f: F) => G,
-  ef: (e: E) => F,
-  de: (d: D) => E,
-  cd: (c: C) => D,
-  bc: (b: B) => C,
-  ab: (a: A) => B
-): (a: A) => G
-export function compose<A, B, C, D, E, F, G, H>(
-  gh: (g: G) => H,
-  fg: (f: F) => G,
-  ef: (e: E) => F,
-  de: (d: D) => E,
-  cd: (c: C) => D,
-  bc: (b: B) => C,
-  ab: (a: A) => B
-): (a: A) => H
-export function compose<A, B, C, D, E, F, G, H, I>(
-  hi: (h: H) => I,
-  gh: (g: G) => H,
-  fg: (f: F) => G,
-  ef: (e: E) => F,
-  de: (d: D) => E,
-  cd: (c: C) => D,
-  bc: (b: B) => C,
-  ab: (a: A) => B
-): (a: A) => I
-export function compose<A, B, C, D, E, F, G, H, I, J>(
-  ij: (i: I) => J,
-  hi: (h: H) => I,
-  gh: (g: G) => H,
-  fg: (f: F) => G,
-  ef: (e: E) => F,
-  de: (d: D) => E,
-  cd: (c: C) => D,
-  bc: (b: B) => C,
-  ab: (a: A) => B
-): (a: A) => J
-export function compose(...fns: Array<Function>): Function {
-  const len = fns.length - 1
-  return function(this: any, x: any) {
-    let y = x
-    for (let i = len; i > -1; i--) {
-      y = fns[i].call(this, y)
-    }
-    return y
-  }
+export function on<A, B, C>(op: BinaryOperation<B, C>, f: (a: A) => B): BinaryOperation<A, C> {
+  return (a1, a2) => op(f(a1), f(a2))
 }
 
 /**
@@ -271,90 +196,20 @@ export function pipe(...fns: Array<Function>): Function {
 /**
  * @since 2.0.0
  */
-export const concat = <A>(x: Array<A>, y: Array<A>): Array<A> => {
-  const lenx = x.length
-  const leny = y.length
-  const r = Array(lenx + leny)
-  for (let i = 0; i < lenx; i++) {
-    r[i] = x[i]
-  }
-  for (let i = 0; i < leny; i++) {
-    r[i + lenx] = y[i]
-  }
-  return r
-}
-
-/**
- * @since 2.0.0
- */
-export function curried(f: Function, n: number, acc: Array<any>) {
-  return function(this: any, x: any) {
-    const combined = concat(acc, [x])
-    return n === 0 ? f.apply(this, combined) : curried(f, n - 1, combined)
-  }
-}
-
-/**
- * @since 2.0.0
- */
-export function curry<A, B, C>(f: FunctionN<[A, B], C>): Curried2<A, B, C>
-export function curry<A, B, C, D>(f: FunctionN<[A, B, C], D>): Curried3<A, B, C, D>
-export function curry<A, B, C, D, E>(f: FunctionN<[A, B, C, D], E>): Curried4<A, B, C, D, E>
-export function curry<A, B, C, D, E, F>(f: FunctionN<[A, B, C, D, E], F>): Curried5<A, B, C, D, E, F>
-export function curry<A, B, C, D, E, F, G>(f: FunctionN<[A, B, C, D, E, F], G>): Curried6<A, B, C, D, E, F, G>
-export function curry<A, B, C, D, E, F, G, H>(f: FunctionN<[A, B, C, D, E, F, G], H>): Curried7<A, B, C, D, E, F, G, H>
-export function curry<A, B, C, D, E, F, G, H, I>(
-  f: FunctionN<[A, B, C, D, E, F, G, H], I>
-): Curried8<A, B, C, D, E, F, G, H, I>
-export function curry<A, B, C, D, E, F, G, H, I, J>(
-  f: FunctionN<[A, B, C, D, E, F, G, H, I], J>
-): Curried9<A, B, C, D, E, F, G, H, I, J>
-export function curry(f: Function) {
-  return curried(f, f.length - 1, [])
-}
-
-/**
- * @since 2.0.0
- */
-export const tuple = <T extends Array<any>>(...t: T): T => {
+export function tuple<T extends Array<any>>(...t: T): T {
   return t
 }
 
 /**
- * Applies a function to an argument ($)
- *
  * @since 2.0.0
  */
-export const apply = <A, B>(f: (a: A) => B) => (a: A): B => {
-  return f(a)
-}
-
-/**
- * Applies an argument to a function (#)
- *
- * @since 2.0.0
- */
-export const applyFlipped = <A>(a: A) => <B>(f: (a: A) => B): B => {
-  return f(a)
-}
-
-/**
- * For use with phantom fields
- *
- * @since 2.0.0
- */
-export const phantom: any = undefined
-
-/**
- * @since 2.0.0
- */
-export const increment = (n: number): number => {
+export function increment(n: number): number {
   return n + 1
 }
 
 /**
  * @since 2.0.0
  */
-export const decrement = (n: number): number => {
+export function decrement(n: number): number {
   return n - 1
 }

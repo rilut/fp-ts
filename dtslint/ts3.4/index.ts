@@ -150,7 +150,7 @@ C.const_.contramap(C.make<boolean>(true), (s: string) => s.length) // $ExpectTyp
 
 // Monad2C
 
-OT.getOptionT(Th.getMonad(Mon.getArrayMonoid<string>())) // $ExpectType OptionT2C<"These", string[]>
+OT.getOptionT(Th.getMonad(A.getMonoid<string>())) // $ExpectType OptionT2C<"These", string[]>
 
 //
 // TaskEither
@@ -358,6 +358,11 @@ const nea2v1reverse1 = nea2v1.reverse() // $ExpectType NonEmptyArray<string>
 //
 // function
 //
+
+// flip
+
+// should handle generics
+const consFlipped = Fu.flip(A.cons) // $ExpectType <A>(b: A[], a: A) => NonEmptyArray<A>
 
 // tuple
 
