@@ -111,7 +111,7 @@ export declare const group: <A>(E: Eq<A>) => (as: A[]) => NonEmptyArray<A>[];
  *
  * @since 2.0.0
  */
-export declare const groupSort: <A>(O: Ord<A>) => (as: A[]) => NonEmptyArray<A>[];
+export declare function groupSort<A>(O: Ord<A>): ((as: Array<A>) => Array<NonEmptyArray<A>>);
 /**
  * Splits an array into sub-non-empty-arrays stored in an object, based on the result of calling a `string`-returning
  * function on each element, and grouping the results according to values returned

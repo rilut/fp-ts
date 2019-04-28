@@ -41,16 +41,6 @@ export declare const monoidAll: Monoid<boolean>;
  */
 export declare const monoidAny: Monoid<boolean>;
 /**
- * @since 2.0.0
- */
-export declare const unsafeMonoidArray: Monoid<Array<any>>;
-/**
- * `Monoid` under array concatenation
- *
- * @since 2.0.0
- */
-export declare const getArrayMonoid: <A = never>() => Monoid<A[]>;
-/**
  * Number monoid under addition
  * @since 2.0.0
  */
@@ -75,7 +65,7 @@ export declare const getFunctionMonoid: <M>(M: Monoid<M>) => <A = never>() => Mo
 /**
  * @since 2.0.0
  */
-export declare const getEndomorphismMonoid: <A = never>() => Monoid<Endomorphism<A>>;
+export declare function getEndomorphismMonoid<A = never>(): Monoid<Endomorphism<A>>;
 /**
  * @since 2.0.0
  */
