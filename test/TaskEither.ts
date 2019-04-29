@@ -8,13 +8,6 @@ import * as T from '../src/Task'
 import * as TE from '../src/TaskEither'
 
 describe('TaskEither', () => {
-  it('attempt', () => {
-    return Promise.all([TE.attempt(TE.fromRight(1))(), TE.attempt(TE.fromLeft('foo'))()]).then(([x, y]) => {
-      assert.deepStrictEqual(x, eitherRight(eitherRight(1)))
-      assert.deepStrictEqual(y, eitherRight(eitherLeft('foo')))
-    })
-  })
-
   describe('bracket', () => {
     let log: Array<string> = []
 
@@ -98,13 +91,11 @@ describe('TaskEither', () => {
   })
 
   it('chain', () => {
-    const te1 = TE.taskEither.chain(
-      TE.fromRight('foo'),
-      a => (a.length > 2 ? TE.fromRight(a.length) : TE.fromLeft('foo'))
+    const te1 = TE.taskEither.chain(TE.fromRight('foo'), a =>
+      a.length > 2 ? TE.fromRight(a.length) : TE.fromLeft('foo')
     )
-    const te2 = TE.taskEither.chain(
-      TE.fromRight('a'),
-      a => (a.length > 2 ? TE.fromRight(a.length) : TE.fromLeft('foo'))
+    const te2 = TE.taskEither.chain(TE.fromRight('a'), a =>
+      a.length > 2 ? TE.fromRight(a.length) : TE.fromLeft('foo')
     )
     return Promise.all([te1(), te2()]).then(([e1, e2]) => {
       assert.deepStrictEqual(e1, eitherRight(3))

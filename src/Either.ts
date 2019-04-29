@@ -112,8 +112,8 @@ export function getShow<L, A>(SL: Show<L>, SA: Show<A>): Show<Either<L, A>> {
  * @since 2.0.0
  */
 export function getEq<L, A>(SL: Eq<L>, SA: Eq<A>): Eq<Either<L, A>> {
-  return fromEquals(
-    (x, y) => (isLeft(x) ? isLeft(y) && SL.equals(x.left, y.left) : isRight(y) && SA.equals(x.right, y.right))
+  return fromEquals((x, y) =>
+    isLeft(x) ? isLeft(y) && SL.equals(x.left, y.left) : isRight(y) && SA.equals(x.right, y.right)
   )
 }
 
@@ -184,8 +184,8 @@ export function fromPredicate<L, A>(predicate: Predicate<A>, onFalse: (a: A) => 
   return a => (predicate(a) ? right(a) : left(onFalse(a)))
 }
 
-function fromOption<L, A>(fa: Option<A>, onNone: () => L): Either<L, A> {
-  return fa._tag === 'None' ? left(onNone()) : right(fa.value)
+function fromOption<L, A>(ma: Option<A>, onNone: () => L): Either<L, A> {
+  return ma._tag === 'None' ? left(onNone()) : right(ma.value)
 }
 
 /**
@@ -382,14 +382,12 @@ const sequence = <F>(F: Applicative<F>) => <L, A>(ma: Either<L, HKT<F, A>>): HKT
 }
 
 const chainRec = <L, A, B>(a: A, f: (a: A) => Either<L, Either<A, B>>): Either<L, B> => {
-  return tailRec(
-    f(a),
-    e =>
-      isLeft(e)
-        ? right<Either<L, B>>(left(e.left))
-        : isLeft(e.right)
-          ? left(f(e.right.left))
-          : right(right(e.right.right))
+  return tailRec(f(a), e =>
+    isLeft(e)
+      ? right<Either<L, B>>(left(e.left))
+      : isLeft(e.right)
+      ? left(f(e.right.left))
+      : right(right(e.right.right))
   )
 }
 
@@ -412,8 +410,8 @@ export function getCompactable<L>(M: Monoid<L>): Compactable2C<URI, L> {
     return isLeft(ma)
       ? { left: ma, right: ma }
       : isLeft(ma.right)
-        ? { left: right(ma.right.left), right: empty }
-        : { left: empty, right: right(ma.right.right) }
+      ? { left: right(ma.right.left), right: empty }
+      : { left: empty, right: right(ma.right.right) }
   }
 
   return {
@@ -435,13 +433,13 @@ export function getFilterable<L>(M: Monoid<L>): Filterable2C<URI, L> {
   const onNone = () => M.empty
 
   const partitionMap = <RL, RR, A>(
-    fa: Either<L, A>,
+    ma: Either<L, A>,
     f: (a: A) => Either<RL, RR>
   ): Separated<Either<L, RL>, Either<L, RR>> => {
-    if (isLeft(fa)) {
-      return { left: fa, right: fa }
+    if (isLeft(ma)) {
+      return { left: ma, right: ma }
     }
-    const e = f(fa.right)
+    const e = f(ma.right)
     return isLeft(e) ? { left: right(e.left), right: empty } : { left: empty, right: right(e.right) }
   }
 
@@ -449,8 +447,8 @@ export function getFilterable<L>(M: Monoid<L>): Filterable2C<URI, L> {
     return isLeft(ma)
       ? { left: ma, right: ma }
       : p(ma.right)
-        ? { left: empty, right: right(ma.right) }
-        : { left: right(ma.right), right: empty }
+      ? { left: empty, right: right(ma.right) }
+      : { left: right(ma.right), right: empty }
   }
 
   const filterMap = <A, B>(ma: Either<L, A>, f: (a: A) => Option<B>): Either<L, B> => {

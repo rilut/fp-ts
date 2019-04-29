@@ -11,19 +11,19 @@ parent: Modules
 - [ReaderTaskEither (interface)](#readertaskeither-interface)
 - [URI (type alias)](#uri-type-alias)
 - [URI (constant)](#uri-constant)
+- [ask (constant)](#ask-constant)
+- [asks (constant)](#asks-constant)
 - [fromReader (constant)](#fromreader-constant)
 - [fromRight (constant)](#fromright-constant)
+- [fromTaskEither (constant)](#fromtaskeither-constant)
+- [local (constant)](#local-constant)
 - [readerTaskEither (constant)](#readertaskeither-constant)
 - [readerTaskEitherSeq (constant)](#readertaskeitherseq-constant)
-- [ask (function)](#ask-function)
-- [asks (function)](#asks-function)
 - [fold (function)](#fold-function)
 - [fromIOEither (function)](#fromioeither-function)
 - [fromLeft (function)](#fromleft-function)
 - [fromPredicate (function)](#frompredicate-function)
-- [fromTaskEither (function)](#fromtaskeither-function)
 - [left (function)](#left-function)
-- [local (function)](#local-function)
 - [mapLeft (function)](#mapleft-function)
 - [orElse (function)](#orelse-function)
 - [right (function)](#right-function)
@@ -60,6 +60,26 @@ export type URI = typeof URI
 export const URI = ...
 ```
 
+# ask (constant)
+
+**Signature**
+
+```ts
+export const ask: <E>() => ReaderTaskEither<E, never, E> = ...
+```
+
+Added in v2.0.0
+
+# asks (constant)
+
+**Signature**
+
+```ts
+export const asks: <E, A>(f: (e: E) => A) => ReaderTaskEither<E, never, A> = ...
+```
+
+Added in v2.0.0
+
 # fromReader (constant)
 
 **Signature**
@@ -76,6 +96,26 @@ Added in v2.0.0
 
 ```ts
 export const fromRight: <A>(a: A) => ReaderTaskEither<unknown, never, A> = ...
+```
+
+Added in v2.0.0
+
+# fromTaskEither (constant)
+
+**Signature**
+
+```ts
+export const fromTaskEither: <E, L, A>(ma: TaskEither<L, A>) => ReaderTaskEither<E, L, A> = ...
+```
+
+Added in v2.0.0
+
+# local (constant)
+
+**Signature**
+
+```ts
+export const local: <E, L, A, D>(ma: ReaderTaskEither<E, L, A>, f: (f: D) => E) => ReaderTaskEither<D, L, A> = ...
 ```
 
 Added in v2.0.0
@@ -103,26 +143,6 @@ Like `readerTaskEither` but `ap` is sequential
 
 ```ts
 export const readerTaskEitherSeq: typeof readerTaskEither = ...
-```
-
-Added in v2.0.0
-
-# ask (function)
-
-**Signature**
-
-```ts
-export function ask<E>(): ReaderTaskEither<E, never, E> { ... }
-```
-
-Added in v2.0.0
-
-# asks (function)
-
-**Signature**
-
-```ts
-export function asks<E, A>(f: (e: E) => A): ReaderTaskEither<E, never, A> { ... }
 ```
 
 Added in v2.0.0
@@ -169,21 +189,11 @@ Added in v2.0.0
 export function fromPredicate<L, A, B extends A>(
   refinement: Refinement<A, B>,
   onFalse: (a: A) => L
-): ((a: A) => ReaderTaskEither<unknown, L, B>)
+): (a: A) => ReaderTaskEither<unknown, L, B>
 export function fromPredicate<L, A>(
   predicate: Predicate<A>,
   onFalse: (a: A) => L
-): ((a: A) => ReaderTaskEither<unknown, L, A>) { ... }
-```
-
-Added in v2.0.0
-
-# fromTaskEither (function)
-
-**Signature**
-
-```ts
-export function fromTaskEither<E, L, A>(ma: TaskEither<L, A>): ReaderTaskEither<E, L, A> { ... }
+): (a: A) => ReaderTaskEither<unknown, L, A> { ... }
 ```
 
 Added in v2.0.0
@@ -194,16 +204,6 @@ Added in v2.0.0
 
 ```ts
 export function left<E, L>(ma: Task<L>): ReaderTaskEither<E, L, never> { ... }
-```
-
-Added in v2.0.0
-
-# local (function)
-
-**Signature**
-
-```ts
-export function local<E, L, A, D>(ma: ReaderTaskEither<E, L, A>, f: (f: D) => E): ReaderTaskEither<D, L, A> { ... }
 ```
 
 Added in v2.0.0
