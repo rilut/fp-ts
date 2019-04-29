@@ -165,7 +165,7 @@ export declare function foldr<A, B>(as: Array<A>, onNil: () => B, onCons: (init:
  *
  * @since 2.0.0
  */
-export declare function scanLeft<A, B>(as: Array<A>, b: B, f: ((b: B, a: A) => B)): Array<B>;
+export declare function scanLeft<A, B>(as: Array<A>, b: B, f: (b: B, a: A) => B): Array<B>;
 /**
  * Fold an array from the right, keeping all intermediate results instead of only the final result
  *
@@ -664,7 +664,7 @@ export declare function elem<A>(E: Eq<A>): (a: A, as: Array<A>) => boolean;
  *
  * @since 2.0.0
  */
-export declare function uniq<A>(E: Eq<A>): ((as: Array<A>) => Array<A>);
+export declare function uniq<A>(E: Eq<A>): (as: Array<A>) => Array<A>;
 /**
  * Sort the elements of an array in increasing order, where elements are compared using first `ords[0]`, then `ords[1]`,
  * etc...
@@ -784,7 +784,7 @@ export declare function comprehension<A, R>(input: [Array<A>], f: (a: A) => bool
  *
  * @since 2.0.0
  */
-export declare function union<A>(E: Eq<A>): ((xs: Array<A>, ys: Array<A>) => Array<A>);
+export declare function union<A>(E: Eq<A>): (xs: Array<A>, ys: Array<A>) => Array<A>;
 /**
  * Creates an array of unique values that are included in all given arrays using a `Eq` for equality
  * comparisons. The order and references of result values are determined by the first array.
@@ -798,7 +798,7 @@ export declare function union<A>(E: Eq<A>): ((xs: Array<A>, ys: Array<A>) => Arr
  *
  * @since 2.0.0
  */
-export declare function intersection<A>(E: Eq<A>): ((xs: Array<A>, ys: Array<A>) => Array<A>);
+export declare function intersection<A>(E: Eq<A>): (xs: Array<A>, ys: Array<A>) => Array<A>;
 /**
  * Creates an array of array values not included in the other given array using a `Eq` for equality
  * comparisons. The order and references of result values are determined by the first array.
@@ -812,7 +812,7 @@ export declare function intersection<A>(E: Eq<A>): ((xs: Array<A>, ys: Array<A>)
  *
  * @since 2.0.0
  */
-export declare function difference<A>(E: Eq<A>): ((xs: Array<A>, ys: Array<A>) => Array<A>);
+export declare function difference<A>(E: Eq<A>): (xs: Array<A>, ys: Array<A>) => Array<A>;
 /**
  * @since 2.0.0
  */

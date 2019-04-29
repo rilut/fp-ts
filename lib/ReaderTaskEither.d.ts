@@ -43,15 +43,15 @@ export declare function mapLeft<E, L, A, M>(ma: ReaderTaskEither<E, L, A>, f: (l
 /**
  * @since 2.0.0
  */
-export declare function ask<E>(): ReaderTaskEither<E, never, E>;
+export declare const ask: <E>() => ReaderTaskEither<E, never, E>;
 /**
  * @since 2.0.0
  */
-export declare function asks<E, A>(f: (e: E) => A): ReaderTaskEither<E, never, A>;
+export declare const asks: <E, A>(f: (e: E) => A) => ReaderTaskEither<E, never, A>;
 /**
  * @since 2.0.0
  */
-export declare function local<E, L, A, D>(ma: ReaderTaskEither<E, L, A>, f: (f: D) => E): ReaderTaskEither<D, L, A>;
+export declare const local: <E, L, A, D>(ma: ReaderTaskEither<E, L, A>, f: (f: D) => E) => ReaderTaskEither<D, L, A>;
 /**
  * @since 2.0.0
  */
@@ -63,7 +63,7 @@ export declare function left<E, L>(ma: Task<L>): ReaderTaskEither<E, L, never>;
 /**
  * @since 2.0.0
  */
-export declare function fromTaskEither<E, L, A>(ma: TaskEither<L, A>): ReaderTaskEither<E, L, A>;
+export declare const fromTaskEither: <E, L, A>(ma: TaskEither<L, A>) => ReaderTaskEither<E, L, A>;
 /**
  * @since 2.0.0
  */
@@ -83,8 +83,8 @@ export declare function fromIOEither<L, A>(ma: IOEither<L, A>): ReaderTaskEither
 /**
  * @since 2.0.0
  */
-export declare function fromPredicate<L, A, B extends A>(refinement: Refinement<A, B>, onFalse: (a: A) => L): ((a: A) => ReaderTaskEither<unknown, L, B>);
-export declare function fromPredicate<L, A>(predicate: Predicate<A>, onFalse: (a: A) => L): ((a: A) => ReaderTaskEither<unknown, L, A>);
+export declare function fromPredicate<L, A, B extends A>(refinement: Refinement<A, B>, onFalse: (a: A) => L): (a: A) => ReaderTaskEither<unknown, L, B>;
+export declare function fromPredicate<L, A>(predicate: Predicate<A>, onFalse: (a: A) => L): (a: A) => ReaderTaskEither<unknown, L, A>;
 /**
  * @since 2.0.0
  */

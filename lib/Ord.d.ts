@@ -21,10 +21,6 @@ export interface Ord<A> extends Eq<A> {
 /**
  * @since 2.0.0
  */
-export declare const unsafeCompare: (x: any, y: any) => Ordering;
-/**
- * @since 2.0.0
- */
 export declare const ordString: Ord<string>;
 /**
  * @since 2.0.0
@@ -35,57 +31,61 @@ export declare const ordNumber: Ord<number>;
  */
 export declare const ordBoolean: Ord<boolean>;
 /**
+ * @since 2.0.0
+ */
+export declare const ordDate: Ord<Date>;
+/**
  * Test whether one value is _strictly less than_ another
  *
  * @since 2.0.0
  */
-export declare const lessThan: <A>(O: Ord<A>) => (x: A, y: A) => boolean;
+export declare function lessThan<A>(O: Ord<A>): (x: A, y: A) => boolean;
 /**
  * Test whether one value is _strictly greater than_ another
  *
  * @since 2.0.0
  */
-export declare const greaterThan: <A>(O: Ord<A>) => (x: A, y: A) => boolean;
+export declare function greaterThan<A>(O: Ord<A>): (x: A, y: A) => boolean;
 /**
  * Test whether one value is _non-strictly less than_ another
  *
  * @since 2.0.0
  */
-export declare const lessThanOrEq: <A>(O: Ord<A>) => (x: A, y: A) => boolean;
+export declare function lessThanOrEq<A>(O: Ord<A>): (x: A, y: A) => boolean;
 /**
  * Test whether one value is _non-strictly greater than_ another
  *
  * @since 2.0.0
  */
-export declare const greaterThanOrEq: <A>(O: Ord<A>) => (x: A, y: A) => boolean;
+export declare function greaterThanOrEq<A>(O: Ord<A>): (x: A, y: A) => boolean;
 /**
  * Take the minimum of two values. If they are considered equal, the first argument is chosen
  *
  * @since 2.0.0
  */
-export declare const min: <A>(O: Ord<A>) => (x: A, y: A) => A;
+export declare function min<A>(O: Ord<A>): (x: A, y: A) => A;
 /**
  * Take the maximum of two values. If they are considered equal, the first argument is chosen
  *
  * @since 2.0.0
  */
-export declare const max: <A>(O: Ord<A>) => (x: A, y: A) => A;
+export declare function max<A>(O: Ord<A>): (x: A, y: A) => A;
 /**
  * Clamp a value between a minimum and a maximum
  *
  * @since 2.0.0
  */
-export declare const clamp: <A>(O: Ord<A>) => (low: A, hi: A) => (x: A) => A;
+export declare function clamp<A>(O: Ord<A>): (low: A, hi: A) => (x: A) => A;
 /**
  * Test whether a value is between a minimum and a maximum (inclusive)
  *
  * @since 2.0.0
  */
-export declare const between: <A>(O: Ord<A>) => (low: A, hi: A) => (x: A) => boolean;
+export declare function between<A>(O: Ord<A>): (low: A, hi: A) => (x: A) => boolean;
 /**
  * @since 2.0.0
  */
-export declare const fromCompare: <A>(compare: (x: A, y: A) => Ordering) => Ord<A>;
+export declare function fromCompare<A>(compare: (x: A, y: A) => Ordering): Ord<A>;
 /**
  * @since 2.0.0
  */
@@ -93,7 +93,7 @@ export declare function contramap<A, B>(O: Ord<A>, f: (b: B) => A): Ord<B>;
 /**
  * @since 2.0.0
  */
-export declare const getSemigroup: <A = never>() => Semigroup<Ord<A>>;
+export declare function getSemigroup<A = never>(): Semigroup<Ord<A>>;
 /**
  * Given a tuple of `Ord`s returns an `Ord` for the tuple
  *
@@ -107,12 +107,10 @@ export declare const getSemigroup: <A = never>() => Semigroup<Ord<A>>;
  *
  * @since 2.0.0
  */
-export declare const getTupleOrd: <T extends Ord<any>[]>(...ords: T) => Ord<{ [K in keyof T]: T[K] extends Ord<infer A> ? A : never; }>;
+export declare function getTupleOrd<T extends Array<Ord<any>>>(...ords: T): Ord<{
+    [K in keyof T]: T[K] extends Ord<infer A> ? A : never;
+}>;
 /**
  * @since 2.0.0
  */
-export declare const getDualOrd: <A>(O: Ord<A>) => Ord<A>;
-/**
- * @since 2.0.0
- */
-export declare const ordDate: Ord<Date>;
+export declare function getDualOrd<A>(O: Ord<A>): Ord<A>;

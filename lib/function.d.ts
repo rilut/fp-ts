@@ -80,7 +80,7 @@ export declare const constVoid: () => void;
  *
  * @since 2.0.0
  */
-export declare function flip<A, B, C>(f: (a: A, b: B) => C): ((b: B, a: A) => C);
+export declare function flip<A, B, C>(f: (a: A, b: B) => C): (b: B, a: A) => C;
 /**
  * The `on` function is used to change the domain of a binary operator.
  *

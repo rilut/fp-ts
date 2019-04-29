@@ -17,13 +17,17 @@ export interface State<S, A> {
  */
 export declare function run<S, A>(ma: State<S, A>, s: S): [A, S];
 /**
+ * Run a computation in the `State` monad, discarding the final state
+ *
  * @since 2.0.0
  */
-export declare function evalState<S, A>(ma: State<S, A>, s: S): A;
+export declare const evalState: <S, A>(ma: State<S, A>, s: S) => A;
 /**
+ * Run a computation in the `State` monad discarding the result
+ *
  * @since 2.0.0
  */
-export declare function execState<S, A>(ma: State<S, A>, s: S): S;
+export declare const execState: <S, A>(ma: State<S, A>, s: S) => S;
 /**
  * Get the current state
  *

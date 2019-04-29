@@ -13,8 +13,7 @@ import { MonadTask2 } from './MonadTask';
 import { MonadThrow2 } from './MonadThrow';
 import { Monoid } from './Monoid';
 import { Semigroup } from './Semigroup';
-import * as T from './Task';
-import Task = T.Task;
+import { Task } from './Task';
 declare module './HKT' {
     interface URI2HKT2<L, A> {
         TaskEither: TaskEither<L, A>;
@@ -31,15 +30,15 @@ export declare const fold: <L, A, R>(ma: TaskEither<L, A>, onLeft: (l: L) => R, 
 /**
  * @since 2.0.0
  */
-export declare function foldTask<L, A, R>(ma: TaskEither<L, A>, onLeft: (l: L) => Task<R>, onRight: (a: A) => Task<R>): Task<R>;
+export declare const foldTask: <L, A, R>(ma: TaskEither<L, A>, onLeft: (l: L) => Task<R>, onRight: (a: A) => Task<R>) => Task<R>;
 /**
  * @since 2.0.0
  */
-export declare function getOrElse<L, A>(ma: TaskEither<L, A>, f: (l: L) => A): Task<A>;
+export declare const mapLeft: <L, A, M>(ma: TaskEither<L, A>, f: (l: L) => M) => TaskEither<M, A>;
 /**
  * @since 2.0.0
  */
-export declare function mapLeft<L, A, M>(ma: TaskEither<L, A>, f: (l: L) => M): TaskEither<M, A>;
+export declare const getOrElse: <L, A>(ma: TaskEither<L, A>, f: (l: L) => A) => Task<A>;
 /**
  * @since 2.0.0
  */
@@ -52,19 +51,19 @@ export declare const fromRight: <A>(a: A) => TaskEither<never, A>;
 /**
  * @since 2.0.0
  */
-export declare function orElse<L, A, M>(ma: TaskEither<L, A>, f: (l: L) => TaskEither<M, A>): TaskEither<M, A>;
+export declare const orElse: <L, A, M>(ma: TaskEither<L, A>, f: (l: L) => TaskEither<M, A>) => TaskEither<M, A>;
 /**
  * @since 2.0.0
  */
-export declare function right<A>(fa: Task<A>): TaskEither<never, A>;
+export declare const right: <A>(ma: Task<A>) => TaskEither<never, A>;
 /**
  * @since 2.0.0
  */
-export declare function left<L>(fl: Task<L>): TaskEither<L, never>;
+export declare const left: <L>(ml: Task<L>) => TaskEither<L, never>;
 /**
  * @since 2.0.0
  */
-export declare function fromLeft<L>(l: L): TaskEither<L, never>;
+export declare const fromLeft: <L>(l: L) => TaskEither<L, never>;
 /**
  * @since 2.0.0
  */
@@ -72,8 +71,8 @@ export declare const fromIOEither: <L, A>(fa: IOEither<L, A>) => TaskEither<L, A
 /**
  * @since 2.0.0
  */
-export declare function fromPredicate<L, A, B extends A>(predicate: Refinement<A, B>, onFalse: (a: A) => L): ((a: A) => TaskEither<L, B>);
-export declare function fromPredicate<L, A>(predicate: Predicate<A>, onFalse: (a: A) => L): ((a: A) => TaskEither<L, A>);
+export declare function fromPredicate<L, A, B extends A>(predicate: Refinement<A, B>, onFalse: (a: A) => L): (a: A) => TaskEither<L, B>;
+export declare function fromPredicate<L, A>(predicate: Predicate<A>, onFalse: (a: A) => L): (a: A) => TaskEither<L, A>;
 /**
  * @since 2.0.0
  */
@@ -150,10 +149,6 @@ export declare function taskify<A, B, L, R>(f: (a: A, b: B, cb: (e: L | null | u
 export declare function taskify<A, B, C, L, R>(f: (a: A, b: B, c: C, cb: (e: L | null | undefined, r?: R) => void) => void): (a: A, b: B, c: C) => TaskEither<L, R>;
 export declare function taskify<A, B, C, D, L, R>(f: (a: A, b: B, c: C, d: D, cb: (e: L | null | undefined, r?: R) => void) => void): (a: A, b: B, c: C, d: D) => TaskEither<L, R>;
 export declare function taskify<A, B, C, D, E, L, R>(f: (a: A, b: B, c: C, d: D, e: E, cb: (e: L | null | undefined, r?: R) => void) => void): (a: A, b: B, c: C, d: D, e: E) => TaskEither<L, R>;
-/**
- * @since 2.0.0
- */
-export declare function attempt<L, A>(ma: TaskEither<L, A>): TaskEither<L, E.Either<L, A>>;
 /**
  * Make sure that a resource is cleaned up in the event of an exception. The
  * release action is called regardless of whether the body action throws or

@@ -27,19 +27,19 @@ export declare function run<E, A>(ma: Reader<E, A>, e: E): A;
  *
  * @since 2.0.0
  */
-export declare function ask<E>(): Reader<E, E>;
+export declare const ask: <E>() => Reader<E, E>;
 /**
  * Projects a value from the global context in a Reader
  *
  * @since 2.0.0
  */
-export declare function asks<E, A>(f: (e: E) => A): Reader<E, A>;
+export declare const asks: <E, A>(f: (e: E) => A) => Reader<E, A>;
 /**
  * changes the value of the local context during the execution of the action `ma`
  *
  * @since 2.0.0
  */
-export declare function local<E, A, D>(ma: Reader<E, A>, f: (d: D) => E): Reader<D, A>;
+export declare const local: <E, A, D>(ma: Reader<E, A>, f: (d: D) => E) => Reader<D, A>;
 /**
  * @since 2.0.0
  */

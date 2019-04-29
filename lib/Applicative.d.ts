@@ -16,7 +16,7 @@
  * Note. `Functor`'s `map` can be derived: `A.map(x, f) = A.ap(A.of(f), x)`
  */
 import { Apply, Apply1, Apply2, Apply2C, Apply3, Apply3C, Apply4 } from './Apply';
-import { FunctorComposition, FunctorComposition11, FunctorComposition12, FunctorComposition12C, FunctorComposition21, FunctorComposition22, FunctorComposition22C, FunctorComposition2C1, FunctorComposition3C1 } from './Functor';
+import { FunctorComposition, FunctorComposition01, FunctorComposition02, FunctorComposition11, FunctorComposition12, FunctorComposition12C, FunctorComposition21, FunctorComposition22, FunctorComposition22C, FunctorComposition2C1, FunctorComposition3C1 } from './Functor';
 import { HKT, Type, Type2, Type3, Type4, URIS, URIS2, URIS3, URIS4 } from './HKT';
 /**
  * @since 2.0.0
@@ -45,6 +45,14 @@ export interface Applicative4<F extends URIS4> extends Apply4<F> {
 export interface ApplicativeComposition<F, G> extends FunctorComposition<F, G> {
     readonly of: <A>(a: A) => HKT<F, HKT<G, A>>;
     readonly ap: <A, B>(fgab: HKT<F, HKT<G, (a: A) => B>>, fga: HKT<F, HKT<G, A>>) => HKT<F, HKT<G, B>>;
+}
+export interface ApplicativeComposition01<F, G extends URIS> extends FunctorComposition01<F, G> {
+    readonly of: <A>(a: A) => HKT<F, Type<G, A>>;
+    readonly ap: <A, B>(fgab: HKT<F, Type<G, (a: A) => B>>, fga: HKT<F, Type<G, A>>) => HKT<F, Type<G, B>>;
+}
+export interface ApplicativeComposition02<F, G extends URIS2> extends FunctorComposition02<F, G> {
+    readonly of: <LG, A>(a: A) => HKT<F, Type2<G, LG, A>>;
+    readonly ap: <LG, A, B>(fgab: HKT<F, Type2<G, LG, (a: A) => B>>, fga: HKT<F, Type2<G, LG, A>>) => HKT<F, Type2<G, LG, B>>;
 }
 export interface ApplicativeComposition11<F extends URIS, G extends URIS> extends FunctorComposition11<F, G> {
     readonly of: <A>(a: A) => Type<F, Type<G, A>>;
@@ -105,6 +113,6 @@ export declare function getApplicativeComposition<F extends URIS2, G extends URI
 export declare function getApplicativeComposition<F extends URIS, G extends URIS2>(F: Applicative1<F>, G: Applicative2<G>): ApplicativeComposition12<F, G>;
 export declare function getApplicativeComposition<F extends URIS, G extends URIS2, LG>(F: Applicative1<F>, G: Applicative2C<G, LG>): ApplicativeComposition12C<F, G, LG>;
 export declare function getApplicativeComposition<F extends URIS, G extends URIS>(F: Applicative1<F>, G: Applicative1<G>): ApplicativeComposition11<F, G>;
-export declare function getApplicativeComposition<F, G extends URIS2>(F: Applicative<F>, G: Applicative2<G>): ApplicativeComposition<F, G>;
-export declare function getApplicativeComposition<F, G extends URIS>(F: Applicative<F>, G: Applicative1<G>): ApplicativeComposition<F, G>;
+export declare function getApplicativeComposition<F, G extends URIS2>(F: Applicative<F>, G: Applicative2<G>): ApplicativeComposition02<F, G>;
+export declare function getApplicativeComposition<F, G extends URIS>(F: Applicative<F>, G: Applicative1<G>): ApplicativeComposition01<F, G>;
 export declare function getApplicativeComposition<F, G>(F: Applicative<F>, G: Applicative<G>): ApplicativeComposition<F, G>;
