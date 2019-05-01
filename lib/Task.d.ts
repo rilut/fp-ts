@@ -38,7 +38,7 @@ export declare const tryCatch: <L, A>(f: Lazy<Promise<A>>, onrejected: (reason: 
 /**
  * @since 2.0.0
  */
-export declare const delay: <A>(millis: number, a: A) => Task<A>;
+export declare function delay<A>(millis: number, ma: Task<A>): Task<A>;
 /**
  * @since 2.0.0
  */

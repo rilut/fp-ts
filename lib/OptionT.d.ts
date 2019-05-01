@@ -9,6 +9,8 @@ export interface OptionM<M> extends ApplicativeComposition01<M, URI> {
     readonly fold: <A, R>(ma: OptionT<M, A>, onNone: () => R, onSome: (a: A) => R) => HKT<M, R>;
     readonly getOrElse: <A>(ma: OptionT<M, A>, f: () => A) => HKT<M, A>;
     readonly fromM: <A>(ma: HKT<M, A>) => OptionT<M, A>;
+    readonly fromOption: <A>(ma: Option<A>) => OptionT<M, A>;
+    readonly none: () => OptionT<M, never>;
 }
 declare type OptionT1<M extends URIS, A> = Type<M, Option<A>>;
 interface OptionM1<M extends URIS> extends ApplicativeComposition11<M, URI> {
@@ -16,6 +18,8 @@ interface OptionM1<M extends URIS> extends ApplicativeComposition11<M, URI> {
     readonly fold: <A, R>(ma: OptionT1<M, A>, onNone: () => R, onSome: (a: A) => R) => Type<M, R>;
     readonly getOrElse: <A>(ma: OptionT1<M, A>, f: () => A) => Type<M, A>;
     readonly fromM: <A>(ma: Type<M, A>) => OptionT1<M, A>;
+    readonly fromOption: <A>(ma: Option<A>) => OptionT1<M, A>;
+    readonly none: () => OptionT1<M, never>;
 }
 declare type OptionT2<M extends URIS2, L, A> = Type2<M, L, Option<A>>;
 interface OptionM2<M extends URIS2> extends ApplicativeComposition21<M, URI> {
@@ -23,12 +27,16 @@ interface OptionM2<M extends URIS2> extends ApplicativeComposition21<M, URI> {
     readonly fold: <L, A, R>(ma: OptionT2<M, L, A>, onNone: () => R, onSome: (a: A) => R) => Type2<M, L, R>;
     readonly getOrElse: <L, A>(ma: OptionT2<M, L, A>, f: () => A) => Type2<M, L, A>;
     readonly fromM: <L, A>(ma: Type2<M, L, A>) => OptionT2<M, L, A>;
+    readonly fromOption: <L, A>(ma: Option<A>) => OptionT2<M, L, A>;
+    readonly none: <L>() => OptionT2<M, L, never>;
 }
 interface OptionM2C<M extends URIS2, L> extends ApplicativeComposition2C1<M, URI, L> {
     readonly chain: <A, B>(ma: OptionT2<M, L, A>, f: (a: A) => OptionT2<M, L, B>) => OptionT2<M, L, B>;
     readonly fold: <A, R>(ma: OptionT2<M, L, A>, onNone: () => R, onSome: (a: A) => R) => Type2<M, L, R>;
     readonly getOrElse: <A>(ma: OptionT2<M, L, A>, f: () => A) => Type2<M, L, A>;
     readonly fromM: <A>(ma: Type2<M, L, A>) => OptionT2<M, L, A>;
+    readonly fromOption: <A>(ma: Option<A>) => OptionT2<M, L, A>;
+    readonly none: () => OptionT2<M, L, never>;
 }
 declare type OptionT3<M extends URIS3, U, L, A> = Type3<M, U, L, Option<A>>;
 interface OptionM3C<M extends URIS3, U, L> extends ApplicativeComposition3C1<M, URI, U, L> {
@@ -36,6 +44,8 @@ interface OptionM3C<M extends URIS3, U, L> extends ApplicativeComposition3C1<M, 
     readonly fold: <A, R>(ma: OptionT3<M, U, L, A>, onNone: () => R, onSome: (a: A) => R) => Type3<M, U, L, R>;
     readonly getOrElse: <A>(ma: OptionT3<M, U, L, A>, f: () => A) => Type3<M, U, L, A>;
     readonly fromM: <A>(ma: Type3<M, U, L, A>) => OptionT3<M, U, L, A>;
+    readonly fromOption: <A>(ma: Option<A>) => OptionT3<M, U, L, A>;
+    readonly none: () => OptionT3<M, U, L, never>;
 }
 /**
  * @since 2.0.0
