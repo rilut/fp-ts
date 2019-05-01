@@ -155,6 +155,10 @@ export declare function fromNullable<A>(a: A | null | undefined): Option<A>;
 /**
  * @since 2.0.0
  */
+export declare function fromEither<L, A>(ma: Either<L, A>): Option<A>;
+/**
+ * @since 2.0.0
+ */
 export declare function toNullable<A>(ma: Option<A>): A | null;
 /**
  * @since 2.0.0
