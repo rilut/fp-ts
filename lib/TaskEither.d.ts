@@ -55,6 +55,10 @@ export declare const orElse: <L, A, M>(ma: TaskEither<L, A>, f: (l: L) => TaskEi
 /**
  * @since 2.0.0
  */
+export declare const swap: <L, A>(ma: TaskEither<L, A>) => TaskEither<A, L>;
+/**
+ * @since 2.0.0
+ */
 export declare const right: <A>(ma: Task<A>) => TaskEither<never, A>;
 /**
  * @since 2.0.0

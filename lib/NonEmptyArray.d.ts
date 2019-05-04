@@ -26,12 +26,11 @@ export interface NonEmptyArray<A> extends Array<A> {
     0: A;
     map: <B>(f: (a: A, index: number, nea: NonEmptyArray<A>) => B) => NonEmptyArray<B>;
     concat: (as: Array<A>) => NonEmptyArray<A>;
-    reverse: () => NonEmptyArray<A>;
 }
 /**
  * @since 2.0.0
  */
-export declare const getShow: <A>(S: Show<A>) => Show<NonEmptyArray<A>>;
+export declare function getShow<A>(S: Show<A>): Show<NonEmptyArray<A>>;
 /**
  * @since 2.0.0
  */
@@ -44,6 +43,10 @@ export declare function head<A>(nea: NonEmptyArray<A>): A;
  * @since 2.0.0
  */
 export declare function tail<A>(nea: NonEmptyArray<A>): Array<A>;
+/**
+ * @since 2.0.0
+ */
+export declare const reverse: <A>(nea: NonEmptyArray<A>) => NonEmptyArray<A>;
 /**
  * @since 2.0.0
  */
@@ -71,7 +74,7 @@ export declare function fromNonEmptyArray<A>(as: Array<A> & {
  *
  * @since 2.0.0
  */
-export declare const getSemigroup: <A = never>() => Semigroup<NonEmptyArray<A>>;
+export declare function getSemigroup<A = never>(): Semigroup<NonEmptyArray<A>>;
 /**
  * @example
  * import { fromNonEmptyArray, getEq, make } from 'fp-ts/lib/NonEmptyArray'
@@ -99,7 +102,7 @@ export declare const getEq: <A>(E: Eq<A>) => Eq<NonEmptyArray<A>>;
  *
  * @since 2.0.0
  */
-export declare const group: <A>(E: Eq<A>) => (as: A[]) => NonEmptyArray<A>[];
+export declare function group<A>(E: Eq<A>): (as: Array<A>) => Array<NonEmptyArray<A>>;
 /**
  * Sort and then group the elements of an array into non empty arrays.
  *
@@ -126,7 +129,7 @@ export declare function groupSort<A>(O: Ord<A>): (as: Array<A>) => Array<NonEmpt
  *
  * @since 2.0.0
  */
-export declare const groupBy: <A>(as: A[], f: (a: A) => string) => {
+export declare function groupBy<A>(as: Array<A>, f: (a: A) => string): {
     [key: string]: NonEmptyArray<A>;
 };
 /**
