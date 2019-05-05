@@ -17,10 +17,6 @@ export interface Writer<W, A> {
 /**
  * @since 2.0.0
  */
-export declare const run: <W, A>(fa: Writer<W, A>) => [A, W];
-/**
- * @since 2.0.0
- */
 export declare const evalWriter: <W, A>(fa: Writer<W, A>) => A;
 /**
  * @since 2.0.0

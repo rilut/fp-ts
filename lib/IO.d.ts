@@ -15,15 +15,11 @@ export interface IO<A> {
 /**
  * @since 2.0.0
  */
-export declare const run: <A>(fa: IO<A>) => A;
+export declare function getSemigroup<A>(S: Semigroup<A>): Semigroup<IO<A>>;
 /**
  * @since 2.0.0
  */
-export declare const getSemigroup: <A>(S: Semigroup<A>) => Semigroup<IO<A>>;
-/**
- * @since 2.0.0
- */
-export declare const getMonoid: <A>(M: Monoid<A>) => Monoid<IO<A>>;
+export declare function getMonoid<A>(M: Monoid<A>): Monoid<IO<A>>;
 /**
  * @since 2.0.0
  */

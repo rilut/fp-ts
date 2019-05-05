@@ -1,9 +1,4 @@
-/**
- * @file `Task<A>` represents an asynchronous computation that yields a value of type `A` and **never fails**.
- * If you want to represent an asynchronous computation that may fail, please see `TaskEither`.
- */
-import { Either } from './Either';
-import { Lazy } from './function';
+import { IO } from './IO';
 import { Monad1 } from './Monad';
 import { MonadIO1 } from './MonadIO';
 import { MonadTask1 } from './MonadTask';
@@ -22,23 +17,27 @@ export interface Task<A> {
 /**
  * @since 2.0.0
  */
-export declare const getRaceMonoid: <A = never>() => Monoid<Task<A>>;
+export declare const never: Task<never>;
 /**
  * @since 2.0.0
  */
-export declare const getSemigroup: <A>(S: Semigroup<A>) => Semigroup<Task<A>>;
+export declare function getSemigroup<A>(S: Semigroup<A>): Semigroup<Task<A>>;
 /**
  * @since 2.0.0
  */
-export declare const getMonoid: <A>(M: Monoid<A>) => Monoid<Task<A>>;
+export declare function getMonoid<A>(M: Monoid<A>): Monoid<Task<A>>;
 /**
  * @since 2.0.0
  */
-export declare const tryCatch: <L, A>(f: Lazy<Promise<A>>, onrejected: (reason: unknown) => L) => Task<Either<L, A>>;
+export declare function getRaceMonoid<A = never>(): Monoid<Task<A>>;
 /**
  * @since 2.0.0
  */
 export declare function delay<A>(millis: number, ma: Task<A>): Task<A>;
+/**
+ * @since 2.0.0
+ */
+export declare function fromIO<A>(ma: IO<A>): Task<A>;
 /**
  * @since 2.0.0
  */

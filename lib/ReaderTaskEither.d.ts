@@ -11,6 +11,8 @@ import { Reader } from './Reader';
 import { Task } from './Task';
 import * as TE from './TaskEither';
 import TaskEither = TE.TaskEither;
+import { Option } from './Option';
+import { IO } from './IO';
 declare module './HKT' {
     interface URI2HKT3<U, L, A> {
         ReaderTaskEither: ReaderTaskEither<U, L, A>;
@@ -28,6 +30,51 @@ export interface ReaderTaskEither<E, L, A> {
  * @since 2.0.0
  */
 export declare function run<E, L, A>(ma: ReaderTaskEither<E, L, A>, e: E): Promise<Either<L, A>>;
+/**
+ * @since 2.0.0
+ */
+export declare function fromLeft<L>(l: L): ReaderTaskEither<unknown, L, never>;
+/**
+ * @since 2.0.0
+ */
+export declare const fromRight: <A>(a: A) => ReaderTaskEither<unknown, never, A>;
+/**
+ * @since 2.0.0
+ */
+export declare function right<A>(ma: Task<A>): ReaderTaskEither<unknown, never, A>;
+/**
+ * @since 2.0.0
+ */
+export declare function left<L>(ma: Task<L>): ReaderTaskEither<unknown, L, never>;
+/**
+ * @since 2.0.0
+ */
+export declare const fromTaskEither: <L, A>(ma: TaskEither<L, A>) => ReaderTaskEither<unknown, L, A>;
+/**
+ * @since 2.0.0
+ */
+export declare const fromReader: <E, A>(ma: Reader<E, A>) => ReaderTaskEither<E, never, A>;
+/**
+ * @since 2.0.0
+ */
+export declare function fromIOEither<L, A>(ma: IOEither<L, A>): ReaderTaskEither<unknown, L, A>;
+/**
+ * @since 2.0.0
+ */
+export declare function fromEither<L, A>(ma: Either<L, A>): ReaderTaskEither<unknown, L, A>;
+/**
+ * @since 2.0.0
+ */
+export declare function fromOption<L, A>(ma: Option<A>, onNone: () => L): ReaderTaskEither<unknown, L, A>;
+/**
+ * @since 2.0.0
+ */
+export declare function fromIO<A>(ma: IO<A>): ReaderTaskEither<unknown, never, A>;
+/**
+ * @since 2.0.0
+ */
+export declare function fromPredicate<L, A, B extends A>(refinement: Refinement<A, B>, onFalse: (a: A) => L): (a: A) => ReaderTaskEither<unknown, L, B>;
+export declare function fromPredicate<L, A>(predicate: Predicate<A>, onFalse: (a: A) => L): (a: A) => ReaderTaskEither<unknown, L, A>;
 /**
  * @since 2.0.0
  */
@@ -52,43 +99,6 @@ export declare const asks: <E, A>(f: (e: E) => A) => ReaderTaskEither<E, never, 
  * @since 2.0.0
  */
 export declare const local: <E, L, A, D>(ma: ReaderTaskEither<E, L, A>, f: (f: D) => E) => ReaderTaskEither<D, L, A>;
-/**
- * @since 2.0.0
- */
-export declare function right<E, A>(ma: Task<A>): ReaderTaskEither<E, never, A>;
-/**
- * @since 2.0.0
- */
-export declare function left<E, L>(ma: Task<L>): ReaderTaskEither<E, L, never>;
-/**
- * @since 2.0.0
- */
-export declare const fromTaskEither: <E, L, A>(ma: TaskEither<L, A>) => ReaderTaskEither<E, L, A>;
-/**
- * @since 2.0.0
- */
-export declare const fromReader: <E, A>(ma: Reader<E, A>) => ReaderTaskEither<E, never, A>;
-/**
- * @since 2.0.0
- */
-export declare function fromLeft<L>(l: L): ReaderTaskEither<unknown, L, never>;
-/**
- * @since 2.0.0
- */
-export declare const fromRight: <A>(a: A) => ReaderTaskEither<unknown, never, A>;
-/**
- * @since 2.0.0
- */
-export declare function fromIOEither<L, A>(ma: IOEither<L, A>): ReaderTaskEither<unknown, L, A>;
-/**
- * @since 2.0.0
- */
-export declare function fromPredicate<L, A, B extends A>(refinement: Refinement<A, B>, onFalse: (a: A) => L): (a: A) => ReaderTaskEither<unknown, L, B>;
-export declare function fromPredicate<L, A>(predicate: Predicate<A>, onFalse: (a: A) => L): (a: A) => ReaderTaskEither<unknown, L, A>;
-/**
- * @since 2.0.0
- */
-export declare function tryCatch<E, L, A>(f: (e: E) => Promise<A>, onError: (reason: unknown, e: E) => L): ReaderTaskEither<E, L, A>;
 /**
  * @since 2.0.0
  */

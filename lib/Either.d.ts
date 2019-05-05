@@ -37,6 +37,7 @@ import { Lazy, Predicate, Refinement } from './function';
 import { Monad2 } from './Monad';
 import { MonadThrow2 } from './MonadThrow';
 import { Monoid } from './Monoid';
+import { Option } from './Option';
 import { Semigroup } from './Semigroup';
 import { Eq } from './Eq';
 import { Show } from './Show';
@@ -75,6 +76,52 @@ export declare function left<L>(l: L): Either<L, never>;
  * @since 2.0.0
  */
 export declare function right<A>(a: A): Either<never, A>;
+/**
+ * @since 2.0.0
+ */
+export declare function fromOption<L, A>(ma: Option<A>, onNone: () => L): Either<L, A>;
+/**
+ * @since 2.0.0
+ */
+export declare function fromPredicate<L, A, B extends A>(predicate: Refinement<A, B>, onFalse: (a: A) => L): (a: A) => Either<L, B>;
+export declare function fromPredicate<L, A>(predicate: Predicate<A>, onFalse: (a: A) => L): (a: A) => Either<L, A>;
+/**
+ * Takes a default and a nullable value, if the value is not nully, turn it into a `Right`, if the value is nully use
+ * the provided default as a `Left`
+ *
+ * @since 2.0.0
+ */
+export declare function fromNullable<L, A>(a: A | null | undefined, l: L): Either<L, A>;
+/**
+ * Default value for the `onError` argument of `tryCatch`
+ *
+ * @since 2.0.0
+ */
+export declare function toError(e: unknown): Error;
+/**
+ * Constructs a new `Either` from a function that might throw
+ *
+ * @example
+ * import { Either, left, right, tryCatch } from 'fp-ts/lib/Either'
+ *
+ * const unsafeHead = <A>(as: Array<A>): A => {
+ *   if (as.length > 0) {
+ *     return as[0]
+ *   } else {
+ *     throw new Error('empty array')
+ *   }
+ * }
+ *
+ * const head = <A>(as: Array<A>): Either<Error, A> => {
+ *   return tryCatch(() => unsafeHead(as), e => (e instanceof Error ? e : new Error('unknown error')))
+ * }
+ *
+ * assert.deepStrictEqual(head([]), left(new Error('empty array')))
+ * assert.deepStrictEqual(head([1, 2, 3]), right(1))
+ *
+ * @since 2.0.0
+ */
+export declare function tryCatch<L, A>(f: Lazy<A>, onError: (e: unknown) => L): Either<L, A>;
 /**
  * @since 2.0.0
  */
@@ -126,48 +173,6 @@ export declare function getApplySemigroup<L, A>(S: Semigroup<A>): Semigroup<Eith
  * @since 2.0.0
  */
 export declare function getApplyMonoid<L, A>(M: Monoid<A>): Monoid<Either<L, A>>;
-/**
- * @since 2.0.0
- */
-export declare function fromPredicate<L, A, B extends A>(predicate: Refinement<A, B>, onFalse: (a: A) => L): (a: A) => Either<L, B>;
-export declare function fromPredicate<L, A>(predicate: Predicate<A>, onFalse: (a: A) => L): (a: A) => Either<L, A>;
-/**
- * Takes a default and a nullable value, if the value is not nully, turn it into a `Right`, if the value is nully use
- * the provided default as a `Left`
- *
- * @since 2.0.0
- */
-export declare function fromNullable<L, A>(a: A | null | undefined, l: L): Either<L, A>;
-/**
- * Default value for the `onError` argument of `tryCatch`
- *
- * @since 2.0.0
- */
-export declare function toError(e: unknown): Error;
-/**
- * Constructs a new `Either` from a function that might throw
- *
- * @example
- * import { Either, left, right, tryCatch } from 'fp-ts/lib/Either'
- *
- * const unsafeHead = <A>(as: Array<A>): A => {
- *   if (as.length > 0) {
- *     return as[0]
- *   } else {
- *     throw new Error('empty array')
- *   }
- * }
- *
- * const head = <A>(as: Array<A>): Either<Error, A> => {
- *   return tryCatch(() => unsafeHead(as), e => (e instanceof Error ? e : new Error('unknown error')))
- * }
- *
- * assert.deepStrictEqual(head([]), left(new Error('empty array')))
- * assert.deepStrictEqual(head([1, 2, 3]), right(1))
- *
- * @since 2.0.0
- */
-export declare function tryCatch<L, A>(f: Lazy<A>, onError: (e: unknown) => L): Either<L, A>;
 /**
  * Returns `true` if the either is an instance of `Left`, `false` otherwise
  *
