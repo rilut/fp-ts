@@ -33,19 +33,19 @@ export declare function run<E, L, A>(ma: ReaderTaskEither<E, L, A>, e: E): Promi
 /**
  * @since 2.0.0
  */
-export declare function fromLeft<L>(l: L): ReaderTaskEither<unknown, L, never>;
+export declare function left<L>(l: L): ReaderTaskEither<unknown, L, never>;
 /**
  * @since 2.0.0
  */
-export declare const fromRight: <A>(a: A) => ReaderTaskEither<unknown, never, A>;
+export declare const right: <A>(a: A) => ReaderTaskEither<unknown, never, A>;
 /**
  * @since 2.0.0
  */
-export declare function right<A>(ma: Task<A>): ReaderTaskEither<unknown, never, A>;
+export declare function rightTask<A>(ma: Task<A>): ReaderTaskEither<unknown, never, A>;
 /**
  * @since 2.0.0
  */
-export declare function left<L>(ma: Task<L>): ReaderTaskEither<unknown, L, never>;
+export declare function leftTask<L>(ma: Task<L>): ReaderTaskEither<unknown, L, never>;
 /**
  * @since 2.0.0
  */
@@ -53,7 +53,11 @@ export declare const fromTaskEither: <L, A>(ma: TaskEither<L, A>) => ReaderTaskE
 /**
  * @since 2.0.0
  */
-export declare const fromReader: <E, A>(ma: Reader<E, A>) => ReaderTaskEither<E, never, A>;
+export declare const rightReader: <E, A>(ma: Reader<E, A>) => ReaderTaskEither<E, never, A>;
+/**
+ * @since 2.0.0
+ */
+export declare function leftReader<E, L>(ml: Reader<E, L>): ReaderTaskEither<E, L, never>;
 /**
  * @since 2.0.0
  */
@@ -69,7 +73,11 @@ export declare function fromOption<L, A>(ma: Option<A>, onNone: () => L): Reader
 /**
  * @since 2.0.0
  */
-export declare function fromIO<A>(ma: IO<A>): ReaderTaskEither<unknown, never, A>;
+export declare function rightIO<A>(ma: IO<A>): ReaderTaskEither<unknown, never, A>;
+/**
+ * @since 2.0.0
+ */
+export declare function leftIO<L>(ml: IO<L>): ReaderTaskEither<unknown, L, never>;
 /**
  * @since 2.0.0
  */

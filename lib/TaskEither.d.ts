@@ -28,19 +28,27 @@ export interface TaskEither<L, A> extends Task<E.Either<L, A>> {
 /**
  * @since 2.0.0
  */
-export declare const fromLeft: <L>(l: L) => TaskEither<L, never>;
+export declare const left: <L>(l: L) => TaskEither<L, never>;
 /**
  * @since 2.0.0
  */
-export declare const fromRight: <A>(a: A) => TaskEither<never, A>;
+export declare const right: <A>(a: A) => TaskEither<never, A>;
 /**
  * @since 2.0.0
  */
-export declare const right: <A>(ma: Task<A>) => TaskEither<never, A>;
+export declare function rightIO<A>(ma: IO<A>): TaskEither<never, A>;
 /**
  * @since 2.0.0
  */
-export declare const left: <L>(ml: Task<L>) => TaskEither<L, never>;
+export declare function leftIO<L>(ml: IO<L>): TaskEither<L, never>;
+/**
+ * @since 2.0.0
+ */
+export declare const rightTask: <A>(ma: Task<A>) => TaskEither<never, A>;
+/**
+ * @since 2.0.0
+ */
+export declare const leftTask: <L>(ml: Task<L>) => TaskEither<L, never>;
 /**
  * @since 2.0.0
  */
@@ -49,10 +57,6 @@ export declare const fromEither: <L, A>(ma: E.Either<L, A>) => TaskEither<L, A>;
  * @since 2.0.0
  */
 export declare function fromOption<L, A>(ma: Option<A>, onNone: () => L): TaskEither<L, A>;
-/**
- * @since 2.0.0
- */
-export declare function fromIO<A>(ma: IO<A>): TaskEither<never, A>;
 /**
  * @since 2.0.0
  */
