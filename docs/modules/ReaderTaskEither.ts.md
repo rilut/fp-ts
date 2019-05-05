@@ -20,15 +20,17 @@ parent: Modules
 - [readerTaskEither (constant)](#readertaskeither-constant)
 - [readerTaskEitherSeq (constant)](#readertaskeitherseq-constant)
 - [fold (function)](#fold-function)
+- [fromEither (function)](#fromeither-function)
+- [fromIO (function)](#fromio-function)
 - [fromIOEither (function)](#fromioeither-function)
 - [fromLeft (function)](#fromleft-function)
+- [fromOption (function)](#fromoption-function)
 - [fromPredicate (function)](#frompredicate-function)
 - [left (function)](#left-function)
 - [mapLeft (function)](#mapleft-function)
 - [orElse (function)](#orelse-function)
 - [right (function)](#right-function)
 - [run (function)](#run-function)
-- [tryCatch (function)](#trycatch-function)
 
 ---
 
@@ -105,7 +107,7 @@ Added in v2.0.0
 **Signature**
 
 ```ts
-export const fromTaskEither: <E, L, A>(ma: TaskEither<L, A>) => ReaderTaskEither<E, L, A> = ...
+export const fromTaskEither: <L, A>(ma: TaskEither<L, A>) => ReaderTaskEither<unknown, L, A> = ...
 ```
 
 Added in v2.0.0
@@ -161,6 +163,26 @@ export function fold<E, L, A, R>(
 
 Added in v2.0.0
 
+# fromEither (function)
+
+**Signature**
+
+```ts
+export function fromEither<L, A>(ma: Either<L, A>): ReaderTaskEither<unknown, L, A> { ... }
+```
+
+Added in v2.0.0
+
+# fromIO (function)
+
+**Signature**
+
+```ts
+export function fromIO<A>(ma: IO<A>): ReaderTaskEither<unknown, never, A> { ... }
+```
+
+Added in v2.0.0
+
 # fromIOEither (function)
 
 **Signature**
@@ -177,6 +199,16 @@ Added in v2.0.0
 
 ```ts
 export function fromLeft<L>(l: L): ReaderTaskEither<unknown, L, never> { ... }
+```
+
+Added in v2.0.0
+
+# fromOption (function)
+
+**Signature**
+
+```ts
+export function fromOption<L, A>(ma: Option<A>, onNone: () => L): ReaderTaskEither<unknown, L, A> { ... }
 ```
 
 Added in v2.0.0
@@ -203,7 +235,7 @@ Added in v2.0.0
 **Signature**
 
 ```ts
-export function left<E, L>(ma: Task<L>): ReaderTaskEither<E, L, never> { ... }
+export function left<L>(ma: Task<L>): ReaderTaskEither<unknown, L, never> { ... }
 ```
 
 Added in v2.0.0
@@ -236,7 +268,7 @@ Added in v2.0.0
 **Signature**
 
 ```ts
-export function right<E, A>(ma: Task<A>): ReaderTaskEither<E, never, A> { ... }
+export function right<A>(ma: Task<A>): ReaderTaskEither<unknown, never, A> { ... }
 ```
 
 Added in v2.0.0
@@ -247,19 +279,6 @@ Added in v2.0.0
 
 ```ts
 export function run<E, L, A>(ma: ReaderTaskEither<E, L, A>, e: E): Promise<Either<L, A>> { ... }
-```
-
-Added in v2.0.0
-
-# tryCatch (function)
-
-**Signature**
-
-```ts
-export function tryCatch<E, L, A>(
-  f: (e: E) => Promise<A>,
-  onError: (reason: unknown, e: E) => L
-): ReaderTaskEither<E, L, A> { ... }
 ```
 
 Added in v2.0.0

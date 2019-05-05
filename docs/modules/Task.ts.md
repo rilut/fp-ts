@@ -19,10 +19,11 @@ If you want to represent an asynchronous computation that may fail, please see `
 - [task (constant)](#task-constant)
 - [taskSeq (constant)](#taskseq-constant)
 - [delay (function)](#delay-function)
+- [fromIO (function)](#fromio-function)
 - [getMonoid (function)](#getmonoid-function)
 - [getRaceMonoid (function)](#getracemonoid-function)
 - [getSemigroup (function)](#getsemigroup-function)
-- [tryCatch (function)](#trycatch-function)
+- [never (function)](#never-function)
 
 ---
 
@@ -84,12 +85,22 @@ export function delay<A>(millis: number, ma: Task<A>): Task<A> { ... }
 
 Added in v2.0.0
 
+# fromIO (function)
+
+**Signature**
+
+```ts
+export function fromIO<A>(ma: IO<A>): Task<A> { ... }
+```
+
+Added in v2.0.0
+
 # getMonoid (function)
 
 **Signature**
 
 ```ts
-export const getMonoid = <A>(M: Monoid<A>): Monoid<Task<A>> => ...
+export function getMonoid<A>(M: Monoid<A>): Monoid<Task<A>> { ... }
 ```
 
 Added in v2.0.0
@@ -99,7 +110,7 @@ Added in v2.0.0
 **Signature**
 
 ```ts
-export const getRaceMonoid = <A = never>(): Monoid<Task<A>> => ...
+export function getRaceMonoid<A = never>(): Monoid<Task<A>> { ... }
 ```
 
 Added in v2.0.0
@@ -109,17 +120,17 @@ Added in v2.0.0
 **Signature**
 
 ```ts
-export const getSemigroup = <A>(S: Semigroup<A>): Semigroup<Task<A>> => ...
+export function getSemigroup<A>(S: Semigroup<A>): Semigroup<Task<A>> { ... }
 ```
 
 Added in v2.0.0
 
-# tryCatch (function)
+# never (function)
 
 **Signature**
 
 ```ts
-export const tryCatch = <L, A>(f: Lazy<Promise<A>>, onrejected: (reason: unknown) => L): Task<Either<L, A>> => ...
+export const never: Task<never> = () => new Promise(_ => ...
 ```
 
 Added in v2.0.0

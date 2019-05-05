@@ -18,6 +18,7 @@ error of type `L`. If you want to represent an asynchronous computation that nev
 - [URI (constant)](#uri-constant)
 - [fold (constant)](#fold-constant)
 - [foldTask (constant)](#foldtask-constant)
+- [fromEither (constant)](#fromeither-constant)
 - [fromIOEither (constant)](#fromioeither-constant)
 - [fromLeft (constant)](#fromleft-constant)
 - [fromRight (constant)](#fromright-constant)
@@ -31,6 +32,8 @@ error of type `L`. If you want to represent an asynchronous computation that nev
 - [taskEitherSeq (constant)](#taskeitherseq-constant)
 - [bracket (function)](#bracket-function)
 - [filterOrElse (function)](#filterorelse-function)
+- [fromIO (function)](#fromio-function)
+- [fromOption (function)](#fromoption-function)
 - [fromPredicate (function)](#frompredicate-function)
 - [getApplyMonoid (function)](#getapplymonoid-function)
 - [getApplySemigroup (function)](#getapplysemigroup-function)
@@ -84,6 +87,16 @@ export const foldTask: <L, A, R>(
   onLeft: (l: L) => Task<R>,
   onRight: (a: A) => Task<R>
 ) => Task<R> = ...
+```
+
+Added in v2.0.0
+
+# fromEither (constant)
+
+**Signature**
+
+```ts
+export const fromEither: <L, A>(ma: E.Either<L, A>) => TaskEither<L, A> = ...
 ```
 
 Added in v2.0.0
@@ -238,6 +251,26 @@ export function filterOrElse<L, A>(ma: TaskEither<L, A>, p: Predicate<A>, zero: 
 
 Added in v2.0.0
 
+# fromIO (function)
+
+**Signature**
+
+```ts
+export function fromIO<A>(ma: IO<A>): TaskEither<never, A> { ... }
+```
+
+Added in v2.0.0
+
+# fromOption (function)
+
+**Signature**
+
+```ts
+export function fromOption<L, A>(ma: Option<A>, onNone: () => L): TaskEither<L, A> { ... }
+```
+
+Added in v2.0.0
+
 # fromPredicate (function)
 
 **Signature**
@@ -336,37 +369,10 @@ Added in v2.0.0
 
 # tryCatch (function)
 
-Transforms a `Promise` into a `TaskEither`, catching the possible error.
-
 **Signature**
 
 ```ts
 export function tryCatch<L, A>(f: Lazy<Promise<A>>, onRejected: (reason: unknown) => L): TaskEither<L, A> { ... }
-```
-
-**Example**
-
-```ts
-import { createHash } from 'crypto'
-import { TaskEither, tryCatch } from 'fp-ts/lib/TaskEither'
-import { createReadStream } from 'fs'
-import { left } from 'fp-ts/lib/Either'
-
-function md5(path: string): TaskEither<string, string> {
-  const mkHash = (p: string) =>
-    new Promise<string>((resolve, reject) => {
-      const hash = createHash('md5')
-      const rs = createReadStream(p)
-      rs.on('error', (error: Error) => reject(error.message))
-      rs.on('data', (chunk: string) => hash.update(chunk))
-      rs.on('end', () => resolve(hash.digest('hex')))
-    })
-  return tryCatch(() => mkHash(path), message => `cannot create md5 hash: ${String(message)}`)
-}
-
-md5('foo')().then(x => {
-  assert.deepStrictEqual(x, left(`cannot create md5 hash: ENOENT: no such file or directory, open 'foo'`))
-})
 ```
 
 Added in v2.0.0

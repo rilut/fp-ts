@@ -19,7 +19,6 @@ If you want to represent a synchronous computation that may fail, please see `IO
 - [io (constant)](#io-constant)
 - [getMonoid (function)](#getmonoid-function)
 - [getSemigroup (function)](#getsemigroup-function)
-- [run (function)](#run-function)
 
 ---
 
@@ -64,7 +63,7 @@ Added in v2.0.0
 **Signature**
 
 ```ts
-export const getMonoid = <A>(M: Monoid<A>): Monoid<IO<A>> => ...
+export function getMonoid<A>(M: Monoid<A>): Monoid<IO<A>> { ... }
 ```
 
 Added in v2.0.0
@@ -74,17 +73,7 @@ Added in v2.0.0
 **Signature**
 
 ```ts
-export const getSemigroup = <A>(S: Semigroup<A>): Semigroup<IO<A>> => ...
-```
-
-Added in v2.0.0
-
-# run (function)
-
-**Signature**
-
-```ts
-export const run = <A>(fa: IO<A>): A => ...
+export function getSemigroup<A>(S: Semigroup<A>): Semigroup<IO<A>> { ... }
 ```
 
 Added in v2.0.0
