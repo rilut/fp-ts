@@ -94,10 +94,6 @@ export declare function orElse<E, L, A, M>(ma: ReaderTaskEither<E, L, A>, f: (l:
 /**
  * @since 2.0.0
  */
-export declare function mapLeft<E, L, A, M>(ma: ReaderTaskEither<E, L, A>, f: (l: L) => M): ReaderTaskEither<E, M, A>;
-/**
- * @since 2.0.0
- */
 export declare const ask: <E>() => ReaderTaskEither<E, never, E>;
 /**
  * @since 2.0.0

@@ -188,10 +188,6 @@ export declare function isRight<L, A>(ma: Either<L, A>): ma is Right<A>;
 /**
  * @since 2.0.0
  */
-export declare function mapLeft<L, A, M>(ma: Either<L, A>, f: (l: L) => M): Either<M, A>;
-/**
- * @since 2.0.0
- */
 export declare function swap<L, A>(ma: Either<L, A>): Either<A, L>;
 /**
  * @since 2.0.0

@@ -65,10 +65,6 @@ export declare const foldIO: <L, A, R>(ma: IOEither<L, A>, onLeft: (l: L) => IO<
 /**
  * @since 2.0.0
  */
-export declare const mapLeft: <L, A, M>(ma: IOEither<L, A>, f: (l: L) => M) => IOEither<M, A>;
-/**
- * @since 2.0.0
- */
 export declare const getOrElse: <L, A>(ma: IOEither<L, A>, f: (l: L) => A) => IO<A>;
 /**
  * @since 2.0.0

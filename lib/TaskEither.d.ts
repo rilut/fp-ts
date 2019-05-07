@@ -77,10 +77,6 @@ export declare const foldTask: <L, A, R>(ma: TaskEither<L, A>, onLeft: (l: L) =>
 /**
  * @since 2.0.0
  */
-export declare const mapLeft: <L, A, M>(ma: TaskEither<L, A>, f: (l: L) => M) => TaskEither<M, A>;
-/**
- * @since 2.0.0
- */
 export declare const getOrElse: <L, A>(ma: TaskEither<L, A>, f: (l: L) => A) => Task<A>;
 /**
  * @since 2.0.0
