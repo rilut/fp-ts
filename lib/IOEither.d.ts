@@ -57,15 +57,11 @@ export declare function fromPredicate<L, A>(predicate: Predicate<A>, onFalse: (a
 /**
  * @since 2.0.0
  */
-export declare const fold: <L, A, R>(ma: IOEither<L, A>, onLeft: (l: L) => R, onRight: (a: A) => R) => IO<R>;
+export declare const fold: <L, A, R>(ma: IOEither<L, A>, onLeft: (l: L) => IO<R>, onRight: (a: A) => IO<R>) => IO<R>;
 /**
  * @since 2.0.0
  */
-export declare const foldIO: <L, A, R>(ma: IOEither<L, A>, onLeft: (l: L) => IO<R>, onRight: (a: A) => IO<R>) => IO<R>;
-/**
- * @since 2.0.0
- */
-export declare const getOrElse: <L, A>(ma: IOEither<L, A>, f: (l: L) => A) => IO<A>;
+export declare const getOrElse: <L, A>(ma: IOEither<L, A>, f: (l: L) => IO<A>) => IO<A>;
 /**
  * @since 2.0.0
  */

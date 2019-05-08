@@ -83,16 +83,17 @@
 import { Alternative1 } from './Alternative';
 import { Compactable1 } from './Compactable';
 import { Either } from './Either';
+import { Eq } from './Eq';
 import { Extend1 } from './Extend';
 import { Filterable1 } from './Filterable';
 import { Foldable1 } from './Foldable';
 import { Lazy, Predicate, Refinement } from './function';
 import { Monad1 } from './Monad';
+import { MonadThrow1 } from './MonadThrow';
 import { Monoid } from './Monoid';
 import { Ord } from './Ord';
 import { Plus1 } from './Plus';
 import { Semigroup } from './Semigroup';
-import { Eq } from './Eq';
 import { Show } from './Show';
 import { Traversable1 } from './Traversable';
 import { Witherable1 } from './Witherable';
@@ -380,4 +381,4 @@ export declare function getMonoid<A>(S: Semigroup<A>): Monoid<Option<A>>;
 /**
  * @since 2.0.0
  */
-export declare const option: Monad1<URI> & Foldable1<URI> & Plus1<URI> & Traversable1<URI> & Alternative1<URI> & Extend1<URI> & Compactable1<URI> & Filterable1<URI> & Witherable1<URI>;
+export declare const option: Monad1<URI> & Foldable1<URI> & Plus1<URI> & Traversable1<URI> & Alternative1<URI> & Extend1<URI> & Compactable1<URI> & Filterable1<URI> & Witherable1<URI> & MonadThrow1<URI>;

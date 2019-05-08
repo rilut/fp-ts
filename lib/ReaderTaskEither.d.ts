@@ -86,10 +86,6 @@ export declare function fromPredicate<L, A>(predicate: Predicate<A>, onFalse: (a
 /**
  * @since 2.0.0
  */
-export declare function fold<E, L, A, R>(ma: ReaderTaskEither<E, L, A>, onLeft: (l: L) => R, onRight: (a: A) => R): Reader<E, Task<R>>;
-/**
- * @since 2.0.0
- */
 export declare function orElse<E, L, A, M>(ma: ReaderTaskEither<E, L, A>, f: (l: L) => ReaderTaskEither<E, M, A>): ReaderTaskEither<E, M, A>;
 /**
  * @since 2.0.0
