@@ -2,7 +2,6 @@ import { Alt2C } from './Alt';
 import { Applicative2C } from './Applicative';
 import { Either, URI } from './Either';
 import { Monad2C } from './Monad';
-import { MonadThrow2C } from './MonadThrow';
 import { Monoid } from './Monoid';
 import { Semigroup } from './Semigroup';
 export declare function getApplicative<L>(S: Semigroup<L>): Applicative2C<URI, L>;
@@ -24,7 +23,3 @@ export declare function getMonoid<L, A>(SL: Semigroup<L>, SA: Monoid<A>): Monoid
  * @since 2.0.0
  */
 export declare function getAlt<L>(S: Semigroup<L>): Alt2C<URI, L>;
-/**
- * @since 2.0.0
- */
-export declare function getMonadThrow<L>(S: Semigroup<L>): MonadThrow2C<URI, L>;

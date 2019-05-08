@@ -110,3 +110,7 @@ export declare function increment(n: number): number;
  * @since 2.0.0
  */
 export declare function decrement(n: number): number;
+/**
+ * @since 2.0.0
+ */
+export declare function absurd<A>(_: never): A;

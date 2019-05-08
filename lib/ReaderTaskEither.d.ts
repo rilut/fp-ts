@@ -6,7 +6,6 @@ import { IOEither } from './IOEither';
 import { Monad3 } from './Monad';
 import { MonadIO3 } from './MonadIO';
 import { MonadTask3 } from './MonadTask';
-import { MonadThrow3 } from './MonadThrow';
 import { Reader } from './Reader';
 import { Task } from './Task';
 import * as TE from './TaskEither';
@@ -102,7 +101,7 @@ export declare const local: <E, L, A, D>(ma: ReaderTaskEither<E, L, A>, f: (f: D
 /**
  * @since 2.0.0
  */
-export declare const readerTaskEither: Monad3<URI> & Bifunctor3<URI> & Alt3<URI> & MonadIO3<URI> & MonadTask3<URI> & MonadThrow3<URI>;
+export declare const readerTaskEither: Monad3<URI> & Bifunctor3<URI> & Alt3<URI> & MonadIO3<URI> & MonadTask3<URI>;
 /**
  * Like `readerTaskEither` but `ap` is sequential
  * @since 2.0.0

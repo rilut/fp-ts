@@ -30,16 +30,15 @@ import { Alt2 } from './Alt';
 import { Bifunctor2 } from './Bifunctor';
 import { ChainRec2 } from './ChainRec';
 import { Compactable2C } from './Compactable';
+import { Eq } from './Eq';
 import { Extend2 } from './Extend';
 import { Filterable2C } from './Filterable';
 import { Foldable2 } from './Foldable';
 import { Lazy, Predicate, Refinement } from './function';
 import { Monad2 } from './Monad';
-import { MonadThrow2 } from './MonadThrow';
 import { Monoid } from './Monoid';
 import { Option } from './Option';
 import { Semigroup } from './Semigroup';
-import { Eq } from './Eq';
 import { Show } from './Show';
 import { Traversable2 } from './Traversable';
 import { Witherable2C } from './Witherable';
@@ -249,4 +248,4 @@ export declare function getWitherable<L>(M: Monoid<L>): Witherable2C<URI, L>;
 /**
  * @since 2.0.0
  */
-export declare const either: Monad2<URI> & Foldable2<URI> & Traversable2<URI> & Bifunctor2<URI> & Alt2<URI> & Extend2<URI> & ChainRec2<URI> & MonadThrow2<URI>;
+export declare const either: Monad2<URI> & Foldable2<URI> & Traversable2<URI> & Bifunctor2<URI> & Alt2<URI> & Extend2<URI> & ChainRec2<URI>;

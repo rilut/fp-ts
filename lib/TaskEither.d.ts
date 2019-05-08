@@ -10,7 +10,6 @@ import { IOEither } from './IOEither';
 import { Monad2 } from './Monad';
 import { MonadIO2 } from './MonadIO';
 import { MonadTask2 } from './MonadTask';
-import { MonadThrow2 } from './MonadThrow';
 import { Monoid } from './Monoid';
 import { Semigroup } from './Semigroup';
 import { Task } from './Task';
@@ -148,7 +147,7 @@ export declare function taskify<A, B, C, D, E, L, R>(f: (a: A, b: B, c: C, d: D,
 /**
  * @since 2.0.0
  */
-export declare const taskEither: Monad2<URI> & Bifunctor2<URI> & Alt2<URI> & MonadIO2<URI> & MonadTask2<URI> & MonadThrow2<URI>;
+export declare const taskEither: Monad2<URI> & Bifunctor2<URI> & Alt2<URI> & MonadIO2<URI> & MonadTask2<URI>;
 /**
  * Like `TaskEither` but `ap` is sequential
  *

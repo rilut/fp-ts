@@ -9,7 +9,6 @@ import { Lazy, Predicate, Refinement } from './function';
 import { IO } from './IO';
 import { Monad2 } from './Monad';
 import { MonadIO2 } from './MonadIO';
-import { MonadThrow2 } from './MonadThrow';
 import { Monoid } from './Monoid';
 import { Option } from './Option';
 import { Semigroup } from './Semigroup';
@@ -103,4 +102,4 @@ export declare function bracket<L, A, B>(acquire: IOEither<L, A>, use: (a: A) =>
 /**
  * @since 2.0.0
  */
-export declare const ioEither: Monad2<URI> & Bifunctor2<URI> & Alt2<URI> & MonadIO2<URI> & MonadThrow2<URI>;
+export declare const ioEither: Monad2<URI> & Bifunctor2<URI> & Alt2<URI> & MonadIO2<URI>;
