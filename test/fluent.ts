@@ -11,6 +11,7 @@ import { ordNumber } from '../src/Ord'
 import { reader } from '../src/Reader'
 import { semigroupSum } from '../src/Semigroup'
 import { showNumber } from '../src/Show'
+import { tuple } from '../src/Tuple'
 
 const fluent = F.fluent(option)
 
@@ -252,5 +253,17 @@ describe('fluent', () => {
     const x = fluent((e: E) => e.count + 1).promap((s: string) => ({ count: s.length }), n => n > 2).value
     assert.deepStrictEqual(x('aa'), true)
     assert.deepStrictEqual(x('a'), false)
+  })
+
+  it('compose', () => {
+    const fluent1 = F.fluent(tuple)
+    assert.deepStrictEqual(fluent1(['a', 1]).compose([1, true]).value, ['a', true])
+    const fluent2 = F.fluent(reader)
+    assert.deepStrictEqual(
+      fluent2((s: string) => s.length)
+        .compose(n => n > 2)
+        .value('aaa'),
+      true
+    )
   })
 })
