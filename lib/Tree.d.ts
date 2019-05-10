@@ -1,8 +1,8 @@
 import { Comonad1 } from './Comonad';
+import { Eq } from './Eq';
 import { Foldable1 } from './Foldable';
 import { HKT, Type, Type2, Type3, URIS, URIS2, URIS3 } from './HKT';
-import { Monad, Monad1, Monad2, Monad2C, Monad3, Monad3C } from './Monad';
-import { Eq } from './Eq';
+import { Monad, Monad1, Monad2, Monad2C, Monad3 } from './Monad';
 import { Show } from './Show';
 import { Traversable1 } from './Traversable';
 declare module './HKT' {
@@ -83,7 +83,6 @@ export declare const unfoldForest: <A, B>(bs: B[], f: (b: B) => [A, B[]]) => Tre
  * @since 2.0.0
  */
 export declare function unfoldTreeM<M extends URIS3>(M: Monad3<M>): <U, L, A, B>(b: B, f: (b: B) => Type3<M, U, L, [A, Array<B>]>) => Type3<M, U, L, Tree<A>>;
-export declare function unfoldTreeM<M extends URIS3, U, L>(M: Monad3C<M, U, L>): <A, B>(b: B, f: (b: B) => Type3<M, U, L, [A, Array<B>]>) => Type3<M, U, L, Tree<A>>;
 export declare function unfoldTreeM<M extends URIS2>(M: Monad2<M>): <L, A, B>(b: B, f: (b: B) => Type2<M, L, [A, Array<B>]>) => Type2<M, L, Tree<A>>;
 export declare function unfoldTreeM<M extends URIS2, L>(M: Monad2C<M, L>): <A, B>(b: B, f: (b: B) => Type2<M, L, [A, Array<B>]>) => Type2<M, L, Tree<A>>;
 export declare function unfoldTreeM<M extends URIS>(M: Monad1<M>): <A, B>(b: B, f: (b: B) => Type<M, [A, Array<B>]>) => Type<M, Tree<A>>;
@@ -94,7 +93,6 @@ export declare function unfoldTreeM<M>(M: Monad<M>): <A, B>(b: B, f: (b: B) => H
  * @since 2.0.0
  */
 export declare function unfoldForestM<M extends URIS3>(M: Monad3<M>): <U, L, A, B>(bs: Array<B>, f: (b: B) => Type3<M, U, L, [A, Array<B>]>) => Type3<M, U, L, Forest<A>>;
-export declare function unfoldForestM<M extends URIS3, U, L>(M: Monad3C<M, U, L>): <A, B>(bs: Array<B>, f: (b: B) => Type3<M, U, L, [A, Array<B>]>) => Type3<M, U, L, Forest<A>>;
 export declare function unfoldForestM<M extends URIS2>(M: Monad2<M>): <L, A, B>(bs: Array<B>, f: (b: B) => Type2<M, L, [A, Array<B>]>) => Type2<M, L, Forest<A>>;
 export declare function unfoldForestM<M extends URIS2, L>(M: Monad2C<M, L>): <A, B>(bs: Array<B>, f: (b: B) => Type2<M, L, [A, Array<B>]>) => Type2<M, L, Forest<A>>;
 export declare function unfoldForestM<M extends URIS>(M: Monad1<M>): <A, B>(bs: Array<B>, f: (b: B) => Type<M, [A, Array<B>]>) => Type<M, Forest<A>>;

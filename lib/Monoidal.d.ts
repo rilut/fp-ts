@@ -5,7 +5,7 @@
  * - https://bartoszmilewski.com/2017/02/06/applicative-functors/
  */
 import { Applicative, Applicative1, Applicative2, Applicative3 } from './Applicative';
-import { Functor, Functor1, Functor2, Functor2C, Functor3, Functor3C } from './Functor';
+import { Functor, Functor1, Functor2, Functor2C, Functor3 } from './Functor';
 import { HKT, Type, Type2, Type3, URIS, URIS2, URIS3 } from './HKT';
 /**
  * @since 2.0.0
@@ -29,10 +29,6 @@ export interface Monoidal3<F extends URIS3> extends Functor3<F> {
 export interface Monoidal2C<F extends URIS2, L> extends Functor2C<F, L> {
     readonly unit: () => Type2<F, L, void>;
     readonly mult: <A, B>(fa: Type2<F, L, A>, fb: Type2<F, L, B>) => Type2<F, L, [A, B]>;
-}
-export interface Monoidal3C<F extends URIS3, U, L> extends Functor3C<F, U, L> {
-    readonly unit: () => Type3<F, U, L, void>;
-    readonly mult: <A, B>(fa: Type3<F, U, L, A>, fb: Type3<F, U, L, B>) => Type3<F, U, L, [A, B]>;
 }
 /**
  * @since 2.0.0

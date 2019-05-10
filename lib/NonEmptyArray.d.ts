@@ -34,7 +34,7 @@ export declare function getShow<A>(S: Show<A>): Show<NonEmptyArray<A>>;
 /**
  * @since 2.0.0
  */
-export declare function make<A>(head: A, tail: Array<A>): NonEmptyArray<A>;
+export declare function make<A>(head: A, tail?: Array<A>): NonEmptyArray<A>;
 /**
  * @since 2.0.0
  */

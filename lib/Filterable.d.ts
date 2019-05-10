@@ -3,10 +3,10 @@
  *
  * Adapted from https://github.com/LiamGoodacre/purescript-filterable/blob/master/src/Data/Filterable.purs
  */
-import { Compactable, Compactable1, Compactable2, Compactable2C, Compactable3, Compactable3C, CompactableComposition, CompactableComposition11, CompactableComposition12, CompactableComposition12C, CompactableComposition21, CompactableComposition22, CompactableComposition3C1, Separated } from './Compactable';
+import { Compactable, Compactable1, Compactable2, Compactable2C, Compactable3, CompactableComposition, CompactableComposition11, CompactableComposition12, CompactableComposition12C, CompactableComposition21, CompactableComposition22, Separated } from './Compactable';
 import { Either } from './Either';
 import { Predicate, Refinement } from './function';
-import { Functor, Functor1, Functor2, Functor2C, Functor3, Functor3C, FunctorComposition, FunctorComposition11, FunctorComposition12, FunctorComposition12C, FunctorComposition21, FunctorComposition22, FunctorComposition3C1 } from './Functor';
+import { Functor, Functor1, Functor2, Functor2C, Functor3, FunctorComposition, FunctorComposition11, FunctorComposition12, FunctorComposition12C, FunctorComposition21, FunctorComposition22 } from './Functor';
 import { HKT, Type, Type2, Type3, URIS, URIS2, URIS3 } from './HKT';
 import { Option } from './Option';
 interface Filter<F> {
@@ -106,23 +106,6 @@ export interface Filterable3<F extends URIS3> extends Functor3<F>, Compactable3<
     readonly filterMap: <U, L, A, B>(fa: Type3<F, U, L, A>, f: (a: A) => Option<B>) => Type3<F, U, L, B>;
     readonly filter: Filter3<F>;
 }
-interface Filter3C<F extends URIS3, U, L> {
-    <A, B extends A>(fa: Type3<F, U, L, A>, refinement: Refinement<A, B>): Type3<F, U, L, B>;
-    <A>(fa: Type3<F, U, L, A>, predicate: Predicate<A>): Type3<F, U, L, A>;
-}
-interface Partition3C<F extends URIS3, U, L> {
-    <A, B extends A>(fa: Type3<F, U, L, A>, refinement: Refinement<A, B>): Separated<Type3<F, U, L, A>, Type3<F, U, L, B>>;
-    <A>(fa: Type3<F, U, L, A>, predicate: Predicate<A>): Separated<Type3<F, U, L, A>, Type3<F, U, L, A>>;
-}
-/**
- * @since 2.0.0
- */
-export interface Filterable3C<F extends URIS3, U, L> extends Functor3C<F, U, L>, Compactable3C<F, U, L> {
-    readonly partitionMap: <RL, RR, A>(fa: Type3<F, U, L, A>, f: (a: A) => Either<RL, RR>) => Separated<Type3<F, U, L, RL>, Type3<F, U, L, RR>>;
-    readonly partition: Partition3C<F, U, L>;
-    readonly filterMap: <A, B>(fa: Type3<F, U, L, A>, f: (a: A) => Option<B>) => Type3<F, U, L, B>;
-    readonly filter: Filter3C<F, U, L>;
-}
 export interface FilterableComposition<F, G> extends FunctorComposition<F, G>, CompactableComposition<F, G> {
     readonly partitionMap: <RL, RR, A>(fa: HKT<F, HKT<G, A>>, f: (a: A) => Either<RL, RR>) => Separated<HKT<F, HKT<G, RL>>, HKT<F, HKT<G, RR>>>;
     readonly partition: <A>(fa: HKT<F, HKT<G, A>>, predicate: Predicate<A>) => Separated<HKT<F, HKT<G, A>>, HKT<F, HKT<G, A>>>;
@@ -171,16 +154,9 @@ export interface FilterableComposition22C<F extends URIS2, G extends URIS2, LG> 
     readonly filterMap: <LF, A, B>(fa: Type2<F, LF, Type2<G, LG, A>>, f: (a: A) => Option<B>) => Type2<F, LF, Type2<G, LG, B>>;
     readonly filter: <LF, A>(fa: Type2<F, LF, Type2<G, LG, A>>, predicate: Predicate<A>) => Type2<F, LF, Type2<G, LG, A>>;
 }
-export interface FilterableComposition3C1<F extends URIS3, G extends URIS, UF, LF> extends FunctorComposition3C1<F, G, UF, LF>, CompactableComposition3C1<F, G, UF, LF> {
-    readonly partitionMap: <RL, RR, A>(fa: Type3<F, UF, LF, Type<G, A>>, f: (a: A) => Either<RL, RR>) => Separated<Type3<F, UF, LF, Type<G, RL>>, Type3<F, UF, LF, Type<G, RR>>>;
-    readonly partition: <A>(fa: Type3<F, UF, LF, Type<G, A>>, predicate: Predicate<A>) => Separated<Type3<F, UF, LF, Type<G, A>>, Type3<F, UF, LF, Type<G, A>>>;
-    readonly filterMap: <A, B>(fa: Type3<F, UF, LF, Type<G, A>>, f: (a: A) => Option<B>) => Type3<F, UF, LF, Type<G, B>>;
-    readonly filter: <A>(fa: Type3<F, UF, LF, Type<G, A>>, predicate: Predicate<A>) => Type3<F, UF, LF, Type<G, A>>;
-}
 /**
  * @since 2.0.0
  */
-export declare function getFilterableComposition<F extends URIS3, G extends URIS, UF, LF>(F: Functor3C<F, UF, LF>, G: Filterable1<G>): FilterableComposition3C1<F, G, UF, LF>;
 export declare function getFilterableComposition<F extends URIS2, G extends URIS2, LG>(F: Functor2<F>, G: Filterable2C<G, LG>): FilterableComposition22C<F, G, LG>;
 export declare function getFilterableComposition<F extends URIS2, G extends URIS2>(F: Functor2<F>, G: Filterable2<G>): FilterableComposition22<F, G>;
 export declare function getFilterableComposition<F extends URIS2, G extends URIS, LF>(F: Functor2C<F, LF>, G: Filterable1<G>): FilterableComposition2C1<F, G, LF>;

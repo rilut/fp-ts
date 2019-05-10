@@ -10,7 +10,7 @@
  * 2. Composition: `F.mapWithIndex(fa, (_i, a) => bc(ab(a))) = F.mapWithIndex(F.mapWithIndex(fa, ab), bc)`
  */
 import { HKT, Type, Type2, Type3, Type4, URIS, URIS2, URIS3, URIS4 } from './HKT';
-import { Functor, Functor1, Functor2, Functor3, Functor4, Functor2C, Functor3C, FunctorComposition, FunctorComposition11, FunctorComposition12, FunctorComposition12C, FunctorComposition21, FunctorComposition2C1, FunctorComposition22, FunctorComposition22C, FunctorComposition3C1 } from './Functor';
+import { Functor, Functor1, Functor2, Functor3, Functor4, Functor2C, FunctorComposition, FunctorComposition11, FunctorComposition12, FunctorComposition12C, FunctorComposition21, FunctorComposition2C1, FunctorComposition22, FunctorComposition22C } from './Functor';
 /**
  * @since 2.0.0
  */
@@ -31,9 +31,6 @@ export interface FunctorWithIndex4<F extends URIS4, I> extends Functor4<F> {
 }
 export interface FunctorWithIndex2C<F extends URIS2, I, L> extends Functor2C<F, L> {
     readonly mapWithIndex: <A, B>(fa: Type2<F, L, A>, f: (i: I, a: A) => B) => Type2<F, L, B>;
-}
-export interface FunctorWithIndex3C<F extends URIS3, I, U, L> extends Functor3C<F, U, L> {
-    readonly mapWithIndex: <A, B>(fa: Type3<F, U, L, A>, f: (i: I, a: A) => B) => Type3<F, U, L, B>;
 }
 export interface FunctorWithIndexComposition<F, FI, G, GI> extends FunctorComposition<F, G> {
     readonly mapWithIndex: <A, B>(fga: HKT<F, HKT<G, A>>, f: (i: [FI, GI], a: A) => B) => HKT<F, HKT<G, B>>;
@@ -59,13 +56,9 @@ export interface FunctorWithIndexComposition22<F extends URIS2, FI, G extends UR
 export interface FunctorWithIndexComposition22C<F extends URIS2, FI, G extends URIS2, GI, LG> extends FunctorComposition22C<F, G, LG> {
     readonly mapWithIndex: <L, A, B>(fa: Type2<F, L, Type2<G, LG, A>>, f: (i: [FI, GI], a: A) => B) => Type2<F, L, Type2<G, LG, B>>;
 }
-export interface FunctorWithIndexComposition3C1<F extends URIS3, FI, G extends URIS, GI, UF, LF> extends FunctorComposition3C1<F, G, UF, LF> {
-    readonly mapWithIndex: <A, B>(fa: Type3<F, UF, LF, Type<G, A>>, f: (i: [FI, GI], a: A) => B) => Type3<F, UF, LF, Type<G, B>>;
-}
 /**
  * @since 2.0.0
  */
-export declare function getFunctorWithIndexComposition<F extends URIS3, FI, G extends URIS, GI, U, L>(F: FunctorWithIndex3C<F, FI, U, L>, G: FunctorWithIndex1<G, FI>): FunctorWithIndexComposition3C1<F, FI, G, GI, U, L>;
 export declare function getFunctorWithIndexComposition<F extends URIS2, FI, G extends URIS2, GI, L>(F: FunctorWithIndex2<F, FI>, G: FunctorWithIndex2C<G, FI, L>): FunctorWithIndexComposition22C<F, FI, G, GI, L>;
 export declare function getFunctorWithIndexComposition<F extends URIS2, FI, G extends URIS2, GI>(F: FunctorWithIndex2<F, FI>, G: FunctorWithIndex2<G, FI>): FunctorWithIndexComposition22<F, FI, G, GI>;
 export declare function getFunctorWithIndexComposition<F extends URIS2, FI, G extends URIS, GI, L>(F: FunctorWithIndex2C<F, FI, L>, G: FunctorWithIndex1<G, GI>): FunctorWithIndexComposition2C1<F, FI, G, GI, L>;

@@ -22,7 +22,7 @@ import { Profunctor, Profunctor2, Profunctor2C } from './Profunctor';
 import { Eq } from './Eq';
 import { Show } from './Show';
 import { Semigroupoid, Semigroupoid2, Semigroupoid2C } from './Semigroupoid';
-interface Fluent2C<F extends URIS2, I, L, A> {
+export interface Fluent2C<F extends URIS2, I, L, A> {
     readonly I: I;
     readonly value: Type2<F, L, A>;
     show(this: Fluent2C<F, Show<Type2<F, L, A>>, L, A>): string;
@@ -62,7 +62,7 @@ interface Fluent2C<F extends URIS2, I, L, A> {
     promap<H, B>(this: Fluent2C<F, Profunctor2C<F, L>, L, A>, f: (h: H) => L, g: (a: A) => B): Fluent2<F, I, H, B>;
     compose<B>(this: Fluent2C<F, Semigroupoid2C<F, L>, L, A>, Type2: HKT2<F, A, B>): Fluent2C<F, I, L, B>;
 }
-interface Fluent2<F extends URIS2, I, L, A> {
+export interface Fluent2<F extends URIS2, I, L, A> {
     readonly I: I;
     readonly value: Type2<F, L, A>;
     show(this: Fluent2<F, Show<Type2<F, L, A>>, L, A>): string;
@@ -102,7 +102,7 @@ interface Fluent2<F extends URIS2, I, L, A> {
     promap<H, B>(this: Fluent2<F, Profunctor2<F>, L, A>, f: (h: H) => L, g: (a: A) => B): Fluent2<F, I, H, B>;
     compose<B>(this: Fluent2<F, Semigroupoid2<F>, L, A>, that: Type2<F, A, B>): Fluent2<F, I, L, B>;
 }
-interface Fluent1<F extends URIS, I, A> {
+export interface Fluent1<F extends URIS, I, A> {
     readonly I: I;
     readonly value: Type<F, A>;
     show(this: Fluent1<F, Show<Type<F, A>>, A>): string;
@@ -138,7 +138,7 @@ interface Fluent1<F extends URIS, I, A> {
     partitionWithIndex<Ix>(this: Fluent1<F, FilterableWithIndex1<F, Ix>, A>, p: (i: Ix, a: A) => boolean): Separated<Type<F, A>, Type<F, A>>;
     partitionMapWithIndex<Ix, RL, RR>(this: Fluent1<F, FilterableWithIndex1<F, Ix>, A>, f: (i: Ix, a: A) => Either<RL, RR>): Separated<Type<F, RL>, Type<F, RR>>;
 }
-declare class Fluent<F, I, A> {
+export declare class Fluent<F, I, A> {
     readonly I: I;
     readonly value: HKT<F, A>;
     constructor(I: I, value: HKT<F, A>);
@@ -205,4 +205,3 @@ export declare function fluent<F extends URIS, I>(I: {
 export declare function fluent<F, I>(I: {
     URI: F;
 } & I): <A>(fa: HKT<F, A>) => Fluent<F, I, A>;
-export {};

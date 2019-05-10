@@ -15,6 +15,7 @@ export interface EitherM<M> extends ApplicativeComposition02<M, URI> {
     readonly rightM: <L, A>(ma: HKT<M, A>) => EitherT<M, L, A>;
     readonly leftM: <L, A>(ml: HKT<M, L>) => EitherT<M, L, A>;
     readonly left: <L, A>(l: L) => EitherT<M, L, A>;
+    readonly bracket: <L, A, B>(acquire: EitherT<M, L, A>, use: (a: A) => EitherT<M, L, B>, release: (a: A, e: Either<L, B>) => EitherT<M, L, void>) => EitherT<M, L, B>;
 }
 declare type EitherT1<M extends URIS, L, A> = Type<M, Either<L, A>>;
 interface EitherM1<M extends URIS> extends ApplicativeComposition12<M, URI> {
@@ -28,6 +29,7 @@ interface EitherM1<M extends URIS> extends ApplicativeComposition12<M, URI> {
     readonly rightM: <L, A>(ma: Type<M, A>) => EitherT1<M, L, A>;
     readonly leftM: <L, A>(ml: Type<M, L>) => EitherT1<M, L, A>;
     readonly left: <L, A>(l: L) => EitherT1<M, L, A>;
+    readonly bracket: <L, A, B>(acquire: EitherT1<M, L, A>, use: (a: A) => EitherT1<M, L, B>, release: (a: A, e: Either<L, B>) => EitherT1<M, L, void>) => EitherT1<M, L, B>;
 }
 declare type EitherT2<M extends URIS2, LM, L, A> = Type2<M, LM, Either<L, A>>;
 interface EitherM2<M extends URIS2> extends ApplicativeComposition22<M, URI> {
@@ -41,6 +43,7 @@ interface EitherM2<M extends URIS2> extends ApplicativeComposition22<M, URI> {
     readonly rightM: <LM, L, A>(ma: Type2<M, LM, A>) => EitherT2<M, LM, L, A>;
     readonly leftM: <LM, L, A>(ml: Type2<M, LM, L>) => EitherT2<M, LM, L, A>;
     readonly left: <LM, L, A>(l: L) => EitherT2<M, LM, L, A>;
+    readonly bracket: <LM, L, A, B>(acquire: EitherT2<M, LM, L, A>, use: (a: A) => EitherT2<M, LM, L, B>, release: (a: A, e: Either<L, B>) => EitherT2<M, LM, L, void>) => EitherT2<M, LM, L, B>;
 }
 /**
  * @since 2.0.0

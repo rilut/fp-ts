@@ -10,7 +10,7 @@
  *
  * Formally, `Apply` represents a strong lax semi-monoidal endofunctor.
  */
-import { Functor, Functor1, Functor2, Functor2C, Functor3, Functor3C, Functor4 } from './Functor';
+import { Functor, Functor1, Functor2, Functor2C, Functor3, Functor4 } from './Functor';
 import { HKT, Type, Type2, Type3, Type4, URIS, URIS2, URIS3, URIS4 } from './HKT';
 /**
  * @since 2.0.0
@@ -30,9 +30,6 @@ export interface Apply3<F extends URIS3> extends Functor3<F> {
 export interface Apply2C<F extends URIS2, L> extends Functor2C<F, L> {
     readonly ap: <A, B>(fab: Type2<F, L, (a: A) => B>, fa: Type2<F, L, A>) => Type2<F, L, B>;
 }
-export interface Apply3C<F extends URIS3, U, L> extends Functor3C<F, U, L> {
-    readonly ap: <A, B>(fab: Type3<F, U, L, (a: A) => B>, fa: Type3<F, U, L, A>) => Type3<F, U, L, B>;
-}
 export interface Apply4<F extends URIS4> extends Functor4<F> {
     readonly ap: <X, U, L, A, B>(fab: Type4<F, X, U, L, (a: A) => B>, fa: Type4<F, X, U, L, A>) => Type4<F, X, U, L, B>;
 }
@@ -51,11 +48,6 @@ export interface Apply4<F extends URIS4> extends Functor4<F> {
  * @since 2.0.0
  */
 export declare function sequenceT<F extends URIS3>(F: Apply3<F>): <U, L, T extends Array<Type3<F, U, L, any>>>(...t: T & {
-    0: Type3<F, U, L, any>;
-}) => Type3<F, U, L, {
-    [K in keyof T]: [T[K]] extends [Type3<F, U, L, infer A>] ? A : never;
-}>;
-export declare function sequenceT<F extends URIS3, U, L>(F: Apply3C<F, U, L>): <T extends Array<Type3<F, U, L, any>>>(...t: T & {
     0: Type3<F, U, L, any>;
 }) => Type3<F, U, L, {
     [K in keyof T]: [T[K]] extends [Type3<F, U, L, infer A>] ? A : never;
@@ -108,9 +100,6 @@ declare type EnforceNonEmptyRecord<R> = keyof R extends never ? never : R;
  * @since 2.0.0
  */
 export declare function sequenceS<F extends URIS3>(F: Apply3<F>): <U, L, R extends Record<string, Type3<F, U, L, any>>>(r: EnforceNonEmptyRecord<R> & Record<string, Type3<F, U, L, any>>) => Type3<F, U, L, {
-    [K in keyof R]: [R[K]] extends [Type3<F, any, any, infer A>] ? A : never;
-}>;
-export declare function sequenceS<F extends URIS3, U, L>(F: Apply3C<F, U, L>): <R extends Record<string, Type3<F, U, L, any>>>(r: EnforceNonEmptyRecord<R>) => Type3<F, U, L, {
     [K in keyof R]: [R[K]] extends [Type3<F, any, any, infer A>] ? A : never;
 }>;
 export declare function sequenceS<F extends URIS2>(F: Apply2<F>): <L, R extends Record<string, Type2<F, L, any>>>(r: EnforceNonEmptyRecord<R> & Record<string, Type2<F, L, any>>) => Type2<F, L, {

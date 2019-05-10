@@ -1,6 +1,6 @@
-import { Applicative, Applicative1, Applicative2, Applicative2C, Applicative3, Applicative3C } from './Applicative';
+import { Applicative, Applicative1, Applicative2, Applicative2C, Applicative3 } from './Applicative';
 import { HKT, Type, Type2, Type3, URIS, URIS2, URIS3 } from './HKT';
-import { Monad, Monad1, Monad2, Monad2C, Monad3, Monad3C } from './Monad';
+import { Monad, Monad1, Monad2, Monad2C, Monad3 } from './Monad';
 import { Monoid } from './Monoid';
 /**
  * @since 2.0.0
@@ -35,14 +35,6 @@ export interface Foldable2C<F extends URIS2, L> {
     readonly reduce: <A, B>(fa: Type2<F, L, A>, b: B, f: (b: B, a: A) => B) => B;
     readonly foldMap: <M>(M: Monoid<M>) => <A>(fa: Type2<F, L, A>, f: (a: A) => M) => M;
     readonly reduceRight: <A, B>(fa: Type2<F, L, A>, b: B, f: (a: A, b: B) => B) => B;
-}
-export interface Foldable3C<F extends URIS3, U, L> {
-    readonly URI: F;
-    readonly _L: L;
-    readonly _U: U;
-    readonly reduce: <A, B>(fa: Type3<F, U, L, A>, b: B, f: (b: B, a: A) => B) => B;
-    readonly foldMap: <M>(M: Monoid<M>) => <A>(fa: Type3<F, U, L, A>, f: (a: A) => M) => M;
-    readonly reduceRight: <A, B>(fa: Type3<F, U, L, A>, b: B, f: (a: A, b: B) => B) => B;
 }
 export interface FoldableComposition<F, G> {
     readonly reduce: <A, B>(fga: HKT<F, HKT<G, A>>, b: B, f: (b: B, a: A) => B) => B;
@@ -83,11 +75,6 @@ export interface FoldableComposition22C<F extends URIS2, G extends URIS2, LG> {
     readonly foldMap: <M>(M: Monoid<M>) => <LF, A>(fa: Type2<F, LF, Type2<G, LG, A>>, f: (a: A) => M) => M;
     readonly reduceRight: <LF, A, B>(fa: Type2<F, LF, Type2<G, LG, A>>, b: B, f: (a: A, b: B) => B) => B;
 }
-export interface FoldableComposition3C1<F extends URIS3, G extends URIS, UF, LF> {
-    readonly reduce: <A, B>(fga: Type3<F, UF, LF, Type<G, A>>, b: B, f: (b: B, a: A) => B) => B;
-    readonly foldMap: <M>(M: Monoid<M>) => <A>(fa: Type3<F, UF, LF, Type<G, A>>, f: (a: A) => M) => M;
-    readonly reduceRight: <LF, A, B>(fa: Type3<F, UF, LF, Type<G, A>>, b: B, f: (a: A, b: B) => B) => B;
-}
 /**
  * Returns the composition of two foldables
  *
@@ -103,7 +90,6 @@ export interface FoldableComposition3C1<F extends URIS3, G extends URIS, UF, LF>
  *
  * @since 2.0.0
  */
-export declare function getFoldableComposition<F extends URIS3, G extends URIS, UF, LF>(F: Foldable3C<F, UF, LF>, G: Foldable1<G>): FoldableComposition3C1<F, G, UF, LF>;
 export declare function getFoldableComposition<F extends URIS2, G extends URIS2, LG>(F: Foldable2<F>, G: Foldable2C<G, LG>): FoldableComposition22C<F, G, LG>;
 export declare function getFoldableComposition<F extends URIS2, G extends URIS2>(F: Foldable2<F>, G: Foldable2<G>): FoldableComposition22<F, G>;
 export declare function getFoldableComposition<F extends URIS2, G extends URIS, LF>(F: Foldable2C<F, LF>, G: Foldable1<G>): FoldableComposition2C1<F, G, LF>;
@@ -128,7 +114,6 @@ export declare function getFoldableComposition<F, G>(F: Foldable<F>, G: Foldable
  * @since 2.0.0
  */
 export declare function foldM<M extends URIS3, F extends URIS>(M: Monad3<M>, F: Foldable1<F>): <U, L, A, B>(fa: Type<F, A>, b: B, f: (b: B, a: A) => Type3<M, U, L, B>) => Type3<M, U, L, B>;
-export declare function foldM<M extends URIS3, F extends URIS, U, L>(M: Monad3C<M, U, L>, F: Foldable1<F>): <A, B>(fa: Type<F, A>, b: B, f: (b: B, a: A) => Type3<M, U, L, B>) => Type3<M, U, L, B>;
 export declare function foldM<M extends URIS2, F extends URIS>(M: Monad2<M>, F: Foldable1<F>): <L, A, B>(fa: Type<F, A>, b: B, f: (b: B, a: A) => Type2<M, L, B>) => Type2<M, L, B>;
 export declare function foldM<M extends URIS2, F extends URIS, L>(M: Monad2C<M, L>, F: Foldable1<F>): <A, B>(fa: Type<F, A>, b: B, f: (b: B, a: A) => Type2<M, L, B>) => Type2<M, L, B>;
 export declare function foldM<M extends URIS, F extends URIS>(M: Monad1<M>, F: Foldable1<F>): <A, B>(fa: Type<F, A>, b: B, f: (b: B, a: A) => Type<M, B>) => Type<M, B>;
@@ -147,7 +132,6 @@ export declare function foldM<M, F>(M: Monad<M>, F: Foldable<F>): <A, B>(fa: HKT
  * @since 2.0.0
  */
 export declare function intercalate<M, F extends URIS3>(M: Monoid<M>, F: Foldable3<F>): <U, L>(sep: M, fm: Type3<F, U, L, M>) => M;
-export declare function intercalate<M, F extends URIS3, U, L>(M: Monoid<M>, F: Foldable3C<F, U, L>): (sep: M, fm: Type3<F, U, L, M>) => M;
 export declare function intercalate<M, F extends URIS2>(M: Monoid<M>, F: Foldable2<F>): <L>(sep: M, fm: Type2<F, L, M>) => M;
 export declare function intercalate<M, F extends URIS2, L>(M: Monoid<M>, F: Foldable2C<F, L>): (sep: M, fm: Type2<F, L, M>) => M;
 export declare function intercalate<M, F extends URIS>(M: Monoid<M>, F: Foldable1<F>): (sep: M, fm: Type<F, M>) => M;
@@ -169,7 +153,6 @@ export declare function intercalate<M, F>(M: Monoid<M>, F: Foldable<F>): (sep: M
  * @since 2.0.0
  */
 export declare function traverse_<M extends URIS3, F extends URIS>(M: Applicative3<M>, F: Foldable1<F>): <U, L, A, B>(fa: Type<F, A>, f: (a: A) => Type3<M, U, L, B>) => Type3<M, U, L, void>;
-export declare function traverse_<M extends URIS3, F extends URIS, U, L>(M: Applicative3C<M, U, L>, F: Foldable1<F>): <A, B>(fa: Type<F, A>, f: (a: A) => Type3<M, U, L, B>) => Type3<M, U, L, void>;
 export declare function traverse_<M extends URIS2, F extends URIS>(M: Applicative2<M>, F: Foldable1<F>): <L, A, B>(fa: Type<F, A>, f: (a: A) => Type2<M, L, B>) => Type2<M, L, void>;
 export declare function traverse_<M extends URIS2, F extends URIS, L>(M: Applicative2C<M, L>, F: Foldable1<F>): <A, B>(fa: Type<F, A>, f: (a: A) => Type2<M, L, B>) => Type2<M, L, void>;
 export declare function traverse_<M extends URIS, F extends URIS>(M: Applicative1<M>, F: Foldable1<F>): <A, B>(fa: Type<F, A>, f: (a: A) => Type<M, B>) => Type<M, void>;

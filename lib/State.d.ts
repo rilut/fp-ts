@@ -13,10 +13,6 @@ export interface State<S, A> {
     (s: S): [A, S];
 }
 /**
- * @since 2.0.0
- */
-export declare function run<S, A>(ma: State<S, A>, s: S): [A, S];
-/**
  * Run a computation in the `State` monad, discarding the final state
  *
  * @since 2.0.0

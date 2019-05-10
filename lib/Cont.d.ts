@@ -9,8 +9,8 @@ export declare type URI = typeof URI;
 /**
  * @since 2.0.0
  */
-export interface Cont<L, A> {
-    (c: (a: A) => L): L;
+export interface Cont<R, A> {
+    (c: (a: A) => R): R;
 }
 /**
  * @since 2.0.0
