@@ -1,6 +1,6 @@
 ---
 title: index.ts
-nav_order: 43
+nav_order: 44
 parent: Modules
 ---
 
@@ -29,6 +29,7 @@ parent: Modules
 - [console (export)](#console-export)
 - [const (export)](#const-export)
 - [cont (export)](#cont-export)
+- [contT (export)](#contt-export)
 - [contravariant (export)](#contravariant-export)
 - [date (export)](#date-export)
 - [distributiveLattice (export)](#distributivelattice-export)
@@ -54,7 +55,6 @@ parent: Modules
 - [io (export)](#io-export)
 - [ioEither (export)](#ioeither-export)
 - [ioRef (export)](#ioref-export)
-- [ixMonad (export)](#ixmonad-export)
 - [joinSemilattice (export)](#joinsemilattice-export)
 - [lattice (export)](#lattice-export)
 - [magma (export)](#magma-export)
@@ -272,6 +272,14 @@ export { const_ as const }
 export { cont }
 ```
 
+# contT (export)
+
+**Signature**
+
+```ts
+export { contT }
+```
+
 # contravariant (export)
 
 **Signature**
@@ -470,14 +478,6 @@ export { ioEither }
 
 ```ts
 export { ioRef }
-```
-
-# ixMonad (export)
-
-**Signature**
-
-```ts
-export { ixMonad }
 ```
 
 # joinSemilattice (export)
