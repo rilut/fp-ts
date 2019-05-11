@@ -1,6 +1,6 @@
 ---
 title: Monoid.ts
-nav_order: 57
+nav_order: 56
 parent: Modules
 ---
 
@@ -141,7 +141,7 @@ Added in v2.0.0
 **Signature**
 
 ```ts
-export const getFunctionMonoid = <M>(M: Monoid<M>) => <A = never>(): Monoid<(a: A) => M> => ...
+export function getFunctionMonoid<M>(M: Monoid<M>): <A = never>() => Monoid<(a: A) => M> { ... }
 ```
 
 Added in v2.0.0

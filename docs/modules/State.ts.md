@@ -1,6 +1,6 @@
 ---
 title: State.ts
-nav_order: 77
+nav_order: 76
 parent: Modules
 ---
 
@@ -41,6 +41,8 @@ Added in v2.0.0
 export type URI = typeof URI
 ```
 
+Added in v2.0.0
+
 # URI (constant)
 
 **Signature**
@@ -48,6 +50,8 @@ export type URI = typeof URI
 ```ts
 export const URI = ...
 ```
+
+Added in v2.0.0
 
 # evalState (constant)
 

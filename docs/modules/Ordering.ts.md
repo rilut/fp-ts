@@ -1,6 +1,6 @@
 ---
 title: Ordering.ts
-nav_order: 63
+nav_order: 62
 parent: Modules
 ---
 
@@ -23,6 +23,8 @@ parent: Modules
 ```ts
 export type Ordering = -1 | 0 | 1
 ```
+
+Added in v2.0.0
 
 # eqOrdering (constant)
 
@@ -49,7 +51,7 @@ Added in v2.0.0
 **Signature**
 
 ```ts
-export const invert = (O: Ordering): Ordering => ...
+export function invert(O: Ordering): Ordering { ... }
 ```
 
 Added in v2.0.0
@@ -59,7 +61,7 @@ Added in v2.0.0
 **Signature**
 
 ```ts
-export const sign = (n: number): Ordering => ...
+export function sign(n: number): Ordering { ... }
 ```
 
 Added in v2.0.0

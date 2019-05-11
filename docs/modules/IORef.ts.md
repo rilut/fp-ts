@@ -1,6 +1,6 @@
 ---
 title: IORef.ts
-nav_order: 48
+nav_order: 47
 parent: Modules
 ---
 
@@ -66,7 +66,7 @@ Added in v2.0.0
 **Signature**
 
 ```ts
-export const newIORef = <A>(a: A): IO<IORef<A>> => ...
+export function newIORef<A>(a: A): IO<IORef<A>> { ... }
 ```
 
 Added in v2.0.0

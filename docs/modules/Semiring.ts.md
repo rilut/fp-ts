@@ -1,6 +1,6 @@
 ---
 title: Semiring.ts
-nav_order: 74
+nav_order: 73
 parent: Modules
 ---
 
@@ -55,7 +55,7 @@ Added in v2.0.0
 **Signature**
 
 ```ts
-export const getFunctionSemiring = <A, B>(S: Semiring<B>): Semiring<(a: A) => B> => ...
+export function getFunctionSemiring<A, B>(S: Semiring<B>): Semiring<(a: A) => B> { ... }
 ```
 
 Added in v2.0.0

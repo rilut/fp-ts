@@ -1,6 +1,6 @@
 ---
 title: Task.ts
-nav_order: 82
+nav_order: 81
 parent: Modules
 ---
 
@@ -37,6 +37,8 @@ export interface Task<A> {
 }
 ```
 
+Added in v2.0.0
+
 # URI (type alias)
 
 **Signature**
@@ -45,6 +47,8 @@ export interface Task<A> {
 export type URI = typeof URI
 ```
 
+Added in v2.0.0
+
 # URI (constant)
 
 **Signature**
@@ -52,6 +56,8 @@ export type URI = typeof URI
 ```ts
 export const URI = ...
 ```
+
+Added in v2.0.0
 
 # task (constant)
 
