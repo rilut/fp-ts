@@ -27,4 +27,4 @@ export declare class IORef<A> {
 /**
  * @since 2.0.0
  */
-export declare const newIORef: <A>(a: A) => IO<IORef<A>>;
+export declare function newIORef<A>(a: A): IO<IORef<A>>;

@@ -13,8 +13,17 @@ declare module './HKT' {
         These: These<L, A>;
     }
 }
+/**
+ * @since 2.0.0
+ */
 export declare const URI = "These";
+/**
+ * @since 2.0.0
+ */
 export declare type URI = typeof URI;
+/**
+ * @since 2.0.0
+ */
 export interface Both<L, A> {
     readonly _tag: 'Both';
     readonly left: L;

@@ -7,8 +7,17 @@ declare module './HKT' {
         IO: IO<A>;
     }
 }
+/**
+ * @since 2.0.0
+ */
 export declare const URI = "IO";
+/**
+ * @since 2.0.0
+ */
 export declare type URI = typeof URI;
+/**
+ * @since 2.0.0
+ */
 export interface IO<A> {
     (): A;
 }

@@ -22,6 +22,9 @@ import { Profunctor, Profunctor2, Profunctor2C } from './Profunctor';
 import { Eq } from './Eq';
 import { Show } from './Show';
 import { Semigroupoid, Semigroupoid2, Semigroupoid2C } from './Semigroupoid';
+/**
+ * @since 2.0.0
+ */
 export interface Fluent2C<F extends URIS2, I, L, A> {
     readonly I: I;
     readonly value: Type2<F, L, A>;
@@ -62,6 +65,9 @@ export interface Fluent2C<F extends URIS2, I, L, A> {
     promap<H, B>(this: Fluent2C<F, Profunctor2C<F, L>, L, A>, f: (h: H) => L, g: (a: A) => B): Fluent2<F, I, H, B>;
     compose<B>(this: Fluent2C<F, Semigroupoid2C<F, L>, L, A>, Type2: HKT2<F, A, B>): Fluent2C<F, I, L, B>;
 }
+/**
+ * @since 2.0.0
+ */
 export interface Fluent2<F extends URIS2, I, L, A> {
     readonly I: I;
     readonly value: Type2<F, L, A>;
@@ -102,6 +108,9 @@ export interface Fluent2<F extends URIS2, I, L, A> {
     promap<H, B>(this: Fluent2<F, Profunctor2<F>, L, A>, f: (h: H) => L, g: (a: A) => B): Fluent2<F, I, H, B>;
     compose<B>(this: Fluent2<F, Semigroupoid2<F>, L, A>, that: Type2<F, A, B>): Fluent2<F, I, L, B>;
 }
+/**
+ * @since 2.0.0
+ */
 export interface Fluent1<F extends URIS, I, A> {
     readonly I: I;
     readonly value: Type<F, A>;
@@ -138,6 +147,9 @@ export interface Fluent1<F extends URIS, I, A> {
     partitionWithIndex<Ix>(this: Fluent1<F, FilterableWithIndex1<F, Ix>, A>, p: (i: Ix, a: A) => boolean): Separated<Type<F, A>, Type<F, A>>;
     partitionMapWithIndex<Ix, RL, RR>(this: Fluent1<F, FilterableWithIndex1<F, Ix>, A>, f: (i: Ix, a: A) => Either<RL, RR>): Separated<Type<F, RL>, Type<F, RR>>;
 }
+/**
+ * @since 2.0.0
+ */
 export declare class Fluent<F, I, A> {
     readonly I: I;
     readonly value: HKT<F, A>;

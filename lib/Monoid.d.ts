@@ -63,7 +63,7 @@ export declare function getDualMonoid<A>(M: Monoid<A>): Monoid<A>;
 /**
  * @since 2.0.0
  */
-export declare const getFunctionMonoid: <M>(M: Monoid<M>) => <A = never>() => Monoid<(a: A) => M>;
+export declare function getFunctionMonoid<M>(M: Monoid<M>): <A = never>() => Monoid<(a: A) => M>;
 /**
  * @since 2.0.0
  */

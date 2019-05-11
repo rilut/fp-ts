@@ -17,13 +17,13 @@ export interface Ring<A> extends Semiring<A> {
 /**
  * @since 2.0.0
  */
-export declare const getFunctionRing: <A, B>(ring: Ring<B>) => Ring<(a: A) => B>;
+export declare function getFunctionRing<A, B>(ring: Ring<B>): Ring<(a: A) => B>;
 /**
  * `negate x` can be used as a shorthand for `zero - x`
  *
  * @since 2.0.0
  */
-export declare const negate: <A>(ring: Ring<A>) => (a: A) => A;
+export declare function negate<A>(ring: Ring<A>): (a: A) => A;
 /**
  * Given a tuple of `Ring`s returns a `Ring` for the tuple
  *
@@ -40,4 +40,6 @@ export declare const negate: <A>(ring: Ring<A>) => (a: A) => A;
  *
  * @since 2.0.0
  */
-export declare const getTupleRing: <T extends Ring<any>[]>(...rings: T) => Ring<{ [K in keyof T]: T[K] extends Ring<infer A> ? A : never; }>;
+export declare function getTupleRing<T extends Array<Ring<any>>>(...rings: T): Ring<{
+    [K in keyof T]: T[K] extends Ring<infer A> ? A : never;
+}>;

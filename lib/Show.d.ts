@@ -24,10 +24,14 @@ export declare const showBoolean: Show<boolean>;
 /**
  * @since 2.0.0
  */
-export declare const getStructShow: <O extends {
+export declare function getStructShow<O extends {
     [key: string]: any;
-}>(shows: { [K in keyof O]: Show<O[K]>; }) => Show<O>;
+}>(shows: {
+    [K in keyof O]: Show<O[K]>;
+}): Show<O>;
 /**
  * @since 2.0.0
  */
-export declare const getTupleShow: <T extends Show<any>[]>(...shows: T) => Show<{ [K in keyof T]: T[K] extends Show<infer A> ? A : never; }>;
+export declare function getTupleShow<T extends Array<Show<any>>>(...shows: T): Show<{
+    [K in keyof T]: T[K] extends Show<infer A> ? A : never;
+}>;

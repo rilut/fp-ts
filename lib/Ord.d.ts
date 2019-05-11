@@ -39,25 +39,25 @@ export declare const ordDate: Ord<Date>;
  *
  * @since 2.0.0
  */
-export declare function lessThan<A>(O: Ord<A>): (x: A, y: A) => boolean;
+export declare function lt<A>(O: Ord<A>): (x: A, y: A) => boolean;
 /**
  * Test whether one value is _strictly greater than_ another
  *
  * @since 2.0.0
  */
-export declare function greaterThan<A>(O: Ord<A>): (x: A, y: A) => boolean;
+export declare function gt<A>(O: Ord<A>): (x: A, y: A) => boolean;
 /**
  * Test whether one value is _non-strictly less than_ another
  *
  * @since 2.0.0
  */
-export declare function lessThanOrEq<A>(O: Ord<A>): (x: A, y: A) => boolean;
+export declare function leq<A>(O: Ord<A>): (x: A, y: A) => boolean;
 /**
  * Test whether one value is _non-strictly greater than_ another
  *
  * @since 2.0.0
  */
-export declare function greaterThanOrEq<A>(O: Ord<A>): (x: A, y: A) => boolean;
+export declare function geq<A>(O: Ord<A>): (x: A, y: A) => boolean;
 /**
  * Take the minimum of two values. If they are considered equal, the first argument is chosen
  *

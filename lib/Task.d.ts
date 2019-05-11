@@ -9,8 +9,17 @@ declare module './HKT' {
         Task: Task<A>;
     }
 }
+/**
+ * @since 2.0.0
+ */
 export declare const URI = "Task";
+/**
+ * @since 2.0.0
+ */
 export declare type URI = typeof URI;
+/**
+ * @since 2.0.0
+ */
 export interface Task<A> {
     (): Promise<A>;
 }

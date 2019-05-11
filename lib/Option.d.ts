@@ -101,11 +101,23 @@ declare module './HKT' {
         Option: Option<A>;
     }
 }
+/**
+ * @since 2.0.0
+ */
 export declare const URI = "Option";
+/**
+ * @since 2.0.0
+ */
 export declare type URI = typeof URI;
+/**
+ * @since 2.0.0
+ */
 export interface None {
     readonly _tag: 'None';
 }
+/**
+ * @since 2.0.0
+ */
 export interface Some<A> {
     readonly _tag: 'Some';
     readonly value: A;
@@ -127,13 +139,13 @@ export declare function some<A>(a: A): Option<A>;
  *
  * @since 2.0.0
  */
-export declare const isSome: <A>(fa: Option<A>) => fa is Some<A>;
+export declare function isSome<A>(fa: Option<A>): fa is Some<A>;
 /**
  * Returns `true` if the option is `None`, `false` otherwise
  *
  * @since 2.0.0
  */
-export declare const isNone: <A>(fa: Option<A>) => fa is None;
+export declare function isNone<A>(fa: Option<A>): fa is None;
 /**
  * @since 2.0.0
  */

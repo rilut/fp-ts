@@ -11,13 +11,13 @@ import { Lazy } from './function';
  *
  * @since 2.0.0
  */
-export declare const trace: <A>(message: unknown, out: Lazy<A>) => A;
+export declare function trace<A>(message: unknown, out: Lazy<A>): A;
 /**
  * Log any value and return it
  *
  * @since 2.0.0
  */
-export declare const spy: <A>(a: A) => A;
+export declare function spy<A>(a: A): A;
 /**
  * Log a message to the console for debugging purposes and then return the unit value of the Applicative `F`
  *

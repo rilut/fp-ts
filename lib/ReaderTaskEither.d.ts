@@ -17,7 +17,13 @@ declare module './HKT' {
         ReaderTaskEither: ReaderTaskEither<U, L, A>;
     }
 }
+/**
+ * @since 2.0.0
+ */
 export declare const URI = "ReaderTaskEither";
+/**
+ * @since 2.0.0
+ */
 export declare type URI = typeof URI;
 /**
  * @since 2.0.0

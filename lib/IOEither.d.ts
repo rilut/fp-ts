@@ -17,7 +17,13 @@ declare module './HKT' {
         IOEither: IOEither<L, A>;
     }
 }
+/**
+ * @since 2.0.0
+ */
 export declare const URI = "IOEither";
+/**
+ * @since 2.0.0
+ */
 export declare type URI = typeof URI;
 /**
  * @since 2.0.0
@@ -88,6 +94,7 @@ export declare function getApplySemigroup<L, A>(S: Semigroup<A>): Semigroup<IOEi
 export declare function getApplyMonoid<L, A>(M: Monoid<A>): Monoid<IOEither<L, A>>;
 /**
  * Constructs a new `IOEither` from a function that performs a side effect and might throw
+ *
  * @since 2.0.0
  */
 export declare function tryCatch<L, A>(f: Lazy<A>, onError: (reason: unknown) => L): IOEither<L, A>;

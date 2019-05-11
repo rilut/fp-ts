@@ -16,14 +16,14 @@ export declare const random: IO<number>;
  *
  * @since 2.0.0
  */
-export declare const randomInt: (low: number, high: number) => IO<number>;
+export declare function randomInt(low: number, high: number): IO<number>;
 /**
  * Returns a random number between a minimum value (inclusive) and a maximum value (exclusive). It is unspecified what
  * happens if `maximum < minimum`.
  *
  * @since 2.0.0
  */
-export declare const randomRange: (min: number, max: number) => IO<number>;
+export declare function randomRange(min: number, max: number): IO<number>;
 /**
  * Returns a random boolean value with an equal chance of being `true` or `false`
  *

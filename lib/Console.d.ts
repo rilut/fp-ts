@@ -5,16 +5,16 @@ import { IO } from './IO';
 /**
  * @since 2.0.0
  */
-export declare const log: (s: unknown) => IO<void>;
+export declare function log(s: unknown): IO<void>;
 /**
  * @since 2.0.0
  */
-export declare const warn: (s: unknown) => IO<void>;
+export declare function warn(s: unknown): IO<void>;
 /**
  * @since 2.0.0
  */
-export declare const error: (s: unknown) => IO<void>;
+export declare function error(s: unknown): IO<void>;
 /**
  * @since 2.0.0
  */
-export declare const info: (s: unknown) => IO<void>;
+export declare function info(s: unknown): IO<void>;

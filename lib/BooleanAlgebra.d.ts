@@ -25,10 +25,10 @@ export declare const booleanAlgebraVoid: BooleanAlgebra<void>;
 /**
  * @since 2.0.0
  */
-export declare const getFunctionBooleanAlgebra: <B>(B: BooleanAlgebra<B>) => <A = never>() => BooleanAlgebra<(a: A) => B>;
+export declare function getFunctionBooleanAlgebra<B>(B: BooleanAlgebra<B>): <A = never>() => BooleanAlgebra<(a: A) => B>;
 /**
  * Every boolean algebras has a dual algebra, which involves reversing one/zero as well as join/meet.
  *
  * @since 2.0.0
  */
-export declare const getDualBooleanAlgebra: <A>(B: BooleanAlgebra<A>) => BooleanAlgebra<A>;
+export declare function getDualBooleanAlgebra<A>(B: BooleanAlgebra<A>): BooleanAlgebra<A>;

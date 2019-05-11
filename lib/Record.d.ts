@@ -21,24 +21,30 @@ declare module './HKT' {
         Record: Record<string, A>;
     }
 }
+/**
+ * @since 2.0.0
+ */
 export declare const URI = "Record";
+/**
+ * @since 2.0.0
+ */
 export declare type URI = typeof URI;
 /**
  * @since 2.0.0
  */
-export declare const getShow: <A>(S: Show<A>) => Show<Record<string, A>>;
+export declare function getShow<A>(S: Show<A>): Show<Record<string, A>>;
 /**
  * Calculate the number of key/value pairs in a record
  *
  * @since 2.0.0
  */
-export declare const size: (r: Record<string, unknown>) => number;
+export declare function size(r: Record<string, unknown>): number;
 /**
  * Test whether a record is empty
  *
  * @since 2.0.0
  */
-export declare const isEmpty: (r: Record<string, unknown>) => boolean;
+export declare function isEmpty(r: Record<string, unknown>): boolean;
 /**
  * @since 2.0.0
  */
@@ -81,7 +87,7 @@ export declare function pop<K extends string, KS extends string, A>(k: K, d: Rec
  *
  * @since 2.0.0
  */
-export declare const isSubrecord: <A>(E: Eq<A>) => (d1: Record<string, A>, d2: Record<string, A>) => boolean;
+export declare function isSubrecord<A>(E: Eq<A>): (d1: Record<string, A>, d2: Record<string, A>) => boolean;
 /**
  * @since 2.0.0
  */
@@ -101,9 +107,10 @@ export declare function getEq<K extends string, A>(E: Eq<A>): Eq<Record<K, A>>;
 export declare function getMonoid<K extends string, A>(S: Semigroup<A>): Monoid<Record<K, A>>;
 /**
  * Lookup the value for a key in a record
+ *
  * @since 2.0.0
  */
-export declare const lookup: <A>(key: string, fa: Record<string, A>) => Option<A>;
+export declare function lookup<A>(key: string, fa: Record<string, A>): Option<A>;
 /**
  * @since 2.0.0
  */
@@ -138,7 +145,7 @@ export declare function reduceRightWithIndex<K extends string, A, B>(fa: Record<
  *
  * @since 2.0.0
  */
-export declare const singleton: <K extends string, A>(k: K, a: A) => Record<K, A>;
+export declare function singleton<K extends string, A>(k: K, a: A): Record<K, A>;
 /**
  * @since 2.0.0
  */

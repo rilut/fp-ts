@@ -10,8 +10,17 @@ declare module './HKT' {
         Tree: Tree<A>;
     }
 }
+/**
+ * @since 2.0.0
+ */
 export declare const URI = "Tree";
+/**
+ * @since 2.0.0
+ */
 export declare type URI = typeof URI;
+/**
+ * @since 2.0.0
+ */
 export declare type Forest<A> = Array<Tree<A>>;
 /**
  * @since 2.0.0
@@ -23,15 +32,15 @@ export interface Tree<A> {
 /**
  * @since 2.0.0
  */
-export declare const make: <A>(value: A, forest: Tree<A>[]) => Tree<A>;
+export declare function make<A>(value: A, forest: Forest<A>): Tree<A>;
 /**
  * @since 2.0.0
  */
-export declare const getShow: <A>(S: Show<A>) => Show<Tree<A>>;
+export declare function getShow<A>(S: Show<A>): Show<Tree<A>>;
 /**
  * @since 2.0.0
  */
-export declare const getEq: <A>(E: Eq<A>) => Eq<Tree<A>>;
+export declare function getEq<A>(E: Eq<A>): Eq<Tree<A>>;
 /**
  * @since 2.0.0
  */

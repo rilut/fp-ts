@@ -10,7 +10,13 @@ declare module './HKT' {
         Reader: Reader<L, A>;
     }
 }
+/**
+ * @since 2.0.0
+ */
 export declare const URI = "Reader";
+/**
+ * @since 2.0.0
+ */
 export declare type URI = typeof URI;
 /**
  * @since 2.0.0

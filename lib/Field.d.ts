@@ -20,10 +20,10 @@ export declare const fieldNumber: Field<number>;
  *
  * @since 2.0.0
  */
-export declare const gcd: <A>(E: Eq<A>, field: Field<A>) => (x: A, y: A) => A;
+export declare function gcd<A>(E: Eq<A>, field: Field<A>): (x: A, y: A) => A;
 /**
  * The *least common multiple* of two values
  *
  * @since 2.0.0
  */
-export declare const lcm: <A>(E: Eq<A>, F: Field<A>) => (x: A, y: A) => A;
+export declare function lcm<A>(E: Eq<A>, F: Field<A>): (x: A, y: A) => A;

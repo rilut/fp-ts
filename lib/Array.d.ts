@@ -33,6 +33,7 @@ export declare type URI = typeof URI;
  */
 export declare function getShow<A>(S: Show<A>): Show<Array<A>>;
 /**
+ * Returns a `Monoid` for `Array<A>`
  *
  * @example
  * import { getMonoid } from 'fp-ts/lib/Array'
@@ -44,10 +45,9 @@ export declare function getShow<A>(S: Show<A>): Show<Array<A>>;
  */
 export declare function getMonoid<A = never>(): Monoid<Array<A>>;
 /**
- * Derives a Eq over the Array of a given element type from the Eq of that type. The derived eq defines two
- * arrays as equal if all elements of both arrays are compared equal pairwise with the given eq `S`. In case of
- * arrays of different lengths, the result is non equality.
- *
+ * Derives an `Eq` over the `Array` of a given element type from the `Eq` of that type. The derived `Eq` defines two
+ * arrays as equal if all elements of both arrays are compared equal pairwise with the given `E`. In case of arrays of
+ * different lengths, the result is non equality.
  *
  * @example
  * import { eqString } from 'fp-ts/lib/Eq'
@@ -61,11 +61,10 @@ export declare function getMonoid<A = never>(): Monoid<Array<A>>;
  */
 export declare function getEq<A>(E: Eq<A>): Eq<Array<A>>;
 /**
- * Derives an `Ord` over the Array of a given element type from the `Ord` of that type. The ordering between two such
+ * Derives an `Ord` over the `Array` of a given element type from the `Ord` of that type. The ordering between two such
  * arrays is equal to: the first non equal comparison of each arrays elements taken pairwise in increasing order, in
  * case of equality over all the pairwise elements; the longest array is considered the greatest, if both arrays have
  * the same length, the result is equality.
- *
  *
  * @example
  * import { getOrd } from 'fp-ts/lib/Array'
@@ -83,7 +82,6 @@ export declare function getOrd<A>(O: Ord<A>): Ord<Array<A>>;
 /**
  * An empty array
  *
- *
  * @since 2.0.0
  */
 export declare const empty: Array<never>;
@@ -96,7 +94,6 @@ export declare const empty: Array<never>;
  * const double = (n: number): number => n * 2
  * assert.deepStrictEqual(makeBy(5, double), [0, 2, 4, 6, 8])
  *
- *
  * @since 2.0.0
  */
 export declare function makeBy<A>(n: number, f: (i: number) => A): Array<A>;
@@ -108,7 +105,6 @@ export declare function makeBy<A>(n: number, f: (i: number) => A): Array<A>;
  *
  * assert.deepStrictEqual(range(1, 5), [1, 2, 3, 4, 5])
  *
- *
  * @since 2.0.0
  */
 export declare function range(start: number, end: number): Array<number>;
@@ -119,7 +115,6 @@ export declare function range(start: number, end: number): Array<number>;
  * import { replicate } from 'fp-ts/lib/Array'
  *
  * assert.deepStrictEqual(replicate(3, 'a'), ['a', 'a', 'a'])
- *
  *
  * @since 2.0.0
  */
@@ -152,20 +147,19 @@ export declare function fold<A, B>(as: Array<A>, onNil: () => B, onCons: (head: 
  *
  * @since 2.0.0
  */
-export declare function foldr<A, B>(as: Array<A>, onNil: () => B, onCons: (init: Array<A>, last: A) => B): B;
+export declare function foldRight<A, B>(as: Array<A>, onNil: () => B, onCons: (init: Array<A>, last: A) => B): B;
 /**
  * Same as `reduce` but it carries over the intermediate steps
  *
  * ```ts
- * import { scanLeft } from 'fp-ts/lib/Array'
+ * import { scan } from 'fp-ts/lib/Array'
  *
- * assert.deepStrictEqual(scanLeft([1, 2, 3], 10, (b, a) => b - a), [ 10, 9, 7, 4 ])
+ * assert.deepStrictEqual(scan([1, 2, 3], 10, (b, a) => b - a), [ 10, 9, 7, 4 ])
  * ```
- *
  *
  * @since 2.0.0
  */
-export declare function scanLeft<A, B>(as: Array<A>, b: B, f: (b: B, a: A) => B): Array<B>;
+export declare function scan<A, B>(as: Array<A>, b: B, f: (b: B, a: A) => B): Array<B>;
 /**
  * Fold an array from the right, keeping all intermediate results instead of only the final result
  *
@@ -173,7 +167,6 @@ export declare function scanLeft<A, B>(as: Array<A>, b: B, f: (b: B, a: A) => B)
  * import { scanRight } from 'fp-ts/lib/Array'
  *
  * assert.deepStrictEqual(scanRight([1, 2, 3], 10, (a, b) => b - a), [ 4, 5, 7, 10 ])
- *
  *
  * @since 2.0.0
  */
@@ -299,14 +292,13 @@ export declare function take<A>(n: number, as: Array<A>): Array<A>;
  * `n` must be a natural number
  *
  * @example
- * import { takeEnd } from 'fp-ts/lib/Array'
+ * import { takeRight } from 'fp-ts/lib/Array'
  *
- * assert.deepStrictEqual(takeEnd(2, [1, 2, 3, 4, 5]), [4, 5])
- *
+ * assert.deepStrictEqual(takeRight(2, [1, 2, 3, 4, 5]), [4, 5])
  *
  * @since 2.0.0
  */
-export declare function takeEnd<A>(n: number, as: Array<A>): Array<A>;
+export declare function takeRight<A>(n: number, as: Array<A>): Array<A>;
 /**
  * Calculate the longest initial subarray for which all element satisfy the specified predicate, creating a new array
  *
@@ -354,14 +346,13 @@ export declare function drop<A>(n: number, as: Array<A>): Array<A>;
  * Drop a number of elements from the end of an array, creating a new array
  *
  * @example
- * import { dropEnd } from 'fp-ts/lib/Array'
+ * import { dropRight } from 'fp-ts/lib/Array'
  *
- * assert.deepStrictEqual(dropEnd(2, [1, 2, 3, 4, 5]), [1, 2, 3])
- *
+ * assert.deepStrictEqual(dropRight(2, [1, 2, 3, 4, 5]), [1, 2, 3])
  *
  * @since 2.0.0
  */
-export declare function dropEnd<A>(n: number, as: Array<A>): Array<A>;
+export declare function dropRight<A>(n: number, as: Array<A>): Array<A>;
 /**
  * Remove the longest initial subarray for which all element satisfy the specified predicate, creating a new array
  *
@@ -476,7 +467,6 @@ export declare function findLastIndex<A>(as: Array<A>, predicate: Predicate<A>):
  */
 export declare function copy<A>(as: Array<A>): Array<A>;
 /**
- *
  * @since 2.0.0
  */
 export declare function unsafeInsertAt<A>(i: number, a: A, as: Array<A>): Array<A>;
@@ -493,7 +483,6 @@ export declare function unsafeInsertAt<A>(i: number, a: A, as: Array<A>): Array<
  */
 export declare function insertAt<A>(i: number, a: A, as: Array<A>): Option<Array<A>>;
 /**
- *
  * @since 2.0.0
  */
 export declare function unsafeUpdateAt<A>(i: number, a: A, as: Array<A>): Array<A>;
@@ -511,7 +500,6 @@ export declare function unsafeUpdateAt<A>(i: number, a: A, as: Array<A>): Array<
  */
 export declare function updateAt<A>(i: number, a: A, as: Array<A>): Option<Array<A>>;
 /**
- *
  * @since 2.0.0
  */
 export declare function unsafeDeleteAt<A>(i: number, as: Array<A>): Array<A>;
@@ -622,7 +610,6 @@ export declare function zip<A, B>(fa: Array<A>, fb: Array<B>): Array<[A, B]>;
  *
  * assert.deepStrictEqual(unzip([[1, 'a'], [2, 'b'], [3, 'c']]), [[1, 2, 3], ['a', 'b', 'c']])
  *
- *
  * @since 2.0.0
  */
 export declare function unzip<A, B>(as: Array<[A, B]>): [Array<A>, Array<B>];
@@ -660,7 +647,6 @@ export declare function elem<A>(E: Eq<A>): (a: A, as: Array<A>) => boolean;
  * import { eqNumber } from 'fp-ts/lib/Eq'
  *
  * assert.deepStrictEqual(uniq(eqNumber)([1, 2, 1]), [1, 2])
- *
  *
  * @since 2.0.0
  */
@@ -710,7 +696,6 @@ export declare function sortBy<A>(ords: Array<Ord<A>>): Endomorphism<Array<A>>;
  * }
  * assert.deepStrictEqual(group(eqNumber)([1, 1, 2, 3, 3, 4]), [[1, 1], [2], [3, 3], [4]])
  *
- *
  * @since 2.0.0
  */
 export declare function chop<A, B>(as: Array<A>, f: (as: Array<A>) => [B, Array<A>]): Array<B>;
@@ -721,7 +706,6 @@ export declare function chop<A, B>(as: Array<A>, f: (as: Array<A>) => [B, Array<
  * import { splitAt } from 'fp-ts/lib/Array'
  *
  * assert.deepStrictEqual(splitAt(2, [1, 2, 3, 4, 5]), [[1, 2], [3, 4, 5]])
- *
  *
  * @since 2.0.0
  */
@@ -740,38 +724,37 @@ export declare function splitAt<A>(n: number, as: Array<A>): [Array<A>, Array<A>
  * @example
  * import { chunksOf } from 'fp-ts/lib/Array'
  *
- * assert.deepStrictEqual(chunksOf([1, 2, 3, 4, 5], 2), [[1, 2], [3, 4], [5]])
+ * assert.deepStrictEqual(chunksOf(2, [1, 2, 3, 4, 5]), [[1, 2], [3, 4], [5]])
  *
  *
  * @since 2.0.0
  */
-export declare function chunksOf<A>(as: Array<A>, n: number): Array<Array<A>>;
+export declare function chunksOf<A>(n: number, as: Array<A>): Array<Array<A>>;
 /**
  * Array comprehension
  *
  * ```
- * [ g(x, y, ...) | x ← xs, y ← ys, ..., f(x, y, ...) ]
+ * [ f(x, y, ...) | x ← xs, y ← ys, ..., g(x, y, ...) ]
  * ```
  *
  * @example
  * import { comprehension } from 'fp-ts/lib/Array'
  * import { tuple } from 'fp-ts/lib/function'
  *
- * assert.deepStrictEqual(comprehension([[1, 2, 3], ['a', 'b']], (a, b) => (a + b.length) % 2 === 0, tuple), [
+ * assert.deepStrictEqual(comprehension([[1, 2, 3], ['a', 'b']], tuple, (a, b) => (a + b.length) % 2 === 0), [
  *   [1, 'a'],
  *   [1, 'b'],
  *   [3, 'a'],
  *   [3, 'b']
  * ])
  *
- *
  * @since 2.0.0
  */
-export declare function comprehension<A, B, C, D, R>(input: [Array<A>, Array<B>, Array<C>, Array<D>], f: (a: A, b: B, c: C, d: D) => boolean, g: (a: A, b: B, c: C, d: D) => R): Array<R>;
-export declare function comprehension<A, B, C, R>(input: [Array<A>, Array<B>, Array<C>], f: (a: A, b: B, c: C) => boolean, g: (a: A, b: B, c: C) => R): Array<R>;
-export declare function comprehension<A, R>(input: [Array<A>], f: (a: A) => boolean, g: (a: A) => R): Array<R>;
-export declare function comprehension<A, B, R>(input: [Array<A>, Array<B>], f: (a: A, b: B) => boolean, g: (a: A, b: B) => R): Array<R>;
-export declare function comprehension<A, R>(input: [Array<A>], f: (a: A) => boolean, g: (a: A) => R): Array<R>;
+export declare function comprehension<A, B, C, D, R>(input: [Array<A>, Array<B>, Array<C>, Array<D>], f: (a: A, b: B, c: C, d: D) => R, g?: (a: A, b: B, c: C, d: D) => boolean): Array<R>;
+export declare function comprehension<A, B, C, R>(input: [Array<A>, Array<B>, Array<C>], f: (a: A, b: B, c: C) => R, g?: (a: A, b: B, c: C) => boolean): Array<R>;
+export declare function comprehension<A, R>(input: [Array<A>], f: (a: A) => R, g?: (a: A) => boolean): Array<R>;
+export declare function comprehension<A, B, R>(input: [Array<A>, Array<B>], f: (a: A, b: B) => R, g?: (a: A, b: B) => boolean): Array<R>;
+export declare function comprehension<A, R>(input: [Array<A>], f: (a: A) => boolean, g?: (a: A) => R): Array<R>;
 /**
  * Creates an array of unique values, in order, from all given arrays using a `Eq` for equality comparisons
  *
@@ -780,7 +763,6 @@ export declare function comprehension<A, R>(input: [Array<A>], f: (a: A) => bool
  * import { eqNumber } from 'fp-ts/lib/Eq'
  *
  * assert.deepStrictEqual(union(eqNumber)([1, 2], [2, 3]), [1, 2, 3])
- *
  *
  * @since 2.0.0
  */
@@ -795,7 +777,6 @@ export declare function union<A>(E: Eq<A>): (xs: Array<A>, ys: Array<A>) => Arra
  *
  * assert.deepStrictEqual(intersection(eqNumber)([1, 2], [2, 3]), [2])
  *
- *
  * @since 2.0.0
  */
 export declare function intersection<A>(E: Eq<A>): (xs: Array<A>, ys: Array<A>) => Array<A>;
@@ -808,7 +789,6 @@ export declare function intersection<A>(E: Eq<A>): (xs: Array<A>, ys: Array<A>) 
  * import { eqNumber } from 'fp-ts/lib/Eq'
  *
  * assert.deepStrictEqual(difference(eqNumber)([1, 2], [2, 3]), [1])
- *
  *
  * @since 2.0.0
  */

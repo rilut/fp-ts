@@ -31,4 +31,4 @@ export interface Semiring<A> {
 /**
  * @since 2.0.0
  */
-export declare const getFunctionSemiring: <A, B>(S: Semiring<B>) => Semiring<(a: A) => B>;
+export declare function getFunctionSemiring<A, B>(S: Semiring<B>): Semiring<(a: A) => B>;

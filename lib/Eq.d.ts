@@ -18,11 +18,11 @@ export interface Eq<A> {
 /**
  * @since 2.0.0
  */
-export declare const fromEquals: <A>(equals: (x: A, y: A) => boolean) => Eq<A>;
+export declare function fromEquals<A>(equals: (x: A, y: A) => boolean): Eq<A>;
 /**
  * @since 2.0.0
  */
-export declare const strictEqual: <A>(a: A, b: A) => boolean;
+export declare function strictEqual<A>(a: A, b: A): boolean;
 /**
  * @since 2.0.0
  */
@@ -38,9 +38,11 @@ export declare const eqBoolean: Eq<boolean>;
 /**
  * @since 2.0.0
  */
-export declare const getStructEq: <O extends {
+export declare function getStructEq<O extends {
     [key: string]: any;
-}>(eqs: { [K in keyof O]: Eq<O[K]>; }) => Eq<O>;
+}>(eqs: {
+    [K in keyof O]: Eq<O[K]>;
+}): Eq<O>;
 /**
  * Given a tuple of `Eq`s returns a `Eq` for the tuple
  *
@@ -55,13 +57,15 @@ export declare const getStructEq: <O extends {
  *
  * @since 2.0.0
  */
-export declare const getTupleEq: <T extends Eq<any>[]>(...eqs: T) => Eq<{ [K in keyof T]: T[K] extends Eq<infer A> ? A : never; }>;
+export declare function getTupleEq<T extends Array<Eq<any>>>(...eqs: T): Eq<{
+    [K in keyof T]: T[K] extends Eq<infer A> ? A : never;
+}>;
 /**
  * Returns the `Eq` corresponding to the partitions of `B` induced by `f`
  *
  * @since 2.0.0
  */
-export declare const contramap: <A, B>(E: Eq<A>, f: (b: B) => A) => Eq<B>;
+export declare function contramap<A, B>(E: Eq<A>, f: (b: B) => A): Eq<B>;
 /**
  * @since 2.0.0
  */

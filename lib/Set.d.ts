@@ -10,7 +10,7 @@ import { Show } from './Show';
 /**
  * @since 2.0.0
  */
-export declare const getShow: <A>(SA: Show<A>) => Show<Set<A>>;
+export declare function getShow<A>(S: Show<A>): Show<Set<A>>;
 /**
  * @since 2.0.0
  */
@@ -18,35 +18,35 @@ export declare const empty: Set<never>;
 /**
  * @since 2.0.0
  */
-export declare const toArray: <A>(O: Ord<A>) => (x: Set<A>) => A[];
+export declare function toArray<A>(O: Ord<A>): (x: Set<A>) => Array<A>;
 /**
  * @since 2.0.0
  */
-export declare const getEq: <A>(E: Eq<A>) => Eq<Set<A>>;
+export declare function getEq<A>(E: Eq<A>): Eq<Set<A>>;
 /**
  * @since 2.0.0
  */
-export declare const some: <A>(x: Set<A>, predicate: Predicate<A>) => boolean;
+export declare function some<A>(x: Set<A>, predicate: Predicate<A>): boolean;
 /**
  * Projects a Set through a function
  *
  * @since 2.0.0
  */
-export declare const map: <B>(E: Eq<B>) => <A>(set: Set<A>, f: (x: A) => B) => Set<B>;
+export declare function map<B>(E: Eq<B>): <A>(set: Set<A>, f: (x: A) => B) => Set<B>;
 /**
  * @since 2.0.0
  */
-export declare const every: <A>(x: Set<A>, predicate: Predicate<A>) => boolean;
+export declare function every<A>(x: Set<A>, predicate: Predicate<A>): boolean;
 /**
  * @since 2.0.0
  */
-export declare const chain: <B>(E: Eq<B>) => <A>(set: Set<A>, f: (x: A) => Set<B>) => Set<B>;
+export declare function chain<B>(E: Eq<B>): <A>(set: Set<A>, f: (x: A) => Set<B>) => Set<B>;
 /**
  * `true` if and only if every element in the first set is an element of the second set
  *
  * @since 2.0.0
  */
-export declare const subset: <A>(E: Eq<A>) => (x: Set<A>, y: Set<A>) => boolean;
+export declare function subset<A>(E: Eq<A>): (x: Set<A>, y: Set<A>) => boolean;
 /**
  * @since 2.0.0
  */
@@ -62,23 +62,23 @@ export declare function partition<A>(x: Set<A>, predicate: Predicate<A>): Separa
  *
  * @since 2.0.0
  */
-export declare const elem: <A>(E: Eq<A>) => (a: A, x: Set<A>) => boolean;
+export declare function elem<A>(E: Eq<A>): (a: A, x: Set<A>) => boolean;
 /**
  * Form the union of two sets
  *
  * @since 2.0.0
  */
-export declare const union: <A>(E: Eq<A>) => (x: Set<A>, y: Set<A>) => Set<A>;
+export declare function union<A>(E: Eq<A>): (x: Set<A>, y: Set<A>) => Set<A>;
 /**
  * The set of elements which are in both the first and second set
  *
  * @since 2.0.0
  */
-export declare const intersection: <A>(E: Eq<A>) => (x: Set<A>, y: Set<A>) => Set<A>;
+export declare function intersection<A>(E: Eq<A>): (x: Set<A>, y: Set<A>) => Set<A>;
 /**
  * @since 2.0.0
  */
-export declare const partitionMap: <L, R>(SL: Eq<L>, SR: Eq<R>) => <A>(x: Set<A>, f: (a: A) => Either<L, R>) => Separated<Set<L>, Set<R>>;
+export declare function partitionMap<L, R>(SL: Eq<L>, SR: Eq<R>): <A>(x: Set<A>, f: (a: A) => Either<L, R>) => Separated<Set<L>, Set<R>>;
 /**
  * Form the set difference (`x` - `y`)
  *
@@ -91,56 +91,56 @@ export declare const partitionMap: <L, R>(SL: Eq<L>, SR: Eq<R>) => <A>(x: Set<A>
  *
  * @since 2.0.0
  */
-export declare const difference: <A>(E: Eq<A>) => (x: Set<A>, y: Set<A>) => Set<A>;
+export declare function difference<A>(E: Eq<A>): (x: Set<A>, y: Set<A>) => Set<A>;
 /**
  * @since 2.0.0
  */
-export declare const getUnionMonoid: <A>(E: Eq<A>) => Monoid<Set<A>>;
+export declare function getUnionMonoid<A>(E: Eq<A>): Monoid<Set<A>>;
 /**
  * @since 2.0.0
  */
-export declare const getIntersectionSemigroup: <A>(E: Eq<A>) => Semigroup<Set<A>>;
+export declare function getIntersectionSemigroup<A>(E: Eq<A>): Semigroup<Set<A>>;
 /**
  * @since 2.0.0
  */
-export declare const reduce: <A>(O: Ord<A>) => <B>(fa: Set<A>, b: B, f: (b: B, a: A) => B) => B;
+export declare function reduce<A>(O: Ord<A>): <B>(fa: Set<A>, b: B, f: (b: B, a: A) => B) => B;
 /**
  * @since 2.0.0
  */
-export declare const foldMap: <A, M>(O: Ord<A>, M: Monoid<M>) => (fa: Set<A>, f: (a: A) => M) => M;
+export declare function foldMap<A, M>(O: Ord<A>, M: Monoid<M>): (fa: Set<A>, f: (a: A) => M) => M;
 /**
  * Create a set with one element
  *
  * @since 2.0.0
  */
-export declare const singleton: <A>(a: A) => Set<A>;
+export declare function singleton<A>(a: A): Set<A>;
 /**
  * Insert a value into a set
  *
  * @since 2.0.0
  */
-export declare const insert: <A>(E: Eq<A>) => (a: A, x: Set<A>) => Set<A>;
+export declare function insert<A>(E: Eq<A>): (a: A, x: Set<A>) => Set<A>;
 /**
  * Delete a value from a set
  *
  * @since 2.0.0
  */
-export declare const remove: <A>(E: Eq<A>) => (a: A, x: Set<A>) => Set<A>;
+export declare function remove<A>(E: Eq<A>): (a: A, x: Set<A>) => Set<A>;
 /**
  * Create a set from an array
  *
  * @since 2.0.0
  */
-export declare const fromArray: <A>(E: Eq<A>) => (as: A[]) => Set<A>;
+export declare function fromArray<A>(E: Eq<A>): (as: Array<A>) => Set<A>;
 /**
  * @since 2.0.0
  */
-export declare const compact: <A>(E: Eq<A>) => (fa: Set<Option<A>>) => Set<A>;
+export declare function compact<A>(E: Eq<A>): (fa: Set<Option<A>>) => Set<A>;
 /**
  * @since 2.0.0
  */
-export declare const separate: <L, R>(SL: Eq<L>, SR: Eq<R>) => (fa: Set<Either<L, R>>) => Separated<Set<L>, Set<R>>;
+export declare function separate<L, R>(EL: Eq<L>, ER: Eq<R>): (fa: Set<Either<L, R>>) => Separated<Set<L>, Set<R>>;
 /**
  * @since 2.0.0
  */
-export declare const filterMap: <B>(E: Eq<B>) => <A>(fa: Set<A>, f: (a: A) => Option<B>) => Set<B>;
+export declare function filterMap<B>(E: Eq<B>): <A>(fa: Set<A>, f: (a: A) => Option<B>) => Set<B>;
