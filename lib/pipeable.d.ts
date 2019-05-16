@@ -9,7 +9,7 @@ import { Filterable, Filterable1, Filterable2, Filterable2C, Filterable3 } from 
 import { FilterableWithIndex, FilterableWithIndex1, FilterableWithIndex2, FilterableWithIndex2C, FilterableWithIndex3, PredicateWithIndex, RefinementWithIndex } from './FilterableWithIndex';
 import { Foldable, Foldable1, Foldable2, Foldable2C, Foldable3 } from './Foldable';
 import { FoldableWithIndex, FoldableWithIndex1, FoldableWithIndex2, FoldableWithIndex2C, FoldableWithIndex3 } from './FoldableWithIndex';
-import { Predicate, Refinement, pipe as p } from './function';
+import { Predicate, Refinement } from './function';
 import { Functor, Functor1, Functor2, Functor2C, Functor3 } from './Functor';
 import { FunctorWithIndex, FunctorWithIndex1, FunctorWithIndex2, FunctorWithIndex2C, FunctorWithIndex3 } from './FunctorWithIndex';
 import { HKT, HKT2, Type, Type2, Type3, URIS, URIS2, URIS3 } from './HKT';
@@ -17,24 +17,15 @@ import { Monoid } from './Monoid';
 import { Option } from './Option';
 import { Profunctor, Profunctor2, Profunctor2C, Profunctor3 } from './Profunctor';
 import { Semigroupoid, Semigroupoid2, Semigroupoid2C, Semigroupoid3 } from './Semigroupoid';
-/**
- * @since 2.0.0
- */
-export declare function apply<A, B>(a: A, f: (a: A) => B): B;
-/**
- * A re-export of `function`'s `pipe`
- * @since 2.0.0
- */
-export declare const pipe: typeof p;
-export declare function pipeOf<A, B>(a: A, ab: (a: A) => B): B;
-export declare function pipeOf<A, B, C>(a: A, ab: (a: A) => B, bc: (b: B) => C): C;
-export declare function pipeOf<A, B, C, D>(a: A, ab: (a: A) => B, bc: (b: B) => C, cd: (c: C) => D): D;
-export declare function pipeOf<A, B, C, D, E>(a: A, ab: (a: A) => B, bc: (b: B) => C, cd: (c: C) => D, de: (d: D) => E): E;
-export declare function pipeOf<A, B, C, D, E, F>(a: A, ab: (a: A) => B, bc: (b: B) => C, cd: (c: C) => D, de: (d: D) => E, ef: (e: E) => F): F;
-export declare function pipeOf<A, B, C, D, E, F, G>(a: A, ab: (a: A) => B, bc: (b: B) => C, cd: (c: C) => D, de: (d: D) => E, ef: (e: E) => F, fg: (f: F) => G): G;
-export declare function pipeOf<A, B, C, D, E, F, G, H>(a: A, ab: (a: A) => B, bc: (b: B) => C, cd: (c: C) => D, de: (d: D) => E, ef: (e: E) => F, fg: (f: F) => G, gh: (g: G) => H): H;
-export declare function pipeOf<A, B, C, D, E, F, G, H, I>(a: A, ab: (a: A) => B, bc: (b: B) => C, cd: (c: C) => D, de: (d: D) => E, ef: (e: E) => F, fg: (f: F) => G, gh: (g: G) => H, hi: (h: H) => I): I;
-export declare function pipeOf<A, B, C, D, E, F, G, H, I, J>(a: A, ab: (a: A) => B, bc: (b: B) => C, cd: (c: C) => D, de: (d: D) => E, ef: (e: E) => F, fg: (f: F) => G, gh: (g: G) => H, hi: (h: H) => I, ij: (i: I) => J): J;
+export declare function pipe<A, B>(a: A, ab: (a: A) => B): B;
+export declare function pipe<A, B, C>(a: A, ab: (a: A) => B, bc: (b: B) => C): C;
+export declare function pipe<A, B, C, D>(a: A, ab: (a: A) => B, bc: (b: B) => C, cd: (c: C) => D): D;
+export declare function pipe<A, B, C, D, E>(a: A, ab: (a: A) => B, bc: (b: B) => C, cd: (c: C) => D, de: (d: D) => E): E;
+export declare function pipe<A, B, C, D, E, F>(a: A, ab: (a: A) => B, bc: (b: B) => C, cd: (c: C) => D, de: (d: D) => E, ef: (e: E) => F): F;
+export declare function pipe<A, B, C, D, E, F, G>(a: A, ab: (a: A) => B, bc: (b: B) => C, cd: (c: C) => D, de: (d: D) => E, ef: (e: E) => F, fg: (f: F) => G): G;
+export declare function pipe<A, B, C, D, E, F, G, H>(a: A, ab: (a: A) => B, bc: (b: B) => C, cd: (c: C) => D, de: (d: D) => E, ef: (e: E) => F, fg: (f: F) => G, gh: (g: G) => H): H;
+export declare function pipe<A, B, C, D, E, F, G, H, I>(a: A, ab: (a: A) => B, bc: (b: B) => C, cd: (c: C) => D, de: (d: D) => E, ef: (e: E) => F, fg: (f: F) => G, gh: (g: G) => H, hi: (h: H) => I): I;
+export declare function pipe<A, B, C, D, E, F, G, H, I, J>(a: A, ab: (a: A) => B, bc: (b: B) => C, cd: (c: C) => D, de: (d: D) => E, ef: (e: E) => F, fg: (f: F) => G, gh: (g: G) => H, hi: (h: H) => I, ij: (i: I) => J): J;
 export interface PipeableFunctor<F> {
     readonly map: <A, B>(f: (a: A) => B) => (fa: HKT<F, A>) => HKT<F, B>;
 }
