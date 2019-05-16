@@ -1,6 +1,6 @@
 ---
 title: Tree.ts
-nav_order: 88
+nav_order: 89
 parent: Modules
 ---
 
@@ -164,7 +164,7 @@ Added in v2.0.0
 **Signature**
 
 ```ts
-export function make<A>(value: A, forest: Forest<A>): Tree<A> { ... }
+export function make<A>(value: A, forest: Forest<A> = empty): Tree<A> { ... }
 ```
 
 Added in v2.0.0
