@@ -2,16 +2,16 @@ import { Alt3 } from './Alt';
 import { Bifunctor3 } from './Bifunctor';
 import { Either } from './Either';
 import { Predicate, Refinement } from './function';
+import { IO } from './IO';
 import { IOEither } from './IOEither';
 import { Monad3 } from './Monad';
 import { MonadIO3 } from './MonadIO';
 import { MonadTask3 } from './MonadTask';
+import { Option } from './Option';
 import { Reader } from './Reader';
 import { Task } from './Task';
 import * as TE from './TaskEither';
 import TaskEither = TE.TaskEither;
-import { Option } from './Option';
-import { IO } from './IO';
 declare module './HKT' {
     interface URI2HKT3<U, L, A> {
         ReaderTaskEither: ReaderTaskEither<U, L, A>;
@@ -88,6 +88,14 @@ export declare function leftIO<L>(ml: IO<L>): ReaderTaskEither<unknown, L, never
  */
 export declare function fromPredicate<L, A, B extends A>(refinement: Refinement<A, B>, onFalse: (a: A) => L): (a: A) => ReaderTaskEither<unknown, L, B>;
 export declare function fromPredicate<L, A>(predicate: Predicate<A>, onFalse: (a: A) => L): (a: A) => ReaderTaskEither<unknown, L, A>;
+/**
+ * @since 2.0.0
+ */
+export declare function fold<E, L, A, R>(ma: ReaderTaskEither<E, L, A>, onLeft: (l: L) => Reader<E, Task<R>>, onRight: (a: A) => Reader<E, Task<R>>): Reader<E, Task<R>>;
+/**
+ * @since 2.0.0
+ */
+export declare function getOrElse<E, L, A>(ma: ReaderTaskEither<E, L, A>, onLeft: (l: L) => Reader<E, Task<A>>): Reader<E, Task<A>>;
 /**
  * @since 2.0.0
  */

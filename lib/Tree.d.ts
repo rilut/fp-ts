@@ -32,7 +32,7 @@ export interface Tree<A> {
 /**
  * @since 2.0.0
  */
-export declare function make<A>(value: A, forest: Forest<A>): Tree<A>;
+export declare function make<A>(value: A, forest?: Forest<A>): Tree<A>;
 /**
  * @since 2.0.0
  */

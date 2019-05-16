@@ -50,6 +50,17 @@ export declare function isEmpty(r: Record<string, unknown>): boolean;
  */
 export declare function keys<K extends string>(r: Record<K, unknown>): Array<K>;
 /**
+ * Map a record into an array
+ *
+ * @example
+ * import {collect} from 'fp-ts/lib/Record'
+ *
+ * const ob: {a: string, b: boolean} = {a: 'foo', b: false}
+ * assert.deepStrictEqual(
+ *   collect(ob, (key, val) => ({key: key, value: val})),
+ *   [{key: 'a', value: 'foo'}, {key: 'b', value: false}]
+ * )
+ *
  * @since 2.0.0
  */
 export declare function collect<K extends string, A, B>(r: Record<K, A>, f: (k: K, a: A) => B): Array<B>;
@@ -121,10 +132,14 @@ export declare function filter<A>(fa: Record<string, A>, p: Predicate<A>): Recor
  */
 export declare const empty: Record<string, never>;
 /**
+ * Map a record passing the keys to the iterating function
+ *
  * @since 2.0.0
  */
 export declare function mapWithIndex<K extends string, A, B>(fa: Record<K, A>, f: (k: K, a: A) => B): Record<K, B>;
 /**
+ * Map a record passing the values to the iterating function
+ *
  * @since 2.0.0
  */
 export declare function map<K extends string, A, B>(fa: Record<K, A>, f: (a: A) => B): Record<K, B>;

@@ -124,11 +124,3 @@ export declare function getFunctorComposition<F extends URIS, G extends URIS2, L
 export declare function getFunctorComposition<F extends URIS, G extends URIS2>(F: Functor1<F>, G: Functor2<G>): FunctorComposition12<F, G>;
 export declare function getFunctorComposition<F extends URIS, G extends URIS>(F: Functor1<F>, G: Functor1<G>): FunctorComposition11<F, G>;
 export declare function getFunctorComposition<F, G>(F: Functor<F>, G: Functor<G>): FunctorComposition<F, G>;
-/**
- * @since 2.0.0
- */
-export declare function lift<F extends URIS3>(F: Functor3<F>): <A, B>(f: (a: A) => B) => <U, L>(fa: Type3<F, U, L, A>) => Type3<F, U, L, B>;
-export declare function lift<F extends URIS2>(F: Functor2<F>): <A, B>(f: (a: A) => B) => <L>(fa: Type2<F, L, A>) => Type2<F, L, B>;
-export declare function lift<F extends URIS2, L>(F: Functor2C<F, L>): <A, B>(f: (a: A) => B) => (fa: Type2<F, L, A>) => Type2<F, L, B>;
-export declare function lift<F extends URIS>(F: Functor1<F>): <A, B>(f: (a: A) => B) => (fa: Type<F, A>) => Type<F, B>;
-export declare function lift<F>(F: Functor<F>): <A, B>(f: (a: A) => B) => (fa: HKT<F, A>) => HKT<F, B>;
