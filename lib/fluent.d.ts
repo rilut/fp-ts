@@ -25,7 +25,7 @@ import { Show } from './Show';
 /**
  * @since 2.0.0
  */
-export interface Fluent3<F extends URIS3, I, U, L, A> {
+export interface Fluent3<U, L, A, F extends URIS3, I> {
     readonly I: I;
     readonly value: Type3<F, U, L, A>;
     readonly show: (this: {
@@ -42,38 +42,38 @@ export interface Fluent3<F extends URIS3, I, U, L, A> {
     }, that: Type3<F, U, L, A>) => Type3<F, U, L, A>;
     readonly map: <B>(this: {
         I: Functor3<F>;
-    }, f: (a: A) => B) => Fluent3<F, I, U, L, B>;
+    }, f: (a: A) => B) => Fluent3<U, L, B, F, I>;
     readonly mapWithIndex: <Ix, B>(this: {
         I: FunctorWithIndex3<F, Ix>;
-    }, f: (i: Ix, a: A) => B) => Fluent3<F, I, U, L, B>;
+    }, f: (i: Ix, a: A) => B) => Fluent3<U, L, B, F, I>;
     readonly bimap: <M, B>(this: {
         I: Bifunctor3<F>;
-    }, f: (l: L) => M, g: (a: A) => B) => Fluent3<F, I, U, M, B>;
+    }, f: (l: L) => M, g: (a: A) => B) => Fluent3<U, M, B, F, I>;
     readonly mapLeft: <M>(this: {
         I: Bifunctor3<F>;
-    }, f: (l: L) => M) => Fluent3<F, I, U, M, A>;
+    }, f: (l: L) => M) => Fluent3<U, M, A, F, I>;
     readonly ap: <B>(this: {
         I: Apply3<F>;
-    }, fab: Type3<F, U, L, (a: A) => B>) => Fluent3<F, I, U, L, B>;
+    }, fab: Type3<F, U, L, (a: A) => B>) => Fluent3<U, L, B, F, I>;
     readonly apFirst: <B>(this: {
         I: Apply3<F>;
-    }, that: Type3<F, U, L, B>) => Fluent3<F, I, U, L, A>;
+    }, that: Type3<F, U, L, B>) => Fluent3<U, L, A, F, I>;
     readonly apSecond: <B>(this: {
         I: Apply3<F>;
-    }, that: Type3<F, U, L, B>) => Fluent3<F, I, U, L, B>;
+    }, that: Type3<F, U, L, B>) => Fluent3<U, L, B, F, I>;
     readonly chain: <B>(this: {
         I: Chain3<F>;
-    }, f: (a: A) => Type3<F, U, L, B>) => Fluent3<F, I, U, L, B>;
+    }, f: (a: A) => Type3<F, U, L, B>) => Fluent3<U, L, B, F, I>;
     readonly flatten: <A>(this: {
         I: Chain3<F>;
         value: Type3<F, U, L, Type3<F, U, L, A>>;
-    }) => Fluent3<F, I, U, L, A>;
+    }) => Fluent3<U, L, A, F, I>;
     readonly extend: <B>(this: {
         I: Extend3<F>;
-    }, f: (fa: Type3<F, U, L, A>) => B) => Fluent3<F, I, U, L, B>;
+    }, f: (fa: Type3<F, U, L, A>) => B) => Fluent3<U, L, B, F, I>;
     readonly duplicate: (this: {
         I: Extend3<F>;
-    }) => Fluent3<F, I, U, L, Type3<F, U, L, A>>;
+    }) => Fluent3<U, L, Type3<F, U, L, A>, F, I>;
     readonly reduce: <B>(this: {
         I: Foldable3<F>;
     }, b: B, f: (b: B, a: A) => B) => B;
@@ -94,11 +94,11 @@ export interface Fluent3<F extends URIS3, I, U, L, A> {
     }, b: B, f: (i: Ix, a: A, b: B) => B) => B;
     readonly alt: (this: {
         I: Alt3<F>;
-    }, that: () => Type3<F, U, L, A>) => Fluent3<F, I, U, L, A>;
+    }, that: () => Type3<F, U, L, A>) => Fluent3<U, L, A, F, I>;
     readonly compact: <A>(this: {
         I: Compactable3<F>;
         value: Option<A>;
-    }) => Fluent3<F, I, U, L, A>;
+    }) => Fluent3<U, L, A, F, I>;
     readonly separate: <A, B>(this: {
         I: Compactable3<F>;
         value: Either<A, B>;
@@ -106,14 +106,14 @@ export interface Fluent3<F extends URIS3, I, U, L, A> {
     readonly filter: {
         <B extends A>(this: {
             I: Filterable3<F>;
-        }, refinement: Refinement<A, B>): Fluent3<F, I, U, L, B>;
+        }, refinement: Refinement<A, B>): Fluent3<U, L, B, F, I>;
         (this: {
             I: Filterable3<F>;
-        }, predicate: Predicate<A>): Fluent3<F, I, U, L, A>;
+        }, predicate: Predicate<A>): Fluent3<U, L, A, F, I>;
     };
     readonly filterMap: <B>(this: {
         I: Filterable3<F>;
-    }, f: (a: A) => Option<B>) => Fluent3<F, I, U, L, B>;
+    }, f: (a: A) => Option<B>) => Fluent3<U, L, B, F, I>;
     readonly partition: {
         <B extends A>(this: {
             I: Filterable3<F>;
@@ -128,14 +128,14 @@ export interface Fluent3<F extends URIS3, I, U, L, A> {
     readonly filterWithIndex: {
         <Ix, B extends A>(this: {
             I: FilterableWithIndex3<F, Ix>;
-        }, refinement: RefinementWithIndex<Ix, A, B>): Fluent3<F, I, U, L, B>;
+        }, refinement: RefinementWithIndex<Ix, A, B>): Fluent3<U, L, B, F, I>;
         <Ix>(this: {
             I: FilterableWithIndex3<F, Ix>;
-        }, predicate: PredicateWithIndex<Ix, A>): Fluent3<F, I, U, L, A>;
+        }, predicate: PredicateWithIndex<Ix, A>): Fluent3<U, L, A, F, I>;
     };
     readonly filterMapWithIndex: <Ix, B>(this: {
         I: FilterableWithIndex3<F, Ix>;
-    }, f: (i: Ix, a: A) => Option<B>) => Fluent3<F, I, U, L, B>;
+    }, f: (i: Ix, a: A) => Option<B>) => Fluent3<U, L, B, F, I>;
     readonly partitionWithIndex: {
         <Ix, B extends A>(this: {
             I: FilterableWithIndex3<F, Ix>;
@@ -149,17 +149,19 @@ export interface Fluent3<F extends URIS3, I, U, L, A> {
     }, f: (i: Ix, a: A) => Either<RL, RR>) => Separated<Type3<F, U, L, RL>, Type3<F, U, L, RR>>;
     readonly promap: <H, B>(this: {
         I: Profunctor3<F>;
-    }, f: (h: H) => L, g: (a: A) => B) => Fluent3<F, I, U, H, B>;
+    }, f: (h: H) => L, g: (a: A) => B) => Fluent3<U, H, B, F, I>;
     readonly compose: <B>(this: {
         I: Semigroupoid3<F>;
-    }, that: Type3<F, U, A, B>) => Fluent3<F, I, U, L, B>;
+    }, that: Type3<F, U, A, B>) => Fluent3<U, L, B, F, I>;
 }
 /**
  * @since 2.0.0
  */
-export interface Fluent2<F extends URIS2, I, L, A> {
+export interface Fluent2<L, A, F extends URIS2, I> {
     readonly I: I;
     readonly value: Type2<F, L, A>;
+    readonly pipe: <M, B>(f: (fa: Type2<F, L, A>) => Type2<F, M, B>) => Fluent2<M, B, F, I>;
+    readonly apply: <R>(f: (fa: Type2<F, L, A>) => R) => R;
     readonly show: (this: {
         I: Show<Type2<F, L, A>>;
     }) => string;
@@ -174,38 +176,38 @@ export interface Fluent2<F extends URIS2, I, L, A> {
     }, that: Type2<F, L, A>) => Type2<F, L, A>;
     readonly map: <B>(this: {
         I: Functor2<F> | Functor2C<F, L>;
-    }, f: (a: A) => B) => Fluent2<F, I, L, B>;
+    }, f: (a: A) => B) => Fluent2<L, B, F, I>;
     readonly mapWithIndex: <Ix, B>(this: {
         I: FunctorWithIndex2<F, Ix> | FunctorWithIndex2C<F, Ix, L>;
-    }, f: (i: Ix, a: A) => B) => Fluent2<F, I, L, B>;
+    }, f: (i: Ix, a: A) => B) => Fluent2<L, B, F, I>;
     readonly bimap: <M, B>(this: {
         I: Bifunctor2<F> | Bifunctor2C<F, L>;
-    }, f: (l: L) => M, g: (a: A) => B) => Fluent2<F, I, M, B>;
+    }, f: (l: L) => M, g: (a: A) => B) => Fluent2<M, B, F, I>;
     readonly mapLeft: <M>(this: {
         I: Bifunctor2<F> | Bifunctor2C<F, L>;
-    }, f: (l: L) => M) => Fluent2<F, I, M, A>;
+    }, f: (l: L) => M) => Fluent2<M, A, F, I>;
     readonly ap: <B>(this: {
         I: Apply2<F> | Apply2C<F, L>;
-    }, fab: Type2<F, L, (a: A) => B>) => Fluent2<F, I, L, B>;
+    }, fab: Type2<F, L, (a: A) => B>) => Fluent2<L, B, F, I>;
     readonly apFirst: <B>(this: {
         I: Apply2<F> | Apply2C<F, L>;
-    }, that: Type2<F, L, B>) => Fluent2<F, I, L, A>;
+    }, that: Type2<F, L, B>) => Fluent2<L, A, F, I>;
     readonly apSecond: <B>(this: {
         I: Apply2<F> | Apply2C<F, L>;
-    }, that: Type2<F, L, B>) => Fluent2<F, I, L, B>;
+    }, that: Type2<F, L, B>) => Fluent2<L, B, F, I>;
     readonly chain: <B>(this: {
         I: Chain2<F> | Chain2C<F, L>;
-    }, f: (a: A) => Type2<F, L, B>) => Fluent2<F, I, L, B>;
+    }, f: (a: A) => Type2<F, L, B>) => Fluent2<L, B, F, I>;
     readonly flatten: <A>(this: {
         I: Chain2<F> | Chain2C<F, L>;
         value: Type2<F, L, Type2<F, L, A>>;
-    }) => Fluent2<F, I, L, A>;
+    }) => Fluent2<L, A, F, I>;
     readonly extend: <B>(this: {
         I: Extend2<F> | Extend2C<F, L>;
-    }, f: (fa: Type2<F, L, A>) => B) => Fluent2<F, I, L, B>;
+    }, f: (fa: Type2<F, L, A>) => B) => Fluent2<L, B, F, I>;
     readonly duplicate: (this: {
         I: Extend2<F> | Extend2C<F, L>;
-    }) => Fluent2<F, I, L, Type2<F, L, A>>;
+    }) => Fluent2<L, Type2<F, L, A>, F, I>;
     readonly reduce: <B>(this: {
         I: Foldable2<F> | Foldable2C<F, L>;
     }, b: B, f: (b: B, a: A) => B) => B;
@@ -226,11 +228,11 @@ export interface Fluent2<F extends URIS2, I, L, A> {
     }, b: B, f: (i: Ix, a: A, b: B) => B) => B;
     readonly alt: (this: {
         I: Alt2<F> | Alt2C<F, L>;
-    }, that: () => Type2<F, L, A>) => Fluent2<F, I, L, A>;
+    }, that: () => Type2<F, L, A>) => Fluent2<L, A, F, I>;
     readonly compact: <A>(this: {
         I: Compactable2<F> | Compactable2C<F, L>;
         value: Option<A>;
-    }) => Fluent2<F, I, L, A>;
+    }) => Fluent2<L, A, F, I>;
     readonly separate: <A, B>(this: {
         I: Compactable2<F> | Compactable2C<F, L>;
         value: Either<A, B>;
@@ -238,14 +240,14 @@ export interface Fluent2<F extends URIS2, I, L, A> {
     readonly filter: {
         <B extends A>(this: {
             I: Filterable2<F> | Filterable2C<F, L>;
-        }, refinement: Refinement<A, B>): Fluent2<F, I, L, B>;
+        }, refinement: Refinement<A, B>): Fluent2<L, B, F, I>;
         (this: {
             I: Filterable2<F> | Filterable2C<F, L>;
-        }, predicate: Predicate<A>): Fluent2<F, I, L, A>;
+        }, predicate: Predicate<A>): Fluent2<L, A, F, I>;
     };
     readonly filterMap: <B>(this: {
         I: Filterable2<F> | Filterable2C<F, L>;
-    }, f: (a: A) => Option<B>) => Fluent2<F, I, L, B>;
+    }, f: (a: A) => Option<B>) => Fluent2<L, B, F, I>;
     readonly partition: {
         <B extends A>(this: {
             I: Filterable2<F> | Filterable2C<F, L>;
@@ -260,14 +262,14 @@ export interface Fluent2<F extends URIS2, I, L, A> {
     readonly filterWithIndex: {
         <Ix, B extends A>(this: {
             I: FilterableWithIndex2<F, Ix> | FilterableWithIndex2C<F, Ix, L>;
-        }, refinement: RefinementWithIndex<Ix, A, B>): Fluent2<F, I, L, B>;
+        }, refinement: RefinementWithIndex<Ix, A, B>): Fluent2<L, B, F, I>;
         <Ix>(this: {
             I: FilterableWithIndex2<F, Ix> | FilterableWithIndex2C<F, Ix, L>;
-        }, predicate: PredicateWithIndex<Ix, A>): Fluent2<F, I, L, A>;
+        }, predicate: PredicateWithIndex<Ix, A>): Fluent2<L, A, F, I>;
     };
     readonly filterMapWithIndex: <Ix, B>(this: {
         I: FilterableWithIndex2<F, Ix> | FilterableWithIndex2C<F, Ix, L>;
-    }, f: (i: Ix, a: A) => Option<B>) => Fluent2<F, I, L, B>;
+    }, f: (i: Ix, a: A) => Option<B>) => Fluent2<L, B, F, I>;
     readonly partitionWithIndex: {
         <Ix, B extends A>(this: {
             I: FilterableWithIndex2<F, Ix> | FilterableWithIndex2C<F, Ix, L>;
@@ -281,17 +283,19 @@ export interface Fluent2<F extends URIS2, I, L, A> {
     }, f: (i: Ix, a: A) => Either<RL, RR>) => Separated<Type2<F, L, RL>, Type2<F, L, RR>>;
     readonly promap: <H, B>(this: {
         I: Profunctor2<F>;
-    }, f: (h: H) => L, g: (a: A) => B) => Fluent2<F, I, H, B>;
+    }, f: (h: H) => L, g: (a: A) => B) => Fluent2<H, B, F, I>;
     readonly compose: <B>(this: {
         I: Semigroupoid2<F>;
-    }, that: Type2<F, A, B>) => Fluent2<F, I, L, B>;
+    }, that: Type2<F, A, B>) => Fluent2<L, B, F, I>;
 }
 /**
  * @since 2.0.0
  */
-export interface Fluent1<F extends URIS, I, A> {
+export interface Fluent1<A, F extends URIS, I> {
     readonly I: I;
     readonly value: Type<F, A>;
+    readonly pipe: <B>(f: (fa: Type<F, A>) => Type<F, B>) => Fluent1<B, F, I>;
+    readonly apply: <R>(f: (fa: Type<F, A>) => R) => R;
     readonly show: (this: {
         I: Show<Type<F, A>>;
     }) => string;
@@ -306,32 +310,32 @@ export interface Fluent1<F extends URIS, I, A> {
     }, that: Type<F, A>) => Type<F, A>;
     readonly map: <B>(this: {
         I: Functor1<F>;
-    }, f: (a: A) => B) => Fluent1<F, I, B>;
+    }, f: (a: A) => B) => Fluent1<B, F, I>;
     readonly mapWithIndex: <Ix, B>(this: {
         I: FunctorWithIndex1<F, Ix>;
-    }, f: (i: Ix, a: A) => B) => Fluent1<F, I, B>;
+    }, f: (i: Ix, a: A) => B) => Fluent1<B, F, I>;
     readonly ap: <B>(this: {
         I: Apply1<F>;
-    }, fab: Type<F, (a: A) => B>) => Fluent1<F, I, B>;
+    }, fab: Type<F, (a: A) => B>) => Fluent1<B, F, I>;
     readonly apFirst: <B>(this: {
         I: Apply1<F>;
-    }, that: Type<F, B>) => Fluent1<F, I, A>;
+    }, that: Type<F, B>) => Fluent1<A, F, I>;
     readonly apSecond: <B>(this: {
         I: Apply1<F>;
-    }, that: Type<F, B>) => Fluent1<F, I, B>;
+    }, that: Type<F, B>) => Fluent1<B, F, I>;
     readonly chain: <B>(this: {
         I: Chain1<F>;
-    }, f: (a: A) => Type<F, B>) => Fluent1<F, I, B>;
+    }, f: (a: A) => Type<F, B>) => Fluent1<B, F, I>;
     readonly flatten: <A>(this: {
         I: Chain1<F>;
         value: Type<F, Type<F, A>>;
-    }) => Fluent1<F, I, A>;
+    }) => Fluent1<A, F, I>;
     readonly extend: <B>(this: {
         I: Extend1<F>;
-    }, f: (fa: Type<F, A>) => B) => Fluent1<F, I, B>;
+    }, f: (fa: Type<F, A>) => B) => Fluent1<B, F, I>;
     readonly duplicate: (this: {
         I: Extend1<F>;
-    }) => Fluent1<F, I, Type<F, A>>;
+    }) => Fluent1<Type<F, A>, F, I>;
     readonly reduce: <B>(this: {
         I: Foldable1<F>;
     }, b: B, f: (b: B, a: A) => B) => B;
@@ -352,11 +356,11 @@ export interface Fluent1<F extends URIS, I, A> {
     }, b: B, f: (i: Ix, a: A, b: B) => B) => B;
     readonly alt: (this: {
         I: Alt1<F>;
-    }, that: () => Type<F, A>) => Fluent1<F, I, A>;
+    }, that: () => Type<F, A>) => Fluent1<A, F, I>;
     readonly compact: <A>(this: {
         I: Compactable1<F>;
         value: Type<F, Option<A>>;
-    }) => Fluent1<F, I, A>;
+    }) => Fluent1<A, F, I>;
     readonly separate: <A, B>(this: {
         I: Compactable1<F>;
         value: Type<F, Either<A, B>>;
@@ -364,14 +368,14 @@ export interface Fluent1<F extends URIS, I, A> {
     readonly filter: {
         <B extends A>(this: {
             I: Filterable1<F>;
-        }, refinement: Refinement<A, B>): Fluent1<F, I, B>;
+        }, refinement: Refinement<A, B>): Fluent1<B, F, I>;
         (this: {
             I: Filterable1<F>;
-        }, predicate: Predicate<A>): Fluent1<F, I, A>;
+        }, predicate: Predicate<A>): Fluent1<A, F, I>;
     };
     readonly filterMap: <B>(this: {
         I: Filterable1<F>;
-    }, f: (a: A) => Option<B>) => Fluent1<F, I, B>;
+    }, f: (a: A) => Option<B>) => Fluent1<B, F, I>;
     readonly partition: {
         <B extends A>(this: {
             I: Filterable1<F>;
@@ -386,15 +390,15 @@ export interface Fluent1<F extends URIS, I, A> {
     readonly filterWithIndex: {
         <Ix, B extends A>(this: {
             I: FilterableWithIndex1<F, Ix>;
-        }, refinement: RefinementWithIndex<Ix, A, B>): Fluent1<F, I, B>;
+        }, refinement: RefinementWithIndex<Ix, A, B>): Fluent1<B, F, I>;
         <Ix>(this: {
             I: FilterableWithIndex1<F, Ix>;
-        }, predicate: PredicateWithIndex<Ix, A>): Fluent1<F, I, A>;
+        }, predicate: PredicateWithIndex<Ix, A>): Fluent1<A, F, I>;
     };
     readonly filterMapWithIndex: {
         <Ix, B>(this: {
             I: FilterableWithIndex1<F, Ix>;
-        }, f: (i: Ix, a: A) => Option<B>): Fluent1<F, I, B>;
+        }, f: (i: Ix, a: A) => Option<B>): Fluent1<B, F, I>;
         <Ix, B extends A>(this: {
             I: FilterableWithIndex1<F, Ix>;
         }, predicate: RefinementWithIndex<Ix, A, B>): Separated<Type<F, A>, Type<F, B>>;
@@ -409,9 +413,11 @@ export interface Fluent1<F extends URIS, I, A> {
 /**
  * @since 2.0.0
  */
-export interface Fluent<F, I, A> {
+export interface Fluent<A, F, I> {
     readonly I: I;
     readonly value: HKT<F, A>;
+    readonly pipe: <B>(f: (fa: HKT<F, A>) => HKT<F, B>) => Fluent<F, I, B>;
+    readonly apply: <R>(f: (fa: HKT<F, A>) => R) => R;
     readonly show: (this: {
         I: Show<HKT<F, A>>;
     }) => string;
@@ -435,7 +441,7 @@ export interface Fluent<F, I, A> {
     }, fab: HKT<F, (a: A) => B>) => Fluent<F, I, B>;
     readonly apFirst: <B>(this: {
         I: Apply<F>;
-    }, that: HKT<F, B>) => Fluent<F, I, A>;
+    }, that: HKT<F, B>) => Fluent<A, F, I>;
     readonly apSecond: <B>(this: {
         I: Apply<F>;
     }, that: HKT<F, B>) => Fluent<F, I, B>;
@@ -445,7 +451,7 @@ export interface Fluent<F, I, A> {
     readonly flatten: <A>(this: {
         I: Chain<F>;
         value: HKT<F, HKT<F, A>>;
-    }) => Fluent<F, I, A>;
+    }) => Fluent<A, F, I>;
     readonly extend: <B>(this: {
         I: Extend<F>;
     }, f: (fa: HKT<F, A>) => B) => Fluent<F, I, B>;
@@ -472,11 +478,11 @@ export interface Fluent<F, I, A> {
     }, b: B, f: (i: Ix, a: A, b: B) => B) => B;
     readonly alt: (this: {
         I: Alt<F>;
-    }, that: () => HKT<F, A>) => Fluent<F, I, A>;
+    }, that: () => HKT<F, A>) => Fluent<A, F, I>;
     readonly compact: <A>(this: {
         I: Compactable<F>;
         value: HKT<F, Option<A>>;
-    }) => Fluent<F, I, A>;
+    }) => Fluent<A, F, I>;
     readonly separate: <A, B>(this: {
         I: Compactable<F>;
         value: HKT<F, Either<A, B>>;
@@ -487,7 +493,7 @@ export interface Fluent<F, I, A> {
         }, refinement: Refinement<A, B>): Fluent<F, I, B>;
         (this: {
             I: Filterable<F>;
-        }, predicate: Predicate<A>): Fluent<F, I, A>;
+        }, predicate: Predicate<A>): Fluent<A, F, I>;
     };
     readonly filterMap: <B>(this: {
         I: Filterable<F>;
@@ -509,7 +515,7 @@ export interface Fluent<F, I, A> {
         }, refinement: RefinementWithIndex<Ix, A, B>): Fluent<F, I, B>;
         <Ix>(this: {
             I: FilterableWithIndex<F, Ix>;
-        }, predicate: PredicateWithIndex<Ix, A>): Fluent<F, I, A>;
+        }, predicate: PredicateWithIndex<Ix, A>): Fluent<A, F, I>;
     };
     readonly filterMapWithIndex: {
         <Ix, B>(this: {
@@ -532,13 +538,13 @@ export interface Fluent<F, I, A> {
 export declare function fluent<F extends URIS2, I, L>(I: {
     URI: F;
     _L: L;
-} & I): <A>(fa: Type2<F, L, A>) => Fluent2<F, I, L, A>;
+} & I): <A>(fa: Type2<F, L, A>) => Fluent2<L, A, F, I>;
 export declare function fluent<F extends URIS2, I>(I: {
     URI: F;
-} & I): <L, A>(fa: Type2<F, L, A>) => Fluent2<F, I, L, A>;
+} & I): <L, A>(fa: Type2<F, L, A>) => Fluent2<L, A, F, I>;
 export declare function fluent<F extends URIS, I>(I: {
     URI: F;
-} & I): <A>(fa: Type<F, A>) => Fluent1<F, I, A>;
+} & I): <A>(fa: Type<F, A>) => Fluent1<A, F, I>;
 export declare function fluent<F, I>(I: {
     URI: F;
-} & I): <A>(fa: HKT<F, A>) => Fluent<F, I, A>;
+} & I): <A>(fa: HKT<F, A>) => Fluent<A, F, I>;
