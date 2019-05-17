@@ -1,41 +1,109 @@
 import * as assert from 'assert'
 import * as _ from '../src/Either'
 import { eqNumber, eqString } from '../src/Eq'
-import { identity } from '../src/function'
+import { identity, pipeOp as pipe } from '../src/function'
 import * as I from '../src/Identity'
 import { monoidString, monoidSum } from '../src/Monoid'
 import { none, option, some } from '../src/Option'
-import { semigroupSum } from '../src/Semigroup'
+import { semigroupSum, semigroupString } from '../src/Semigroup'
 import { showString } from '../src/Show'
+import { getMonoid as getArrayMonoid } from '../src/Array'
 
 describe('Either', () => {
   it('fold', () => {
     const f = (s: string) => `left${s.length}`
     const g = (s: string) => `right${s.length}`
-    assert.strictEqual(_.fold(_.left('abc'), f, g), 'left3')
-    assert.strictEqual(_.fold(_.right('abc'), f, g), 'right3')
+    const fold = _.fold(f, g)
+    assert.strictEqual(fold(_.left('abc')), 'left3')
+    assert.strictEqual(fold(_.right('abc')), 'right3')
   })
 
   it('getOrElse', () => {
-    assert.deepStrictEqual(_.getOrElse(_.right(12), () => 17), 12)
-    assert.deepStrictEqual(_.getOrElse(_.left('a'), () => 17), 17)
-    assert.deepStrictEqual(_.getOrElse(_.left('a'), (l: string) => l.length + 1), 2)
+    assert.deepStrictEqual(
+      pipe(
+        _.right(12),
+        _.getOrElse(() => 17)
+      ),
+      12
+    )
+    assert.deepStrictEqual(
+      pipe(
+        _.left('a'),
+        _.getOrElse(() => 17)
+      ),
+      17
+    )
+    assert.deepStrictEqual(
+      pipe(
+        _.left('a'),
+        _.getOrElse((l: string) => l.length + 1)
+      ),
+      2
+    )
+  })
+
+  it('elem', () => {
+    assert.deepStrictEqual(_.elem(eqNumber)(2, _.left('a')), false)
+    assert.deepStrictEqual(_.elem(eqNumber)(2, _.right(2)), true)
+    assert.deepStrictEqual(_.elem(eqNumber)(1, _.right(2)), false)
   })
 
   it('filterOrElse', () => {
     const gt10 = (n: number): boolean => n > 10
-    assert.deepStrictEqual(_.filterOrElse(_.right(12), gt10, () => -1), _.right(12))
-    assert.deepStrictEqual(_.filterOrElse(_.right(7), gt10, () => -1), _.left(-1))
-    assert.deepStrictEqual(_.filterOrElse(_.left(12), gt10, () => -1), _.left(12))
-    assert.deepStrictEqual(_.filterOrElse(_.right(7), gt10, n => `invalid ${n}`), _.left('invalid 7'))
+    assert.deepStrictEqual(
+      pipe(
+        _.right(12),
+        _.filterOrElse(gt10, () => -1)
+      ),
+      _.right(12)
+    )
+    assert.deepStrictEqual(
+      pipe(
+        _.right(7),
+        _.filterOrElse(gt10, () => -1)
+      ),
+      _.left(-1)
+    )
+    assert.deepStrictEqual(
+      pipe(
+        _.left(12),
+        _.filterOrElse(gt10, () => -1)
+      ),
+      _.left(12)
+    )
+    assert.deepStrictEqual(
+      pipe(
+        _.right(7),
+        _.filterOrElse(gt10, n => `invalid ${n}`)
+      ),
+      _.left('invalid 7')
+    )
 
     type Color = 'red' | 'blue'
     const isColor = (s: string): s is Color => s === 'red' || s === 'blue'
     const errorHandler = (s: string) => `invalid color ${s}`
 
-    assert.deepStrictEqual(_.filterOrElse(_.right('red'), isColor, errorHandler), _.right('red'))
-    assert.deepStrictEqual(_.filterOrElse(_.right('foo'), isColor, errorHandler), _.left('invalid color foo'))
-    assert.deepStrictEqual(_.filterOrElse(_.left('err'), isColor, errorHandler), _.left('err'))
+    assert.deepStrictEqual(
+      pipe(
+        _.right('red'),
+        _.filterOrElse(isColor, errorHandler)
+      ),
+      _.right('red')
+    )
+    assert.deepStrictEqual(
+      pipe(
+        _.right('foo'),
+        _.filterOrElse(isColor, errorHandler)
+      ),
+      _.left('invalid color foo')
+    )
+    assert.deepStrictEqual(
+      pipe(
+        _.left('err'),
+        _.filterOrElse(isColor, errorHandler)
+      ),
+      _.left('err')
+    )
   })
 
   it('isLeft', () => {
@@ -49,10 +117,41 @@ describe('Either', () => {
   })
 
   it('orElse', () => {
-    assert.deepStrictEqual(_.orElse(_.right(1), () => _.right(2)), _.right(1))
-    assert.deepStrictEqual(_.orElse(_.right(1), () => _.left('foo')), _.right(1))
-    assert.deepStrictEqual(_.orElse(_.left('foo'), () => _.right(1)), _.right(1))
-    assert.deepStrictEqual(_.orElse(_.left('foo'), () => _.left('bar')), _.left('bar'))
+    assert.deepStrictEqual(
+      pipe(
+        _.right(1),
+        _.orElse(() => _.right(2))
+      ),
+      _.right(1)
+    )
+    assert.deepStrictEqual(
+      pipe(
+        _.right(1),
+        _.orElse(() => _.left('foo') as _.Either<string, number>)
+      ),
+      _.right(1)
+    )
+    assert.deepStrictEqual(
+      pipe(
+        _.left('a'),
+        _.orElse(() => _.right(1))
+      ),
+      _.right(1)
+    )
+    assert.deepStrictEqual(
+      pipe(
+        _.left('a'),
+        _.orElse(() => _.left('b'))
+      ),
+      _.left('b')
+    )
+  })
+
+  it('alt', () => {
+    assert.deepStrictEqual(_.either.alt(_.right(1), () => _.right(2)), _.right(1))
+    assert.deepStrictEqual(_.either.alt(_.right(1), () => _.left('a')), _.right(1))
+    assert.deepStrictEqual(_.either.alt(_.left('a'), () => _.right(2)), _.right(2))
+    assert.deepStrictEqual(_.either.alt(_.left('a'), () => _.left('b')), _.left('b'))
   })
 
   it('swap', () => {
@@ -380,5 +479,42 @@ describe('Either', () => {
       assert.strictEqual(S.show(_.left('a')), `left("a")`)
       assert.strictEqual(S.show(_.right('a')), `right("a")`)
     })
+  })
+
+  it('getValidationMonad', () => {
+    const M = _.getValidationMonad(monoidString)
+    const f = (s: string) => _.right(s.length)
+    assert.deepStrictEqual(M.chain(_.right('abc'), f), _.right(3))
+    assert.deepStrictEqual(M.chain(_.left('a'), f), _.left('a'))
+    assert.deepStrictEqual(M.chain(_.left('a'), () => _.left('b')), _.left('a'))
+    assert.deepStrictEqual(M.of(1), _.right(1))
+    const double = (n: number) => n * 2
+    assert.deepStrictEqual(M.ap(_.right(double), _.right(1)), _.right(2))
+    assert.deepStrictEqual(M.ap(_.right(double), _.left('foo')), _.left('foo'))
+    assert.deepStrictEqual(M.ap(_.left('foo'), _.right(1)), _.left('foo'))
+    assert.deepStrictEqual(M.ap(_.left('foo'), _.left('bar')), _.left('foobar'))
+  })
+
+  it('getValidationSemigroup', () => {
+    const { concat } = _.getValidationSemigroup(semigroupString, semigroupString)
+    assert.deepStrictEqual(concat(_.right('a'), _.right('b')), _.right('ab'))
+    assert.deepStrictEqual(concat(_.right('a'), _.left('b')), _.left('b'))
+    assert.deepStrictEqual(concat(_.left('b'), _.right('a')), _.left('b'))
+    assert.deepStrictEqual(concat(_.left('a'), _.left('b')), _.left('ab'))
+  })
+
+  it('getValidationAlt', () => {
+    const alt = _.getValidationAlt(getArrayMonoid<number>())
+    assert.deepStrictEqual(alt.alt(_.left([1]), () => _.right('a')), _.right('a'))
+    assert.deepStrictEqual(alt.alt(_.right('a'), () => _.left([1])), _.right('a'))
+    assert.deepStrictEqual(alt.alt(_.left([1]), () => _.left([2])), _.left([1, 2]))
+  })
+
+  it('getValidationMonoid', () => {
+    const M = _.getValidationMonoid(monoidString, monoidSum)
+    assert.deepStrictEqual(M.concat(_.right(1), _.right(2)), _.right(3))
+    assert.deepStrictEqual(M.concat(_.right(1), _.left('foo')), _.left('foo'))
+    assert.deepStrictEqual(M.concat(_.left('foo'), _.right(1)), _.left('foo'))
+    assert.deepStrictEqual(M.concat(_.left('foo'), _.left('bar')), _.left('foobar'))
   })
 })

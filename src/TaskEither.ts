@@ -107,31 +107,38 @@ export function fromPredicate<L, A>(predicate: Predicate<A>, onFalse: (a: A) => 
 /**
  * @since 2.0.0
  */
-export const fold: <L, A, R>(ma: TaskEither<L, A>, onLeft: (l: L) => Task<R>, onRight: (a: A) => Task<R>) => Task<R> =
-  T.fold
+export const fold: <L, A, R>(
+  onLeft: (l: L) => Task<R>,
+  onRight: (a: A) => Task<R>
+) => (ma: TaskEither<L, A>) => Task<R> = T.fold
 
 /**
  * @since 2.0.0
  */
-export const getOrElse: <L, A>(ma: TaskEither<L, A>, f: (l: L) => Task<A>) => Task<A> = T.getOrElse
+export const getOrElse: <L, A>(f: (l: L) => Task<A>) => (ma: TaskEither<L, A>) => Task<A> = T.getOrElse
 
 /**
  * @since 2.0.0
  */
 export function filterOrElse<L, A, B extends A>(
-  ma: TaskEither<L, A>,
-  p: Refinement<A, B>,
+  predicate: Refinement<A, B>,
   zero: (a: A) => L
-): TaskEither<L, B>
-export function filterOrElse<L, A>(ma: TaskEither<L, A>, p: Predicate<A>, zero: (a: A) => L): TaskEither<L, A>
-export function filterOrElse<L, A>(ma: TaskEither<L, A>, p: Predicate<A>, zero: (a: A) => L): TaskEither<L, A> {
-  return task.map(ma, e => E.filterOrElse(e, p, zero))
+): (ma: TaskEither<L, A>) => TaskEither<L, B>
+export function filterOrElse<L, A>(
+  predicate: Predicate<A>,
+  zero: (a: A) => L
+): (ma: TaskEither<L, A>) => TaskEither<L, A>
+export function filterOrElse<L, A>(
+  predicate: Predicate<A>,
+  zero: (a: A) => L
+): (ma: TaskEither<L, A>) => TaskEither<L, A> {
+  return ma => task.map(ma, E.filterOrElse(predicate, zero))
 }
 
 /**
  * @since 2.0.0
  */
-export const orElse: <L, A, M>(ma: TaskEither<L, A>, f: (l: L) => TaskEither<M, A>) => TaskEither<M, A> = T.orElse
+export const orElse: <L, A, M>(f: (l: L) => TaskEither<M, A>) => (ma: TaskEither<L, A>) => TaskEither<M, A> = T.orElse
 
 /**
  * @since 2.0.0
@@ -248,7 +255,7 @@ export const taskEither: Monad2<URI> & Bifunctor2<URI> & Alt2<URI> & MonadIO2<UR
   of: right,
   ap: T.ap,
   chain: T.chain,
-  alt: orElse,
+  alt: T.alt,
   fromIO: rightIO,
   fromTask: rightTask
 }

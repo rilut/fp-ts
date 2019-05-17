@@ -54,7 +54,7 @@ export const asks: <E, A>(f: (e: E) => A) => Reader<E, A> = T.asks
  *
  * @since 2.0.0
  */
-export const local: <E, A, D>(ma: Reader<E, A>, f: (d: D) => E) => Reader<D, A> = T.local
+export const local: <D, E>(f: (d: D) => E) => <A>(ma: Reader<E, A>) => Reader<D, A> = T.local
 
 /**
  * @since 2.0.0
@@ -76,11 +76,11 @@ export function getMonoid<E, A>(M: Monoid<A>): Monoid<Reader<E, A>> {
 }
 
 function left<A, B, C>(pab: Reader<A, B>): Reader<E.Either<A, C>, E.Either<B, C>> {
-  return e => E.fold<A, C, E.Either<B, C>>(e, a => E.left(pab(a)), E.right)
+  return E.fold<A, C, E.Either<B, C>>(a => E.left(pab(a)), E.right)
 }
 
 function right<A, B, C>(pbc: Reader<B, C>): Reader<E.Either<A, B>, E.Either<A, C>> {
-  return e => E.fold<A, B, E.Either<A, C>>(e, E.left, b => E.right(pbc(b)))
+  return E.fold<A, B, E.Either<A, C>>(E.left, b => E.right(pbc(b)))
 }
 
 /**

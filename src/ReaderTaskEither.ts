@@ -1,7 +1,7 @@
 import { Alt3 } from './Alt'
 import { Bifunctor3 } from './Bifunctor'
 import { Either } from './Either'
-import { Predicate, Refinement } from './function'
+import { pipeOp, Predicate, Refinement } from './function'
 import { IO } from './IO'
 import { IOEither } from './IOEither'
 import { Monad3 } from './Monad'
@@ -148,31 +148,28 @@ export function fromPredicate<L, A>(
  * @since 2.0.0
  */
 export function fold<E, L, A, R>(
-  ma: ReaderTaskEither<E, L, A>,
   onLeft: (l: L) => Reader<E, Task<R>>,
   onRight: (a: A) => Reader<E, Task<R>>
-): Reader<E, Task<R>> {
-  return e => TE.fold(ma(e), l => onLeft(l)(e), a => onRight(a)(e))
+): (ma: ReaderTaskEither<E, L, A>) => Reader<E, Task<R>> {
+  return ma => e => pipeOp(ma(e), TE.fold(l => onLeft(l)(e), a => onRight(a)(e)))
 }
 
 /**
  * @since 2.0.0
  */
 export function getOrElse<E, L, A>(
-  ma: ReaderTaskEither<E, L, A>,
   onLeft: (l: L) => Reader<E, Task<A>>
-): Reader<E, Task<A>> {
-  return e => TE.getOrElse(ma(e), l => onLeft(l)(e))
+): (ma: ReaderTaskEither<E, L, A>) => Reader<E, Task<A>> {
+  return ma => e => TE.getOrElse<L, A>(l => onLeft(l)(e))(ma(e))
 }
 
 /**
  * @since 2.0.0
  */
 export function orElse<E, L, A, M>(
-  ma: ReaderTaskEither<E, L, A>,
   f: (l: L) => ReaderTaskEither<E, M, A>
-): ReaderTaskEither<E, M, A> {
-  return e => TE.orElse(ma(e), l => f(l)(e))
+): (ma: ReaderTaskEither<E, L, A>) => ReaderTaskEither<E, M, A> {
+  return ma => e => TE.orElse<L, A, M>(l => f(l)(e))(ma(e))
 }
 
 /**
@@ -188,7 +185,15 @@ export const asks: <E, A>(f: (e: E) => A) => ReaderTaskEither<E, never, A> = T.a
 /**
  * @since 2.0.0
  */
-export const local: <E, L, A, D>(ma: ReaderTaskEither<E, L, A>, f: (f: D) => E) => ReaderTaskEither<D, L, A> = T.local
+export const local: <D, E>(f: (f: D) => E) => <L, A>(ma: ReaderTaskEither<E, L, A>) => ReaderTaskEither<D, L, A> =
+  T.local
+
+const alt = <E, L, A>(
+  fx: ReaderTaskEither<E, L, A>,
+  fy: () => ReaderTaskEither<E, L, A>
+): ReaderTaskEither<E, L, A> => {
+  return e => TE.taskEither.alt(fx(e), () => fy()(e))
+}
 
 /**
  * @since 2.0.0
@@ -199,7 +204,7 @@ export const readerTaskEither: Monad3<URI> & Bifunctor3<URI> & Alt3<URI> & Monad
   of: right,
   ap: T.ap,
   chain: T.chain,
-  alt: orElse,
+  alt,
   bimap: (ma, f, g) => e => TE.taskEither.bimap(ma(e), f, g),
   mapLeft: (ma, f) => e => TE.taskEither.mapLeft(ma(e), f),
   fromIO: rightIO,

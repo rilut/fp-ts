@@ -95,7 +95,10 @@ Added in v2.0.0
 **Signature**
 
 ```ts
-export const  = ...
+export const fold: <L, A, R>(
+  onLeft: (l: L) => Task<R>,
+  onRight: (a: A) => Task<R>
+) => (ma: TaskEither<L, A>) => Task<R> = ...
 ```
 
 Added in v2.0.0
@@ -125,7 +128,7 @@ Added in v2.0.0
 **Signature**
 
 ```ts
-export const getOrElse: <L, A>(ma: TaskEither<L, A>, f: (l: L) => Task<A>) => Task<A> = ...
+export const getOrElse: <L, A>(f: (l: L) => Task<A>) => (ma: TaskEither<L, A>) => Task<A> = ...
 ```
 
 Added in v2.0.0
@@ -155,7 +158,7 @@ Added in v2.0.0
 **Signature**
 
 ```ts
-export const orElse: <L, A, M>(ma: TaskEither<L, A>, f: (l: L) => TaskEither<M, A>) => TaskEither<M, A> = ...
+export const orElse: <L, A, M>(f: (l: L) => TaskEither<M, A>) => (ma: TaskEither<L, A>) => TaskEither<M, A> = ...
 ```
 
 Added in v2.0.0
@@ -218,11 +221,13 @@ Added in v2.0.0
 
 ```ts
 export function filterOrElse<L, A, B extends A>(
-  ma: TaskEither<L, A>,
-  p: Refinement<A, B>,
+  predicate: Refinement<A, B>,
   zero: (a: A) => L
-): TaskEither<L, B>
-export function filterOrElse<L, A>(ma: TaskEither<L, A>, p: Predicate<A>, zero: (a: A) => L): TaskEither<L, A> { ... }
+): (ma: TaskEither<L, A>) => TaskEither<L, B>
+export function filterOrElse<L, A>(
+  predicate: Predicate<A>,
+  zero: (a: A) => L
+): (ma: TaskEither<L, A>) => TaskEither<L, A> { ... }
 ```
 
 Added in v2.0.0

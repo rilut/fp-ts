@@ -6,6 +6,7 @@ import { monoidString } from '../src/Monoid'
 import { semigroupSum } from '../src/Semigroup'
 import * as T from '../src/Task'
 import * as _ from '../src/TaskEither'
+import { pipeOp as pipe } from '../src/function'
 
 const delay = <A>(millis: number, a: A): T.Task<A> => T.delay(millis, T.task.of(a))
 
@@ -105,9 +106,15 @@ describe('TaskEither', () => {
   })
 
   it('orElse', async () => {
-    const e1 = await _.orElse(_.left('foo'), l => _.right(l.length))()
-    const e2 = await _.orElse(_.right(1), () => _.right(2))()
+    const e1 = await pipe(
+      _.left('foo'),
+      _.orElse(l => _.right(l.length))
+    )()
     assert.deepStrictEqual(e1, E.right(3))
+    const e2 = await pipe(
+      _.right(1),
+      _.orElse(() => _.right(2))
+    )()
     assert.deepStrictEqual(e2, E.right(1))
   })
 
@@ -241,15 +248,30 @@ describe('TaskEither', () => {
   it('filterOrElse', async () => {
     const isNumber = (u: string | number): u is number => typeof u === 'number'
 
-    const e1 = await _.filterOrElse(_.right(12), n => n > 10, () => 'bar')()
+    const e1 = await pipe(
+      _.right(12),
+      _.filterOrElse(n => n > 10, () => 'bar')
+    )()
     assert.deepStrictEqual(e1, E.right(12))
-    const e2 = await _.filterOrElse(_.right(7), n => n > 10, () => 'bar')()
+    const e2 = await pipe(
+      _.right(7),
+      _.filterOrElse(n => n > 10, () => 'bar')
+    )()
     assert.deepStrictEqual(e2, E.left('bar'))
-    const e3 = await _.filterOrElse(_.left('foo'), n => n > 10, () => 'bar')()
+    const e3 = await pipe(
+      _.left('foo'),
+      _.filterOrElse(n => n > 10, () => 'bar')
+    )()
     assert.deepStrictEqual(e3, E.left('foo'))
-    const e4 = await _.filterOrElse(_.right(7), n => n > 10, n => `invalid ${n}`)()
+    const e4 = await pipe(
+      _.right(7),
+      _.filterOrElse(n => n > 10, n => `invalid ${n}`)
+    )()
     assert.deepStrictEqual(e4, E.left('invalid 7'))
-    const e5 = await _.filterOrElse(_.right(12), isNumber, () => 'not a number')()
+    const e5 = await pipe(
+      _.right(12),
+      _.filterOrElse(isNumber, () => 'not a number')
+    )()
     assert.deepStrictEqual(e5, E.right(12))
   })
 

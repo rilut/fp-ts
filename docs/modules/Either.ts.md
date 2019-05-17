@@ -43,6 +43,7 @@ either.map(left(23), double) // left(23)
 - [URI (type alias)](#uri-type-alias)
 - [URI (constant)](#uri-constant)
 - [either (constant)](#either-constant)
+- [elem (function)](#elem-function)
 - [filterOrElse (function)](#filterorelse-function)
 - [fold (function)](#fold-function)
 - [fromNullable (function)](#fromnullable-function)
@@ -56,6 +57,11 @@ either.map(left(23), double) // left(23)
 - [getOrElse (function)](#getorelse-function)
 - [getSemigroup (function)](#getsemigroup-function)
 - [getShow (function)](#getshow-function)
+- [getValidationAlt (function)](#getvalidationalt-function)
+- [getValidationApplicative (function)](#getvalidationapplicative-function)
+- [getValidationMonad (function)](#getvalidationmonad-function)
+- [getValidationMonoid (function)](#getvalidationmonoid-function)
+- [getValidationSemigroup (function)](#getvalidationsemigroup-function)
 - [getWitherable (function)](#getwitherable-function)
 - [isLeft (function)](#isleft-function)
 - [isRight (function)](#isright-function)
@@ -142,17 +148,26 @@ export const either: Monad2<URI> &
 
 Added in v2.0.0
 
+# elem (function)
+
+**Signature**
+
+```ts
+export function elem<A>(E: Eq<A>): <L>(a: A, ma: Either<L, A>) => boolean { ... }
+```
+
+Added in v2.0.0
+
 # filterOrElse (function)
 
 **Signature**
 
 ```ts
 export function filterOrElse<L, A, B extends A>(
-  ma: Either<L, A>,
   refinement: Refinement<A, B>,
   zero: (a: A) => L
-): Either<L, B>
-export function filterOrElse<L, A>(ma: Either<L, A>, predicate: Predicate<A>, zero: (a: A) => L): Either<L, A> { ... }
+): (ma: Either<L, A>) => Either<L, B>
+export function filterOrElse<L, A>(predicate: Predicate<A>, zero: (a: A) => L): (ma: Either<L, A>) => Either<L, A> { ... }
 ```
 
 Added in v2.0.0
@@ -162,7 +177,7 @@ Added in v2.0.0
 **Signature**
 
 ```ts
-export function fold<L, A, R>(ma: Either<L, A>, onLeft: (l: L) => R, onRight: (a: A) => R): R { ... }
+export function fold<L, A, R>(onLeft: (l: L) => R, onRight: (a: A) => R): (ma: Either<L, A>) => R { ... }
 ```
 
 Added in v2.0.0
@@ -278,7 +293,7 @@ Added in v2.0.0
 **Signature**
 
 ```ts
-export function getOrElse<L, A>(ma: Either<L, A>, f: (l: L) => A): A { ... }
+export function getOrElse<L, A>(f: (l: L) => A): (ma: Either<L, A>) => A { ... }
 ```
 
 Added in v2.0.0
@@ -315,6 +330,60 @@ Added in v2.0.0
 
 ```ts
 export function getShow<L, A>(SL: Show<L>, SA: Show<A>): Show<Either<L, A>> { ... }
+```
+
+Added in v2.0.0
+
+# getValidationAlt (function)
+
+**Signature**
+
+```ts
+export function getValidationAlt<L>(S: Semigroup<L>): Alt2C<URI, L> { ... }
+```
+
+Added in v2.0.0
+
+# getValidationApplicative (function)
+
+**Signature**
+
+```ts
+export function getValidationApplicative<L>(
+  S: Semigroup<L>
+): Applicative2C<URI, L> & Foldable2C<URI, L> & Traversable2C<URI, L> & Bifunctor2C<URI, L> & Extend2C<URI, L> { ... }
+```
+
+# getValidationMonad (function)
+
+**Note**: This function is here just to avoid switching to / from `Either`
+
+**Signature**
+
+```ts
+export function getValidationMonad<L>(
+  S: Semigroup<L>
+): Monad2C<URI, L> & Foldable2C<URI, L> & Traversable2C<URI, L> & Bifunctor2C<URI, L> & Extend2C<URI, L> { ... }
+```
+
+Added in v2.0.0
+
+# getValidationMonoid (function)
+
+**Signature**
+
+```ts
+export function getValidationMonoid<L, A>(SL: Semigroup<L>, SA: Monoid<A>): Monoid<Either<L, A>> { ... }
+```
+
+Added in v2.0.0
+
+# getValidationSemigroup (function)
+
+**Signature**
+
+```ts
+export function getValidationSemigroup<L, A>(SL: Semigroup<L>, SA: Semigroup<A>): Semigroup<Either<L, A>> { ... }
 ```
 
 Added in v2.0.0
@@ -373,7 +442,7 @@ Added in v2.0.0
 **Signature**
 
 ```ts
-export function orElse<L, A, M>(ma: Either<L, A>, f: (l: L) => Either<M, A>): Either<M, A> { ... }
+export function orElse<L, A, M>(f: (l: L) => Either<M, A>): (ma: Either<L, A>) => Either<M, A> { ... }
 ```
 
 Added in v2.0.0

@@ -103,7 +103,7 @@ Added in v2.0.0
 **Signature**
 
 ```ts
-export const local: <E, L, A, D>(ma: ReaderTaskEither<E, L, A>, f: (f: D) => E) => ReaderTaskEither<D, L, A> = ...
+export const  = ...
 ```
 
 Added in v2.0.0
@@ -156,10 +156,9 @@ Added in v2.0.0
 
 ```ts
 export function fold<E, L, A, R>(
-  ma: ReaderTaskEither<E, L, A>,
   onLeft: (l: L) => Reader<E, Task<R>>,
   onRight: (a: A) => Reader<E, Task<R>>
-): Reader<E, Task<R>> { ... }
+): (ma: ReaderTaskEither<E, L, A>) => Reader<E, Task<R>> { ... }
 ```
 
 Added in v2.0.0
@@ -217,9 +216,8 @@ Added in v2.0.0
 
 ```ts
 export function getOrElse<E, L, A>(
-  ma: ReaderTaskEither<E, L, A>,
   onLeft: (l: L) => Reader<E, Task<A>>
-): Reader<E, Task<A>> { ... }
+): (ma: ReaderTaskEither<E, L, A>) => Reader<E, Task<A>> { ... }
 ```
 
 Added in v2.0.0
@@ -270,9 +268,8 @@ Added in v2.0.0
 
 ```ts
 export function orElse<E, L, A, M>(
-  ma: ReaderTaskEither<E, L, A>,
   f: (l: L) => ReaderTaskEither<E, M, A>
-): ReaderTaskEither<E, M, A> { ... }
+): (ma: ReaderTaskEither<E, L, A>) => ReaderTaskEither<E, M, A> { ... }
 ```
 
 Added in v2.0.0

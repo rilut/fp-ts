@@ -31,7 +31,7 @@ const fluent = F.fluent(option)
 describe('fluent', () => {
   it('apply', () => {
     const fluent = F.fluent(option)
-    assert.strictEqual(fluent(some(1)).apply(o => fold(o, () => 'none', a => `some(${a})`)), 'some(1)')
+    assert.strictEqual(fluent(some(1)).apply(fold(() => 'none', a => `some(${a})`)), 'some(1)')
   })
 
   it('pipe', () => {
@@ -46,8 +46,8 @@ describe('fluent', () => {
     const x: X = { a: { b: { c: 1 } } }
     assert.deepStrictEqual(
       fluent(fromNullable(x.a))
-        .pipe(o => mapNullable(o, x => x.b))
-        .apply(o => mapNullable(o, x => x.c)),
+        .pipe(mapNullable(x => x.b))
+        .apply(mapNullable(x => x.c)),
       some(1)
     )
   })

@@ -27,23 +27,23 @@
  * ```
  */
 
-import { Alt2 } from './Alt'
-import { Applicative } from './Applicative'
-import { Bifunctor2 } from './Bifunctor'
+import { Alt2, Alt2C } from './Alt'
+import { Applicative, Applicative2C } from './Applicative'
+import { Bifunctor2, Bifunctor2C } from './Bifunctor'
 import { ChainRec2, tailRec } from './ChainRec'
 import { Compactable2C, Separated } from './Compactable'
 import { Eq, fromEquals } from './Eq'
-import { Extend2 } from './Extend'
+import { Extend2, Extend2C } from './Extend'
 import { Filterable2C } from './Filterable'
-import { Foldable2 } from './Foldable'
+import { Foldable2, Foldable2C } from './Foldable'
 import { Lazy, phantom, Predicate, Refinement } from './function'
 import { HKT } from './HKT'
-import { Monad2 } from './Monad'
+import { Monad2, Monad2C } from './Monad'
 import { Monoid } from './Monoid'
 import { Option } from './Option'
 import { Semigroup } from './Semigroup'
 import { Show } from './Show'
-import { Traversable2 } from './Traversable'
+import { Traversable2, Traversable2C } from './Traversable'
 import { Witherable2C } from './Witherable'
 
 declare module './HKT' {
@@ -175,8 +175,8 @@ export function tryCatch<L, A>(f: Lazy<A>, onError: (e: unknown) => L): Either<L
 /**
  * @since 2.0.0
  */
-export function fold<L, A, R>(ma: Either<L, A>, onLeft: (l: L) => R, onRight: (a: A) => R): R {
-  return isLeft(ma) ? onLeft(ma.left) : onRight(ma.right)
+export function fold<L, A, R>(onLeft: (l: L) => R, onRight: (a: A) => R): (ma: Either<L, A>) => R {
+  return ma => (isLeft(ma) ? onLeft(ma.left) : onRight(ma.right))
 }
 
 /**
@@ -285,28 +285,34 @@ export function swap<L, A>(ma: Either<L, A>): Either<A, L> {
 /**
  * @since 2.0.0
  */
-export function orElse<L, A, M>(ma: Either<L, A>, f: (l: L) => Either<M, A>): Either<M, A> {
-  return isLeft(ma) ? f(ma.left) : ma
+export function orElse<L, A, M>(f: (l: L) => Either<M, A>): (ma: Either<L, A>) => Either<M, A> {
+  return ma => (isLeft(ma) ? f(ma.left) : ma)
 }
 
 /**
  * @since 2.0.0
  */
-export function getOrElse<L, A>(ma: Either<L, A>, f: (l: L) => A): A {
-  return isLeft(ma) ? f(ma.left) : ma.right
+export function getOrElse<L, A>(f: (l: L) => A): (ma: Either<L, A>) => A {
+  return ma => (isLeft(ma) ? f(ma.left) : ma.right)
+}
+
+/**
+ * @since 2.0.0
+ */
+export function elem<A>(E: Eq<A>): <L>(a: A, ma: Either<L, A>) => boolean {
+  return (a, ma) => (isLeft(ma) ? false : E.equals(a, ma.right))
 }
 
 /**
  * @since 2.0.0
  */
 export function filterOrElse<L, A, B extends A>(
-  ma: Either<L, A>,
   refinement: Refinement<A, B>,
   zero: (a: A) => L
-): Either<L, B>
-export function filterOrElse<L, A>(ma: Either<L, A>, predicate: Predicate<A>, zero: (a: A) => L): Either<L, A>
-export function filterOrElse<L, A>(ma: Either<L, A>, predicate: Predicate<A>, zero: (a: A) => L): Either<L, A> {
-  return isLeft(ma) ? ma : predicate(ma.right) ? ma : left(zero(ma.right))
+): (ma: Either<L, A>) => Either<L, B>
+export function filterOrElse<L, A>(predicate: Predicate<A>, zero: (a: A) => L): (ma: Either<L, A>) => Either<L, A>
+export function filterOrElse<L, A>(predicate: Predicate<A>, zero: (a: A) => L): (ma: Either<L, A>) => Either<L, A> {
+  return ma => (isLeft(ma) ? ma : predicate(ma.right) ? ma : left(zero(ma.right)))
 }
 
 /**
@@ -341,16 +347,12 @@ export function stringifyJSON<L>(u: unknown, onError: (reason: unknown) => L): E
   return tryCatch(() => JSON.stringify(u), onError)
 }
 
-//
-// instances
-//
-
 const map = <L, A, B>(ma: Either<L, A>, f: (a: A) => B): Either<L, B> => {
   return isLeft(ma) ? ma : right(f(ma.right))
 }
 
 const ap = <L, A, B>(mab: Either<L, (a: A) => B>, ma: Either<L, A>): Either<L, B> => {
-  return isLeft(mab) ? mab : fold<L, A, Either<L, B>>(ma, left, a => right(mab.right(a)))
+  return isLeft(mab) ? mab : isLeft(ma) ? ma : right(mab.right(ma.right))
 }
 
 const chain = <L, A, B>(ma: Either<L, A>, f: (a: A) => Either<L, B>): Either<L, B> => {
@@ -462,7 +464,8 @@ export function getFilterable<L>(M: Monoid<L>): Filterable2C<URI, L> {
     return isLeft(ma) ? ma : fromOption(f(ma.right), onNone)
   }
 
-  const filter = <A>(ma: Either<L, A>, p: Predicate<A>): Either<L, A> => filterOrElse(ma, p, () => M.empty)
+  const filter = <A>(ma: Either<L, A>, predicate: Predicate<A>): Either<L, A> =>
+    isLeft(ma) ? ma : predicate(ma.right) ? ma : left(M.empty)
 
   return {
     ...C,
@@ -511,6 +514,91 @@ export function getWitherable<L>(M: Monoid<L>): Witherable2C<URI, L> {
   }
 }
 
+export function getValidationApplicative<L>(
+  S: Semigroup<L>
+): Applicative2C<URI, L> & Foldable2C<URI, L> & Traversable2C<URI, L> & Bifunctor2C<URI, L> & Extend2C<URI, L> {
+  return {
+    URI,
+    _L: phantom,
+    map,
+    of: either.of,
+    ap: (mab, ma) =>
+      isLeft(mab)
+        ? isLeft(ma)
+          ? left(S.concat(mab.left, ma.left))
+          : mab
+        : isLeft(ma)
+        ? ma
+        : right(mab.right(ma.right)),
+    reduce: either.reduce,
+    foldMap: either.foldMap,
+    reduceRight: either.reduceRight,
+    traverse: either.traverse,
+    sequence: either.sequence,
+    extend: either.extend,
+    bimap: either.bimap,
+    mapLeft: either.mapLeft
+  }
+}
+
+/**
+ * **Note**: This function is here just to avoid switching to / from `Either`
+ *
+ * @since 2.0.0
+ */
+export function getValidationMonad<L>(
+  S: Semigroup<L>
+): Monad2C<URI, L> & Foldable2C<URI, L> & Traversable2C<URI, L> & Bifunctor2C<URI, L> & Extend2C<URI, L> {
+  return {
+    ...getValidationApplicative(S),
+    chain: (ma, f) => (isLeft(ma) ? ma : f(ma.right))
+  }
+}
+
+/**
+ * @since 2.0.0
+ */
+export function getValidationSemigroup<L, A>(SL: Semigroup<L>, SA: Semigroup<A>): Semigroup<Either<L, A>> {
+  return {
+    concat: (fx, fy) =>
+      isLeft(fx)
+        ? isLeft(fy)
+          ? left(SL.concat(fx.left, fy.left))
+          : fx
+        : isLeft(fy)
+        ? fy
+        : right(SA.concat(fx.right, fy.right))
+  }
+}
+
+/**
+ * @since 2.0.0
+ */
+export function getValidationMonoid<L, A>(SL: Semigroup<L>, SA: Monoid<A>): Monoid<Either<L, A>> {
+  return {
+    ...getValidationSemigroup(SL, SA),
+    empty: right(SA.empty)
+  }
+}
+
+/**
+ * @since 2.0.0
+ */
+export function getValidationAlt<L>(S: Semigroup<L>): Alt2C<URI, L> {
+  return {
+    URI,
+    _L: phantom,
+    map,
+    alt: (fx, f) => {
+      if (isRight(fx)) {
+        return fx
+      }
+      const fy = f()
+      return isLeft(fy) ? left(S.concat(fx.left, fy.left)) : fy
+    }
+  }
+}
+
 /**
  * @since 2.0.0
  */
@@ -533,7 +621,7 @@ export const either: Monad2<URI> &
   sequence,
   bimap,
   mapLeft: (ma, f) => (isLeft(ma) ? left(f(ma.left)) : ma),
-  alt: orElse,
+  alt: (fx, fy) => (isLeft(fx) ? fy() : fx),
   extend,
   chainRec
 }
