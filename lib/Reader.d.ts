@@ -41,7 +41,7 @@ export declare const asks: <E, A>(f: (e: E) => A) => Reader<E, A>;
  *
  * @since 2.0.0
  */
-export declare const local: <E, A, D>(ma: Reader<E, A>, f: (d: D) => E) => Reader<D, A>;
+export declare const local: <D, E>(f: (d: D) => E) => <A>(ma: Reader<E, A>) => Reader<D, A>;
 /**
  * @since 2.0.0
  */

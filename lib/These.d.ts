@@ -48,7 +48,7 @@ export declare function both<L, A>(left: L, right: A): These<L, A>;
 /**
  * @since 2.0.0
  */
-export declare function fold<L, A, R>(fa: These<L, A>, onLeft: (l: L) => R, onRight: (a: A) => R, onBoth: (l: L, a: A) => R): R;
+export declare function fold<L, A, R>(onLeft: (l: L) => R, onRight: (a: A) => R, onBoth: (l: L, a: A) => R): (fa: These<L, A>) => R;
 /**
  * @since 2.0.0
  */
@@ -70,13 +70,13 @@ export declare function getMonad<L>(S: Semigroup<L>): Monad2C<URI, L>;
  * @example
  * import { toTuple, left, right, both } from 'fp-ts/lib/These'
  *
- * assert.deepStrictEqual(toTuple(left('b'), 'a', 1), ['b', 1])
- * assert.deepStrictEqual(toTuple(right(2), 'a', 1), ['a', 2])
- * assert.deepStrictEqual(toTuple(both('b', 2), 'a', 1), ['b', 2])
+ * assert.deepStrictEqual(toTuple('a', 1)(left('b')), ['b', 1])
+ * assert.deepStrictEqual(toTuple('a', 1)(right(2)), ['a', 2])
+ * assert.deepStrictEqual(toTuple('a', 1)(both('b', 2)), ['b', 2])
  *
  * @since 2.0.0
  */
-export declare function toTuple<L, A>(fa: These<L, A>, l: L, a: A): [L, A];
+export declare function toTuple<L, A>(l: L, a: A): (fa: These<L, A>) => [L, A];
 /**
  * Returns an `L` value if possible
  *

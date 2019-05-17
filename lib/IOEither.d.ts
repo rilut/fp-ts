@@ -62,20 +62,20 @@ export declare function fromPredicate<L, A>(predicate: Predicate<A>, onFalse: (a
 /**
  * @since 2.0.0
  */
-export declare const fold: <L, A, R>(ma: IOEither<L, A>, onLeft: (l: L) => IO<R>, onRight: (a: A) => IO<R>) => IO<R>;
+export declare const fold: <L, A, R>(onLeft: (l: L) => IO<R>, onRight: (a: A) => IO<R>) => (ma: IOEither<L, A>) => IO<R>;
 /**
  * @since 2.0.0
  */
-export declare const getOrElse: <L, A>(ma: IOEither<L, A>, f: (l: L) => IO<A>) => IO<A>;
+export declare const getOrElse: <L, A>(f: (l: L) => IO<A>) => (ma: IOEither<L, A>) => IO<A>;
 /**
  * @since 2.0.0
  */
-export declare function filterOrElse<L, A, B extends A>(ma: IOEither<L, A>, p: Refinement<A, B>, zero: (a: A) => L): IOEither<L, B>;
-export declare function filterOrElse<L, A>(ma: IOEither<L, A>, p: Predicate<A>, zero: (a: A) => L): IOEither<L, A>;
+export declare function filterOrElse<L, A, B extends A>(p: Refinement<A, B>, zero: (a: A) => L): (ma: IOEither<L, A>) => IOEither<L, B>;
+export declare function filterOrElse<L, A>(p: Predicate<A>, zero: (a: A) => L): (ma: IOEither<L, A>) => IOEither<L, A>;
 /**
  * @since 2.0.0
  */
-export declare const orElse: <L, A, M>(ma: IOEither<L, A>, f: (l: L) => IOEither<M, A>) => IOEither<M, A>;
+export declare const orElse: <L, A, M>(f: (l: L) => IOEither<M, A>) => (ma: IOEither<L, A>) => IOEither<M, A>;
 /**
  * @since 2.0.0
  */

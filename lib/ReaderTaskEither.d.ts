@@ -91,15 +91,15 @@ export declare function fromPredicate<L, A>(predicate: Predicate<A>, onFalse: (a
 /**
  * @since 2.0.0
  */
-export declare function fold<E, L, A, R>(ma: ReaderTaskEither<E, L, A>, onLeft: (l: L) => Reader<E, Task<R>>, onRight: (a: A) => Reader<E, Task<R>>): Reader<E, Task<R>>;
+export declare function fold<E, L, A, R>(onLeft: (l: L) => Reader<E, Task<R>>, onRight: (a: A) => Reader<E, Task<R>>): (ma: ReaderTaskEither<E, L, A>) => Reader<E, Task<R>>;
 /**
  * @since 2.0.0
  */
-export declare function getOrElse<E, L, A>(ma: ReaderTaskEither<E, L, A>, onLeft: (l: L) => Reader<E, Task<A>>): Reader<E, Task<A>>;
+export declare function getOrElse<E, L, A>(onLeft: (l: L) => Reader<E, Task<A>>): (ma: ReaderTaskEither<E, L, A>) => Reader<E, Task<A>>;
 /**
  * @since 2.0.0
  */
-export declare function orElse<E, L, A, M>(ma: ReaderTaskEither<E, L, A>, f: (l: L) => ReaderTaskEither<E, M, A>): ReaderTaskEither<E, M, A>;
+export declare function orElse<E, L, A, M>(f: (l: L) => ReaderTaskEither<E, M, A>): (ma: ReaderTaskEither<E, L, A>) => ReaderTaskEither<E, M, A>;
 /**
  * @since 2.0.0
  */
@@ -111,7 +111,7 @@ export declare const asks: <E, A>(f: (e: E) => A) => ReaderTaskEither<E, never, 
 /**
  * @since 2.0.0
  */
-export declare const local: <E, L, A, D>(ma: ReaderTaskEither<E, L, A>, f: (f: D) => E) => ReaderTaskEither<D, L, A>;
+export declare const local: <D, E>(f: (f: D) => E) => <L, A>(ma: ReaderTaskEither<E, L, A>) => ReaderTaskEither<D, L, A>;
 /**
  * @since 2.0.0
  */

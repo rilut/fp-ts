@@ -37,13 +37,13 @@ export declare function listen<P, A>(wa: Traced<P, A>): Traced<P, [A, P]>;
  *
  * @since 2.0.0
  */
-export declare function listens<P, A, B>(wa: Traced<P, A>, f: (p: P) => B): Traced<P, [A, B]>;
+export declare function listens<P, B>(f: (p: P) => B): <A>(wa: Traced<P, A>) => Traced<P, [A, B]>;
 /**
  * Apply a function to the current position
  *
  * @since 2.0.0
  */
-export declare function censor<P, A>(wa: Traced<P, A>, f: (p: P) => P): Traced<P, A>;
+export declare function censor<P>(f: (p: P) => P): <A>(wa: Traced<P, A>) => Traced<P, A>;
 /**
  * @since 2.0.0
  */

@@ -102,6 +102,18 @@ export declare function pipe<A, B, C, D, E, F, G, H, I, J>(ab: (a: A) => B, bc: 
 /**
  * @since 2.0.0
  */
+export declare function pipeOp<A, B>(a: A, ab: (a: A) => B): B;
+export declare function pipeOp<A, B, C>(a: A, ab: (a: A) => B, bc: (b: B) => C): C;
+export declare function pipeOp<A, B, C, D>(a: A, ab: (a: A) => B, bc: (b: B) => C, cd: (c: C) => D): D;
+export declare function pipeOp<A, B, C, D, E>(a: A, ab: (a: A) => B, bc: (b: B) => C, cd: (c: C) => D, de: (d: D) => E): E;
+export declare function pipeOp<A, B, C, D, E, F>(a: A, ab: (a: A) => B, bc: (b: B) => C, cd: (c: C) => D, de: (d: D) => E, ef: (e: E) => F): F;
+export declare function pipeOp<A, B, C, D, E, F, G>(a: A, ab: (a: A) => B, bc: (b: B) => C, cd: (c: C) => D, de: (d: D) => E, ef: (e: E) => F, fg: (f: F) => G): G;
+export declare function pipeOp<A, B, C, D, E, F, G, H>(a: A, ab: (a: A) => B, bc: (b: B) => C, cd: (c: C) => D, de: (d: D) => E, ef: (e: E) => F, fg: (f: F) => G, gh: (g: G) => H): H;
+export declare function pipeOp<A, B, C, D, E, F, G, H, I>(a: A, ab: (a: A) => B, bc: (b: B) => C, cd: (c: C) => D, de: (d: D) => E, ef: (e: E) => F, fg: (f: F) => G, gh: (g: G) => H, hi: (h: H) => I): I;
+export declare function pipeOp<A, B, C, D, E, F, G, H, I, J>(a: A, ab: (a: A) => B, bc: (b: B) => C, cd: (c: C) => D, de: (d: D) => E, ef: (e: E) => F, fg: (f: F) => G, gh: (g: G) => H, hi: (h: H) => I, ij: (i: I) => J): J;
+/**
+ * @since 2.0.0
+ */
 export declare function tuple<T extends Array<any>>(...t: T): T;
 /**
  * @since 2.0.0

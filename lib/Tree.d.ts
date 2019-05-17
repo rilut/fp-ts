@@ -50,7 +50,7 @@ export declare const tree: Monad1<URI> & Foldable1<URI> & Traversable1<URI> & Co
  *
  * @since 2.0.0
  */
-export declare const drawForest: (forest: Tree<string>[]) => string;
+export declare function drawForest(forest: Forest<string>): string;
 /**
  * Neat 2-dimensional drawing of a tree
  *
@@ -73,19 +73,19 @@ export declare const drawForest: (forest: Tree<string>[]) => string;
  *
  * @since 2.0.0
  */
-export declare const drawTree: (tree: Tree<string>) => string;
+export declare function drawTree(tree: Tree<string>): string;
 /**
  * Build a tree from a seed value
  *
  * @since 2.0.0
  */
-export declare const unfoldTree: <A, B>(b: B, f: (b: B) => [A, B[]]) => Tree<A>;
+export declare function unfoldTree<A, B>(b: B, f: (b: B) => [A, Array<B>]): Tree<A>;
 /**
  * Build a tree from a seed value
  *
  * @since 2.0.0
  */
-export declare const unfoldForest: <A, B>(bs: B[], f: (b: B) => [A, B[]]) => Tree<A>[];
+export declare function unfoldForest<A, B>(bs: Array<B>, f: (b: B) => [A, Array<B>]): Forest<A>;
 /**
  * Monadic tree builder, in depth-first order
  *

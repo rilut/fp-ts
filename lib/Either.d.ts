@@ -26,21 +26,22 @@
  * either.map(left(23), double)  // left(23)
  * ```
  */
-import { Alt2 } from './Alt';
-import { Bifunctor2 } from './Bifunctor';
+import { Alt2, Alt2C } from './Alt';
+import { Applicative2C } from './Applicative';
+import { Bifunctor2, Bifunctor2C } from './Bifunctor';
 import { ChainRec2 } from './ChainRec';
 import { Compactable2C } from './Compactable';
 import { Eq } from './Eq';
-import { Extend2 } from './Extend';
+import { Extend2, Extend2C } from './Extend';
 import { Filterable2C } from './Filterable';
-import { Foldable2 } from './Foldable';
+import { Foldable2, Foldable2C } from './Foldable';
 import { Lazy, Predicate, Refinement } from './function';
-import { Monad2 } from './Monad';
+import { Monad2, Monad2C } from './Monad';
 import { Monoid } from './Monoid';
 import { Option } from './Option';
 import { Semigroup } from './Semigroup';
 import { Show } from './Show';
-import { Traversable2 } from './Traversable';
+import { Traversable2, Traversable2C } from './Traversable';
 import { Witherable2C } from './Witherable';
 declare module './HKT' {
     interface URI2HKT2<L, A> {
@@ -136,7 +137,7 @@ export declare function tryCatch<L, A>(f: Lazy<A>, onError: (e: unknown) => L): 
 /**
  * @since 2.0.0
  */
-export declare function fold<L, A, R>(ma: Either<L, A>, onLeft: (l: L) => R, onRight: (a: A) => R): R;
+export declare function fold<L, A, R>(onLeft: (l: L) => R, onRight: (a: A) => R): (ma: Either<L, A>) => R;
 /**
  * @since 2.0.0
  */
@@ -203,16 +204,20 @@ export declare function swap<L, A>(ma: Either<L, A>): Either<A, L>;
 /**
  * @since 2.0.0
  */
-export declare function orElse<L, A, M>(ma: Either<L, A>, f: (l: L) => Either<M, A>): Either<M, A>;
+export declare function orElse<L, A, M>(f: (l: L) => Either<M, A>): (ma: Either<L, A>) => Either<M, A>;
 /**
  * @since 2.0.0
  */
-export declare function getOrElse<L, A>(ma: Either<L, A>, f: (l: L) => A): A;
+export declare function getOrElse<L, A>(f: (l: L) => A): (ma: Either<L, A>) => A;
 /**
  * @since 2.0.0
  */
-export declare function filterOrElse<L, A, B extends A>(ma: Either<L, A>, refinement: Refinement<A, B>, zero: (a: A) => L): Either<L, B>;
-export declare function filterOrElse<L, A>(ma: Either<L, A>, predicate: Predicate<A>, zero: (a: A) => L): Either<L, A>;
+export declare function elem<A>(E: Eq<A>): <L>(a: A, ma: Either<L, A>) => boolean;
+/**
+ * @since 2.0.0
+ */
+export declare function filterOrElse<L, A, B extends A>(refinement: Refinement<A, B>, zero: (a: A) => L): (ma: Either<L, A>) => Either<L, B>;
+export declare function filterOrElse<L, A>(predicate: Predicate<A>, zero: (a: A) => L): (ma: Either<L, A>) => Either<L, A>;
 /**
  * Converts a JavaScript Object Notation (JSON) string into an object.
  *
@@ -257,6 +262,25 @@ export declare function getFilterable<L>(M: Monoid<L>): Filterable2C<URI, L>;
  * @since 2.0.0
  */
 export declare function getWitherable<L>(M: Monoid<L>): Witherable2C<URI, L>;
+export declare function getValidationApplicative<L>(S: Semigroup<L>): Applicative2C<URI, L> & Foldable2C<URI, L> & Traversable2C<URI, L> & Bifunctor2C<URI, L> & Extend2C<URI, L>;
+/**
+ * **Note**: This function is here just to avoid switching to / from `Either`
+ *
+ * @since 2.0.0
+ */
+export declare function getValidationMonad<L>(S: Semigroup<L>): Monad2C<URI, L> & Foldable2C<URI, L> & Traversable2C<URI, L> & Bifunctor2C<URI, L> & Extend2C<URI, L>;
+/**
+ * @since 2.0.0
+ */
+export declare function getValidationSemigroup<L, A>(SL: Semigroup<L>, SA: Semigroup<A>): Semigroup<Either<L, A>>;
+/**
+ * @since 2.0.0
+ */
+export declare function getValidationMonoid<L, A>(SL: Semigroup<L>, SA: Monoid<A>): Monoid<Either<L, A>>;
+/**
+ * @since 2.0.0
+ */
+export declare function getValidationAlt<L>(S: Semigroup<L>): Alt2C<URI, L>;
 /**
  * @since 2.0.0
  */
