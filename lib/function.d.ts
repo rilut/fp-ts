@@ -102,6 +102,7 @@ export declare function pipe<A, B, C, D, E, F, G, H, I, J>(ab: (a: A) => B, bc: 
 /**
  * @since 2.0.0
  */
+export declare function pipeOp<A>(a: A): A;
 export declare function pipeOp<A, B>(a: A, ab: (a: A) => B): B;
 export declare function pipeOp<A, B, C>(a: A, ab: (a: A) => B, bc: (b: B) => C): C;
 export declare function pipeOp<A, B, C, D>(a: A, ab: (a: A) => B, bc: (b: B) => C, cd: (c: C) => D): D;

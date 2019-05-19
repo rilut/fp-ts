@@ -24,19 +24,19 @@ export declare type URI = typeof URI;
 /**
  * @since 2.0.0
  */
-export interface Both<L, A> {
+export interface Both<E, A> {
     readonly _tag: 'Both';
-    readonly left: L;
+    readonly left: E;
     readonly right: A;
 }
 /**
  * @since 2.0.0
  */
-export declare type These<L, A> = Either<L, A> | Both<L, A>;
+export declare type These<E, A> = Either<E, A> | Both<E, A>;
 /**
  * @since 2.0.0
  */
-export declare function left<L>(left: L): These<L, never>;
+export declare function left<E>(left: E): These<E, never>;
 /**
  * @since 2.0.0
  */
@@ -44,27 +44,27 @@ export declare function right<A>(right: A): These<never, A>;
 /**
  * @since 2.0.0
  */
-export declare function both<L, A>(left: L, right: A): These<L, A>;
+export declare function both<E, A>(left: E, right: A): These<E, A>;
 /**
  * @since 2.0.0
  */
-export declare function fold<L, A, R>(onLeft: (l: L) => R, onRight: (a: A) => R, onBoth: (l: L, a: A) => R): (fa: These<L, A>) => R;
+export declare function fold<E, A, R>(onLeft: (e: E) => R, onRight: (a: A) => R, onBoth: (e: E, a: A) => R): (fa: These<E, A>) => R;
 /**
  * @since 2.0.0
  */
-export declare function getShow<L, A>(SL: Show<L>, SA: Show<A>): Show<These<L, A>>;
+export declare function getShow<E, A>(SE: Show<E>, SA: Show<A>): Show<These<E, A>>;
 /**
  * @since 2.0.0
  */
-export declare function getEq<L, A>(SL: Eq<L>, SA: Eq<A>): Eq<These<L, A>>;
+export declare function getEq<E, A>(EE: Eq<E>, EA: Eq<A>): Eq<These<E, A>>;
 /**
  * @since 2.0.0
  */
-export declare function getSemigroup<L, A>(SL: Semigroup<L>, SA: Semigroup<A>): Semigroup<These<L, A>>;
+export declare function getSemigroup<E, A>(SL: Semigroup<E>, SA: Semigroup<A>): Semigroup<These<E, A>>;
 /**
  * @since 2.0.0
  */
-export declare function getMonad<L>(S: Semigroup<L>): Monad2C<URI, L>;
+export declare function getMonad<E>(S: Semigroup<E>): Monad2C<URI, E>;
 /**
  *
  * @example
@@ -76,7 +76,7 @@ export declare function getMonad<L>(S: Semigroup<L>): Monad2C<URI, L>;
  *
  * @since 2.0.0
  */
-export declare function toTuple<L, A>(l: L, a: A): (fa: These<L, A>) => [L, A];
+export declare function toTuple<E, A>(e: E, a: A): (fa: These<E, A>) => [E, A];
 /**
  * Returns an `L` value if possible
  *
@@ -90,7 +90,7 @@ export declare function toTuple<L, A>(l: L, a: A): (fa: These<L, A>) => [L, A];
  *
  * @since 2.0.0
  */
-export declare function getLeft<L, A>(fa: These<L, A>): Option<L>;
+export declare function getLeft<E, A>(fa: These<E, A>): Option<E>;
 /**
  * Returns an `A` value if possible
  *
@@ -104,25 +104,25 @@ export declare function getLeft<L, A>(fa: These<L, A>): Option<L>;
  *
  * @since 2.0.0
  */
-export declare function getRight<L, A>(fa: These<L, A>): Option<A>;
+export declare function getRight<E, A>(fa: These<E, A>): Option<A>;
 /**
  * Returns `true` if the these is an instance of `Left`, `false` otherwise
  *
  * @since 2.0.0
  */
-export declare function isLeft<L, A>(fa: These<L, A>): fa is Left<L>;
+export declare function isLeft<E, A>(fa: These<E, A>): fa is Left<E>;
 /**
  * Returns `true` if the these is an instance of `Right`, `false` otherwise
  *
  * @since 2.0.0
  */
-export declare function isRight<L, A>(fa: These<L, A>): fa is Right<A>;
+export declare function isRight<E, A>(fa: These<E, A>): fa is Right<A>;
 /**
  * Returns `true` if the these is an instance of `Both`, `false` otherwise
  *
  * @since 2.0.0
  */
-export declare function isBoth<L, A>(fa: These<L, A>): fa is Both<L, A>;
+export declare function isBoth<E, A>(fa: These<E, A>): fa is Both<E, A>;
 /**
  * @example
  * import { leftOrBoth, left, both } from 'fp-ts/lib/These'
@@ -133,7 +133,7 @@ export declare function isBoth<L, A>(fa: These<L, A>): fa is Both<L, A>;
  *
  * @since 2.0.0
  */
-export declare function leftOrBoth<L, A>(defaultLeft: L, ma: Option<A>): These<L, A>;
+export declare function leftOrBoth<E, A>(defaultLeft: E, ma: Option<A>): These<E, A>;
 /**
  * @example
  * import { rightOrBoth, right, both } from 'fp-ts/lib/These'
@@ -144,7 +144,7 @@ export declare function leftOrBoth<L, A>(defaultLeft: L, ma: Option<A>): These<L
  *
  * @since 2.0.0
  */
-export declare function rightOrBoth<L, A>(defaultRight: A, ml: Option<L>): These<L, A>;
+export declare function rightOrBoth<E, A>(defaultRight: A, me: Option<E>): These<E, A>;
 /**
  * Returns the `L` value if and only if the value is constructed with `Left`
  *
@@ -158,7 +158,7 @@ export declare function rightOrBoth<L, A>(defaultRight: A, ml: Option<L>): These
  *
  * @since 2.0.0
  */
-export declare function getLeftOnly<L, A>(fa: These<L, A>): Option<L>;
+export declare function getLeftOnly<E, A>(fa: These<E, A>): Option<E>;
 /**
  * Returns the `A` value if and only if the value is constructed with `Right`
  *
@@ -173,7 +173,7 @@ export declare function getLeftOnly<L, A>(fa: These<L, A>): Option<L>;
  *
  * @since 2.0.0
  */
-export declare function getRightOnly<L, A>(fa: These<L, A>): Option<A>;
+export declare function getRightOnly<E, A>(fa: These<E, A>): Option<A>;
 /**
  * Takes a pair of `Option`s and attempts to create a `These` from them
  *
@@ -188,7 +188,7 @@ export declare function getRightOnly<L, A>(fa: These<L, A>): Option<A>;
  *
  * @since 2.0.0
  */
-export declare function fromOptions<L, A>(fl: Option<L>, fa: Option<A>): Option<These<L, A>>;
+export declare function fromOptions<E, A>(fe: Option<E>, fa: Option<A>): Option<These<E, A>>;
 /**
  * @since 2.0.0
  */

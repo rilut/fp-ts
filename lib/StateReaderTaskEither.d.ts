@@ -25,29 +25,29 @@ export declare type URI = typeof URI;
 /**
  * @since 2.0.0
  */
-export interface StateReaderTaskEither<S, E, L, A> {
-    (s: S): ReaderTaskEither<E, L, [A, S]>;
+export interface StateReaderTaskEither<S, R, E, A> {
+    (s: S): ReaderTaskEither<R, E, [A, S]>;
 }
 /**
  * @since 2.0.0
  */
-export declare function run<S, E, L, A>(ma: StateReaderTaskEither<S, E, L, A>, s: S, e: E): Promise<Either<L, [A, S]>>;
+export declare function run<S, R, E, A>(ma: StateReaderTaskEither<S, R, E, A>, s: S, r: R): Promise<Either<E, [A, S]>>;
 /**
  * Run a computation in the `StateReaderTaskEither` monad, discarding the final state
  *
  * @since 2.0.0
  */
-export declare const evalState: <S, E, L, A>(ma: StateReaderTaskEither<S, E, L, A>, s: S) => ReaderTaskEither<E, L, A>;
+export declare const evalState: <S, R, E, A>(ma: StateReaderTaskEither<S, R, E, A>, s: S) => ReaderTaskEither<R, E, A>;
 /**
  * Run a computation in the `StateReaderTaskEither` monad discarding the result
  *
  * @since 2.0.0
  */
-export declare const execState: <S, E, L, A>(ma: StateReaderTaskEither<S, E, L, A>, s: S) => ReaderTaskEither<E, L, S>;
+export declare const execState: <S, R, E, A>(ma: StateReaderTaskEither<S, R, E, A>, s: S) => ReaderTaskEither<R, E, S>;
 /**
  * @since 2.0.0
  */
-export declare function left<S, L>(l: L): StateReaderTaskEither<S, unknown, L, never>;
+export declare function left<S, E>(e: E): StateReaderTaskEither<S, unknown, E, never>;
 /**
  * @since 2.0.0
  */
@@ -59,31 +59,31 @@ export declare function rightTask<S, A>(ma: Task<A>): StateReaderTaskEither<S, u
 /**
  * @since 2.0.0
  */
-export declare function leftTask<S, L>(ma: Task<L>): StateReaderTaskEither<S, unknown, L, never>;
+export declare function leftTask<S, E>(me: Task<E>): StateReaderTaskEither<S, unknown, E, never>;
 /**
  * @since 2.0.0
  */
-export declare function fromTaskEither<S, L, A>(ma: TaskEither<L, A>): StateReaderTaskEither<S, unknown, L, A>;
+export declare function fromTaskEither<S, E, A>(ma: TaskEither<E, A>): StateReaderTaskEither<S, unknown, E, A>;
 /**
  * @since 2.0.0
  */
-export declare function rightReader<S, E, A>(ma: Reader<E, A>): StateReaderTaskEither<S, E, never, A>;
+export declare function rightReader<S, R, A>(ma: Reader<R, A>): StateReaderTaskEither<S, R, never, A>;
 /**
  * @since 2.0.0
  */
-export declare function leftReader<S, E, L>(ml: Reader<E, L>): StateReaderTaskEither<S, E, L, never>;
+export declare function leftReader<S, R, E>(me: Reader<R, E>): StateReaderTaskEither<S, R, E, never>;
 /**
  * @since 2.0.0
  */
-export declare function fromIOEither<S, L, A>(ma: IOEither<L, A>): StateReaderTaskEither<S, unknown, L, A>;
+export declare function fromIOEither<S, E, A>(ma: IOEither<E, A>): StateReaderTaskEither<S, unknown, E, A>;
 /**
  * @since 2.0.0
  */
-export declare function fromEither<S, L, A>(ma: Either<L, A>): StateReaderTaskEither<S, unknown, L, A>;
+export declare function fromEither<S, E, A>(ma: Either<E, A>): StateReaderTaskEither<S, unknown, E, A>;
 /**
  * @since 2.0.0
  */
-export declare function fromOption<S, L, A>(ma: Option<A>, onNone: () => L): StateReaderTaskEither<S, unknown, L, A>;
+export declare function fromOption<S, E, A>(ma: Option<A>, onNone: () => E): StateReaderTaskEither<S, unknown, E, A>;
 /**
  * @since 2.0.0
  */
@@ -91,7 +91,7 @@ export declare function rightIO<S, A>(ma: IO<A>): StateReaderTaskEither<S, unkno
 /**
  * @since 2.0.0
  */
-export declare function leftIO<S, L>(ml: IO<L>): StateReaderTaskEither<S, unknown, L, never>;
+export declare function leftIO<S, E>(me: IO<E>): StateReaderTaskEither<S, unknown, E, never>;
 /**
  * @since 2.0.0
  */
@@ -99,11 +99,11 @@ export declare const rightState: <S, A>(ma: State<S, A>) => StateReaderTaskEithe
 /**
  * @since 2.0.0
  */
-export declare function leftState<S, L>(ml: State<S, L>): StateReaderTaskEither<S, unknown, L, never>;
+export declare function leftState<S, E>(me: State<S, E>): StateReaderTaskEither<S, unknown, E, never>;
 /**
  * @since 2.0.0
  */
-export declare const fromReaderTaskEither: <S, E, L, A>(ma: ReaderTaskEither<E, L, A>) => StateReaderTaskEither<S, E, L, A>;
+export declare const fromReaderTaskEither: <S, R, E, A>(ma: ReaderTaskEither<R, E, A>) => StateReaderTaskEither<S, R, E, A>;
 /**
  * Get the current state
  *

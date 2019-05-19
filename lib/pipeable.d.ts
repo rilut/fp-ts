@@ -52,48 +52,53 @@ export interface PipeableFunctorWithIndex3<F extends URIS3, I> extends PipeableF
     readonly mapWithIndex: <A, B>(f: (i: I, a: A) => B) => <U, L>(fa: Type3<F, U, L, A>) => Type3<F, U, L, B>;
 }
 export interface PipeableApply<F> extends PipeableFunctor<F> {
-    readonly ap: <A, B>(fab: HKT<F, (a: A) => B>) => (fa: HKT<F, A>) => HKT<F, B>;
+    readonly ap: <A>(fa: HKT<F, A>) => <B>(fab: HKT<F, (a: A) => B>) => HKT<F, B>;
     readonly apFirst: <B>(fb: HKT<F, B>) => <A>(fa: HKT<F, A>) => HKT<F, A>;
     readonly apSecond: <B>(fb: HKT<F, B>) => <A>(fa: HKT<F, A>) => HKT<F, B>;
 }
 export interface PipeableApply1<F extends URIS> extends PipeableFunctor1<F> {
-    readonly ap: <A, B>(fab: Type<F, (a: A) => B>) => (fa: Type<F, A>) => Type<F, B>;
+    readonly ap: <A>(fa: Type<F, A>) => <B>(fab: Type<F, (a: A) => B>) => Type<F, B>;
     readonly apFirst: <B>(fb: Type<F, B>) => <A>(fa: Type<F, A>) => Type<F, A>;
     readonly apSecond: <B>(fb: Type<F, B>) => <A>(fa: Type<F, A>) => Type<F, B>;
 }
 export interface PipeableApply2<F extends URIS2> extends PipeableFunctor2<F> {
-    readonly ap: <L, A, B>(fab: Type2<F, L, (a: A) => B>) => (fa: Type2<F, L, A>) => Type2<F, L, B>;
+    readonly ap: <L, A>(fa: Type2<F, L, A>) => <B>(fab: Type2<F, L, (a: A) => B>) => Type2<F, L, B>;
     readonly apFirst: <L, B>(fb: Type2<F, L, B>) => <A>(fa: Type2<F, L, A>) => Type2<F, L, A>;
     readonly apSecond: <L, B>(fb: Type2<F, L, B>) => <A>(fa: Type2<F, L, A>) => Type2<F, L, B>;
 }
 export interface PipeableApply2C<F extends URIS2, L> extends PipeableFunctor2C<F, L> {
-    readonly ap: <A, B>(fab: Type2<F, L, (a: A) => B>) => (fa: Type2<F, L, A>) => Type2<F, L, B>;
+    readonly ap: <A>(fa: Type2<F, L, A>) => <B>(fab: Type2<F, L, (a: A) => B>) => Type2<F, L, B>;
     readonly apFirst: <A>(fb: Type2<F, L, A>) => <B>(fb: Type2<F, L, B>) => Type2<F, L, A>;
     readonly apSecond: <A>(fb: Type2<F, L, A>) => <B>(fb: Type2<F, L, B>) => Type2<F, L, B>;
 }
 export interface PipeableApply3<F extends URIS3> extends PipeableFunctor3<F> {
-    readonly ap: <U, L, A, B>(fab: Type3<F, U, L, (a: A) => B>) => (fa: Type3<F, U, L, A>) => Type3<F, U, L, B>;
+    readonly ap: <U, L, A>(fa: Type3<F, U, L, A>) => <B>(fab: Type3<F, U, L, (a: A) => B>) => Type3<F, U, L, B>;
     readonly apFirst: <U, L, B>(fb: Type3<F, U, L, B>) => <A>(fa: Type3<F, U, L, A>) => Type3<F, U, L, A>;
     readonly apSecond: <U, L, B>(fb: Type3<F, U, L, B>) => <A>(fa: Type3<F, U, L, A>) => Type3<F, U, L, B>;
 }
 export interface PipeableChain<F> extends PipeableApply<F> {
     readonly chain: <A, B>(f: (a: A) => HKT<F, B>) => (ma: HKT<F, A>) => HKT<F, B>;
+    readonly chainFirst: <A, B>(f: (a: A) => HKT<F, B>) => (ma: HKT<F, A>) => HKT<F, A>;
     readonly flatten: <A>(mma: HKT<F, HKT<F, A>>) => HKT<F, A>;
 }
 export interface PipeableChain1<F extends URIS> extends PipeableApply1<F> {
     readonly chain: <A, B>(f: (a: A) => Type<F, B>) => (ma: Type<F, A>) => Type<F, B>;
+    readonly chainFirst: <A, B>(f: (a: A) => Type<F, B>) => (ma: Type<F, A>) => Type<F, A>;
     readonly flatten: <A>(mma: Type<F, Type<F, A>>) => Type<F, A>;
 }
 export interface PipeableChain2<F extends URIS2> extends PipeableApply2<F> {
     readonly chain: <L, A, B>(f: (a: A) => Type2<F, L, B>) => (ma: Type2<F, L, A>) => Type2<F, L, B>;
+    readonly chainFirst: <L, A, B>(f: (a: A) => Type2<F, L, B>) => (ma: Type2<F, L, A>) => Type2<F, L, A>;
     readonly flatten: <L, A>(mma: Type2<F, L, Type2<F, L, A>>) => Type2<F, L, A>;
 }
 export interface PipeableChain2C<F extends URIS2, L> extends PipeableApply2C<F, L> {
     readonly chain: <A, B>(f: (a: A) => Type2<F, L, B>) => (ma: Type2<F, L, A>) => Type2<F, L, B>;
+    readonly chainFirst: <A, B>(f: (a: A) => Type2<F, L, B>) => (ma: Type2<F, L, A>) => Type2<F, L, A>;
     readonly flatten: <A>(mma: Type2<F, L, Type2<F, L, A>>) => Type2<F, L, A>;
 }
 export interface PipeableChain3<F extends URIS3> extends PipeableApply3<F> {
     readonly chain: <U, L, A, B>(f: (a: A) => Type3<F, U, L, B>) => (ma: Type3<F, U, L, A>) => Type3<F, U, L, B>;
+    readonly chainFirst: <U, L, A, B>(f: (a: A) => Type3<F, U, L, B>) => (ma: Type3<F, U, L, A>) => Type3<F, U, L, A>;
     readonly flatten: <U, L, A>(mma: Type3<F, U, L, Type3<F, U, L, A>>) => Type3<F, U, L, A>;
 }
 export interface PipeableExtend<F> extends PipeableFunctor<F> {

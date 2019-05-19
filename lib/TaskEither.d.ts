@@ -1,6 +1,6 @@
 /**
- * @file `TaskEither<L, A>` represents an asynchronous computation that either yields a value of type `A` or fails yielding an
- * error of type `L`. If you want to represent an asynchronous computation that never fails, please see `Task`.
+ * @file `TaskEither<E, A>` represents an asynchronous computation that either yields a value of type `A` or fails yielding an
+ * error of type `E`. If you want to represent an asynchronous computation that never fails, please see `Task`.
  */
 import { Alt2 } from './Alt';
 import { Bifunctor2 } from './Bifunctor';
@@ -31,12 +31,12 @@ export declare type URI = typeof URI;
 /**
  * @since 2.0.0
  */
-export interface TaskEither<L, A> extends Task<E.Either<L, A>> {
+export interface TaskEither<E, A> extends Task<E.Either<E, A>> {
 }
 /**
  * @since 2.0.0
  */
-export declare const left: <L>(l: L) => TaskEither<L, never>;
+export declare const left: <E>(e: E) => TaskEither<E, never>;
 /**
  * @since 2.0.0
  */
@@ -48,7 +48,7 @@ export declare function rightIO<A>(ma: IO<A>): TaskEither<never, A>;
 /**
  * @since 2.0.0
  */
-export declare function leftIO<L>(ml: IO<L>): TaskEither<L, never>;
+export declare function leftIO<E>(me: IO<E>): TaskEither<E, never>;
 /**
  * @since 2.0.0
  */
@@ -56,61 +56,61 @@ export declare const rightTask: <A>(ma: Task<A>) => TaskEither<never, A>;
 /**
  * @since 2.0.0
  */
-export declare const leftTask: <L>(ml: Task<L>) => TaskEither<L, never>;
+export declare const leftTask: <E>(me: Task<E>) => TaskEither<E, never>;
 /**
  * @since 2.0.0
  */
-export declare const fromEither: <L, A>(ma: E.Either<L, A>) => TaskEither<L, A>;
+export declare const fromEither: <E, A>(ma: E.Either<E, A>) => TaskEither<E, A>;
 /**
  * @since 2.0.0
  */
-export declare function fromOption<L, A>(ma: Option<A>, onNone: () => L): TaskEither<L, A>;
+export declare function fromOption<E, A>(ma: Option<A>, onNone: () => E): TaskEither<E, A>;
 /**
  * @since 2.0.0
  */
-export declare const fromIOEither: <L, A>(fa: IOEither<L, A>) => TaskEither<L, A>;
+export declare const fromIOEither: <E, A>(fa: IOEither<E, A>) => TaskEither<E, A>;
 /**
  * @since 2.0.0
  */
-export declare function fromPredicate<L, A, B extends A>(predicate: Refinement<A, B>, onFalse: (a: A) => L): (a: A) => TaskEither<L, B>;
-export declare function fromPredicate<L, A>(predicate: Predicate<A>, onFalse: (a: A) => L): (a: A) => TaskEither<L, A>;
+export declare function fromPredicate<E, A, B extends A>(predicate: Refinement<A, B>, onFalse: (a: A) => E): (a: A) => TaskEither<E, B>;
+export declare function fromPredicate<E, A>(predicate: Predicate<A>, onFalse: (a: A) => E): (a: A) => TaskEither<E, A>;
 /**
  * @since 2.0.0
  */
-export declare const fold: <L, A, R>(onLeft: (l: L) => Task<R>, onRight: (a: A) => Task<R>) => (ma: TaskEither<L, A>) => Task<R>;
+export declare const fold: <E, A, R>(onLeft: (e: E) => Task<R>, onRight: (a: A) => Task<R>) => (ma: TaskEither<E, A>) => Task<R>;
 /**
  * @since 2.0.0
  */
-export declare const getOrElse: <L, A>(f: (l: L) => Task<A>) => (ma: TaskEither<L, A>) => Task<A>;
+export declare const getOrElse: <E, A>(f: (e: E) => Task<A>) => (ma: TaskEither<E, A>) => Task<A>;
 /**
  * @since 2.0.0
  */
-export declare function filterOrElse<L, A, B extends A>(predicate: Refinement<A, B>, zero: (a: A) => L): (ma: TaskEither<L, A>) => TaskEither<L, B>;
-export declare function filterOrElse<L, A>(predicate: Predicate<A>, zero: (a: A) => L): (ma: TaskEither<L, A>) => TaskEither<L, A>;
+export declare function filterOrElse<E, A, B extends A>(predicate: Refinement<A, B>, zero: (a: A) => E): (ma: TaskEither<E, A>) => TaskEither<E, B>;
+export declare function filterOrElse<E, A>(predicate: Predicate<A>, zero: (a: A) => E): (ma: TaskEither<E, A>) => TaskEither<E, A>;
 /**
  * @since 2.0.0
  */
-export declare const orElse: <L, A, M>(f: (l: L) => TaskEither<M, A>) => (ma: TaskEither<L, A>) => TaskEither<M, A>;
+export declare const orElse: <E, A, M>(f: (e: E) => TaskEither<M, A>) => (ma: TaskEither<E, A>) => TaskEither<M, A>;
 /**
  * @since 2.0.0
  */
-export declare const swap: <L, A>(ma: TaskEither<L, A>) => TaskEither<A, L>;
+export declare const swap: <E, A>(ma: TaskEither<E, A>) => TaskEither<A, E>;
 /**
  * @since 2.0.0
  */
-export declare function getSemigroup<L, A>(S: Semigroup<A>): Semigroup<TaskEither<L, A>>;
+export declare function getSemigroup<E, A>(S: Semigroup<A>): Semigroup<TaskEither<E, A>>;
 /**
  * @since 2.0.0
  */
-export declare function getApplySemigroup<L, A>(S: Semigroup<A>): Semigroup<TaskEither<L, A>>;
+export declare function getApplySemigroup<E, A>(S: Semigroup<A>): Semigroup<TaskEither<E, A>>;
 /**
  * @since 2.0.0
  */
-export declare function getApplyMonoid<L, A>(M: Monoid<A>): Monoid<TaskEither<L, A>>;
+export declare function getApplyMonoid<E, A>(M: Monoid<A>): Monoid<TaskEither<E, A>>;
 /**
  * @since 2.0.0
  */
-export declare function tryCatch<L, A>(f: Lazy<Promise<A>>, onRejected: (reason: unknown) => L): TaskEither<L, A>;
+export declare function tryCatch<E, A>(f: Lazy<Promise<A>>, onRejected: (reason: unknown) => E): TaskEither<E, A>;
 /**
  * Make sure that a resource is cleaned up in the event of an exception. The
  * release action is called regardless of whether the body action throws or
@@ -118,7 +118,7 @@ export declare function tryCatch<L, A>(f: Lazy<Promise<A>>, onRejected: (reason:
  *
  * @since 2.0.0
  */
-export declare const bracket: <L, A, B>(acquire: TaskEither<L, A>, use: (a: A) => TaskEither<L, B>, release: (a: A, e: E.Either<L, B>) => TaskEither<L, void>) => TaskEither<L, B>;
+export declare const bracket: <E, A, B>(acquire: TaskEither<E, A>, use: (a: A) => TaskEither<E, B>, release: (a: A, e: E.Either<E, B>) => TaskEither<E, void>) => TaskEither<E, B>;
 /**
  * Convert a node style callback function to one returning a `TaskEither`
  *

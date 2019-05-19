@@ -59,9 +59,9 @@ export declare type URI = typeof URI;
 /**
  * @since 2.0.0
  */
-export interface Left<L> {
+export interface Left<E> {
     readonly _tag: 'Left';
-    readonly left: L;
+    readonly left: E;
 }
 /**
  * @since 2.0.0
@@ -73,14 +73,14 @@ export interface Right<A> {
 /**
  * @since 2.0.0
  */
-export declare type Either<L, A> = Left<L> | Right<A>;
+export declare type Either<E, A> = Left<E> | Right<A>;
 /**
  * Constructs a new `Either` holding a `Left` value. This usually represents a failure, due to the right-bias of this
  * structure
  *
  * @since 2.0.0
  */
-export declare function left<L>(l: L): Either<L, never>;
+export declare function left<E>(e: E): Either<E, never>;
 /**
  * Constructs a new `Either` holding a `Right` value. This usually represents a successful value due to the right bias
  * of this structure
@@ -91,19 +91,19 @@ export declare function right<A>(a: A): Either<never, A>;
 /**
  * @since 2.0.0
  */
-export declare function fromOption<L, A>(ma: Option<A>, onNone: () => L): Either<L, A>;
+export declare function fromOption<E, A>(ma: Option<A>, onNone: () => E): Either<E, A>;
 /**
  * @since 2.0.0
  */
-export declare function fromPredicate<L, A, B extends A>(predicate: Refinement<A, B>, onFalse: (a: A) => L): (a: A) => Either<L, B>;
-export declare function fromPredicate<L, A>(predicate: Predicate<A>, onFalse: (a: A) => L): (a: A) => Either<L, A>;
+export declare function fromPredicate<E, A, B extends A>(predicate: Refinement<A, B>, onFalse: (a: A) => E): (a: A) => Either<E, B>;
+export declare function fromPredicate<E, A>(predicate: Predicate<A>, onFalse: (a: A) => E): (a: A) => Either<E, A>;
 /**
  * Takes a default and a nullable value, if the value is not nully, turn it into a `Right`, if the value is nully use
  * the provided default as a `Left`
  *
  * @since 2.0.0
  */
-export declare function fromNullable<L, A>(a: A | null | undefined, l: L): Either<L, A>;
+export declare function fromNullable<E, A>(a: A | null | undefined, e: E): Either<E, A>;
 /**
  * Default value for the `onError` argument of `tryCatch`
  *
@@ -133,19 +133,19 @@ export declare function toError(e: unknown): Error;
  *
  * @since 2.0.0
  */
-export declare function tryCatch<L, A>(f: Lazy<A>, onError: (e: unknown) => L): Either<L, A>;
+export declare function tryCatch<E, A>(f: Lazy<A>, onError: (e: unknown) => E): Either<E, A>;
 /**
  * @since 2.0.0
  */
-export declare function fold<L, A, R>(onLeft: (l: L) => R, onRight: (a: A) => R): (ma: Either<L, A>) => R;
+export declare function fold<E, A, R>(onLeft: (e: E) => R, onRight: (a: A) => R): (ma: Either<E, A>) => R;
 /**
  * @since 2.0.0
  */
-export declare function getShow<L, A>(SL: Show<L>, SA: Show<A>): Show<Either<L, A>>;
+export declare function getShow<E, A>(SE: Show<E>, SA: Show<A>): Show<Either<E, A>>;
 /**
  * @since 2.0.0
  */
-export declare function getEq<L, A>(SL: Eq<L>, SA: Eq<A>): Eq<Either<L, A>>;
+export declare function getEq<E, A>(EL: Eq<E>, EA: Eq<A>): Eq<Either<E, A>>;
 /**
  * Semigroup returning the left-most non-`Left` value. If both operands are `Right`s then the inner values are
  * appended using the provided `Semigroup`
@@ -163,7 +163,7 @@ export declare function getEq<L, A>(SL: Eq<L>, SA: Eq<A>): Eq<Either<L, A>>;
  *
  * @since 2.0.0
  */
-export declare function getSemigroup<L, A>(S: Semigroup<A>): Semigroup<Either<L, A>>;
+export declare function getSemigroup<E, A>(S: Semigroup<A>): Semigroup<Either<E, A>>;
 /**
  * `Apply` semigroup
  *
@@ -180,44 +180,44 @@ export declare function getSemigroup<L, A>(S: Semigroup<A>): Semigroup<Either<L,
  *
  * @since 2.0.0
  */
-export declare function getApplySemigroup<L, A>(S: Semigroup<A>): Semigroup<Either<L, A>>;
+export declare function getApplySemigroup<E, A>(S: Semigroup<A>): Semigroup<Either<E, A>>;
 /**
  * @since 2.0.0
  */
-export declare function getApplyMonoid<L, A>(M: Monoid<A>): Monoid<Either<L, A>>;
+export declare function getApplyMonoid<E, A>(M: Monoid<A>): Monoid<Either<E, A>>;
 /**
  * Returns `true` if the either is an instance of `Left`, `false` otherwise
  *
  * @since 2.0.0
  */
-export declare function isLeft<L, A>(ma: Either<L, A>): ma is Left<L>;
+export declare function isLeft<E, A>(ma: Either<E, A>): ma is Left<E>;
 /**
  * Returns `true` if the either is an instance of `Right`, `false` otherwise
  *
  * @since 2.0.0
  */
-export declare function isRight<L, A>(ma: Either<L, A>): ma is Right<A>;
+export declare function isRight<E, A>(ma: Either<E, A>): ma is Right<A>;
 /**
  * @since 2.0.0
  */
-export declare function swap<L, A>(ma: Either<L, A>): Either<A, L>;
+export declare function swap<E, A>(ma: Either<E, A>): Either<A, E>;
 /**
  * @since 2.0.0
  */
-export declare function orElse<L, A, M>(f: (l: L) => Either<M, A>): (ma: Either<L, A>) => Either<M, A>;
+export declare function orElse<E, A, M>(f: (e: E) => Either<M, A>): (ma: Either<E, A>) => Either<M, A>;
 /**
  * @since 2.0.0
  */
-export declare function getOrElse<L, A>(f: (l: L) => A): (ma: Either<L, A>) => A;
+export declare function getOrElse<E, A>(f: (e: E) => A): (ma: Either<E, A>) => A;
 /**
  * @since 2.0.0
  */
-export declare function elem<A>(E: Eq<A>): <L>(a: A, ma: Either<L, A>) => boolean;
+export declare function elem<A>(E: Eq<A>): <E>(a: A, ma: Either<E, A>) => boolean;
 /**
  * @since 2.0.0
  */
-export declare function filterOrElse<L, A, B extends A>(refinement: Refinement<A, B>, zero: (a: A) => L): (ma: Either<L, A>) => Either<L, B>;
-export declare function filterOrElse<L, A>(predicate: Predicate<A>, zero: (a: A) => L): (ma: Either<L, A>) => Either<L, A>;
+export declare function filterOrElse<E, A, B extends A>(refinement: Refinement<A, B>, zero: (a: A) => E): (ma: Either<E, A>) => Either<E, B>;
+export declare function filterOrElse<E, A>(predicate: Predicate<A>, zero: (a: A) => E): (ma: Either<E, A>) => Either<E, A>;
 /**
  * Converts a JavaScript Object Notation (JSON) string into an object.
  *
@@ -229,7 +229,7 @@ export declare function filterOrElse<L, A>(predicate: Predicate<A>, zero: (a: A)
  *
  * @since 2.0.0
  */
-export declare function parseJSON<L>(s: string, onError: (reason: unknown) => L): Either<L, unknown>;
+export declare function parseJSON<E>(s: string, onError: (reason: unknown) => E): Either<E, unknown>;
 /**
  * Converts a JavaScript value to a JavaScript Object Notation (JSON) string.
  *
@@ -243,44 +243,44 @@ export declare function parseJSON<L>(s: string, onError: (reason: unknown) => L)
  *
  * @since 2.0.0
  */
-export declare function stringifyJSON<L>(u: unknown, onError: (reason: unknown) => L): Either<L, string>;
+export declare function stringifyJSON<E>(u: unknown, onError: (reason: unknown) => E): Either<E, string>;
 /**
  * Builds `Compactable` instance for `Either` given a `Monoid` for the left side
  *
  * @since 2.0.0
  */
-export declare function getCompactable<L>(M: Monoid<L>): Compactable2C<URI, L>;
+export declare function getCompactable<E>(M: Monoid<E>): Compactable2C<URI, E>;
 /**
  * Builds `Filterable` instance for `Either` given a `Monoid` for the left side
  *
  * @since 2.0.0
  */
-export declare function getFilterable<L>(M: Monoid<L>): Filterable2C<URI, L>;
+export declare function getFilterable<E>(M: Monoid<E>): Filterable2C<URI, E>;
 /**
  * Builds `Witherable` instance for `Either` given `Monoid` for the left side
  *
  * @since 2.0.0
  */
-export declare function getWitherable<L>(M: Monoid<L>): Witherable2C<URI, L>;
-export declare function getValidationApplicative<L>(S: Semigroup<L>): Applicative2C<URI, L> & Foldable2C<URI, L> & Traversable2C<URI, L> & Bifunctor2C<URI, L> & Extend2C<URI, L>;
+export declare function getWitherable<E>(M: Monoid<E>): Witherable2C<URI, E>;
+export declare function getValidationApplicative<E>(S: Semigroup<E>): Applicative2C<URI, E> & Foldable2C<URI, E> & Traversable2C<URI, E> & Bifunctor2C<URI, E> & Extend2C<URI, E>;
 /**
  * **Note**: This function is here just to avoid switching to / from `Either`
  *
  * @since 2.0.0
  */
-export declare function getValidationMonad<L>(S: Semigroup<L>): Monad2C<URI, L> & Foldable2C<URI, L> & Traversable2C<URI, L> & Bifunctor2C<URI, L> & Extend2C<URI, L>;
+export declare function getValidationMonad<E>(S: Semigroup<E>): Monad2C<URI, E> & Foldable2C<URI, E> & Traversable2C<URI, E> & Bifunctor2C<URI, E> & Extend2C<URI, E>;
 /**
  * @since 2.0.0
  */
-export declare function getValidationSemigroup<L, A>(SL: Semigroup<L>, SA: Semigroup<A>): Semigroup<Either<L, A>>;
+export declare function getValidationSemigroup<E, A>(SE: Semigroup<E>, SA: Semigroup<A>): Semigroup<Either<E, A>>;
 /**
  * @since 2.0.0
  */
-export declare function getValidationMonoid<L, A>(SL: Semigroup<L>, SA: Monoid<A>): Monoid<Either<L, A>>;
+export declare function getValidationMonoid<E, A>(SE: Semigroup<E>, SA: Monoid<A>): Monoid<Either<E, A>>;
 /**
  * @since 2.0.0
  */
-export declare function getValidationAlt<L>(S: Semigroup<L>): Alt2C<URI, L>;
+export declare function getValidationAlt<E>(S: Semigroup<E>): Alt2C<URI, E>;
 /**
  * @since 2.0.0
  */

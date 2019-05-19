@@ -1,6 +1,6 @@
 /**
- * @file `IOEither<L, A>` represents a synchronous computation that either yields a value of type `A` or fails yielding an
- * error of type `L`. If you want to represent a synchronous computation that never fails, please see `IO`.
+ * @file `IOEither<E, A>` represents a synchronous computation that either yields a value of type `A` or fails yielding an
+ * error of type `E`. If you want to represent a synchronous computation that never fails, please see `IO`.
  */
 import { Alt2 } from './Alt';
 import { Bifunctor2 } from './Bifunctor';
@@ -28,7 +28,7 @@ export declare type URI = typeof URI;
 /**
  * @since 2.0.0
  */
-export interface IOEither<L, A> extends IO<E.Either<L, A>> {
+export interface IOEither<E, A> extends IO<E.Either<E, A>> {
 }
 /**
  * @since 2.0.0
@@ -45,59 +45,59 @@ export declare const rightIO: <A>(ma: IO<A>) => IOEither<never, A>;
 /**
  * @since 2.0.0
  */
-export declare const leftIO: <L>(ml: IO<L>) => IOEither<L, never>;
+export declare const leftIO: <E>(me: IO<E>) => IOEither<E, never>;
 /**
  * @since 2.0.0
  */
-export declare const fromEither: <L, A>(ma: E.Either<L, A>) => IOEither<L, A>;
+export declare const fromEither: <E, A>(ma: E.Either<E, A>) => IOEither<E, A>;
 /**
  * @since 2.0.0
  */
-export declare function fromOption<L, A>(ma: Option<A>, onNone: () => L): IOEither<L, A>;
+export declare function fromOption<E, A>(ma: Option<A>, onNone: () => E): IOEither<E, A>;
 /**
  * @since 2.0.0
  */
-export declare function fromPredicate<L, A, B extends A>(predicate: Refinement<A, B>, onFalse: (a: A) => L): (a: A) => IOEither<L, B>;
-export declare function fromPredicate<L, A>(predicate: Predicate<A>, onFalse: (a: A) => L): (a: A) => IOEither<L, A>;
+export declare function fromPredicate<E, A, B extends A>(predicate: Refinement<A, B>, onFalse: (a: A) => E): (a: A) => IOEither<E, B>;
+export declare function fromPredicate<E, A>(predicate: Predicate<A>, onFalse: (a: A) => E): (a: A) => IOEither<E, A>;
 /**
  * @since 2.0.0
  */
-export declare const fold: <L, A, R>(onLeft: (l: L) => IO<R>, onRight: (a: A) => IO<R>) => (ma: IOEither<L, A>) => IO<R>;
+export declare const fold: <E, A, R>(onLeft: (e: E) => IO<R>, onRight: (a: A) => IO<R>) => (ma: IOEither<E, A>) => IO<R>;
 /**
  * @since 2.0.0
  */
-export declare const getOrElse: <L, A>(f: (l: L) => IO<A>) => (ma: IOEither<L, A>) => IO<A>;
+export declare const getOrElse: <E, A>(f: (e: E) => IO<A>) => (ma: IOEither<E, A>) => IO<A>;
 /**
  * @since 2.0.0
  */
-export declare function filterOrElse<L, A, B extends A>(p: Refinement<A, B>, zero: (a: A) => L): (ma: IOEither<L, A>) => IOEither<L, B>;
-export declare function filterOrElse<L, A>(p: Predicate<A>, zero: (a: A) => L): (ma: IOEither<L, A>) => IOEither<L, A>;
+export declare function filterOrElse<E, A, B extends A>(p: Refinement<A, B>, zero: (a: A) => E): (ma: IOEither<E, A>) => IOEither<E, B>;
+export declare function filterOrElse<E, A>(p: Predicate<A>, zero: (a: A) => E): (ma: IOEither<E, A>) => IOEither<E, A>;
 /**
  * @since 2.0.0
  */
-export declare const orElse: <L, A, M>(f: (l: L) => IOEither<M, A>) => (ma: IOEither<L, A>) => IOEither<M, A>;
+export declare const orElse: <E, A, M>(f: (e: E) => IOEither<M, A>) => (ma: IOEither<E, A>) => IOEither<M, A>;
 /**
  * @since 2.0.0
  */
-export declare const swap: <L, A>(ma: IOEither<L, A>) => IOEither<A, L>;
+export declare const swap: <E, A>(ma: IOEither<E, A>) => IOEither<A, E>;
 /**
  * @since 2.0.0
  */
-export declare function getSemigroup<L, A>(S: Semigroup<A>): Semigroup<IOEither<L, A>>;
+export declare function getSemigroup<E, A>(S: Semigroup<A>): Semigroup<IOEither<E, A>>;
 /**
  * @since 2.0.0
  */
-export declare function getApplySemigroup<L, A>(S: Semigroup<A>): Semigroup<IOEither<L, A>>;
+export declare function getApplySemigroup<E, A>(S: Semigroup<A>): Semigroup<IOEither<E, A>>;
 /**
  * @since 2.0.0
  */
-export declare function getApplyMonoid<L, A>(M: Monoid<A>): Monoid<IOEither<L, A>>;
+export declare function getApplyMonoid<E, A>(M: Monoid<A>): Monoid<IOEither<E, A>>;
 /**
  * Constructs a new `IOEither` from a function that performs a side effect and might throw
  *
  * @since 2.0.0
  */
-export declare function tryCatch<L, A>(f: Lazy<A>, onError: (reason: unknown) => L): IOEither<L, A>;
+export declare function tryCatch<E, A>(f: Lazy<A>, onError: (reason: unknown) => E): IOEither<E, A>;
 /**
  * Make sure that a resource is cleaned up in the event of an exception. The
  * release action is called regardless of whether the body action throws or
@@ -105,7 +105,7 @@ export declare function tryCatch<L, A>(f: Lazy<A>, onError: (reason: unknown) =>
  *
  * @since 2.0.0
  */
-export declare const bracket: <L, A, B>(acquire: IOEither<L, A>, use: (a: A) => IOEither<L, B>, release: (a: A, e: E.Either<L, B>) => IOEither<L, void>) => IOEither<L, B>;
+export declare const bracket: <E, A, B>(acquire: IOEither<E, A>, use: (a: A) => IOEither<E, B>, release: (a: A, e: E.Either<E, B>) => IOEither<E, void>) => IOEither<E, B>;
 /**
  * @since 2.0.0
  */

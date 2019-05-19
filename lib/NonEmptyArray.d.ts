@@ -30,17 +30,13 @@ export declare type URI = typeof URI;
  */
 export interface NonEmptyArray<A> extends Array<A> {
     0: A;
-    map: <B>(f: (a: A, index: number, nea: NonEmptyArray<A>) => B) => NonEmptyArray<B>;
-    concat: (as: Array<A>) => NonEmptyArray<A>;
+    map<B>(f: (a: A, index: number, nea: NonEmptyArray<A>) => B): NonEmptyArray<B>;
+    concat(as: Array<A>): NonEmptyArray<A>;
 }
 /**
  * @since 2.0.0
  */
 export declare function getShow<A>(S: Show<A>): Show<NonEmptyArray<A>>;
-/**
- * @since 2.0.0
- */
-export declare function make<A>(head: A, tail?: Array<A>): NonEmptyArray<A>;
 /**
  * @since 2.0.0
  */
@@ -83,12 +79,12 @@ export declare function fromNonEmptyArray<A>(as: Array<A> & {
 export declare function getSemigroup<A = never>(): Semigroup<NonEmptyArray<A>>;
 /**
  * @example
- * import { fromNonEmptyArray, getEq, make } from 'fp-ts/lib/NonEmptyArray'
+ * import { fromNonEmptyArray, getEq, cons } from 'fp-ts/lib/NonEmptyArray'
  * import { eqNumber } from 'fp-ts/lib/Eq'
  *
  * const E = getEq(eqNumber)
- * assert.strictEqual(E.equals(make(1, [2]), fromNonEmptyArray([1, 2])), true)
- * assert.strictEqual(E.equals(make(1, [2]), fromNonEmptyArray([1, 3])), false)
+ * assert.strictEqual(E.equals(cons(1, [2]), fromNonEmptyArray([1, 2])), true)
+ * assert.strictEqual(E.equals(cons(1, [2]), fromNonEmptyArray([1, 3])), false)
  *
  * @since 2.0.0
  */
@@ -97,13 +93,13 @@ export declare const getEq: <A>(E: Eq<A>) => Eq<NonEmptyArray<A>>;
  * Group equal, consecutive elements of an array into non empty arrays.
  *
  * @example
- * import { make, group } from 'fp-ts/lib/NonEmptyArray'
+ * import { cons, group } from 'fp-ts/lib/NonEmptyArray'
  * import { ordNumber } from 'fp-ts/lib/Ord'
  *
  * assert.deepStrictEqual(group(ordNumber)([1, 2, 1, 1]), [
- *   make(1, []),
- *   make(2, []),
- *   make(1, [1])
+ *   cons(1, []),
+ *   cons(2, []),
+ *   cons(1, [1])
  * ])
  *
  * @since 2.0.0
@@ -113,10 +109,10 @@ export declare function group<A>(E: Eq<A>): (as: Array<A>) => Array<NonEmptyArra
  * Sort and then group the elements of an array into non empty arrays.
  *
  * @example
- * import { make, groupSort } from 'fp-ts/lib/NonEmptyArray'
+ * import { cons, groupSort } from 'fp-ts/lib/NonEmptyArray'
  * import { ordNumber } from 'fp-ts/lib/Ord'
  *
- * assert.deepStrictEqual(groupSort(ordNumber)([1, 2, 1, 1]), [make(1, [1, 1]), make(2, [])])
+ * assert.deepStrictEqual(groupSort(ordNumber)([1, 2, 1, 1]), [cons(1, [1, 1]), cons(2, [])])
  *
  * @since 2.0.0
  */
@@ -126,11 +122,11 @@ export declare function groupSort<A>(O: Ord<A>): (as: Array<A>) => Array<NonEmpt
  * function on each element, and grouping the results according to values returned
  *
  * @example
- * import { make, groupBy } from 'fp-ts/lib/NonEmptyArray'
+ * import { cons, groupBy } from 'fp-ts/lib/NonEmptyArray'
  *
  * assert.deepStrictEqual(groupBy(['foo', 'bar', 'foobar'], a => String(a.length)), {
- *   '3': make('foo', ['bar']),
- *   '6': make('foobar', [])
+ *   '3': cons('foo', ['bar']),
+ *   '6': cons('foobar', [])
  * })
  *
  * @since 2.0.0
