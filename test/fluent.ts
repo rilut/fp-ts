@@ -112,33 +112,43 @@ describe('fluent', () => {
   })
 
   it('ap', () => {
-    const fab = some((s: string): number => s.length)
-    assert.deepStrictEqual(fluent(some('foo')).ap(fab).value, option.ap(fab, some('foo')))
-    assert.deepStrictEqual(fluent(none).ap(fab).value, option.ap(fab, none))
+    const add = (a: number) => (b: number): number => a + b
+    assert.deepStrictEqual(
+      fluent(some(add))
+        .ap(some(1))
+        .ap(some(2)).value,
+      some(3)
+    )
   })
 
   it('apFirst', () => {
     const log: Array<string> = []
-    const append = (message: string): IO<number> => () => log.push(message)
+    const append = (message: string): IO<string> => () => {
+      log.push(message)
+      return message
+    }
     const fluent = F.fluent(io)
     assert.strictEqual(
       fluent(append('a'))
         .apFirst(append('b'))
         .value(),
-      1
+      'a'
     )
     assert.deepStrictEqual(log, ['a', 'b'])
   })
 
   it('apSecond', () => {
     const log: Array<string> = []
-    const append = (message: string): IO<number> => () => log.push(message)
+    const append = (message: string): IO<string> => () => {
+      log.push(message)
+      return message
+    }
     const fluent = F.fluent(io)
     assert.strictEqual(
       fluent(append('a'))
         .apSecond(append('b'))
         .value(),
-      2
+      'b'
     )
     assert.deepStrictEqual(log, ['a', 'b'])
   })
@@ -293,11 +303,17 @@ describe('fluent', () => {
 
   it('compose', () => {
     const fluent1 = F.fluent(tuple)
-    assert.deepStrictEqual(fluent1(['a', 1]).compose([1, true]).value, ['a', true])
+    assert.deepStrictEqual(
+      fluent1([true, 1]).compose([1, 'a']).value,
+      tuple.compose(
+        [true, 1],
+        [1, 'a']
+      )
+    )
     const fluent2 = F.fluent(reader)
     assert.deepStrictEqual(
-      fluent2((s: string) => s.length)
-        .compose(n => n > 2)
+      fluent2((n: number) => n > 2)
+        .compose((s: string) => s.length)
         .value('aaa'),
       true
     )
