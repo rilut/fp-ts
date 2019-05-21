@@ -1,6 +1,6 @@
 ---
 title: IOEither.ts
-nav_order: 46
+nav_order: 45
 parent: Modules
 ---
 
@@ -191,10 +191,13 @@ Added in v2.0.0
 
 ```ts
 export function filterOrElse<E, A, B extends A>(
-  p: Refinement<A, B>,
-  zero: (a: A) => E
+  refinement: Refinement<A, B>,
+  onFalse: (a: A) => E
 ): (ma: IOEither<E, A>) => IOEither<E, B>
-export function filterOrElse<E, A>(p: Predicate<A>, zero: (a: A) => E): (ma: IOEither<E, A>) => IOEither<E, A> { ... }
+export function filterOrElse<E, A>(
+  predicate: Predicate<A>,
+  zeonFalsero: (a: A) => E
+): (ma: IOEither<E, A>) => IOEither<E, A> { ... }
 ```
 
 Added in v2.0.0
