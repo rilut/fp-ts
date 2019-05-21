@@ -85,8 +85,8 @@ export declare const getOrElse: <E, A>(f: (e: E) => Task<A>) => (ma: TaskEither<
 /**
  * @since 2.0.0
  */
-export declare function filterOrElse<E, A, B extends A>(predicate: Refinement<A, B>, zero: (a: A) => E): (ma: TaskEither<E, A>) => TaskEither<E, B>;
-export declare function filterOrElse<E, A>(predicate: Predicate<A>, zero: (a: A) => E): (ma: TaskEither<E, A>) => TaskEither<E, A>;
+export declare function filterOrElse<E, A, B extends A>(refinement: Refinement<A, B>, onFalse: (a: A) => E): (ma: TaskEither<E, A>) => TaskEither<E, B>;
+export declare function filterOrElse<E, A>(predicate: Predicate<A>, onFalse: (a: A) => E): (ma: TaskEither<E, A>) => TaskEither<E, A>;
 /**
  * @since 2.0.0
  */

@@ -70,8 +70,8 @@ export declare const getOrElse: <E, A>(f: (e: E) => IO<A>) => (ma: IOEither<E, A
 /**
  * @since 2.0.0
  */
-export declare function filterOrElse<E, A, B extends A>(p: Refinement<A, B>, zero: (a: A) => E): (ma: IOEither<E, A>) => IOEither<E, B>;
-export declare function filterOrElse<E, A>(p: Predicate<A>, zero: (a: A) => E): (ma: IOEither<E, A>) => IOEither<E, A>;
+export declare function filterOrElse<E, A, B extends A>(refinement: Refinement<A, B>, onFalse: (a: A) => E): (ma: IOEither<E, A>) => IOEither<E, B>;
+export declare function filterOrElse<E, A>(predicate: Predicate<A>, zeonFalsero: (a: A) => E): (ma: IOEither<E, A>) => IOEither<E, A>;
 /**
  * @since 2.0.0
  */

@@ -211,7 +211,7 @@ export declare function lookup<A>(i: number, as: Array<A>): Option<A>;
  *
  * @since 2.0.0
  */
-export declare function cons<A>(a: A, as: Array<A>): NonEmptyArray<A>;
+export declare function cons<A>(head: A, tail: Array<A>): NonEmptyArray<A>;
 /**
  * Append an element to the end of an array, creating a new non empty array
  *
@@ -222,7 +222,7 @@ export declare function cons<A>(a: A, as: Array<A>): NonEmptyArray<A>;
  *
  * @since 2.0.0
  */
-export declare function snoc<A>(as: Array<A>, a: A): NonEmptyArray<A>;
+export declare function snoc<A>(init: Array<A>, end: A): NonEmptyArray<A>;
 /**
  * Get the first element in an array, or `None` if the array is empty
  *

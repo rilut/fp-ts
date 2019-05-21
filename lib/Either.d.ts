@@ -216,8 +216,8 @@ export declare function elem<A>(E: Eq<A>): <E>(a: A, ma: Either<E, A>) => boolea
 /**
  * @since 2.0.0
  */
-export declare function filterOrElse<E, A, B extends A>(refinement: Refinement<A, B>, zero: (a: A) => E): (ma: Either<E, A>) => Either<E, B>;
-export declare function filterOrElse<E, A>(predicate: Predicate<A>, zero: (a: A) => E): (ma: Either<E, A>) => Either<E, A>;
+export declare function filterOrElse<E, A, B extends A>(refinement: Refinement<A, B>, onFalse: (a: A) => E): (ma: Either<E, A>) => Either<E, B>;
+export declare function filterOrElse<E, A>(predicate: Predicate<A>, onFalse: (a: A) => E): (ma: Either<E, A>) => Either<E, A>;
 /**
  * Converts a JavaScript Object Notation (JSON) string into an object.
  *

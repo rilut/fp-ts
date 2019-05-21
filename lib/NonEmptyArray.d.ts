@@ -34,6 +34,42 @@ export interface NonEmptyArray<A> extends Array<A> {
     concat(as: Array<A>): NonEmptyArray<A>;
 }
 /**
+ * Builds a `NonEmptyArray` from a provably (compile time) non empty `Array`.
+ *
+ * @since 2.0.0
+ */
+export declare function make<A>(as: Array<A> & {
+    0: A;
+}): NonEmptyArray<A>;
+/**
+ * Append an element to the front of an array, creating a new non empty array
+ *
+ * @example
+ * import { cons } from 'fp-ts/lib/NonEmptyArray'
+ *
+ * assert.deepStrictEqual(cons(1, [2, 3, 4]), [1, 2, 3, 4])
+ *
+ * @since 2.0.0
+ */
+export declare const cons: <A>(head: A, tail: Array<A>) => NonEmptyArray<A>;
+/**
+ * Append an element to the end of an array, creating a new non empty array
+ *
+ * @example
+ * import { snoc } from 'fp-ts/lib/NonEmptyArray'
+ *
+ * assert.deepStrictEqual(snoc([1, 2, 3], 4), [1, 2, 3, 4])
+ *
+ * @since 2.0.0
+ */
+export declare const snoc: <A>(init: Array<A>, end: A) => NonEmptyArray<A>;
+/**
+ * Builds a `NonEmptyArray` from an `Array` returning `none` if `as` is an empty array
+ *
+ * @since 2.0.0
+ */
+export declare function fromArray<A>(as: Array<A>): Option<NonEmptyArray<A>>;
+/**
  * @since 2.0.0
  */
 export declare function getShow<A>(S: Show<A>): Show<NonEmptyArray<A>>;
@@ -58,20 +94,6 @@ export declare function min<A>(ord: Ord<A>): (nea: NonEmptyArray<A>) => A;
  */
 export declare function max<A>(ord: Ord<A>): (nea: NonEmptyArray<A>) => A;
 /**
- * Builds a `NonEmptyArray` from an `Array` returning `none` if `as` is an empty array
- *
- * @since 2.0.0
- */
-export declare function fromArray<A>(as: Array<A>): Option<NonEmptyArray<A>>;
-/**
- * Builds a `NonEmptyArray` from a provably (compile time) non empty `Array`.
- *
- * @since 2.0.0
- */
-export declare function fromNonEmptyArray<A>(as: Array<A> & {
-    0: A;
-}): NonEmptyArray<A>;
-/**
  * Builds a `Semigroup` instance for `NonEmptyArray`
  *
  * @since 2.0.0
@@ -79,12 +101,12 @@ export declare function fromNonEmptyArray<A>(as: Array<A> & {
 export declare function getSemigroup<A = never>(): Semigroup<NonEmptyArray<A>>;
 /**
  * @example
- * import { fromNonEmptyArray, getEq, cons } from 'fp-ts/lib/NonEmptyArray'
+ * import { make, getEq, cons } from 'fp-ts/lib/NonEmptyArray'
  * import { eqNumber } from 'fp-ts/lib/Eq'
  *
  * const E = getEq(eqNumber)
- * assert.strictEqual(E.equals(cons(1, [2]), fromNonEmptyArray([1, 2])), true)
- * assert.strictEqual(E.equals(cons(1, [2]), fromNonEmptyArray([1, 3])), false)
+ * assert.strictEqual(E.equals(cons(1, [2]), make([1, 2])), true)
+ * assert.strictEqual(E.equals(cons(1, [2]), make([1, 3])), false)
  *
  * @since 2.0.0
  */
@@ -185,28 +207,6 @@ export declare function filter<A>(nea: NonEmptyArray<A>, predicate: Predicate<A>
  * @since 2.0.0
  */
 export declare function filterWithIndex<A>(nea: NonEmptyArray<A>, predicate: (i: number, a: A) => boolean): Option<NonEmptyArray<A>>;
-/**
- * Append an element to the end of an array, creating a new non empty array
- *
- * @example
- * import { snoc } from 'fp-ts/lib/NonEmptyArray'
- *
- * assert.deepStrictEqual(snoc([1, 2, 3], 4), [1, 2, 3, 4])
- *
- * @since 2.0.0
- */
-export declare const snoc: <A>(as: Array<A>, a: A) => NonEmptyArray<A>;
-/**
- * Append an element to the front of an array, creating a new non empty array
- *
- * @example
- * import { cons } from 'fp-ts/lib/NonEmptyArray'
- *
- * assert.deepStrictEqual(cons(1, [2, 3, 4]), [1, 2, 3, 4])
- *
- * @since 2.0.0
- */
-export declare const cons: <A>(a: A, as: Array<A>) => NonEmptyArray<A>;
 /**
  * @since 2.0.0
  */

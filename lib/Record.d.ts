@@ -82,6 +82,10 @@ export declare function toUnfoldable<F>(unfoldable: Unfoldable<F>): <K extends s
  */
 export declare function insert<KS extends string, K extends string, A>(k: K, a: A, d: Record<KS, A>): Record<KS | K, A>;
 /**
+ * @since 2.0.0
+ */
+export declare function hasOwnProperty<K extends string, A>(k: K, d: Record<K, A>): boolean;
+/**
  * Delete a key and value from a map
  *
  * @since 2.0.0
@@ -121,12 +125,12 @@ export declare function getMonoid<K extends string, A>(S: Semigroup<A>): Monoid<
  *
  * @since 2.0.0
  */
-export declare function lookup<A>(key: string, fa: Record<string, A>): Option<A>;
+export declare function lookup<A>(k: string, fa: Record<string, A>): Option<A>;
 /**
  * @since 2.0.0
  */
-export declare function filter<A, B extends A>(fa: Record<string, A>, p: Refinement<A, B>): Record<string, B>;
-export declare function filter<A>(fa: Record<string, A>, p: Predicate<A>): Record<string, A>;
+export declare function filter<A, B extends A>(fa: Record<string, A>, refinement: Refinement<A, B>): Record<string, B>;
+export declare function filter<A>(fa: Record<string, A>, predicate: Predicate<A>): Record<string, A>;
 /**
  * @since 2.0.0
  */
