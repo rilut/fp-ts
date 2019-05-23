@@ -1,6 +1,6 @@
-import * as assert from 'assert'
-import { monoidString } from '../src/Monoid'
-import { ordNumber } from '../src/Ord'
+import * as assert from 'assert.ts'
+import { monoidString } from '../src/Monoid.ts'
+import { ordNumber } from '../src/Ord.ts'
 import {
   fold,
   getFirstSemigroup,
@@ -14,7 +14,7 @@ import {
   semigroupSum,
   semigroupVoid,
   getDualSemigroup
-} from '../src/Semigroup'
+} from '../src/Semigroup.ts'
 
 describe('Semigroup', () => {
   it('getTupleSemigroup', () => {
@@ -43,10 +43,10 @@ describe('Semigroup', () => {
     }
     const foo: T = {
       foo: 123,
-      bar: '456'
+      bar: '456.ts'
     }
     const bar: T = {
-      bar: '123'
+      bar: '123.ts'
     }
     const S = getObjectSemigroup<T>()
     const result = S.concat(foo, bar)

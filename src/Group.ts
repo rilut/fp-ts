@@ -3,7 +3,7 @@
  *
  * - Inverse: `concat(inverse(a), a) = empty = concat(a, inverse(a))`
  */
-import { Monoid } from './Monoid'
+import { Monoid } from './Monoid.ts'
 
 /**
  * @since 2.0.0

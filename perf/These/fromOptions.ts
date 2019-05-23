@@ -1,6 +1,6 @@
-import * as Benchmark from 'benchmark'
-import { fromOptions } from '../../src/These'
-import { some } from '../../src/Option'
+import * as Benchmark from 'benchmark.ts'
+import { fromOptions } from '../../src/These.ts'
+import { some } from '../../src/Option.ts'
 
 const suite = new Benchmark.Suite()
 

@@ -1,25 +1,25 @@
-import { Applicative } from './Applicative'
-import { Compactable2, Separated } from './Compactable'
-import { Either, isLeft } from './Either'
-import { FilterableWithIndex2C } from './FilterableWithIndex'
-import { Foldable2C, Foldable3, Foldable2, Foldable1, Foldable } from './Foldable'
-import { FoldableWithIndex2C } from './FoldableWithIndex'
-import { Predicate, phantom } from './function'
-import { HKT, Type, Type2, Type3, URIS, URIS2, URIS3 } from './HKT'
-import { Monoid } from './Monoid'
-import { Option, none, some, isSome, isNone, option } from './Option'
-import { Ord } from './Ord'
-import { Eq, fromEquals } from './Eq'
-import { TraversableWithIndex2C } from './TraversableWithIndex'
-import { Unfoldable, Unfoldable1 } from './Unfoldable'
-import { Semigroup } from './Semigroup'
-import { Witherable2C } from './Witherable'
-import { FunctorWithIndex2C } from './FunctorWithIndex'
-import { Functor2 } from './Functor'
-import { Traversable2C } from './Traversable'
-import { Filterable2 } from './Filterable'
-import { Show } from './Show'
-import { Magma } from './Magma'
+import { Applicative } from './Applicative.ts'
+import { Compactable2, Separated } from './Compactable.ts'
+import { Either, isLeft } from './Either.ts'
+import { FilterableWithIndex2C } from './FilterableWithIndex.ts'
+import { Foldable2C, Foldable3, Foldable2, Foldable1, Foldable } from './Foldable.ts'
+import { FoldableWithIndex2C } from './FoldableWithIndex.ts'
+import { Predicate, phantom } from './function.ts'
+import { HKT, Type, Type2, Type3, URIS, URIS2, URIS3 } from './HKT.ts'
+import { Monoid } from './Monoid.ts'
+import { Option, none, some, isSome, isNone, option } from './Option.ts'
+import { Ord } from './Ord.ts'
+import { Eq, fromEquals } from './Eq.ts'
+import { TraversableWithIndex2C } from './TraversableWithIndex.ts'
+import { Unfoldable, Unfoldable1 } from './Unfoldable.ts'
+import { Semigroup } from './Semigroup.ts'
+import { Witherable2C } from './Witherable.ts'
+import { FunctorWithIndex2C } from './FunctorWithIndex.ts'
+import { Functor2 } from './Functor.ts'
+import { Traversable2C } from './Traversable.ts'
+import { Filterable2 } from './Filterable.ts'
+import { Show } from './Show.ts'
+import { Magma } from './Magma.ts'
 
 declare module './HKT' {
   interface URI2HKT2<L, A> {
@@ -30,7 +30,7 @@ declare module './HKT' {
 /**
  * @since 2.0.0
  */
-export const URI = 'Map'
+export const URI = 'Map.ts'
 
 /**
  * @since 2.0.0
@@ -43,7 +43,7 @@ export type URI = typeof URI
 export function getShow<K, A>(SK: Show<K>, SA: Show<A>): Show<Map<K, A>> {
   return {
     show: m => {
-      let elements = ''
+      let elements = '.ts'
       m.forEach((a, k) => {
         elements += `[${SK.show(k)}, ${SA.show(a)}], `
       })

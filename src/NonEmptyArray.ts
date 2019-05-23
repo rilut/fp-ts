@@ -1,18 +1,18 @@
 /**
  * @file Data structure which represents non-empty arrays
  */
-import { Monad1 } from './Monad'
-import * as A from './Array'
-import { Comonad1 } from './Comonad'
-import { FunctorWithIndex1 } from './FunctorWithIndex'
-import { TraversableWithIndex1 } from './TraversableWithIndex'
-import { FoldableWithIndex1 } from './FoldableWithIndex'
-import { Ord } from './Ord'
-import { getMeetSemigroup, getJoinSemigroup, Semigroup } from './Semigroup'
-import { Option, some, none } from './Option'
-import { Eq } from './Eq'
-import { Predicate, Refinement } from './function'
-import { Show } from './Show'
+import { Monad1 } from './Monad.ts'
+import * as A from './Array.ts'
+import { Comonad1 } from './Comonad.ts'
+import { FunctorWithIndex1 } from './FunctorWithIndex.ts'
+import { TraversableWithIndex1 } from './TraversableWithIndex.ts'
+import { FoldableWithIndex1 } from './FoldableWithIndex.ts'
+import { Ord } from './Ord.ts'
+import { getMeetSemigroup, getJoinSemigroup, Semigroup } from './Semigroup.ts'
+import { Option, some, none } from './Option.ts'
+import { Eq } from './Eq.ts'
+import { Predicate, Refinement } from './function.ts'
+import { Show } from './Show.ts'
 
 declare module './HKT' {
   interface URI2HKT<A> {
@@ -23,7 +23,7 @@ declare module './HKT' {
 /**
  * @since 2.0.0
  */
-export const URI = 'NonEmptyArray'
+export const URI = 'NonEmptyArray.ts'
 
 /**
  * @since 2.0.0
@@ -52,7 +52,7 @@ export function make<A>(as: Array<A> & { 0: A }): NonEmptyArray<A> {
  * Append an element to the front of an array, creating a new non empty array
  *
  * @example
- * import { cons } from 'fp-ts/lib/NonEmptyArray'
+ * import { cons } from 'fp-ts/lib/NonEmptyArray.ts'
  *
  * assert.deepStrictEqual(cons(1, [2, 3, 4]), [1, 2, 3, 4])
  *
@@ -64,7 +64,7 @@ export const cons: <A>(head: A, tail: Array<A>) => NonEmptyArray<A> = A.cons
  * Append an element to the end of an array, creating a new non empty array
  *
  * @example
- * import { snoc } from 'fp-ts/lib/NonEmptyArray'
+ * import { snoc } from 'fp-ts/lib/NonEmptyArray.ts'
  *
  * assert.deepStrictEqual(snoc([1, 2, 3], 4), [1, 2, 3, 4])
  *
@@ -139,8 +139,8 @@ export function getSemigroup<A = never>(): Semigroup<NonEmptyArray<A>> {
 
 /**
  * @example
- * import { make, getEq, cons } from 'fp-ts/lib/NonEmptyArray'
- * import { eqNumber } from 'fp-ts/lib/Eq'
+ * import { make, getEq, cons } from 'fp-ts/lib/NonEmptyArray.ts'
+ * import { eqNumber } from 'fp-ts/lib/Eq.ts'
  *
  * const E = getEq(eqNumber)
  * assert.strictEqual(E.equals(cons(1, [2]), make([1, 2])), true)
@@ -154,8 +154,8 @@ export const getEq: <A>(E: Eq<A>) => Eq<NonEmptyArray<A>> = A.getEq
  * Group equal, consecutive elements of an array into non empty arrays.
  *
  * @example
- * import { cons, group } from 'fp-ts/lib/NonEmptyArray'
- * import { ordNumber } from 'fp-ts/lib/Ord'
+ * import { cons, group } from 'fp-ts/lib/NonEmptyArray.ts'
+ * import { ordNumber } from 'fp-ts/lib/Ord.ts'
  *
  * assert.deepStrictEqual(group(ordNumber)([1, 2, 1, 1]), [
  *   cons(1, []),
@@ -193,8 +193,8 @@ export function group<A>(E: Eq<A>): (as: Array<A>) => Array<NonEmptyArray<A>> {
  * Sort and then group the elements of an array into non empty arrays.
  *
  * @example
- * import { cons, groupSort } from 'fp-ts/lib/NonEmptyArray'
- * import { ordNumber } from 'fp-ts/lib/Ord'
+ * import { cons, groupSort } from 'fp-ts/lib/NonEmptyArray.ts'
+ * import { ordNumber } from 'fp-ts/lib/Ord.ts'
  *
  * assert.deepStrictEqual(groupSort(ordNumber)([1, 2, 1, 1]), [cons(1, [1, 1]), cons(2, [])])
  *
@@ -211,7 +211,7 @@ export function groupSort<A>(O: Ord<A>): (as: Array<A>) => Array<NonEmptyArray<A
  * function on each element, and grouping the results according to values returned
  *
  * @example
- * import { cons, groupBy } from 'fp-ts/lib/NonEmptyArray'
+ * import { cons, groupBy } from 'fp-ts/lib/NonEmptyArray.ts'
  *
  * assert.deepStrictEqual(groupBy(['foo', 'bar', 'foobar'], a => String(a.length)), {
  *   '3': cons('foo', ['bar']),

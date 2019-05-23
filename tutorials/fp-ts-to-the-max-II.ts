@@ -1,11 +1,11 @@
-import { log } from '../src/Console'
-import { Type, URIS } from '../src/HKT'
-import { none, Option, some, fold } from '../src/Option'
-import { randomInt } from '../src/Random'
-import * as T from '../src/Task'
-import { createInterface } from 'readline'
-import { State, state } from '../src/State'
-import { Monad1 } from '../src/Monad'
+import { log } from '../src/Console.ts'
+import { Type, URIS } from '../src/HKT.ts'
+import { none, Option, some, fold } from '../src/Option.ts'
+import { randomInt } from '../src/Random.ts'
+import * as T from '../src/Task.ts'
+import { createInterface } from 'readline.ts'
+import { State, state } from '../src/State.ts'
+import { Monad1 } from '../src/Monad.ts'
 
 //
 // helpers
@@ -122,7 +122,7 @@ export const mainTask = main({ ...programTask, ...consoleTask, ...randomTask })
 // tests
 //
 
-import { drop, snoc } from '../src/Array'
+import { drop, snoc } from '../src/Array.ts'
 
 class TestData {
   constructor(readonly input: Array<string>, readonly output: Array<string>, readonly nums: Array<number>) {}
@@ -137,7 +137,7 @@ class TestData {
   }
 }
 
-const URI = 'Test'
+const URI = 'Test.ts'
 
 type URI = typeof URI
 
@@ -174,7 +174,7 @@ const randomTest: Random<URI> = {
 const mainTestTask = main({ ...programTest, ...consoleTest, ...randomTest })
 const testExample = new TestData(['Giulio', '1', 'n'], [], [1])
 
-import * as assert from 'assert'
+import * as assert from 'assert.ts'
 
 assert.deepStrictEqual(mainTestTask(testExample), [
   undefined,
@@ -185,7 +185,7 @@ assert.deepStrictEqual(mainTestTask(testExample), [
       'Hello, Giulio welcome to the game!',
       'Dear Giulio, please guess a number from 1 to 5',
       'You guessed right, Giulio!',
-      'Do you want to continue, Giulio?'
+      'Do you want to continue, Giulio?.ts'
     ],
     []
   )

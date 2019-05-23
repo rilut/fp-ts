@@ -1,6 +1,6 @@
-import { HKT, Type, Type2, Type3, URIS, URIS2, URIS3 } from './HKT'
-import { Monad, Monad1, Monad2, Monad3 } from './Monad'
-import { Reader } from './Reader'
+import { HKT, Type, Type2, Type3, URIS, URIS2, URIS3 } from './HKT.ts'
+import { Monad, Monad1, Monad2, Monad3 } from './Monad.ts'
+import { Reader } from './Reader.ts'
 
 /**
  * @since 2.0.0

@@ -1,5 +1,5 @@
-import { HKT, Type, URIS } from './HKT'
-import { Monad, Monad1 } from './Monad'
+import { HKT, Type, URIS } from './HKT.ts'
+import { Monad, Monad1 } from './Monad.ts'
 
 /**
  * @since 2.0.0

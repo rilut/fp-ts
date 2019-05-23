@@ -1,11 +1,11 @@
-import * as assert from 'assert'
-import { identity } from '../src/function'
-import { monoidString } from '../src/Monoid'
-import { showString } from '../src/Show'
-import * as T from '../src/Tuple'
-import { getMonoid } from '../src/Array'
-import { right, left } from '../src/Either'
-import { option, some, none } from '../src/Option'
+import * as assert from 'assert.ts'
+import { identity } from '../src/function.ts'
+import { monoidString } from '../src/Monoid.ts'
+import { showString } from '../src/Show.ts'
+import * as T from '../src/Tuple.ts'
+import { getMonoid } from '../src/Array.ts'
+import { right, left } from '../src/Either.ts'
+import { option, some, none } from '../src/Option.ts'
 
 describe('Tuple', () => {
   it('compose', () => {

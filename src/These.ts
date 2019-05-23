@@ -17,20 +17,20 @@
  *
  * Adapted from https://github.com/purescript-contrib/purescript-these
  */
-import { Applicative } from './Applicative'
-import { Bifunctor2 } from './Bifunctor'
-import { Either, Left, Right } from './Either'
-import { Foldable2 } from './Foldable'
-import { phantom, identity } from './function'
-import { Functor2 } from './Functor'
-import { HKT } from './HKT'
-import { Monad2C } from './Monad'
-import { Monoid } from './Monoid'
-import { Option, some, none, isNone } from './Option'
-import { Semigroup } from './Semigroup'
-import { fromEquals, Eq } from './Eq'
-import { Show } from './Show'
-import { Traversable2 } from './Traversable'
+import { Applicative } from './Applicative.ts'
+import { Bifunctor2 } from './Bifunctor.ts'
+import { Either, Left, Right } from './Either.ts'
+import { Foldable2 } from './Foldable.ts'
+import { phantom, identity } from './function.ts'
+import { Functor2 } from './Functor.ts'
+import { HKT } from './HKT.ts'
+import { Monad2C } from './Monad.ts'
+import { Monoid } from './Monoid.ts'
+import { Option, some, none, isNone } from './Option.ts'
+import { Semigroup } from './Semigroup.ts'
+import { fromEquals, Eq } from './Eq.ts'
+import { Show } from './Show.ts'
+import { Traversable2 } from './Traversable.ts'
 
 declare module './HKT' {
   interface URI2HKT2<L, A> {
@@ -41,7 +41,7 @@ declare module './HKT' {
 /**
  * @since 2.0.0
  */
-export const URI = 'These'
+export const URI = 'These.ts'
 
 /**
  * @since 2.0.0
@@ -52,7 +52,7 @@ export type URI = typeof URI
  * @since 2.0.0
  */
 export interface Both<E, A> {
-  readonly _tag: 'Both'
+  readonly _tag: 'Both.ts'
   readonly left: E
   readonly right: A
 }
@@ -211,7 +211,7 @@ const sequence = <F>(F: Applicative<F>) => <E, A>(ta: These<E, HKT<F, A>>): HKT<
 /**
  *
  * @example
- * import { toTuple, left, right, both } from 'fp-ts/lib/These'
+ * import { toTuple, left, right, both } from 'fp-ts/lib/These.ts'
  *
  * assert.deepStrictEqual(toTuple('a', 1)(left('b')), ['b', 1])
  * assert.deepStrictEqual(toTuple('a', 1)(right(2)), ['a', 2])
@@ -227,8 +227,8 @@ export function toTuple<E, A>(e: E, a: A): (fa: These<E, A>) => [E, A] {
  * Returns an `L` value if possible
  *
  * @example
- * import { getLeft, left, right, both } from 'fp-ts/lib/These'
- * import { none, some } from 'fp-ts/lib/Option'
+ * import { getLeft, left, right, both } from 'fp-ts/lib/These.ts'
+ * import { none, some } from 'fp-ts/lib/Option.ts'
  *
  * assert.deepStrictEqual(getLeft(left('a')), some('a'))
  * assert.deepStrictEqual(getLeft(right(1)), none)
@@ -244,8 +244,8 @@ export function getLeft<E, A>(fa: These<E, A>): Option<E> {
  * Returns an `A` value if possible
  *
  * @example
- * import { getRight, left, right, both } from 'fp-ts/lib/These'
- * import { none, some } from 'fp-ts/lib/Option'
+ * import { getRight, left, right, both } from 'fp-ts/lib/These.ts'
+ * import { none, some } from 'fp-ts/lib/Option.ts'
  *
  * assert.deepStrictEqual(getRight(left('a')), none)
  * assert.deepStrictEqual(getRight(right(1)), some(1))
@@ -263,7 +263,7 @@ export function getRight<E, A>(fa: These<E, A>): Option<A> {
  * @since 2.0.0
  */
 export function isLeft<E, A>(fa: These<E, A>): fa is Left<E> {
-  return fa._tag === 'Left'
+  return fa._tag === 'Left.ts'
 }
 
 /**
@@ -272,7 +272,7 @@ export function isLeft<E, A>(fa: These<E, A>): fa is Left<E> {
  * @since 2.0.0
  */
 export function isRight<E, A>(fa: These<E, A>): fa is Right<A> {
-  return fa._tag === 'Right'
+  return fa._tag === 'Right.ts'
 }
 
 /**
@@ -281,13 +281,13 @@ export function isRight<E, A>(fa: These<E, A>): fa is Right<A> {
  * @since 2.0.0
  */
 export function isBoth<E, A>(fa: These<E, A>): fa is Both<E, A> {
-  return fa._tag === 'Both'
+  return fa._tag === 'Both.ts'
 }
 
 /**
  * @example
- * import { leftOrBoth, left, both } from 'fp-ts/lib/These'
- * import { none, some } from 'fp-ts/lib/Option'
+ * import { leftOrBoth, left, both } from 'fp-ts/lib/These.ts'
+ * import { none, some } from 'fp-ts/lib/Option.ts'
  *
  * assert.deepStrictEqual(leftOrBoth('a', none), left('a'))
  * assert.deepStrictEqual(leftOrBoth('a', some(1)), both('a', 1))
@@ -300,8 +300,8 @@ export function leftOrBoth<E, A>(defaultLeft: E, ma: Option<A>): These<E, A> {
 
 /**
  * @example
- * import { rightOrBoth, right, both } from 'fp-ts/lib/These'
- * import { none, some } from 'fp-ts/lib/Option'
+ * import { rightOrBoth, right, both } from 'fp-ts/lib/These.ts'
+ * import { none, some } from 'fp-ts/lib/Option.ts'
  *
  * assert.deepStrictEqual(rightOrBoth(1, none), right(1))
  * assert.deepStrictEqual(rightOrBoth(1, some('a')), both('a', 1))
@@ -316,8 +316,8 @@ export function rightOrBoth<E, A>(defaultRight: A, me: Option<E>): These<E, A> {
  * Returns the `L` value if and only if the value is constructed with `Left`
  *
  * @example
- * import { getLeftOnly, left, right, both } from 'fp-ts/lib/These'
- * import { none, some } from 'fp-ts/lib/Option'
+ * import { getLeftOnly, left, right, both } from 'fp-ts/lib/These.ts'
+ * import { none, some } from 'fp-ts/lib/Option.ts'
  *
  * assert.deepStrictEqual(getLeftOnly(left('a')), some('a'))
  * assert.deepStrictEqual(getLeftOnly(right(1)), none)
@@ -333,8 +333,8 @@ export function getLeftOnly<E, A>(fa: These<E, A>): Option<E> {
  * Returns the `A` value if and only if the value is constructed with `Right`
  *
  * @example
- * import { getRightOnly, left, right, both } from 'fp-ts/lib/These'
- * import { none, some } from 'fp-ts/lib/Option'
+ * import { getRightOnly, left, right, both } from 'fp-ts/lib/These.ts'
+ * import { none, some } from 'fp-ts/lib/Option.ts'
  *
  * assert.deepStrictEqual(getRightOnly(left('a')), none)
  * assert.deepStrictEqual(getRightOnly(right(1)), some(1))
@@ -351,8 +351,8 @@ export function getRightOnly<E, A>(fa: These<E, A>): Option<A> {
  * Takes a pair of `Option`s and attempts to create a `These` from them
  *
  * @example
- * import { fromOptions, left, right, both } from 'fp-ts/lib/These'
- * import { none, some } from 'fp-ts/lib/Option'
+ * import { fromOptions, left, right, both } from 'fp-ts/lib/These.ts'
+ * import { none, some } from 'fp-ts/lib/Option.ts'
  *
  * assert.deepStrictEqual(fromOptions(none, none), none)
  * assert.deepStrictEqual(fromOptions(some('a'), none), some(left('a')))

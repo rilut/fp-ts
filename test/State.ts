@@ -1,6 +1,6 @@
-import * as assert from 'assert'
-import * as S from '../src/State'
-import { tuple } from '../src/function'
+import * as assert from 'assert.ts'
+import * as S from '../src/State.ts'
+import { tuple } from '../src/function.ts'
 
 describe('State', () => {
   it('eval', () => {

@@ -1,6 +1,6 @@
-import * as assert from 'assert'
-import { array } from '../src/Array'
-import { getFunctorWithIndexComposition } from '../src/FunctorWithIndex'
+import * as assert from 'assert.ts'
+import { array } from '../src/Array.ts'
+import { getFunctorWithIndexComposition } from '../src/FunctorWithIndex.ts'
 
 describe('FunctorWithIndex', () => {
   it('getFunctorComposition', () => {

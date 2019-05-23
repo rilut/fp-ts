@@ -3,10 +3,10 @@ import {
   ApplicativeComposition12,
   ApplicativeComposition22,
   getApplicativeComposition
-} from './Applicative'
-import { Either, either, isLeft, left, right, URI, swap, fold } from './Either'
-import { HKT, Type, Type2, URIS, URIS2 } from './HKT'
-import { Monad, Monad1, Monad2 } from './Monad'
+} from './Applicative.ts'
+import { Either, either, isLeft, left, right, URI, swap, fold } from './Either.ts'
+import { HKT, Type, Type2, URIS, URIS2 } from './HKT.ts'
+import { Monad, Monad1, Monad2 } from './Monad.ts'
 
 /**
  * @since 2.0.0

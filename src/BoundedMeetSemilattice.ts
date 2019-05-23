@@ -3,7 +3,7 @@
  *
  * - `a ∧ 1 = a`
  */
-import { MeetSemilattice } from './MeetSemilattice'
+import { MeetSemilattice } from './MeetSemilattice.ts'
 
 /**
  * @since 2.0.0

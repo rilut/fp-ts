@@ -1,5 +1,5 @@
-import * as fc from 'fast-check'
-import { NonEmptyArray } from '../../src/NonEmptyArray'
+import * as fc from 'fast-check.ts'
+import { NonEmptyArray } from '../../src/NonEmptyArray.ts'
 
 /**
  * Returns an `Arbitrary` that yelds a non empty array

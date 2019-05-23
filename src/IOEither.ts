@@ -2,17 +2,17 @@
  * @file `IOEither<E, A>` represents a synchronous computation that either yields a value of type `A` or fails yielding an
  * error of type `E`. If you want to represent a synchronous computation that never fails, please see `IO`.
  */
-import { Alt2 } from './Alt'
-import { Bifunctor2 } from './Bifunctor'
-import * as E from './Either'
-import { getEitherM } from './EitherT'
-import { Lazy, Predicate, Refinement } from './function'
-import { getSemigroup as getIOSemigroup, IO, io } from './IO'
-import { Monad2 } from './Monad'
-import { MonadIO2 } from './MonadIO'
-import { Monoid } from './Monoid'
-import { Option } from './Option'
-import { Semigroup } from './Semigroup'
+import { Alt2 } from './Alt.ts'
+import { Bifunctor2 } from './Bifunctor.ts'
+import * as E from './Either.ts'
+import { getEitherM } from './EitherT.ts'
+import { Lazy, Predicate, Refinement } from './function.ts'
+import { getSemigroup as getIOSemigroup, IO, io } from './IO.ts'
+import { Monad2 } from './Monad.ts'
+import { MonadIO2 } from './MonadIO.ts'
+import { Monoid } from './Monoid.ts'
+import { Option } from './Option.ts'
+import { Semigroup } from './Semigroup.ts'
 
 import Either = E.Either
 
@@ -27,7 +27,7 @@ declare module './HKT' {
 /**
  * @since 2.0.0
  */
-export const URI = 'IOEither'
+export const URI = 'IOEither.ts'
 
 /**
  * @since 2.0.0

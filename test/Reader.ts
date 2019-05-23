@@ -1,8 +1,8 @@
-import * as assert from 'assert'
-import * as R from '../src/Reader'
-import { semigroupSum } from '../src/Semigroup'
-import { monoidSum } from '../src/Monoid'
-import { pipeOp as pipe } from '../src/function'
+import * as assert from 'assert.ts'
+import * as R from '../src/Reader.ts'
+import { semigroupSum } from '../src/Semigroup.ts'
+import { monoidSum } from '../src/Monoid.ts'
+import { pipeOp as pipe } from '../src/function.ts'
 
 interface Env {
   count: number
@@ -26,7 +26,7 @@ describe('Reader', () => {
   })
 
   it('chain', () => {
-    const x = () => 'foo'
+    const x = () => 'foo.ts'
     const f = (s: string): R.Reader<object, number> => R.reader.of(s.length)
     assert.strictEqual(R.reader.chain(x, f)({}), 3)
   })

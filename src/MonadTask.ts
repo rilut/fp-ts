@@ -1,9 +1,9 @@
 /**
  * @file Lift a computation from the `Task` monad
  */
-import { HKT, Type, Type2, Type3, URIS, URIS2, URIS3 } from './HKT'
-import { Monad, Monad1, Monad2, Monad2C, Monad3 } from './Monad'
-import { Task } from './Task'
+import { HKT, Type, Type2, Type3, URIS, URIS2, URIS3 } from './HKT.ts'
+import { Monad, Monad1, Monad2, Monad2C, Monad3 } from './Monad.ts'
+import { Task } from './Task.ts'
 
 /**
  * @since 2.0.0

@@ -1,15 +1,15 @@
-import { Alt1 } from './Alt'
-import { Applicative } from './Applicative'
-import { ChainRec1 } from './ChainRec'
-import { Comonad1 } from './Comonad'
-import { Either } from './Either'
-import { Foldable1 } from './Foldable'
-import { identity as id } from './function'
-import { HKT } from './HKT'
-import { Monad1 } from './Monad'
-import { Eq } from './Eq'
-import { Show } from './Show'
-import { Traversable1 } from './Traversable'
+import { Alt1 } from './Alt.ts'
+import { Applicative } from './Applicative.ts'
+import { ChainRec1 } from './ChainRec.ts'
+import { Comonad1 } from './Comonad.ts'
+import { Either } from './Either.ts'
+import { Foldable1 } from './Foldable.ts'
+import { identity as id } from './function.ts'
+import { HKT } from './HKT.ts'
+import { Monad1 } from './Monad.ts'
+import { Eq } from './Eq.ts'
+import { Show } from './Show.ts'
+import { Traversable1 } from './Traversable.ts'
 
 declare module './HKT' {
   interface URI2HKT<A> {
@@ -20,7 +20,7 @@ declare module './HKT' {
 /**
  * @since 2.0.0
  */
-export const URI = 'Identity'
+export const URI = 'Identity.ts'
 
 /**
  * @since 2.0.0

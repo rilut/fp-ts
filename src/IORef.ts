@@ -1,12 +1,12 @@
 /**
  * @file Mutable references in the `IO` monad
  */
-import { IO } from './IO'
+import { IO } from './IO.ts'
 
 /**
  * @example
- * import { io } from 'fp-ts/lib/IO'
- * import { newIORef } from 'fp-ts/lib/IORef'
+ * import { io } from 'fp-ts/lib/IO.ts'
+ * import { newIORef } from 'fp-ts/lib/IORef.ts'
  *
  * assert.strictEqual(io.chain(newIORef(1), ref => io.chain(ref.write(2), () => ref.read))(), 2)
  *

@@ -20,7 +20,7 @@
  * Another way to look at option is: it represents the effect of a possibly failing computation.
  *
  * ```ts
- * import { Option, some, none } from 'fp-ts/lib/Option'
+ * import { Option, some, none } from 'fp-ts/lib/Option.ts'
  *
  * const someValue: Option<string> = some('foo')
  * const emptyValue: Option<string> = none
@@ -38,18 +38,18 @@
  * Using `getOrElse` we can provide a default value `"No value"` when the optional argument `None` does not exist:
  *
  * ```ts
- * import { getOrElse } from 'fp-ts/lib/Option'
+ * import { getOrElse } from 'fp-ts/lib/Option.ts'
  *
  * const value1 = head(['foo', 'bar']) // some('foo)
  * const value2 = head([]) // none
- * getOrElse(() => 'No value')(value1) // 'foo'
- * getOrElse(() => 'No value')(value2) // 'No value'
+ * getOrElse(() => 'No value')(value1) // 'foo.ts'
+ * getOrElse(() => 'No value')(value2) // 'No value.ts'
  * ```
  *
  * Checking whether option has value:
  *
  * ```ts
- * import { isNone } from 'fp-ts/lib/Option'
+ * import { isNone } from 'fp-ts/lib/Option.ts'
  *
  * isNone(value1) // false
  * isNone(value2) // true
@@ -58,7 +58,7 @@
  * We can pattern match using the `fold` function
  *
  * ```ts
- * import { fold } from 'fp-ts/lib/Option'
+ * import { fold } from 'fp-ts/lib/Option.ts'
  *
  * const x: Option<number> = some(3)
  * const y: Option<number> = none
@@ -69,7 +69,7 @@
  * You can chain several possibly failing computations using the `chain` function
  *
  * ```ts
- * import { option } from 'fp-ts/lib/Option'
+ * import { option } from 'fp-ts/lib/Option.ts'
  *
  * function inverse(n: number): Option<number> {
  *   return n === 0 ? none : some(1 / n)
@@ -80,24 +80,24 @@
  * option.chain(some(0), inverse) // none
  * ```
  */
-import { Alternative1 } from './Alternative'
-import { Applicative } from './Applicative'
-import { Compactable1, Separated } from './Compactable'
-import { Either } from './Either'
-import { Eq } from './Eq'
-import { Extend1 } from './Extend'
-import { Filterable1 } from './Filterable'
-import { Foldable1 } from './Foldable'
-import { Lazy, Predicate, Refinement } from './function'
-import { HKT } from './HKT'
-import { Monad1 } from './Monad'
-import { Monoid } from './Monoid'
-import { Ord } from './Ord'
-import { Plus1 } from './Plus'
-import { Semigroup } from './Semigroup'
-import { Show } from './Show'
-import { Traversable1 } from './Traversable'
-import { Witherable1 } from './Witherable'
+import { Alternative1 } from './Alternative.ts'
+import { Applicative } from './Applicative.ts'
+import { Compactable1, Separated } from './Compactable.ts'
+import { Either } from './Either.ts'
+import { Eq } from './Eq.ts'
+import { Extend1 } from './Extend.ts'
+import { Filterable1 } from './Filterable.ts'
+import { Foldable1 } from './Foldable.ts'
+import { Lazy, Predicate, Refinement } from './function.ts'
+import { HKT } from './HKT.ts'
+import { Monad1 } from './Monad.ts'
+import { Monoid } from './Monoid.ts'
+import { Ord } from './Ord.ts'
+import { Plus1 } from './Plus.ts'
+import { Semigroup } from './Semigroup.ts'
+import { Show } from './Show.ts'
+import { Traversable1 } from './Traversable.ts'
+import { Witherable1 } from './Witherable.ts'
 
 declare module './HKT' {
   interface URI2HKT<A> {
@@ -108,7 +108,7 @@ declare module './HKT' {
 /**
  * @since 2.0.0
  */
-export const URI = 'Option'
+export const URI = 'Option.ts'
 
 /**
  * @since 2.0.0
@@ -119,14 +119,14 @@ export type URI = typeof URI
  * @since 2.0.0
  */
 export interface None {
-  readonly _tag: 'None'
+  readonly _tag: 'None.ts'
 }
 
 /**
  * @since 2.0.0
  */
 export interface Some<A> {
-  readonly _tag: 'Some'
+  readonly _tag: 'Some.ts'
   readonly value: A
 }
 
@@ -153,7 +153,7 @@ export function some<A>(a: A): Option<A> {
  * @since 2.0.0
  */
 export function isSome<A>(fa: Option<A>): fa is Some<A> {
-  return fa._tag === 'Some'
+  return fa._tag === 'Some.ts'
 }
 
 /**
@@ -162,7 +162,7 @@ export function isSome<A>(fa: Option<A>): fa is Some<A> {
  * @since 2.0.0
  */
 export function isNone<A>(fa: Option<A>): fa is None {
-  return fa._tag === 'None'
+  return fa._tag === 'None.ts'
 }
 
 /**
@@ -177,7 +177,7 @@ export function fold<A, R>(onNone: () => R, onSome: (a: A) => R): (ma: Option<A>
  * returns the value wrapped in a `Some`
  *
  * @example
- * import { none, some, fromNullable } from 'fp-ts/lib/Option'
+ * import { none, some, fromNullable } from 'fp-ts/lib/Option.ts'
  *
  * assert.deepStrictEqual(fromNullable(undefined), none)
  * assert.deepStrictEqual(fromNullable(null), none)
@@ -233,7 +233,7 @@ export function exists<A>(predicate: Predicate<A>): (ma: Option<A>) => boolean {
 
 /**
  * @example
- * import { none, some, fromPredicate } from 'fp-ts/lib/Option'
+ * import { none, some, fromPredicate } from 'fp-ts/lib/Option.ts'
  *
  * const positive = fromPredicate((n: number) => n >= 0)
  *
@@ -253,7 +253,7 @@ export function fromPredicate<A>(predicate: Predicate<A>): (a: A) => Option<A> {
  * `Some`
  *
  * @example
- * import { none, some, tryCatch } from 'fp-ts/lib/Option'
+ * import { none, some, tryCatch } from 'fp-ts/lib/Option.ts'
  *
  * assert.deepStrictEqual(
  *   tryCatch(() => {
@@ -296,14 +296,14 @@ export function getRight<L, A>(ma: Either<L, A>): Option<A> {
  * This function ensures that a custom type guard definition is type-safe.
  *
  * ```ts
- * import { some, none, getRefinement } from 'fp-ts/lib/Option'
+ * import { some, none, getRefinement } from 'fp-ts/lib/Option.ts'
  *
  * type A = { type: 'A' }
  * type B = { type: 'B' }
  * type C = A | B
  *
  * const isA = (c: C): c is A => c.type === 'B' // <= typo but typescript doesn't complain
- * const isA = getRefinement<C, A>(c => (c.type === 'B' ? some(c) : none)) // static error: Type '"B"' is not assignable to type '"A"'
+ * const isA = getRefinement<C, A>(c => (c.type === 'B' ? some(c) : none)) // static error: Type '"B"' is not assignable to type '"A".ts'
  * ```
  *
  * @since 2.0.0
@@ -330,8 +330,8 @@ export function getShow<A>(S: Show<A>): Show<Option<A>> {
 
 /**
  * @example
- * import { none, some, getEq } from 'fp-ts/lib/Option'
- * import { eqNumber } from 'fp-ts/lib/Eq'
+ * import { none, some, getEq } from 'fp-ts/lib/Option.ts'
+ * import { eqNumber } from 'fp-ts/lib/Eq.ts'
  *
  * const E = getEq(eqNumber)
  * assert.strictEqual(E.equals(none, none), true)
@@ -356,8 +356,8 @@ export function getEq<A>(E: Eq<A>): Eq<Option<A>> {
  *
  *
  * @example
- * import { none, some, getOrd } from 'fp-ts/lib/Option'
- * import { ordNumber } from 'fp-ts/lib/Ord'
+ * import { none, some, getOrd } from 'fp-ts/lib/Option.ts'
+ * import { ordNumber } from 'fp-ts/lib/Ord.ts'
  *
  * const O = getOrd(ordNumber)
  * assert.strictEqual(O.compare(none, none), 0)
@@ -386,8 +386,8 @@ export function getOrd<A>(O: Ord<A>): Ord<Option<A>> {
  * | some(a) | some(b) | some(concat(a, b)) |
  *
  * @example
- * import { getApplySemigroup, some, none } from 'fp-ts/lib/Option'
- * import { semigroupSum } from 'fp-ts/lib/Semigroup'
+ * import { getApplySemigroup, some, none } from 'fp-ts/lib/Option.ts'
+ * import { semigroupSum } from 'fp-ts/lib/Semigroup.ts'
  *
  * const S = getApplySemigroup(semigroupSum)
  * assert.deepStrictEqual(S.concat(none, none), none)
@@ -424,7 +424,7 @@ export function getApplyMonoid<A>(M: Monoid<A>): Monoid<Option<A>> {
  * | some(a) | some(b) | some(a)      |
  *
  * @example
- * import { getFirstMonoid, some, none } from 'fp-ts/lib/Option'
+ * import { getFirstMonoid, some, none } from 'fp-ts/lib/Option.ts'
  *
  * const M = getFirstMonoid<number>()
  * assert.deepStrictEqual(M.concat(none, none), none)
@@ -452,7 +452,7 @@ export function getFirstMonoid<A = never>(): Monoid<Option<A>> {
  * | some(a) | some(b) | some(b)      |
  *
  * @example
- * import { getLastMonoid, some, none } from 'fp-ts/lib/Option'
+ * import { getLastMonoid, some, none } from 'fp-ts/lib/Option.ts'
  *
  * const M = getLastMonoid<number>()
  * assert.deepStrictEqual(M.concat(none, none), none)
@@ -481,8 +481,8 @@ export function getLastMonoid<A = never>(): Monoid<Option<A>> {
  * | some(a) | some(b) | some(concat(a, b)) |
  *
  * @example
- * import { getMonoid, some, none } from 'fp-ts/lib/Option'
- * import { semigroupSum } from 'fp-ts/lib/Semigroup'
+ * import { getMonoid, some, none } from 'fp-ts/lib/Option.ts'
+ * import { semigroupSum } from 'fp-ts/lib/Semigroup.ts'
  *
  * const M = getMonoid(semigroupSum)
  * assert.deepStrictEqual(M.concat(none, none), none)

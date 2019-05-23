@@ -1,6 +1,6 @@
-import { Monad2 } from './Monad'
-import { getStateM } from './StateT'
-import { identity } from './Identity'
+import { Monad2 } from './Monad.ts'
+import { getStateM } from './StateT.ts'
+import { identity } from './Identity.ts'
 
 const T = getStateM(identity)
 
@@ -13,7 +13,7 @@ declare module './HKT' {
 /**
  * @since 2.0.0
  */
-export const URI = 'State'
+export const URI = 'State.ts'
 
 /**
  * @since 2.0.0

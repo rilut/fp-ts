@@ -5,17 +5,17 @@
  * type Forest<A> = Array<Tree<A>>
  * ```
  */
-import { Applicative } from './Applicative'
-import { array, empty, getEq as getArrayEq, getMonoid } from './Array'
-import { Comonad1 } from './Comonad'
-import { Eq, fromEquals } from './Eq'
-import { Foldable1 } from './Foldable'
-import { identity } from './function'
-import { HKT, Type, Type2, Type3, URIS, URIS2, URIS3 } from './HKT'
-import { Monad, Monad1, Monad2, Monad2C, Monad3 } from './Monad'
-import { Monoid } from './Monoid'
-import { Show } from './Show'
-import { Traversable1 } from './Traversable'
+import { Applicative } from './Applicative.ts'
+import { array, empty, getEq as getArrayEq, getMonoid } from './Array.ts'
+import { Comonad1 } from './Comonad.ts'
+import { Eq, fromEquals } from './Eq.ts'
+import { Foldable1 } from './Foldable.ts'
+import { identity } from './function.ts'
+import { HKT, Type, Type2, Type3, URIS, URIS2, URIS3 } from './HKT.ts'
+import { Monad, Monad1, Monad2, Monad2C, Monad3 } from './Monad.ts'
+import { Monoid } from './Monoid.ts'
+import { Show } from './Show.ts'
+import { Traversable1 } from './Traversable.ts'
 
 declare module './HKT' {
   interface URI2HKT<A> {
@@ -26,7 +26,7 @@ declare module './HKT' {
 /**
  * @since 2.0.0
  */
-export const URI = 'Tree'
+export const URI = 'Tree.ts'
 
 /**
  * @since 2.0.0
@@ -165,7 +165,7 @@ export const tree: Monad1<URI> & Foldable1<URI> & Traversable1<URI> & Comonad1<U
 }
 
 const draw = (indentation: string, forest: Forest<string>): string => {
-  let r: string = ''
+  let r: string = '.ts'
   const len = forest.length
   let tree: Tree<string>
   for (let i = 0; i < len; i++) {
@@ -190,7 +190,7 @@ export function drawForest(forest: Forest<string>): string {
  * Neat 2-dimensional drawing of a tree
  *
  * @example
- * import { make, drawTree, tree } from 'fp-ts/lib/Tree'
+ * import { make, drawTree, tree } from 'fp-ts/lib/Tree.ts'
  *
  * const fa = make('a', [
  *   tree.of('b'),

@@ -1,6 +1,6 @@
-import { getContM } from './ContT'
-import { identity } from './Identity'
-import { Monad2 } from './Monad'
+import { getContM } from './ContT.ts'
+import { identity } from './Identity.ts'
+import { Monad2 } from './Monad.ts'
 
 const T = getContM(identity)
 
@@ -13,7 +13,7 @@ declare module './HKT' {
 /**
  * @since 2.0.0
  */
-export const URI = 'Cont'
+export const URI = 'Cont.ts'
 
 /**
  * @since 2.0.0

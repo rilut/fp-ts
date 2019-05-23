@@ -15,7 +15,7 @@
  *
  * Note. `Functor`'s `map` can be derived: `A.map(x, f) = A.ap(A.of(f), x)`
  */
-import { Apply, Apply1, Apply2, Apply2C, Apply3, Apply4 } from './Apply'
+import { Apply, Apply1, Apply2, Apply2C, Apply3, Apply4 } from './Apply.ts'
 import {
   FunctorComposition,
   FunctorComposition01,
@@ -28,8 +28,8 @@ import {
   FunctorComposition22C,
   FunctorComposition2C1,
   getFunctorComposition
-} from './Functor'
-import { HKT, Type, Type2, Type3, Type4, URIS, URIS2, URIS3, URIS4 } from './HKT'
+} from './Functor.ts'
+import { HKT, Type, Type2, Type3, Type4, URIS, URIS2, URIS3, URIS4 } from './HKT.ts'
 
 /**
  * @since 2.0.0
@@ -181,9 +181,9 @@ export interface ApplicativeComposition22C<F extends URIS2, G extends URIS2, LG>
  * Like `Functor`, `Applicative`s compose. If `F` and `G` have `Applicative` instances, then so does `F<G<_>>`
  *
  * @example
- * import { getApplicativeComposition } from 'fp-ts/lib/Applicative'
- * import { option, Option, some } from 'fp-ts/lib/Option'
- * import { task, Task } from 'fp-ts/lib/Task'
+ * import { getApplicativeComposition } from 'fp-ts/lib/Applicative.ts'
+ * import { option, Option, some } from 'fp-ts/lib/Option.ts'
+ * import { task, Task } from 'fp-ts/lib/Task.ts'
  *
  * // an Applicative instance for Task<Option<A>>
  * const A = getApplicativeComposition(task, option)

@@ -8,7 +8,7 @@
  *
  * Boolean algebras generalize classical logic: one is equivalent to "true" and zero is equivalent to "false".
  */
-import { HeytingAlgebra } from './HeytingAlgebra'
+import { HeytingAlgebra } from './HeytingAlgebra.ts'
 
 /**
  * @since 2.0.0

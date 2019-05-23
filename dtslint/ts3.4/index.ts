@@ -1,27 +1,27 @@
-import * as Apv from '../../src/Applicative'
-import * as Apy from '../../src/Apply'
-import * as A from '../../src/Array'
-import * as C from '../../src/Const'
-import * as E from '../../src/Either'
-import * as H from '../../src/HKT'
-import * as O from '../../src/Option'
-import * as OT from '../../src/OptionT'
-import * as Re from '../../src/Reader'
-import * as RTE from '../../src/ReaderTaskEither'
-import * as R from '../../src/Record'
-import * as S from '../../src/Semigroup'
-import * as TE from '../../src/TaskEither'
-import * as Th from '../../src/These'
-import * as Mon from '../../src/Monoid'
-import * as Eq from '../../src/Eq'
-import * as Fo from '../../src/Foldable'
-import * as Or from '../../src/Ord'
-import * as Fu from '../../src/function'
-import * as Ring from '../../src/Ring'
-import * as Field from '../../src/Field'
-import * as T from '../../src/Task'
-import * as Map from '../../src/Map'
-import * as NEA from '../../src/NonEmptyArray'
+import * as Apv from '../../src/Applicative.ts'
+import * as Apy from '../../src/Apply.ts'
+import * as A from '../../src/Array.ts'
+import * as C from '../../src/Const.ts'
+import * as E from '../../src/Either.ts'
+import * as H from '../../src/HKT.ts'
+import * as O from '../../src/Option.ts'
+import * as OT from '../../src/OptionT.ts'
+import * as Re from '../../src/Reader.ts'
+import * as RTE from '../../src/ReaderTaskEither.ts'
+import * as R from '../../src/Record.ts'
+import * as S from '../../src/Semigroup.ts'
+import * as TE from '../../src/TaskEither.ts'
+import * as Th from '../../src/These.ts'
+import * as Mon from '../../src/Monoid.ts'
+import * as Eq from '../../src/Eq.ts'
+import * as Fo from '../../src/Foldable.ts'
+import * as Or from '../../src/Ord.ts'
+import * as Fu from '../../src/function.ts'
+import * as Ring from '../../src/Ring.ts'
+import * as Field from '../../src/Field.ts'
+import * as T from '../../src/Task.ts'
+import * as Map from '../../src/Map.ts'
+import * as NEA from '../../src/NonEmptyArray.ts'
 
 const len = (s: string): number => s.length
 
@@ -160,10 +160,10 @@ TE.taskify(apiForTaskify) // $ExpectType (a: string) => TaskEither<Error, string
 // getRefinement
 
 interface A {
-  type: 'A'
+  type: 'A.ts'
 }
 interface B {
-  type: 'B'
+  type: 'B.ts'
 }
 type C = A | B
 
@@ -275,7 +275,7 @@ declare const arr2: Array<['a' | 'b', number]>
 R.fromFoldable(S.getFirstSemigroup<number>(), A.array)(arr1) // $ExpectType Record<string, number>
 R.fromFoldable(S.getFirstSemigroup<number>(), A.array)(arr2) // $ExpectType Record<"a" | "b", number>
 
-type Keys = 'key1' | 'key2'
+type Keys = 'key1' | 'key2.ts'
 const Mon1 = R.getMonoid(S.semigroupSum) // $ExpectType Monoid<Record<string, number>>
 const Mon2 = R.getMonoid<Keys, number>(S.semigroupSum) // $ExpectType Monoid<Record<Keys, number>>
 

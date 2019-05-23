@@ -1,8 +1,8 @@
 /**
  * @file This class identifies data structures which can be _unfolded_, generalizing `unfold` on arrays.
  */
-import { HKT, Type, Type2, Type3, URIS, URIS2, URIS3 } from './HKT'
-import { Option } from './Option'
+import { HKT, Type, Type2, Type3, URIS, URIS2, URIS3 } from './HKT.ts'
+import { Option } from './Option.ts'
 
 /**
  * @since 2.0.0

@@ -1,7 +1,7 @@
-import * as Benchmark from 'benchmark'
-import { Either, left, right, isLeft } from '../src/Either'
-import { readerTaskEither } from '../src/ReaderTaskEither'
-import { taskEither, TaskEither } from '../src/TaskEither'
+import * as Benchmark from 'benchmark.ts'
+import { Either, left, right, isLeft } from '../src/Either.ts'
+import { readerTaskEither } from '../src/ReaderTaskEither.ts'
+import { taskEither, TaskEither } from '../src/TaskEither.ts'
 
 const suite = new Benchmark.Suite()
 

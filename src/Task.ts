@@ -2,12 +2,12 @@
  * @file `Task<A>` represents an asynchronous computation that yields a value of type `A` and **never fails**.
  * If you want to represent an asynchronous computation that may fail, please see `TaskEither`.
  */
-import { IO } from './IO'
-import { Monad1 } from './Monad'
-import { MonadIO1 } from './MonadIO'
-import { MonadTask1 } from './MonadTask'
-import { Monoid } from './Monoid'
-import { Semigroup } from './Semigroup'
+import { IO } from './IO.ts'
+import { Monad1 } from './Monad.ts'
+import { MonadIO1 } from './MonadIO.ts'
+import { MonadTask1 } from './MonadTask.ts'
+import { Monoid } from './Monoid.ts'
+import { Semigroup } from './Semigroup.ts'
 
 declare module './HKT' {
   interface URI2HKT<A> {
@@ -18,7 +18,7 @@ declare module './HKT' {
 /**
  * @since 2.0.0
  */
-export const URI = 'Task'
+export const URI = 'Task.ts'
 
 /**
  * @since 2.0.0

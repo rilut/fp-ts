@@ -1,4 +1,4 @@
-import { HKT2, Type2, Type3, URIS2, URIS3 } from './HKT'
+import { HKT2, Type2, Type3, URIS2, URIS3 } from './HKT.ts'
 
 /**
  * @since 2.0.0

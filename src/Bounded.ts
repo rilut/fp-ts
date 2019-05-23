@@ -5,7 +5,7 @@
  *
  * - Bounded: `bottom <= a <= top`
  */
-import { Ord, ordNumber } from './Ord'
+import { Ord, ordNumber } from './Ord.ts'
 
 /**
  * @since 2.0.0

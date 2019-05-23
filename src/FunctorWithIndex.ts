@@ -9,7 +9,7 @@
  * 1. Identity: `F.mapWithIndex(fa, (_i, a) => a) = fa`
  * 2. Composition: `F.mapWithIndex(fa, (_i, a) => bc(ab(a))) = F.mapWithIndex(F.mapWithIndex(fa, ab), bc)`
  */
-import { HKT, Type, Type2, Type3, Type4, URIS, URIS2, URIS3, URIS4 } from './HKT'
+import { HKT, Type, Type2, Type3, Type4, URIS, URIS2, URIS3, URIS4 } from './HKT.ts'
 import {
   Functor,
   Functor1,
@@ -26,7 +26,7 @@ import {
   FunctorComposition22,
   FunctorComposition22C,
   getFunctorComposition
-} from './Functor'
+} from './Functor.ts'
 
 /**
  * @since 2.0.0

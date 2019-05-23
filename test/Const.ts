@@ -1,9 +1,9 @@
-import * as assert from 'assert'
-import { Const, getApply, getEq, const_, getApplicative, getShow, make } from '../src/Const'
-import { semigroupString } from '../src/Semigroup'
-import { eqNumber } from '../src/Eq'
-import { monoidString } from '../src/Monoid'
-import { showString } from '../src/Show'
+import * as assert from 'assert.ts'
+import { Const, getApply, getEq, const_, getApplicative, getShow, make } from '../src/Const.ts'
+import { semigroupString } from '../src/Semigroup.ts'
+import { eqNumber } from '../src/Eq.ts'
+import { monoidString } from '../src/Monoid.ts'
+import { showString } from '../src/Show.ts'
 
 describe('Const', () => {
   it('map', () => {

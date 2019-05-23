@@ -1,6 +1,6 @@
-import * as assert from 'assert'
-import { getMinMaxBoundedDistributiveLattice } from '../src/BoundedDistributiveLattice'
-import { ordNumber } from '../src/Ord'
+import * as assert from 'assert.ts'
+import { getMinMaxBoundedDistributiveLattice } from '../src/BoundedDistributiveLattice.ts'
+import { ordNumber } from '../src/Ord.ts'
 
 describe('BoundedDistributiveLattice', () => {
   it('getMinMaxBoundedDistributiveLattice', () => {

@@ -7,9 +7,9 @@
  * 1. Distributivity: `A.ap(A.alt(fab, gab), fa) = A.alt(A.ap(fab, fa), A.ap(gab, fa))`
  * 2. Annihilation: `A.ap(zero, fa) = zero`
  */
-import { Applicative, Applicative1, Applicative2, Applicative2C, Applicative3 } from './Applicative'
-import { URIS, URIS2, URIS3 } from './HKT'
-import { Plus, Plus1, Plus2, Plus2C, Plus3 } from './Plus'
+import { Applicative, Applicative1, Applicative2, Applicative2C, Applicative3 } from './Applicative.ts'
+import { URIS, URIS2, URIS3 } from './HKT.ts'
+import { Plus, Plus1, Plus2, Plus2C, Plus3 } from './Plus.ts'
 
 /**
  * @since 2.0.0

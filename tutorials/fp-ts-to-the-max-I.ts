@@ -1,8 +1,8 @@
-import { createInterface } from 'readline'
-import { log } from '../src/Console'
-import { none, Option, some, fold } from '../src/Option'
-import { randomInt } from '../src/Random'
-import { Task, task } from '../src/Task'
+import { createInterface } from 'readline.ts'
+import { log } from '../src/Console.ts'
+import { none, Option, some, fold } from '../src/Option.ts'
+import { randomInt } from '../src/Random.ts'
+import { Task, task } from '../src/Task.ts'
 
 //
 // helpers

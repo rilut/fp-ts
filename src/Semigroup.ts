@@ -1,9 +1,9 @@
 /**
  * @file See [Getting started with fp-ts: Semigroup](https://dev.to/gcanti/getting-started-with-fp-ts-semigroup-2mf7)
  */
-import { Ord, max, min } from './Ord'
-import { identity } from './function'
-import { Magma } from './Magma'
+import { Ord, max, min } from './Ord.ts'
+import { identity } from './function.ts'
+import { Magma } from './Magma.ts'
 
 /**
  * A `Semigroup` is a `Magma` where `concat` is associative, that is:
@@ -39,7 +39,7 @@ export function getLastSemigroup<A = never>(): Semigroup<A> {
  * Given a tuple of semigroups returns a semigroup for the tuple
  *
  * @example
- * import { getTupleSemigroup, semigroupString, semigroupSum, semigroupAll } from 'fp-ts/lib/Semigroup'
+ * import { getTupleSemigroup, semigroupString, semigroupSum, semigroupAll } from 'fp-ts/lib/Semigroup.ts'
  *
  * const S1 = getTupleSemigroup(semigroupString, semigroupSum)
  * assert.deepStrictEqual(S1.concat(['a', 1], ['b', 2]), ['ab', 3])
@@ -114,7 +114,7 @@ export function getJoinSemigroup<A>(O: Ord<A>): Semigroup<A> {
  * Returns a `Semigroup` instance for objects preserving their type
  *
  * @example
- * import { getObjectSemigroup } from 'fp-ts/lib/Semigroup'
+ * import { getObjectSemigroup } from 'fp-ts/lib/Semigroup.ts'
  *
  * interface Person {
  *   name: string

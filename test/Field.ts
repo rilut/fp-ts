@@ -1,6 +1,6 @@
-import * as assert from 'assert'
-import { fieldNumber, gcd, lcm } from '../src/Field'
-import * as eq from '../src/Eq'
+import * as assert from 'assert.ts'
+import { fieldNumber, gcd, lcm } from '../src/Field.ts'
+import * as eq from '../src/Eq.ts'
 
 describe('Field', () => {
   it('gcd', () => {

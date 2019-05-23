@@ -1,14 +1,14 @@
-import { Category2 } from './Category'
-import { Choice2 } from './Choice'
-import * as E from './Either'
-import { identity as id } from './function'
-import { identity } from './Identity'
-import { Monad2 } from './Monad'
-import { Monoid } from './Monoid'
-import { Profunctor2 } from './Profunctor'
-import { getReaderM } from './ReaderT'
-import { Semigroup } from './Semigroup'
-import { Strong2 } from './Strong'
+import { Category2 } from './Category.ts'
+import { Choice2 } from './Choice.ts'
+import * as E from './Either.ts'
+import { identity as id } from './function.ts'
+import { identity } from './Identity.ts'
+import { Monad2 } from './Monad.ts'
+import { Monoid } from './Monoid.ts'
+import { Profunctor2 } from './Profunctor.ts'
+import { getReaderM } from './ReaderT.ts'
+import { Semigroup } from './Semigroup.ts'
+import { Strong2 } from './Strong.ts'
 
 const T = getReaderM(identity)
 
@@ -21,7 +21,7 @@ declare module './HKT' {
 /**
  * @since 2.0.0
  */
-export const URI = 'Reader'
+export const URI = 'Reader.ts'
 
 /**
  * @since 2.0.0

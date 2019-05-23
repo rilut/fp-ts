@@ -1,11 +1,11 @@
-import * as assert from 'assert'
-import { left, right } from '../src/Either'
-import { identity } from '../src/function'
-import * as I from '../src/Identity'
-import { monoidString } from '../src/Monoid'
-import { none, option, some } from '../src/Option'
-import { eqNumber } from '../src/Eq'
-import { showString } from '../src/Show'
+import * as assert from 'assert.ts'
+import { left, right } from '../src/Either.ts'
+import { identity } from '../src/function.ts'
+import * as I from '../src/Identity.ts'
+import { monoidString } from '../src/Monoid.ts'
+import { none, option, some } from '../src/Option.ts'
+import { eqNumber } from '../src/Eq.ts'
+import { showString } from '../src/Show.ts'
 
 describe('Identity', () => {
   it('map', () => {
@@ -32,7 +32,7 @@ describe('Identity', () => {
 
   it('reduce', () => {
     const x = I.identity.of('b')
-    const expected = 'ab'
+    const expected = 'ab.ts'
     assert.deepStrictEqual(I.identity.reduce(x, 'a', (b, a) => b + a), expected)
   })
 
@@ -46,7 +46,7 @@ describe('Identity', () => {
   it('reduceRight', () => {
     const reduceRight = I.identity.reduceRight
     const x1 = I.identity.of('a')
-    const init1 = ''
+    const init1 = '.ts'
     const f1 = (a: string, acc: string) => acc + a
     assert.strictEqual(reduceRight(x1, init1, f1), 'a')
   })

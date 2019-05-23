@@ -8,8 +8,8 @@
  * 1. Associativity: `A.alt(A.alt(fa, ga), ha) = A.alt(fa, A.alt(ga, ha))`
  * 2. Distributivity: `A.map(A.alt(fa, ga), ab) = A.alt(A.map(fa, ab), A.map(ga, ab))`
  */
-import { Functor, Functor1, Functor2, Functor2C, Functor3 } from './Functor'
-import { HKT, Type, Type2, Type3, URIS, URIS2, URIS3 } from './HKT'
+import { Functor, Functor1, Functor2, Functor2C, Functor3 } from './Functor.ts'
+import { HKT, Type, Type2, Type3, URIS, URIS2, URIS3 } from './HKT.ts'
 
 /**
  * @since 2.0.0

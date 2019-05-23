@@ -1,6 +1,6 @@
-import { Chain, Chain1, Chain2, Chain2C, Chain3 } from './Chain'
-import { Either } from './Either'
-import { HKT, Type, Type2, Type3, URIS, URIS2, URIS3 } from './HKT'
+import { Chain, Chain1, Chain2, Chain2C, Chain3 } from './Chain.ts'
+import { Either } from './Either.ts'
+import { HKT, Type, Type2, Type3, URIS, URIS2, URIS3 } from './HKT.ts'
 
 /**
  * @since 2.0.0

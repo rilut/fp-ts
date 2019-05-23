@@ -20,31 +20,31 @@
  * operations like `map`, `chain`, ... return the `Left` value unchanged:
  *
  * ```ts
- * import { either } from 'fp-ts/lib/Either'
+ * import { either } from 'fp-ts/lib/Either.ts'
  *
  * either.map(right(12), double) // right(24)
  * either.map(left(23), double)  // left(23)
  * ```
  */
 
-import { Alt2, Alt2C } from './Alt'
-import { Applicative, Applicative2C } from './Applicative'
-import { Bifunctor2, Bifunctor2C } from './Bifunctor'
-import { ChainRec2, tailRec } from './ChainRec'
-import { Compactable2C, Separated } from './Compactable'
-import { Eq } from './Eq'
-import { Extend2, Extend2C } from './Extend'
-import { Filterable2C } from './Filterable'
-import { Foldable2, Foldable2C } from './Foldable'
-import { Lazy, Predicate, Refinement } from './function'
-import { HKT } from './HKT'
-import { Monad2, Monad2C } from './Monad'
-import { Monoid } from './Monoid'
-import { Option } from './Option'
-import { Semigroup } from './Semigroup'
-import { Show } from './Show'
-import { Traversable2, Traversable2C } from './Traversable'
-import { Witherable2C } from './Witherable'
+import { Alt2, Alt2C } from './Alt.ts'
+import { Applicative, Applicative2C } from './Applicative.ts'
+import { Bifunctor2, Bifunctor2C } from './Bifunctor.ts'
+import { ChainRec2, tailRec } from './ChainRec.ts'
+import { Compactable2C, Separated } from './Compactable.ts'
+import { Eq } from './Eq.ts'
+import { Extend2, Extend2C } from './Extend.ts'
+import { Filterable2C } from './Filterable.ts'
+import { Foldable2, Foldable2C } from './Foldable.ts'
+import { Lazy, Predicate, Refinement } from './function.ts'
+import { HKT } from './HKT.ts'
+import { Monad2, Monad2C } from './Monad.ts'
+import { Monoid } from './Monoid.ts'
+import { Option } from './Option.ts'
+import { Semigroup } from './Semigroup.ts'
+import { Show } from './Show.ts'
+import { Traversable2, Traversable2C } from './Traversable.ts'
+import { Witherable2C } from './Witherable.ts'
 
 declare module './HKT' {
   interface URI2HKT2<L, A> {
@@ -55,7 +55,7 @@ declare module './HKT' {
 /**
  * @since 2.0.0
  */
-export const URI = 'Either'
+export const URI = 'Either.ts'
 
 /**
  * @since 2.0.0
@@ -66,7 +66,7 @@ export type URI = typeof URI
  * @since 2.0.0
  */
 export interface Left<E> {
-  readonly _tag: 'Left'
+  readonly _tag: 'Left.ts'
   readonly left: E
 }
 
@@ -74,7 +74,7 @@ export interface Left<E> {
  * @since 2.0.0
  */
 export interface Right<A> {
-  readonly _tag: 'Right'
+  readonly _tag: 'Right.ts'
   readonly right: A
 }
 
@@ -145,7 +145,7 @@ export function toError(e: unknown): Error {
  * Constructs a new `Either` from a function that might throw
  *
  * @example
- * import { Either, left, right, tryCatch } from 'fp-ts/lib/Either'
+ * import { Either, left, right, tryCatch } from 'fp-ts/lib/Either.ts'
  *
  * const unsafeHead = <A>(as: Array<A>): A => {
  *   if (as.length > 0) {
@@ -203,8 +203,8 @@ export function getEq<E, A>(EL: Eq<E>, EA: Eq<A>): Eq<Either<E, A>> {
  * appended using the provided `Semigroup`
  *
  * @example
- * import { getSemigroup, left, right } from 'fp-ts/lib/Either'
- * import { semigroupSum } from 'fp-ts/lib/Semigroup'
+ * import { getSemigroup, left, right } from 'fp-ts/lib/Either.ts'
+ * import { semigroupSum } from 'fp-ts/lib/Semigroup.ts'
  *
  * const S = getSemigroup<string, number>(semigroupSum)
  * assert.deepStrictEqual(S.concat(left('a'), left('b')), left('a'))
@@ -225,8 +225,8 @@ export function getSemigroup<E, A>(S: Semigroup<A>): Semigroup<Either<E, A>> {
  * `Apply` semigroup
  *
  * @example
- * import { getApplySemigroup, left, right } from 'fp-ts/lib/Either'
- * import { semigroupSum } from 'fp-ts/lib/Semigroup'
+ * import { getApplySemigroup, left, right } from 'fp-ts/lib/Either.ts'
+ * import { semigroupSum } from 'fp-ts/lib/Semigroup.ts'
  *
  * const S = getApplySemigroup<string, number>(semigroupSum)
  * assert.deepStrictEqual(S.concat(left('a'), left('b')), left('a'))
@@ -320,7 +320,7 @@ export function filterOrElse<E, A>(predicate: Predicate<A>, onFalse: (a: A) => E
  * Converts a JavaScript Object Notation (JSON) string into an object.
  *
  * @example
- * import { parseJSON, toError, right, left } from 'fp-ts/lib/Either'
+ * import { parseJSON, toError, right, left } from 'fp-ts/lib/Either.ts'
  *
  * assert.deepStrictEqual(parseJSON('{"a":1}', toError), right({ a: 1 }))
  * assert.deepStrictEqual(parseJSON('{"a":}', toError), left(new SyntaxError('Unexpected token } in JSON at position 5')))
@@ -335,7 +335,7 @@ export function parseJSON<E>(s: string, onError: (reason: unknown) => E): Either
  * Converts a JavaScript value to a JavaScript Object Notation (JSON) string.
  *
  * @example
- * import { stringifyJSON, toError, right, left } from 'fp-ts/lib/Either'
+ * import { stringifyJSON, toError, right, left } from 'fp-ts/lib/Either.ts'
  *
  * assert.deepStrictEqual(stringifyJSON({ a: 1 }, toError), right('{"a":1}'))
  * const circular: any = { ref: null }

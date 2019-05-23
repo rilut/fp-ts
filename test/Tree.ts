@@ -1,10 +1,10 @@
-import * as assert from 'assert'
-import { identity } from '../src/function'
-import * as I from '../src/Identity'
-import { monoidString } from '../src/Monoid'
-import { contramap, Eq, eqNumber } from '../src/Eq'
-import { showString } from '../src/Show'
-import { drawTree, elem, getEq, getShow, Tree, tree, unfoldTree, unfoldTreeM, make } from '../src/Tree'
+import * as assert from 'assert.ts'
+import { identity } from '../src/function.ts'
+import * as I from '../src/Identity.ts'
+import { monoidString } from '../src/Monoid.ts'
+import { contramap, Eq, eqNumber } from '../src/Eq.ts'
+import { showString } from '../src/Show.ts'
+import { drawTree, elem, getEq, getShow, Tree, tree, unfoldTree, unfoldTreeM, make } from '../src/Tree.ts'
 
 describe('Tree', () => {
   it('map', () => {
@@ -56,7 +56,7 @@ describe('Tree', () => {
   it('reduceRight', () => {
     const reduceRight = tree.reduceRight
     const x1 = make('a', [make('b'), make('c')])
-    const init1 = ''
+    const init1 = '.ts'
     const f1 = (a: string, acc: string) => acc + a
     assert.strictEqual(reduceRight(x1, init1, f1), 'cba')
   })

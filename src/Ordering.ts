@@ -1,5 +1,5 @@
-import { Semigroup } from './Semigroup'
-import { Eq } from './Eq'
+import { Semigroup } from './Semigroup.ts'
+import { Eq } from './Eq.ts'
 
 /**
  * @since 2.0.0

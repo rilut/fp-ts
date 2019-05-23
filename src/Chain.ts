@@ -8,8 +8,8 @@
  *
  * Note. `Apply`'s `ap` can be derived: `(fab, fa) => F.chain(fab, f => F.map(f, fa))`
  */
-import { Apply, Apply1, Apply2, Apply2C, Apply3, Apply4 } from './Apply'
-import { HKT, Type, Type2, Type3, Type4, URIS, URIS2, URIS3, URIS4 } from './HKT'
+import { Apply, Apply1, Apply2, Apply2C, Apply3, Apply4 } from './Apply.ts'
+import { HKT, Type, Type2, Type3, Type4, URIS, URIS2, URIS3, URIS4 } from './HKT.ts'
 
 /**
  * @since 2.0.0

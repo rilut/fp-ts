@@ -2,20 +2,20 @@
  * @file `TaskEither<E, A>` represents an asynchronous computation that either yields a value of type `A` or fails yielding an
  * error of type `E`. If you want to represent an asynchronous computation that never fails, please see `Task`.
  */
-import { Alt2 } from './Alt'
-import { Bifunctor2 } from './Bifunctor'
-import * as E from './Either'
-import { getEitherM } from './EitherT'
-import { Predicate, Refinement, Lazy } from './function'
-import { IOEither } from './IOEither'
-import { Monad2 } from './Monad'
-import { MonadIO2 } from './MonadIO'
-import { MonadTask2 } from './MonadTask'
-import { Monoid } from './Monoid'
-import { Semigroup } from './Semigroup'
-import { getSemigroup as getTaskSemigroup, Task, task } from './Task'
-import { Option } from './Option'
-import { IO } from './IO'
+import { Alt2 } from './Alt.ts'
+import { Bifunctor2 } from './Bifunctor.ts'
+import * as E from './Either.ts'
+import { getEitherM } from './EitherT.ts'
+import { Predicate, Refinement, Lazy } from './function.ts'
+import { IOEither } from './IOEither.ts'
+import { Monad2 } from './Monad.ts'
+import { MonadIO2 } from './MonadIO.ts'
+import { MonadTask2 } from './MonadTask.ts'
+import { Monoid } from './Monoid.ts'
+import { Semigroup } from './Semigroup.ts'
+import { getSemigroup as getTaskSemigroup, Task, task } from './Task.ts'
+import { Option } from './Option.ts'
+import { IO } from './IO.ts'
 
 import Either = E.Either
 
@@ -30,7 +30,7 @@ declare module './HKT' {
 /**
  * @since 2.0.0
  */
-export const URI = 'TaskEither'
+export const URI = 'TaskEither.ts'
 
 /**
  * @since 2.0.0
@@ -209,8 +209,8 @@ export const bracket: <E, A, B>(
  * ```
  *
  * @example
- * import { taskify } from 'fp-ts/lib/TaskEither'
- * import * as fs from 'fs'
+ * import { taskify } from 'fp-ts/lib/TaskEither.ts'
+ * import * as fs from 'fs.ts'
  *
  * // const stat: (a: string | Buffer) => TaskEither<NodeJS.ErrnoException, fs.Stats>
  * const stat = taskify(fs.stat)

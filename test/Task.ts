@@ -1,7 +1,7 @@
-import * as assert from 'assert'
-import { array } from '../src/Array'
-import { monoidString } from '../src/Monoid'
-import * as T from '../src/Task'
+import * as assert from 'assert.ts'
+import { array } from '../src/Array.ts'
+import { monoidString } from '../src/Monoid.ts'
+import * as T from '../src/Task.ts'
 
 const delayReject = <A>(n: number, a: A): T.Task<A> => () =>
   new Promise<A>((_, reject) => {

@@ -1,8 +1,8 @@
-import * as assert from 'assert'
-import * as O from '../src/Option'
-import { getOptionM } from '../src/OptionT'
-import { task } from '../src/Task'
-import { pipeOp as pipe } from '../src/function'
+import * as assert from 'assert.ts'
+import * as O from '../src/Option.ts'
+import { getOptionM } from '../src/OptionT.ts'
+import { task } from '../src/Task.ts'
+import { pipeOp as pipe } from '../src/function.ts'
 
 const T = getOptionM(task)
 

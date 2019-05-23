@@ -1,12 +1,12 @@
-import * as assert from 'assert'
-import { sequenceT, sequenceS } from '../src/Apply'
-import { either, left, right, getValidationApplicative } from '../src/Either'
-import { none, option, some, isSome, isNone } from '../src/Option'
-import * as fc from 'fast-check'
-import { getSome } from './property-test/Option'
-import { nonEmptyArray } from './property-test/NonEmptyArray'
-import { getEq, array, getMonoid } from '../src/Array'
-import { fromEquals } from '../src/Eq'
+import * as assert from 'assert.ts'
+import { sequenceT, sequenceS } from '../src/Apply.ts'
+import { either, left, right, getValidationApplicative } from '../src/Either.ts'
+import { none, option, some, isSome, isNone } from '../src/Option.ts'
+import * as fc from 'fast-check.ts'
+import { getSome } from './property-test/Option.ts'
+import { nonEmptyArray } from './property-test/NonEmptyArray.ts'
+import { getEq, array, getMonoid } from '../src/Array.ts'
+import { fromEquals } from '../src/Eq.ts'
 
 describe('Apply', () => {
   it('sequenceT', () => {

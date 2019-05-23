@@ -1,11 +1,11 @@
-import * as assert from 'assert'
-import { array } from '../src/Array'
-import { foldM, getFoldableComposition, intercalate, traverse_ } from '../src/Foldable'
-import { io } from '../src/IO'
-import { monoidString } from '../src/Monoid'
-import * as option from '../src/Option'
+import * as assert from 'assert.ts'
+import { array } from '../src/Array.ts'
+import { foldM, getFoldableComposition, intercalate, traverse_ } from '../src/Foldable.ts'
+import { io } from '../src/IO.ts'
+import { monoidString } from '../src/Monoid.ts'
+import * as option from '../src/Option.ts'
 
-export const ArrayOptionURI = 'ArrayOption'
+export const ArrayOptionURI = 'ArrayOption.ts'
 
 export type ArrayOptionURI = typeof ArrayOptionURI
 
@@ -25,7 +25,7 @@ describe('Foldable', () => {
     // reduceRight
     assert.strictEqual(
       F.reduceRight([option.some('a'), option.some('b'), option.some('c')], '', monoidString.concat),
-      'abc'
+      'abc.ts'
     )
     assert.strictEqual(F.reduceRight([option.none, option.some('b'), option.none], '', monoidString.concat), 'b')
     assert.strictEqual(F.reduceRight([option.none, option.none, option.none], '', monoidString.concat), '')
@@ -37,7 +37,7 @@ describe('Foldable', () => {
   })
 
   it('traverse_', () => {
-    let log = ''
+    let log = '.ts'
     const append = (s: String) => () => (log += s)
     traverse_(io, array)(['a', 'b', 'c'], append)()
     assert.strictEqual(log, 'abc')

@@ -1,7 +1,7 @@
-import { phantom } from './function'
-import { Functor2 } from './Functor'
-import { Monad2C } from './Monad'
-import { Monoid } from './Monoid'
+import { phantom } from './function.ts'
+import { Functor2 } from './Functor.ts'
+import { Monad2C } from './Monad.ts'
+import { Monoid } from './Monoid.ts'
 
 declare module './HKT' {
   interface URI2HKT2<L, A> {
@@ -12,7 +12,7 @@ declare module './HKT' {
 /**
  * @since 2.0.0
  */
-export const URI = 'Writer'
+export const URI = 'Writer.ts'
 
 /**
  * @since 2.0.0

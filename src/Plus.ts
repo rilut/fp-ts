@@ -10,8 +10,8 @@
  * 2. Right identity: `A.alt(fa, zero) == fa`
  * 3. Annihilation: `A.map(zero, fa) == zero`
  */
-import { Alt, Alt1, Alt2, Alt2C, Alt3 } from './Alt'
-import { HKT, Type, Type2, Type3, URIS, URIS2, URIS3 } from './HKT'
+import { Alt, Alt1, Alt2, Alt2C, Alt3 } from './Alt.ts'
+import { HKT, Type, Type2, Type3, URIS, URIS2, URIS3 } from './HKT.ts'
 
 /**
  * @since 2.0.0

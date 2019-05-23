@@ -1,6 +1,6 @@
-import * as assert from 'assert'
-import { getContM } from '../src/ContT'
-import { IO, io } from '../src/IO'
+import * as assert from 'assert.ts'
+import { getContM } from '../src/ContT.ts'
+import { IO, io } from '../src/IO.ts'
 
 const T = getContM(io)
 

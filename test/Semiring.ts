@@ -1,6 +1,6 @@
-import * as assert from 'assert'
-import { getFunctionSemiring } from '../src/Semiring'
-import { fieldNumber } from '../src/Field'
+import * as assert from 'assert.ts'
+import { getFunctionSemiring } from '../src/Semiring.ts'
+import { fieldNumber } from '../src/Field.ts'
 
 describe('Semiring', () => {
   it('getFunctionSemiring', () => {

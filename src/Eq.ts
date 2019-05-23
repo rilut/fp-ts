@@ -68,7 +68,7 @@ export function getStructEq<O extends { [key: string]: any }>(eqs: { [K in keyof
  * Given a tuple of `Eq`s returns a `Eq` for the tuple
  *
  * @example
- * import { getTupleEq, eqString, eqNumber, eqBoolean } from 'fp-ts/lib/Eq'
+ * import { getTupleEq, eqString, eqNumber, eqBoolean } from 'fp-ts/lib/Eq.ts'
  *
  * const E = getTupleEq(eqString, eqNumber, eqBoolean)
  * assert.strictEqual(E.equals(['a', 1, true], ['a', 1, true]), true)

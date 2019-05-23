@@ -7,7 +7,7 @@
  *
  * Adapted from https://github.com/LiamGoodacre/purescript-filterable/blob/master/src/Data/Compactable.purs
  */
-import { Either } from './Either'
+import { Either } from './Either.ts'
 import {
   Functor,
   Functor1,
@@ -22,9 +22,9 @@ import {
   FunctorComposition22C,
   FunctorComposition2C1,
   getFunctorComposition
-} from './Functor'
-import { HKT, Type, Type2, Type3, URIS, URIS2, URIS3 } from './HKT'
-import { getLeft, getRight, Option } from './Option'
+} from './Functor.ts'
+import { HKT, Type, Type2, Type3, URIS, URIS2, URIS3 } from './HKT.ts'
+import { getLeft, getRight, Option } from './Option.ts'
 
 /**
  * A `Separated` type which holds `left` and `right` parts.

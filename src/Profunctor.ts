@@ -1,5 +1,5 @@
-import { Functor2, Functor2C, Functor3, Functor4 } from './Functor'
-import { HKT2, Type2, Type3, Type4, URIS2, URIS3, URIS4 } from './HKT'
+import { Functor2, Functor2C, Functor3, Functor4 } from './Functor.ts'
+import { HKT2, Type2, Type3, Type4, URIS2, URIS3, URIS4 } from './HKT.ts'
 
 /**
  * @since 2.0.0

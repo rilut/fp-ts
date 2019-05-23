@@ -9,7 +9,7 @@
  * 1. Identity: `F.map(fa, a => a) = fa`
  * 2. Composition: `F.map(fa, a => bc(ab(a))) = F.map(F.map(fa, ab), bc)`
  */
-import { HKT, Type, Type2, Type3, Type4, URIS, URIS2, URIS3, URIS4 } from './HKT'
+import { HKT, Type, Type2, Type3, Type4, URIS, URIS2, URIS3, URIS4 } from './HKT.ts'
 
 /**
  * @since 2.0.0

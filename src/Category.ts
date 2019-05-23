@@ -1,5 +1,5 @@
-import { HKT2, Type2, Type3, URIS2, URIS3, URIS4, Type4 } from './HKT'
-import { Semigroupoid, Semigroupoid2, Semigroupoid3, Semigroupoid4 } from './Semigroupoid'
+import { HKT2, Type2, Type3, URIS2, URIS3, URIS4, Type4 } from './HKT.ts'
+import { Semigroupoid, Semigroupoid2, Semigroupoid3, Semigroupoid4 } from './Semigroupoid.ts'
 
 /**
  * @since 2.0.0

@@ -1,15 +1,15 @@
-import { Separated } from './Compactable'
-import { Either } from './Either'
-import { Filterable, Filterable1, Filterable2, Filterable2C, Filterable3 } from './Filterable'
+import { Separated } from './Compactable.ts'
+import { Either } from './Either.ts'
+import { Filterable, Filterable1, Filterable2, Filterable2C, Filterable3 } from './Filterable.ts'
 import {
   FunctorWithIndex,
   FunctorWithIndex1,
   FunctorWithIndex2,
   FunctorWithIndex2C,
   FunctorWithIndex3
-} from './FunctorWithIndex'
-import { HKT, Type, Type2, Type3, URIS, URIS2, URIS3 } from './HKT'
-import { Option } from './Option'
+} from './FunctorWithIndex.ts'
+import { HKT, Type, Type2, Type3, URIS, URIS2, URIS3 } from './HKT.ts'
+import { Option } from './Option.ts'
 
 /**
  * @since 2.0.0

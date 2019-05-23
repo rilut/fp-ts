@@ -1,14 +1,14 @@
-import * as RTE from './ReaderTaskEither'
-import { getStateM } from './StateT'
-import { Monad4 } from './Monad'
-import { Either } from './Either'
-import { State } from './State'
-import { Task } from './Task'
-import { TaskEither } from './TaskEither'
-import { Reader } from './Reader'
-import { IOEither } from './IOEither'
-import { Option } from './Option'
-import { IO } from './IO'
+import * as RTE from './ReaderTaskEither.ts'
+import { getStateM } from './StateT.ts'
+import { Monad4 } from './Monad.ts'
+import { Either } from './Either.ts'
+import { State } from './State.ts'
+import { Task } from './Task.ts'
+import { TaskEither } from './TaskEither.ts'
+import { Reader } from './Reader.ts'
+import { IOEither } from './IOEither.ts'
+import { Option } from './Option.ts'
+import { IO } from './IO.ts'
 
 import ReaderTaskEither = RTE.ReaderTaskEither
 
@@ -23,7 +23,7 @@ declare module './HKT' {
 /**
  * @since 2.0.0
  */
-export const URI = 'StateReaderTaskEither'
+export const URI = 'StateReaderTaskEither.ts'
 
 /**
  * @since 2.0.0

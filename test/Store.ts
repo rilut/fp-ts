@@ -1,7 +1,7 @@
-import * as assert from 'assert'
-import { Store, store, seek, seeks, peeks, experiment } from '../src/Store'
-import { array } from '../src/Array'
-import { pipeOp as pipe } from '../src/function'
+import * as assert from 'assert.ts'
+import { Store, store, seek, seeks, peeks, experiment } from '../src/Store.ts'
+import { array } from '../src/Array.ts'
+import { pipeOp as pipe } from '../src/function.ts'
 
 const len = (s: string): number => s.length
 

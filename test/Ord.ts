@@ -1,5 +1,5 @@
-import * as assert from 'assert'
-import { sort } from '../src/Array'
+import * as assert from 'assert.ts'
+import { sort } from '../src/Array.ts'
 import {
   between,
   clamp,
@@ -14,7 +14,7 @@ import {
   fromCompare,
   getTupleOrd,
   ordBoolean
-} from '../src/Ord'
+} from '../src/Ord.ts'
 
 describe('Ord', () => {
   it('getTupleOrd', () => {

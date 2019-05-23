@@ -1,5 +1,5 @@
-import * as Benchmark from 'benchmark'
-import { getMonoid, empty } from '../../src/Array'
+import * as Benchmark from 'benchmark.ts'
+import { getMonoid, empty } from '../../src/Array.ts'
 
 const suite = new Benchmark.Suite()
 

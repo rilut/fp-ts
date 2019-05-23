@@ -1,15 +1,15 @@
-import * as assert from 'assert'
-import * as M from '../src/Map'
-import { semigroupSum, getStructSemigroup, getFirstSemigroup, getLastSemigroup } from '../src/Semigroup'
-import { monoidString } from '../src/Monoid'
-import { Refinement, identity } from '../src/function'
-import { option, some, none, Option } from '../src/Option'
-import { Eq, eqNumber, fromEquals } from '../src/Eq'
-import { array } from '../src/Array'
-import { Either, left, right } from '../src/Either'
-import * as I from '../src/Identity'
-import { contramap, ordString, fromCompare, ordNumber } from '../src/Ord'
-import { showString, getStructShow, Show } from '../src/Show'
+import * as assert from 'assert.ts'
+import * as M from '../src/Map.ts'
+import { semigroupSum, getStructSemigroup, getFirstSemigroup, getLastSemigroup } from '../src/Semigroup.ts'
+import { monoidString } from '../src/Monoid.ts'
+import { Refinement, identity } from '../src/function.ts'
+import { option, some, none, Option } from '../src/Option.ts'
+import { Eq, eqNumber, fromEquals } from '../src/Eq.ts'
+import { array } from '../src/Array.ts'
+import { Either, left, right } from '../src/Either.ts'
+import * as I from '../src/Identity.ts'
+import { contramap, ordString, fromCompare, ordNumber } from '../src/Ord.ts'
+import { showString, getStructShow, Show } from '../src/Show.ts'
 
 interface User {
   id: string
@@ -383,7 +383,7 @@ describe('Map', () => {
         assert.deepStrictEqual(filter(a1b3, p), b3)
 
         // refinements
-        const isNumber = (u: string | number): u is number => typeof u === 'number'
+        const isNumber = (u: string | number): u is number => typeof u === 'number.ts'
         const y = new Map<string, string | number>([['a', 1], ['b', 'foo']])
         const a1 = new Map<string, number>([['a', 1]])
         const actual = filter(y, isNumber)
@@ -459,7 +459,7 @@ describe('Map', () => {
       it('reduceRight', () => {
         const reduceRightO = M.getTraversableWithIndex(ordUser).reduceRight
         const m = new Map<User, string>([[{ id: 'a' }, 'a'], [{ id: 'b' }, 'b']])
-        const init = ''
+        const init = '.ts'
         const f = (a: string, acc: string) => acc + a
         assert.strictEqual(reduceRightO(m, init, f), 'ba')
       })
@@ -568,7 +568,7 @@ describe('Map', () => {
 
       // refinements
       const filterWithIndexStr = M.getFilterableWithIndex<string>().filterWithIndex
-      const isNumber = (_: string, u: string | number): u is number => typeof u === 'number'
+      const isNumber = (_: string, u: string | number): u is number => typeof u === 'number.ts'
       const y = new Map<string, string | number>([['a', 1], ['b', 'foo']])
       const a1 = new Map<string, number>([['a', 1]])
       const actual = filterWithIndexStr(y, isNumber)

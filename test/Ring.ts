@@ -1,6 +1,6 @@
-import * as assert from 'assert'
-import { fieldNumber } from '../src/Field'
-import { negate, getFunctionRing, getTupleRing } from '../src/Ring'
+import * as assert from 'assert.ts'
+import { fieldNumber } from '../src/Field.ts'
+import { negate, getFunctionRing, getTupleRing } from '../src/Ring.ts'
 
 describe('Ring', () => {
   it('getTupleRing', () => {

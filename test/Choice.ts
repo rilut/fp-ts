@@ -1,7 +1,7 @@
-import * as assert from 'assert'
-import { fanin, splitChoice } from '../src/Choice'
-import { left, right } from '../src/Either'
-import { reader } from '../src/Reader'
+import * as assert from 'assert.ts'
+import { fanin, splitChoice } from '../src/Choice.ts'
+import { left, right } from '../src/Either.ts'
+import { reader } from '../src/Reader.ts'
 
 describe('Choice', () => {
   it('splitChoice', () => {

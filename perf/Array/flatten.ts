@@ -1,6 +1,6 @@
-import * as Benchmark from 'benchmark'
-import { array, flatten } from '../../src/Array'
-import { identity } from '../../src/function'
+import * as Benchmark from 'benchmark.ts'
+import { array, flatten } from '../../src/Array.ts'
+import { identity } from '../../src/function.ts'
 
 const suite = new Benchmark.Suite()
 

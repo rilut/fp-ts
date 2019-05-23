@@ -1,9 +1,9 @@
-import * as assert from 'assert'
-import * as C from '../src/Const'
-import { eqNumber } from '../src/Eq'
-import { identity } from '../src/function'
-import * as I from '../src/Identity'
-import { fold, monoidString, monoidSum } from '../src/Monoid'
+import * as assert from 'assert.ts'
+import * as C from '../src/Const.ts'
+import { eqNumber } from '../src/Eq.ts'
+import { identity } from '../src/function.ts'
+import * as I from '../src/Identity.ts'
+import { fold, monoidString, monoidSum } from '../src/Monoid.ts'
 import {
   cons,
   copy,
@@ -33,10 +33,10 @@ import {
   sort,
   tail,
   updateAt
-} from '../src/NonEmptyArray'
-import { isSome, none, option, some } from '../src/Option'
-import { ordNumber } from '../src/Ord'
-import { showString } from '../src/Show'
+} from '../src/NonEmptyArray.ts'
+import { isSome, none, option, some } from '../src/Option.ts'
+import { ordNumber } from '../src/Ord.ts'
+import { showString } from '../src/Show.ts'
 
 describe.only('NonEmptyArray', () => {
   it('head', () => {
@@ -133,7 +133,7 @@ describe.only('NonEmptyArray', () => {
   it('reduceRight', () => {
     const reduceRight = nonEmptyArray.reduceRight
     const x1 = make(['a', 'b', 'c'])
-    const init1 = ''
+    const init1 = '.ts'
     const f1 = (a: string, acc: string) => acc + a
     assert.strictEqual(reduceRight(x1, init1, f1), 'cba')
   })

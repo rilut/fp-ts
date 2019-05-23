@@ -1,6 +1,6 @@
-import * as assert from 'assert'
-import { array } from '../src/Array'
-import { boundedNumber } from '../src/Bounded'
+import * as assert from 'assert.ts'
+import { array } from '../src/Array.ts'
+import { boundedNumber } from '../src/Bounded.ts'
 import {
   fold,
   getEndomorphismMonoid,
@@ -13,7 +13,7 @@ import {
   monoidString,
   monoidSum,
   getDualMonoid
-} from '../src/Monoid'
+} from '../src/Monoid.ts'
 
 describe('Monoid', () => {
   it('getTupleMonoid', () => {

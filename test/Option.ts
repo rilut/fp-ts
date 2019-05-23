@@ -1,14 +1,14 @@
-import * as assert from 'assert'
-import { array } from '../src/Array'
-import { left, right } from '../src/Either'
-import { eqNumber } from '../src/Eq'
-import { identity, pipeOp as pipe } from '../src/function'
-import * as I from '../src/Identity'
-import { monoidString, monoidSum } from '../src/Monoid'
-import * as O from '../src/Option'
-import { ordString } from '../src/Ord'
-import { semigroupString, semigroupSum } from '../src/Semigroup'
-import { showString } from '../src/Show'
+import * as assert from 'assert.ts'
+import { array } from '../src/Array.ts'
+import { left, right } from '../src/Either.ts'
+import { eqNumber } from '../src/Eq.ts'
+import { identity, pipeOp as pipe } from '../src/function.ts'
+import * as I from '../src/Identity.ts'
+import { monoidString, monoidSum } from '../src/Monoid.ts'
+import * as O from '../src/Option.ts'
+import { ordString } from '../src/Ord.ts'
+import { semigroupString, semigroupSum } from '../src/Semigroup.ts'
+import { showString } from '../src/Show.ts'
 
 const p = (n: number): boolean => n > 2
 
@@ -18,7 +18,7 @@ describe('Option', () => {
   })
 
   it('fold', () => {
-    const f = () => 'none'
+    const f = () => 'none.ts'
     const g = (s: string) => `some${s.length}`
     const fold = O.fold(f, g)
     assert.strictEqual(fold(O.none), 'none')
@@ -179,7 +179,7 @@ describe('Option', () => {
     assert.deepStrictEqual(f(1), O.none)
     assert.deepStrictEqual(f(3), O.some(3))
 
-    type Direction = 'asc' | 'desc'
+    type Direction = 'asc' | 'desc.ts'
     const parseDirection = O.fromPredicate((s: string): s is Direction => s === 'asc' || s === 'desc')
     assert.deepStrictEqual(parseDirection('asc'), O.some('asc'))
     assert.deepStrictEqual(parseDirection('foo'), O.none)
@@ -213,7 +213,7 @@ describe('Option', () => {
   it('reduceRight', () => {
     const reduceRight = O.option.reduceRight
     const x1 = O.some('a')
-    const init1 = ''
+    const init1 = '.ts'
     const f1 = (a: string, acc: string) => acc + a
     assert.strictEqual(reduceRight(x1, init1, f1), 'a')
     const x2: O.Option<string> = O.none

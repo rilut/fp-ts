@@ -3,7 +3,7 @@
  *
  * - `a ∨ 0 == a`
  */
-import { JoinSemilattice } from './JoinSemilattice'
+import { JoinSemilattice } from './JoinSemilattice.ts'
 
 /**
  * @since 2.0.0

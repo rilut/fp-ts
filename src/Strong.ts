@@ -25,10 +25,10 @@
  *
  * Adapted from https://github.com/purescript/purescript-profunctor/blob/master/src/Data/Profunctor/Strong.purs
  */
-import { Category, Category2, Category3, Category4 } from './Category'
-import { identity } from './function'
-import { HKT2, Type2, Type3, URIS2, URIS3, URIS4, Type4 } from './HKT'
-import { Profunctor, Profunctor2, Profunctor3, Profunctor4 } from './Profunctor'
+import { Category, Category2, Category3, Category4 } from './Category.ts'
+import { identity } from './function.ts'
+import { HKT2, Type2, Type3, URIS2, URIS3, URIS4, Type4 } from './HKT.ts'
+import { Profunctor, Profunctor2, Profunctor3, Profunctor4 } from './Profunctor.ts'
 
 /**
  * @since 2.0.0

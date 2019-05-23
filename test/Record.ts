@@ -1,14 +1,14 @@
-import * as assert from 'assert'
-import * as R from '../src/Record'
-import { semigroupSum, getLastSemigroup, getFirstSemigroup } from '../src/Semigroup'
-import { monoidString } from '../src/Monoid'
-import { identity } from '../src/function'
-import { option, some, none, Option, getOrElse } from '../src/Option'
-import { eqNumber } from '../src/Eq'
-import { array, zip } from '../src/Array'
-import { left, right } from '../src/Either'
-import * as I from '../src/Identity'
-import { showString } from '../src/Show'
+import * as assert from 'assert.ts'
+import * as R from '../src/Record.ts'
+import { semigroupSum, getLastSemigroup, getFirstSemigroup } from '../src/Semigroup.ts'
+import { monoidString } from '../src/Monoid.ts'
+import { identity } from '../src/function.ts'
+import { option, some, none, Option, getOrElse } from '../src/Option.ts'
+import { eqNumber } from '../src/Eq.ts'
+import { array, zip } from '../src/Array.ts'
+import { left, right } from '../src/Either.ts'
+import * as I from '../src/Identity.ts'
+import { showString } from '../src/Show.ts'
 
 const p = (n: number) => n > 2
 
@@ -48,7 +48,7 @@ describe('Record', () => {
   it('reduceRight', () => {
     const reduceRight = R.record.reduceRight
     const x1 = { a: 'a', b: 'b' }
-    const init1 = ''
+    const init1 = '.ts'
     const f1 = (a: string, acc: string) => acc + a
     assert.strictEqual(reduceRight(x1, init1, f1), 'ba')
   })
@@ -159,7 +159,7 @@ describe('Record', () => {
     assert.deepStrictEqual(R.filter(d, p), { b: 3 })
 
     // refinements
-    const isNumber = (u: string | number): u is number => typeof u === 'number'
+    const isNumber = (u: string | number): u is number => typeof u === 'number.ts'
     const y: Record<string, string | number> = { a: 1, b: 'foo' }
     const actual = R.filter(y, isNumber)
     assert.deepStrictEqual(actual, { a: 1 })

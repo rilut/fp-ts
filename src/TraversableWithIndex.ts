@@ -18,11 +18,11 @@
  * mapWithIndex(ta, f) = traverseWithIndex(identity)(ta, (i, a) => new Identity(f(i, a))).value
  * ```
  */
-import { Applicative, Applicative1, Applicative2, Applicative2C, Applicative3 } from './Applicative'
-import { FoldableWithIndex, FoldableWithIndex1, FoldableWithIndex2, FoldableWithIndex2C } from './FoldableWithIndex'
-import { FunctorWithIndex, FunctorWithIndex1, FunctorWithIndex2, FunctorWithIndex2C } from './FunctorWithIndex'
-import { HKT, Type, Type2, Type3, URIS, URIS2, URIS3 } from './HKT'
-import { Traversable, Traversable1, Traversable2, Traversable2C } from './Traversable'
+import { Applicative, Applicative1, Applicative2, Applicative2C, Applicative3 } from './Applicative.ts'
+import { FoldableWithIndex, FoldableWithIndex1, FoldableWithIndex2, FoldableWithIndex2C } from './FoldableWithIndex.ts'
+import { FunctorWithIndex, FunctorWithIndex1, FunctorWithIndex2, FunctorWithIndex2C } from './FunctorWithIndex.ts'
+import { HKT, Type, Type2, Type3, URIS, URIS2, URIS3 } from './HKT.ts'
+import { Traversable, Traversable1, Traversable2, Traversable2C } from './Traversable.ts'
 
 /**
  * @since 2.0.0

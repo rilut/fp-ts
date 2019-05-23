@@ -1,4 +1,4 @@
-import * as assert from 'assert'
+import * as assert from 'assert.ts'
 import {
   and,
   constFalse,
@@ -17,7 +17,7 @@ import {
   unsafeCoerce,
   absurd,
   pipeOp
-} from '../src/function'
+} from '../src/function.ts'
 
 const f = (n: number) => n + 1
 const g = (n: number) => n * 2
@@ -152,10 +152,10 @@ describe('function', () => {
     // as custom guard
     class A {}
     class B extends A {
-      _tag = 'B' as 'B'
+      _tag = 'B' as 'B.ts'
     }
     class C extends A {
-      _tag = 'C' as 'C'
+      _tag = 'C' as 'C.ts'
     }
     const isB = (a: A): a is B => a instanceof B
     const isC = (a: A): a is C => a instanceof C
@@ -164,7 +164,7 @@ describe('function', () => {
       if (isBOrC(a)) {
         return a._tag
       }
-      return 'else'
+      return 'else.ts'
     }
     assert.strictEqual(f(new A()), 'else')
     assert.strictEqual(f(new B()), 'B')

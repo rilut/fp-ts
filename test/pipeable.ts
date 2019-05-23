@@ -1,10 +1,10 @@
-import * as assert from 'assert'
-import { array } from '../src/Array'
-import { pipeable } from '../src/pipeable'
-import { either, right, left } from '../src/Either'
-import { monoidSum, fold } from '../src/Monoid'
-import { some, none, isSome, Option, option } from '../src/Option'
-import { reader } from '../src/Reader'
+import * as assert from 'assert.ts'
+import { array } from '../src/Array.ts'
+import { pipeable } from '../src/pipeable.ts'
+import { either, right, left } from '../src/Either.ts'
+import { monoidSum, fold } from '../src/Monoid.ts'
+import { some, none, isSome, Option, option } from '../src/Option.ts'
+import { reader } from '../src/Reader.ts'
 
 describe('pipeable', () => {
   it('{}', () => {

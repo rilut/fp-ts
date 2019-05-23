@@ -1,12 +1,12 @@
-import * as assert from 'assert'
-import { array } from '../src/Array'
-import * as E from '../src/Either'
-import { io } from '../src/IO'
-import { reader } from '../src/Reader'
-import * as _ from '../src/ReaderTaskEither'
-import { task } from '../src/Task'
-import { taskEither } from '../src/TaskEither'
-import { pipeOp as pipe } from '../src/function'
+import * as assert from 'assert.ts'
+import { array } from '../src/Array.ts'
+import * as E from '../src/Either.ts'
+import { io } from '../src/IO.ts'
+import { reader } from '../src/Reader.ts'
+import * as _ from '../src/ReaderTaskEither.ts'
+import { task } from '../src/Task.ts'
+import { taskEither } from '../src/TaskEither.ts'
+import { pipeOp as pipe } from '../src/function.ts'
 
 describe('ReaderTaskEither', () => {
   describe('Monad', () => {
@@ -70,7 +70,7 @@ describe('ReaderTaskEither', () => {
         _.asks((n: number) => n + 1),
         _.local(len)
       ),
-      'aaa'
+      'aaa.ts'
     )
     assert.deepStrictEqual(e, E.right(4))
   })
@@ -165,7 +165,7 @@ describe('ReaderTaskEither', () => {
     const predicate = (n: number) => n >= 2
     const gt2 = _.fromPredicate(predicate, n => `Invalid number ${n}`)
 
-    const refinement = (u: string | number): u is number => typeof u === 'number'
+    const refinement = (u: string | number): u is number => typeof u === 'number.ts'
     const isNumber = _.fromPredicate(refinement, u => `Invalid number ${String(u)}`)
 
     const rtes = [gt2(3), gt2(1), isNumber(4)]

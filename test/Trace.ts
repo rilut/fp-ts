@@ -1,8 +1,8 @@
-import * as assert from 'assert'
-import { head } from '../src/Array'
-import { option, some, isSome } from '../src/Option'
-import { pipe, pipeable } from '../src/pipeable'
-import { spy, trace } from '../src/Trace'
+import * as assert from 'assert.ts'
+import { head } from '../src/Array.ts'
+import { option, some, isSome } from '../src/Option.ts'
+import { pipe, pipeable } from '../src/pipeable.ts'
+import { spy, trace } from '../src/Trace.ts'
 
 const O = pipeable(option)
 

@@ -1,5 +1,5 @@
-import * as assert from 'assert'
-import { showString, showNumber, showBoolean, getStructShow, getTupleShow } from '../src/Show'
+import * as assert from 'assert.ts'
+import { showString, showNumber, showBoolean, getStructShow, getTupleShow } from '../src/Show.ts'
 
 describe('Show', () => {
   it('showString', () => {

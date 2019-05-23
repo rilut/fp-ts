@@ -14,7 +14,7 @@
  * <F>(F: Applicative<F>) => <A>(ta: HKT<T, HKT<F, A>>) => HKT<F, HKT<T, A>>
  * ```
  */
-import { Applicative, Applicative1, Applicative2, Applicative2C, Applicative3 } from './Applicative'
+import { Applicative, Applicative1, Applicative2, Applicative2C, Applicative3 } from './Applicative.ts'
 import {
   Foldable,
   Foldable1,
@@ -24,7 +24,7 @@ import {
   FoldableComposition,
   FoldableComposition11,
   getFoldableComposition
-} from './Foldable'
+} from './Foldable.ts'
 import {
   Functor,
   Functor1,
@@ -34,8 +34,8 @@ import {
   FunctorComposition,
   FunctorComposition11,
   getFunctorComposition
-} from './Functor'
-import { HKT, Type, Type2, Type3, URIS, URIS2, URIS3 } from './HKT'
+} from './Functor.ts'
+import { HKT, Type, Type2, Type3, URIS, URIS2, URIS3 } from './HKT.ts'
 
 /**
  * @since 2.0.0
@@ -319,10 +319,10 @@ export interface TraversableComposition11<F extends URIS, G extends URIS>
  * Returns the composition of two traversables
  *
  * @example
- * import { array } from 'fp-ts/lib/Array'
- * import { io } from 'fp-ts/lib/IO'
- * import { none, option, some } from 'fp-ts/lib/Option'
- * import { getTraversableComposition } from 'fp-ts/lib/Traversable'
+ * import { array } from 'fp-ts/lib/Array.ts'
+ * import { io } from 'fp-ts/lib/IO.ts'
+ * import { none, option, some } from 'fp-ts/lib/Option.ts'
+ * import { getTraversableComposition } from 'fp-ts/lib/Traversable.ts'
  *
  * const T = getTraversableComposition(array, option)
  * const state: Record<string, number | undefined> = {

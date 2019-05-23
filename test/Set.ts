@@ -1,6 +1,6 @@
-import * as assert from 'assert'
-import { left, right } from '../src/Either'
-import { ordNumber } from '../src/Ord'
+import * as assert from 'assert.ts'
+import { left, right } from '../src/Either.ts'
+import { ordNumber } from '../src/Ord.ts'
 import {
   chain,
   every,
@@ -28,11 +28,11 @@ import {
   foldMap,
   getShow,
   empty
-} from '../src/Set'
-import { Eq, eqNumber, eqString, contramap, getStructEq } from '../src/Eq'
-import { none, some as optionSome } from '../src/Option'
-import { showString } from '../src/Show'
-import { getMonoid } from '../src/Array'
+} from '../src/Set.ts'
+import { Eq, eqNumber, eqString, contramap, getStructEq } from '../src/Eq.ts'
+import { none, some as optionSome } from '../src/Option.ts'
+import { showString } from '../src/Show.ts'
+import { getMonoid } from '../src/Array.ts'
 
 const gte2 = (n: number) => n >= 2
 
@@ -94,7 +94,7 @@ describe('Set', () => {
 
     // refinements
     const x: Set<string | number> = new Set([1, 'a', 2])
-    const isNumber = (u: string | number): u is number => typeof u === 'number'
+    const isNumber = (u: string | number): u is number => typeof u === 'number.ts'
     const actual = filter(x, isNumber)
     assert.deepStrictEqual(actual, new Set([1, 2]))
   })
@@ -110,7 +110,7 @@ describe('Set', () => {
 
     // refinements
     const x: Set<string | number> = new Set([1, 'a', 2])
-    const isNumber = (u: string | number): u is number => typeof u === 'number'
+    const isNumber = (u: string | number): u is number => typeof u === 'number.ts'
     const actual = partition(x, isNumber)
     assert.deepStrictEqual(actual, {
       left: new Set(['a']),

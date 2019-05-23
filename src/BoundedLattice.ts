@@ -4,8 +4,8 @@
  * - Absorbtion law for meet: `a ∧ (a ∨ b) == a`
  * - Absorbtion law for join: `a ∨ (a ∧ b) == a`
  */
-import { BoundedJoinSemilattice } from './BoundedJoinSemilattice'
-import { BoundedMeetSemilattice } from './BoundedMeetSemilattice'
+import { BoundedJoinSemilattice } from './BoundedJoinSemilattice.ts'
+import { BoundedMeetSemilattice } from './BoundedMeetSemilattice.ts'
 
 /**
  * @since 2.0.0

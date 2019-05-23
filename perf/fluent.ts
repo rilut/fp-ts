@@ -1,7 +1,7 @@
-import * as Benchmark from 'benchmark'
-import * as F from '../src/fluent'
-import { option, some, none, fold } from '../src/Option'
-import { pipeable, apply, pipe } from '../src/pipeable'
+import * as Benchmark from 'benchmark.ts'
+import * as F from '../src/fluent.ts'
+import { option, some, none, fold } from '../src/Option.ts'
+import { pipeable, apply, pipe } from '../src/pipeable.ts'
 
 /*
 

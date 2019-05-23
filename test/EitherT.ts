@@ -1,8 +1,8 @@
-import * as assert from 'assert'
-import * as E from '../src/Either'
-import { getEitherM } from '../src/EitherT'
-import { io } from '../src/IO'
-import { pipeOp as pipe } from '../src/function'
+import * as assert from 'assert.ts'
+import * as E from '../src/Either.ts'
+import { getEitherM } from '../src/EitherT.ts'
+import { io } from '../src/IO.ts'
+import { pipeOp as pipe } from '../src/function.ts'
 
 const T = getEitherM(io)
 
@@ -22,14 +22,14 @@ describe('EitherT', () => {
         io.of(E.right('a')),
         T.getOrElse(onLeft)
       )(),
-      'a'
+      'a.ts'
     )
     assert.strictEqual(
       pipe(
         io.of(E.left('bb')),
         T.getOrElse(onLeft)
       )(),
-      'left(bb)'
+      'left(bb).ts'
     )
   })
 })

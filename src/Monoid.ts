@@ -1,5 +1,5 @@
-import { Bounded } from './Bounded'
-import { Endomorphism, identity } from './function'
+import { Bounded } from './Bounded.ts'
+import { Endomorphism, identity } from './function.ts'
 import {
   fold as foldSemigroup,
   getDualSemigroup,
@@ -15,7 +15,7 @@ import {
   semigroupVoid,
   getStructSemigroup,
   getTupleSemigroup
-} from './Semigroup'
+} from './Semigroup.ts'
 
 /**
  * @since 2.0.0
@@ -65,7 +65,7 @@ export const monoidProduct: Monoid<number> = {
  */
 export const monoidString: Monoid<string> = {
   concat: semigroupString.concat,
-  empty: ''
+  empty: '.ts'
 }
 
 /**
@@ -88,7 +88,7 @@ export function fold<A>(M: Monoid<A>): (as: Array<A>) => A {
  * Given a tuple of monoids returns a monoid for the tuple
  *
  * @example
- * import { getTupleMonoid, monoidString, monoidSum, monoidAll } from 'fp-ts/lib/Monoid'
+ * import { getTupleMonoid, monoidString, monoidSum, monoidAll } from 'fp-ts/lib/Monoid.ts'
  *
  * const M1 = getTupleMonoid(monoidString, monoidSum)
  * assert.deepStrictEqual(M1.concat(['a', 1], ['b', 2]), ['ab', 3])

@@ -1,5 +1,5 @@
-import * as assert from 'assert'
-import * as fc from 'fast-check'
+import * as assert from 'assert.ts'
+import * as fc from 'fast-check.ts'
 import {
   array,
   cons,
@@ -57,16 +57,16 @@ import {
   getShow,
   reverse,
   getEq
-} from '../src/Array'
-import { left, right } from '../src/Either'
-import { fold as foldMonoid, monoidSum, monoidString } from '../src/Monoid'
-import * as O from '../src/Option'
-import { contramap as contramapOrd, ordNumber, ordString } from '../src/Ord'
-import { contramap, eqBoolean, eqNumber, eqString, Eq } from '../src/Eq'
-import { identity, tuple, Predicate } from '../src/function'
-import * as I from '../src/Identity'
-import * as C from '../src/Const'
-import { showString } from '../src/Show'
+} from '../src/Array.ts'
+import { left, right } from '../src/Either.ts'
+import { fold as foldMonoid, monoidSum, monoidString } from '../src/Monoid.ts'
+import * as O from '../src/Option.ts'
+import { contramap as contramapOrd, ordNumber, ordString } from '../src/Ord.ts'
+import { contramap, eqBoolean, eqNumber, eqString, Eq } from '../src/Eq.ts'
+import { identity, tuple, Predicate } from '../src/function.ts'
+import * as I from '../src/Identity.ts'
+import * as C from '../src/Const.ts'
+import { showString } from '../src/Show.ts'
 
 const p = (n: number) => n > 2
 
@@ -196,7 +196,7 @@ describe('Array', () => {
 
     // refinements
     const xs: Array<string | number> = [1, 'a', 3]
-    const isNumber = (u: string | number): u is number => typeof u === 'number'
+    const isNumber = (u: string | number): u is number => typeof u === 'number.ts'
     const actual = span(xs, isNumber)
     assert.deepStrictEqual(actual, { init: [1], rest: ['a', 3] })
   })
@@ -242,16 +242,16 @@ describe('Array', () => {
     assert.deepStrictEqual(findFirst([], x => x === 2), O.none)
     assert.deepStrictEqual(findFirst([{ a: 1, b: 1 }, { a: 1, b: 2 }], x => x.a === 1), O.some({ a: 1, b: 1 }))
     interface A {
-      type: 'A'
+      type: 'A.ts'
       a: number
     }
 
     interface B {
-      type: 'B'
+      type: 'B.ts'
     }
 
     type AOrB = A | B
-    const isA = (x: AOrB): x is A => x.type === 'A'
+    const isA = (x: AOrB): x is A => x.type === 'A.ts'
     const xs1: Array<AOrB> = [{ type: 'B' }, { type: 'A', a: 1 }, { type: 'A', a: 2 }]
     assert.deepStrictEqual(findFirst(xs1, isA), O.some({ type: 'A', a: 1 }))
     const xs2: Array<AOrB> = [{ type: 'B' }]
@@ -418,7 +418,7 @@ describe('Array', () => {
   it('reduceRight', () => {
     const reduceRight = array.reduceRight
     const x1 = ['a', 'b', 'c']
-    const init1 = ''
+    const init1 = '.ts'
     const f1 = (a: string, acc: string) => acc + a
     assert.strictEqual(reduceRight(x1, init1, f1), 'cba')
     const x2: Array<string> = []
@@ -551,7 +551,7 @@ describe('Array', () => {
     assert.deepStrictEqual(partition([1, 3], p), { left: [1], right: [3] })
     // refinements
     const xs: Array<string | number> = ['a', 'b', 1]
-    const isNumber = (x: string | number): x is number => typeof x === 'number'
+    const isNumber = (x: string | number): x is number => typeof x === 'number.ts'
     const actual = partition(xs, isNumber)
     assert.deepStrictEqual(actual, { left: ['a', 'b'], right: [1] })
   })

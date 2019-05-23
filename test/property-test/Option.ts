@@ -1,5 +1,5 @@
-import * as fc from 'fast-check'
-import { Option, some, none } from '../../src/Option'
+import * as fc from 'fast-check.ts'
+import { Option, some, none } from '../../src/Option.ts'
 
 /**
  * Returns an `Arbitrary` that yelds only `some`s

@@ -1,11 +1,11 @@
-import * as assert from 'assert'
-import { identity, pipeOp as pipe } from '../src/function'
-import { monoidString, monoidSum } from '../src/Monoid'
-import { none, option, some } from '../src/Option'
-import { semigroupString } from '../src/Semigroup'
-import { eqNumber } from '../src/Eq'
-import { showString } from '../src/Show'
-import * as _ from '../src/These'
+import * as assert from 'assert.ts'
+import { identity, pipeOp as pipe } from '../src/function.ts'
+import { monoidString, monoidSum } from '../src/Monoid.ts'
+import { none, option, some } from '../src/Option.ts'
+import { semigroupString } from '../src/Semigroup.ts'
+import { eqNumber } from '../src/Eq.ts'
+import { showString } from '../src/Show.ts'
+import * as _ from '../src/These.ts'
 
 describe('These', () => {
   it('getEq', () => {
@@ -218,7 +218,7 @@ describe('These', () => {
   it('reduceRight', () => {
     const reduceRight = _.these.reduceRight
     const x1 = _.right('a')
-    const init1 = ''
+    const init1 = '.ts'
     const f1 = (a: string, acc: string) => acc + a
     assert.strictEqual(reduceRight(x1, init1, f1), 'a')
     const x2 = _.left(1)

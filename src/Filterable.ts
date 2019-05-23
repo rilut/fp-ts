@@ -17,9 +17,9 @@ import {
   CompactableComposition22,
   getCompactableComposition,
   Separated
-} from './Compactable'
-import { Either } from './Either'
-import { Predicate, Refinement } from './function'
+} from './Compactable.ts'
+import { Either } from './Either.ts'
+import { Predicate, Refinement } from './function.ts'
 import {
   Functor,
   Functor1,
@@ -32,9 +32,9 @@ import {
   FunctorComposition12C,
   FunctorComposition21,
   FunctorComposition22
-} from './Functor'
-import { HKT, Type, Type2, Type3, URIS, URIS2, URIS3 } from './HKT'
-import { getLeft, getRight, Option } from './Option'
+} from './Functor.ts'
+import { HKT, Type, Type2, Type3, URIS, URIS2, URIS3 } from './HKT.ts'
+import { getLeft, getRight, Option } from './Option.ts'
 
 /**
  * @since 2.0.0

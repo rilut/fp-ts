@@ -1,7 +1,7 @@
-import * as assert from 'assert'
-import { IO, getSemigroup, io, getMonoid } from '../src/IO'
-import { semigroupSum } from '../src/Semigroup'
-import { monoidSum } from '../src/Monoid'
+import * as assert from 'assert.ts'
+import { IO, getSemigroup, io, getMonoid } from '../src/IO.ts'
+import { semigroupSum } from '../src/Semigroup.ts'
+import { monoidSum } from '../src/Monoid.ts'
 
 describe('IO', () => {
   it('ap', () => {

@@ -1,11 +1,11 @@
-import * as assert from 'assert'
-import * as E from '../src/Either'
-import { io } from '../src/IO'
-import * as _ from '../src/IOEither'
-import { monoidString } from '../src/Monoid'
-import { semigroupSum } from '../src/Semigroup'
-import { none, some } from '../src/Option'
-import { pipeOp as pipe } from '../src/function'
+import * as assert from 'assert.ts'
+import * as E from '../src/Either.ts'
+import { io } from '../src/IO.ts'
+import * as _ from '../src/IOEither.ts'
+import { monoidString } from '../src/Monoid.ts'
+import { semigroupSum } from '../src/Semigroup.ts'
+import { none, some } from '../src/Option.ts'
+import { pipeOp as pipe } from '../src/function.ts'
 
 describe('IOEither', () => {
   it('tryCatch', () => {
@@ -19,7 +19,7 @@ describe('IOEither', () => {
   })
 
   it('filterOrElse', () => {
-    const isNumber = (u: string | number): u is number => typeof u === 'number'
+    const isNumber = (u: string | number): u is number => typeof u === 'number.ts'
 
     assert.deepStrictEqual(
       pipe(
@@ -69,7 +69,7 @@ describe('IOEither', () => {
     assert.deepStrictEqual(gt2(1)(), E.left('Invalid number 1'))
 
     // refinements
-    const isNumber = (u: string | number): u is number => typeof u === 'number'
+    const isNumber = (u: string | number): u is number => typeof u === 'number.ts'
     const from = _.fromPredicate(isNumber, () => 'not a number')
     assert.deepStrictEqual(from(4)(), E.right(4))
   })

@@ -1,11 +1,11 @@
-import { Alt, Alt1, Alt2, Alt2C, Alt3 } from './Alt'
-import { Apply, Apply1, Apply2, Apply2C, Apply3 } from './Apply'
-import { Bifunctor, Bifunctor2, Bifunctor3 } from './Bifunctor'
-import { Chain, Chain1, Chain2, Chain2C, Chain3 } from './Chain'
-import { Compactable, Compactable1, Compactable2, Compactable2C, Compactable3, Separated } from './Compactable'
-import { Either } from './Either'
-import { Extend, Extend1, Extend2, Extend2C, Extend3 } from './Extend'
-import { Filterable, Filterable1, Filterable2, Filterable2C, Filterable3 } from './Filterable'
+import { Alt, Alt1, Alt2, Alt2C, Alt3 } from './Alt.ts'
+import { Apply, Apply1, Apply2, Apply2C, Apply3 } from './Apply.ts'
+import { Bifunctor, Bifunctor2, Bifunctor3 } from './Bifunctor.ts'
+import { Chain, Chain1, Chain2, Chain2C, Chain3 } from './Chain.ts'
+import { Compactable, Compactable1, Compactable2, Compactable2C, Compactable3, Separated } from './Compactable.ts'
+import { Either } from './Either.ts'
+import { Extend, Extend1, Extend2, Extend2C, Extend3 } from './Extend.ts'
+import { Filterable, Filterable1, Filterable2, Filterable2C, Filterable3 } from './Filterable.ts'
 import {
   FilterableWithIndex,
   FilterableWithIndex1,
@@ -14,29 +14,29 @@ import {
   FilterableWithIndex3,
   PredicateWithIndex,
   RefinementWithIndex
-} from './FilterableWithIndex'
-import { Foldable, Foldable1, Foldable2, Foldable2C, Foldable3 } from './Foldable'
+} from './FilterableWithIndex.ts'
+import { Foldable, Foldable1, Foldable2, Foldable2C, Foldable3 } from './Foldable.ts'
 import {
   FoldableWithIndex,
   FoldableWithIndex1,
   FoldableWithIndex2,
   FoldableWithIndex2C,
   FoldableWithIndex3
-} from './FoldableWithIndex'
-import { identity, Predicate, Refinement, pipeOp } from './function'
-import { Functor, Functor1, Functor2, Functor2C, Functor3 } from './Functor'
+} from './FoldableWithIndex.ts'
+import { identity, Predicate, Refinement, pipeOp } from './function.ts'
+import { Functor, Functor1, Functor2, Functor2C, Functor3 } from './Functor.ts'
 import {
   FunctorWithIndex,
   FunctorWithIndex1,
   FunctorWithIndex2,
   FunctorWithIndex2C,
   FunctorWithIndex3
-} from './FunctorWithIndex'
-import { HKT, HKT2, Type, Type2, Type3, URIS, URIS2, URIS3 } from './HKT'
-import { Monoid } from './Monoid'
-import { Option } from './Option'
-import { Profunctor, Profunctor2, Profunctor2C, Profunctor3 } from './Profunctor'
-import { Semigroupoid, Semigroupoid2, Semigroupoid2C, Semigroupoid3 } from './Semigroupoid'
+} from './FunctorWithIndex.ts'
+import { HKT, HKT2, Type, Type2, Type3, URIS, URIS2, URIS3 } from './HKT.ts'
+import { Monoid } from './Monoid.ts'
+import { Option } from './Option.ts'
+import { Profunctor, Profunctor2, Profunctor2C, Profunctor3 } from './Profunctor.ts'
+import { Semigroupoid, Semigroupoid2, Semigroupoid2C, Semigroupoid3 } from './Semigroupoid.ts'
 
 /**
  * @since 2.0.0
@@ -483,21 +483,21 @@ export interface PipeableSemigroupoid3<F extends URIS3> {
   readonly compose: <U, L, A>(la: Type3<F, U, L, A>) => <B>(ab: Type3<F, U, A, B>) => Type3<F, U, L, B>
 }
 
-const isFunctor = <F>(I: any): I is Functor<F> => typeof I.map === 'function'
-const isFunctorWithIndex = <F>(I: any): I is FunctorWithIndex<F, unknown> => typeof I.mapWithIndex === 'function'
-const isApply = <F>(I: any): I is Apply<F> => typeof I.ap === 'function'
-const isChain = <F>(I: any): I is Chain<F> => typeof I.chain === 'function'
-const isBifunctor = <F>(I: any): I is Bifunctor<F> => typeof I.bimap === 'function'
-const isExtend = <F>(I: any): I is Extend<F> => typeof I.extend === 'function'
-const isFoldable = <F>(I: any): I is Foldable<F> => typeof I.reduce === 'function'
-const isFoldableWithIndex = <F>(I: any): I is FoldableWithIndex<F, unknown> => typeof I.reduceWithIndex === 'function'
-const isAlt = <F>(I: any): I is Alt<F> => typeof I.alt === 'function'
-const isCompactable = <F>(I: any): I is Compactable<F> => typeof I.compact === 'function'
-const isFilterable = <F>(I: any): I is Filterable<F> => typeof I.filter === 'function'
+const isFunctor = <F>(I: any): I is Functor<F> => typeof I.map === 'function.ts'
+const isFunctorWithIndex = <F>(I: any): I is FunctorWithIndex<F, unknown> => typeof I.mapWithIndex === 'function.ts'
+const isApply = <F>(I: any): I is Apply<F> => typeof I.ap === 'function.ts'
+const isChain = <F>(I: any): I is Chain<F> => typeof I.chain === 'function.ts'
+const isBifunctor = <F>(I: any): I is Bifunctor<F> => typeof I.bimap === 'function.ts'
+const isExtend = <F>(I: any): I is Extend<F> => typeof I.extend === 'function.ts'
+const isFoldable = <F>(I: any): I is Foldable<F> => typeof I.reduce === 'function.ts'
+const isFoldableWithIndex = <F>(I: any): I is FoldableWithIndex<F, unknown> => typeof I.reduceWithIndex === 'function.ts'
+const isAlt = <F>(I: any): I is Alt<F> => typeof I.alt === 'function.ts'
+const isCompactable = <F>(I: any): I is Compactable<F> => typeof I.compact === 'function.ts'
+const isFilterable = <F>(I: any): I is Filterable<F> => typeof I.filter === 'function.ts'
 const isFilterableWithIndex = <F>(I: any): I is FilterableWithIndex<F, unknown> =>
-  typeof I.filterWithIndex === 'function'
-const isProfunctor = <F>(I: any): I is Profunctor<F> => typeof I.promap === 'function'
-const isSemigroupoid = <F>(I: any): I is Semigroupoid<F> => typeof I.compose === 'function'
+  typeof I.filterWithIndex === 'function.ts'
+const isProfunctor = <F>(I: any): I is Profunctor<F> => typeof I.promap === 'function.ts'
+const isSemigroupoid = <F>(I: any): I is Semigroupoid<F> => typeof I.compose === 'function.ts'
 
 /**
  * @since 2.0.0

@@ -1,9 +1,9 @@
 /**
  * @file Lift a computation from the `IO` monad
  */
-import { HKT, Type, Type2, Type3, URIS, URIS2, URIS3 } from './HKT'
-import { IO } from './IO'
-import { Monad, Monad1, Monad2, Monad3, Monad2C } from './Monad'
+import { HKT, Type, Type2, Type3, URIS, URIS2, URIS3 } from './HKT.ts'
+import { IO } from './IO.ts'
+import { Monad, Monad1, Monad2, Monad3, Monad2C } from './Monad.ts'
 
 /**
  * @since 2.0.0

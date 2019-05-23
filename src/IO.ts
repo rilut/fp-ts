@@ -13,7 +13,7 @@
  * Below are some basic examples of how you can wrap values and function calls with `IO`.
  *
  * ```ts
- * import { IO, io } from 'fp-ts/lib/IO'
+ * import { IO, io } from 'fp-ts/lib/IO.ts'
  *
  * const constant: IO<number> = io.of(123)
  * constant()  // returns 123
@@ -36,9 +36,9 @@
  * `console.log()`.
  *
  * ```ts
- * import { IO } from 'fp-ts/lib/IO'
- * import { fromNullable, fold } from 'fp-ts/lib/Option'
- * import { log } from 'fp-ts/lib/Console'
+ * import { IO } from 'fp-ts/lib/IO.ts'
+ * import { fromNullable, fold } from 'fp-ts/lib/Option.ts'
+ * import { log } from 'fp-ts/lib/Console.ts'
  *
  * const logger = (input: number|null) => fold(fromNullable(input),
  *   log('Received null'),
@@ -54,10 +54,10 @@
  * care about the execution order but do not care about the results.
  *
  * ```ts
- * import { IO, io } from 'fp-ts/lib/IO'
- * import { array } from 'fp-ts/lib/Array'
- * import { sequence_ } from 'fp-ts/lib/Foldable'
- * import { log } from 'fp-ts/lib/Console'
+ * import { IO, io } from 'fp-ts/lib/IO.ts'
+ * import { array } from 'fp-ts/lib/Array.ts'
+ * import { sequence_ } from 'fp-ts/lib/Foldable.ts'
+ * import { log } from 'fp-ts/lib/Console.ts'
  *
  * const logGiraffe: IO<void> = log('giraffe');
  * const logZebra: IO<void> = log('zebra');
@@ -72,8 +72,8 @@
  * results but do not care about the execution order.
  *
  * ```ts
- * import { IO, io } from 'fp-ts/lib/IO'
- * import { sequenceS } from 'fp-ts/lib/Apply'
+ * import { IO, io } from 'fp-ts/lib/IO.ts'
+ * import { sequenceS } from 'fp-ts/lib/Apply.ts'
  *
  * interface Result {
  *   name: string,
@@ -90,11 +90,11 @@
  * computation() // returns { name: 'Aristotle', age: 60 }
  * ```
  */
-import { identity } from './function'
-import { Monad1 } from './Monad'
-import { MonadIO1 } from './MonadIO'
-import { Monoid } from './Monoid'
-import { Semigroup } from './Semigroup'
+import { identity } from './function.ts'
+import { Monad1 } from './Monad.ts'
+import { MonadIO1 } from './MonadIO.ts'
+import { Monoid } from './Monoid.ts'
+import { Semigroup } from './Semigroup.ts'
 
 declare module './HKT' {
   interface URI2HKT<A> {
@@ -105,7 +105,7 @@ declare module './HKT' {
 /**
  * @since 2.0.0
  */
-export const URI = 'IO'
+export const URI = 'IO.ts'
 
 /**
  * @since 2.0.0

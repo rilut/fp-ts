@@ -4,10 +4,10 @@
  * - https://wiki.haskell.org/Typeclassopedia#Alternative_formulation
  * - https://bartoszmilewski.com/2017/02/06/applicative-functors/
  */
-import { Applicative, Applicative1, Applicative2, Applicative3 } from './Applicative'
-import { constant } from './function'
-import { Functor, Functor1, Functor2, Functor2C, Functor3 } from './Functor'
-import { HKT, Type, Type2, Type3, URIS, URIS2, URIS3 } from './HKT'
+import { Applicative, Applicative1, Applicative2, Applicative3 } from './Applicative.ts'
+import { constant } from './function.ts'
+import { Functor, Functor1, Functor2, Functor2C, Functor3 } from './Functor.ts'
+import { HKT, Type, Type2, Type3, URIS, URIS2, URIS3 } from './HKT.ts'
 
 /**
  * @since 2.0.0

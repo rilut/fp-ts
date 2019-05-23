@@ -1,7 +1,7 @@
 /**
  * @file Adapted from https://github.com/purescript/purescript-console
  */
-import { IO } from './IO'
+import { IO } from './IO.ts'
 
 /**
  * @since 2.0.0

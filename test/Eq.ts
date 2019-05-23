@@ -1,5 +1,5 @@
-import * as assert from 'assert'
-import { contramap, eqDate, eqNumber, eqString, fromEquals, getTupleEq, eqBoolean, getStructEq } from '../src/Eq'
+import * as assert from 'assert.ts'
+import { contramap, eqDate, eqNumber, eqString, fromEquals, getTupleEq, eqBoolean, getStructEq } from '../src/Eq.ts'
 
 describe('Eq', () => {
   it('getTupleEq', () => {

@@ -1,5 +1,5 @@
-import * as assert from 'assert'
-import { log, info, error, warn } from '../src/Console'
+import * as assert from 'assert.ts'
+import { log, info, error, warn } from '../src/Console.ts'
 
 describe('Console', () => {
   it('log', () => {

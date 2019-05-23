@@ -1,6 +1,6 @@
-import * as assert from 'assert'
-import { Cont, cont } from '../src/Cont'
-import { identity } from '../src/function'
+import * as assert from 'assert.ts'
+import { Cont, cont } from '../src/Cont.ts'
+import { identity } from '../src/function.ts'
 
 describe('Cont', () => {
   it('map', () => {

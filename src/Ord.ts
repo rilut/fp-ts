@@ -9,9 +9,9 @@
  *
  * See [Getting started with fp-ts: Ord](https://dev.to/gcanti/getting-started-with-fp-ts-ord-5f1e)
  */
-import { Ordering, semigroupOrdering } from './Ordering'
-import { Semigroup } from './Semigroup'
-import { Eq, eqBoolean, eqNumber, eqString } from './Eq'
+import { Ordering, semigroupOrdering } from './Ordering.ts'
+import { Semigroup } from './Semigroup.ts'
+import { Eq, eqBoolean, eqNumber, eqString } from './Eq.ts'
 
 /**
  * @since 2.0.0
@@ -161,7 +161,7 @@ export function getSemigroup<A = never>(): Semigroup<Ord<A>> {
  * Given a tuple of `Ord`s returns an `Ord` for the tuple
  *
  * @example
- * import { getTupleOrd, ordString, ordNumber, ordBoolean } from 'fp-ts/lib/Ord'
+ * import { getTupleOrd, ordString, ordNumber, ordBoolean } from 'fp-ts/lib/Ord.ts'
  *
  * const O = getTupleOrd(ordString, ordNumber, ordBoolean)
  * assert.strictEqual(O.compare(['a', 1, true], ['b', 2, true]), -1)

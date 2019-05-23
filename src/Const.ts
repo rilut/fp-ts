@@ -1,12 +1,12 @@
-import { Applicative2C } from './Applicative'
-import { Apply2C } from './Apply'
-import { Contravariant2 } from './Contravariant'
-import { phantom, unsafeCoerce, identity } from './function'
-import { Functor2 } from './Functor'
-import { Monoid } from './Monoid'
-import { Semigroup } from './Semigroup'
-import { Eq } from './Eq'
-import { Show } from './Show'
+import { Applicative2C } from './Applicative.ts'
+import { Apply2C } from './Apply.ts'
+import { Contravariant2 } from './Contravariant.ts'
+import { phantom, unsafeCoerce, identity } from './function.ts'
+import { Functor2 } from './Functor.ts'
+import { Monoid } from './Monoid.ts'
+import { Semigroup } from './Semigroup.ts'
+import { Eq } from './Eq.ts'
+import { Show } from './Show.ts'
 
 declare module './HKT' {
   interface URI2HKT2<L, A> {
@@ -17,7 +17,7 @@ declare module './HKT' {
 /**
  * @since 2.0.0
  */
-export const URI = 'Const'
+export const URI = 'Const.ts'
 
 /**
  * @since 2.0.0

@@ -1,7 +1,7 @@
-import { Comonad2 } from './Comonad'
-import { Endomorphism } from './function'
-import { Functor, Functor1, Functor2, Functor2C, Functor3 } from './Functor'
-import { HKT, Type, Type2, Type3, URIS, URIS2, URIS3 } from './HKT'
+import { Comonad2 } from './Comonad.ts'
+import { Endomorphism } from './function.ts'
+import { Functor, Functor1, Functor2, Functor2C, Functor3 } from './Functor.ts'
+import { HKT, Type, Type2, Type3, URIS, URIS2, URIS3 } from './HKT.ts'
 
 declare module './HKT' {
   interface URI2HKT2<L, A> {
@@ -12,7 +12,7 @@ declare module './HKT' {
 /**
  * @since 2.0.0
  */
-export const URI = 'Store'
+export const URI = 'Store.ts'
 
 /**
  * @since 2.0.0

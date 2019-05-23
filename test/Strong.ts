@@ -1,6 +1,6 @@
-import * as assert from 'assert'
-import { reader } from '../src/Reader'
-import { fanout, splitStrong } from '../src/Strong'
+import * as assert from 'assert.ts'
+import { reader } from '../src/Reader.ts'
+import { fanout, splitStrong } from '../src/Strong.ts'
 
 describe('Strong', () => {
   it('splitStrong', () => {

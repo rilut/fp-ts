@@ -1,10 +1,10 @@
-import * as assert from 'assert'
+import * as assert from 'assert.ts'
 import {
   booleanAlgebraBoolean,
   booleanAlgebraVoid,
   getFunctionBooleanAlgebra,
   getDualBooleanAlgebra
-} from '../src/BooleanAlgebra'
+} from '../src/BooleanAlgebra.ts'
 
 describe('BooleanAlgebra', () => {
   it('booleanAlgebraBoolean', () => {

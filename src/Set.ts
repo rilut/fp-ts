@@ -1,12 +1,12 @@
-import { Either } from './Either'
-import { Monoid } from './Monoid'
-import { Ord } from './Ord'
-import { Semigroup } from './Semigroup'
-import { Eq, fromEquals } from './Eq'
-import { Predicate, not, Refinement, identity } from './function'
-import { Separated } from './Compactable'
-import { Option } from './Option'
-import { Show } from './Show'
+import { Either } from './Either.ts'
+import { Monoid } from './Monoid.ts'
+import { Ord } from './Ord.ts'
+import { Semigroup } from './Semigroup.ts'
+import { Eq, fromEquals } from './Eq.ts'
+import { Predicate, not, Refinement, identity } from './function.ts'
+import { Separated } from './Compactable.ts'
+import { Option } from './Option.ts'
+import { Show } from './Show.ts'
 
 /**
  * @since 2.0.0
@@ -14,9 +14,9 @@ import { Show } from './Show'
 export function getShow<A>(S: Show<A>): Show<Set<A>> {
   return {
     show: s => {
-      let elements = ''
+      let elements = '.ts'
       s.forEach(a => {
-        elements += S.show(a) + ', '
+        elements += S.show(a) + ', .ts'
       })
       if (elements !== '') {
         elements = elements.substring(0, elements.length - 2)
@@ -247,8 +247,8 @@ export function partitionMap<L, R>(
  * Form the set difference (`x` - `y`)
  *
  * @example
- * import { difference } from 'fp-ts/lib/Set'
- * import { eqNumber } from 'fp-ts/lib/Eq'
+ * import { difference } from 'fp-ts/lib/Set.ts'
+ * import { eqNumber } from 'fp-ts/lib/Eq.ts'
  *
  * assert.deepStrictEqual(difference(eqNumber)(new Set([1, 2]), new Set([1, 3])), new Set([2]))
  *

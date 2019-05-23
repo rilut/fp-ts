@@ -1,22 +1,22 @@
 /**
  * @file Adapted from https://github.com/purescript/purescript-tuples
  */
-import { Applicative, Applicative2C } from './Applicative'
-import { Apply2C } from './Apply'
-import { Bifunctor2 } from './Bifunctor'
-import { Chain2C } from './Chain'
-import { ChainRec2C } from './ChainRec'
-import { Comonad2 } from './Comonad'
-import { Either } from './Either'
-import { Foldable2 } from './Foldable'
-import { phantom } from './function'
-import { HKT } from './HKT'
-import { Monad2C } from './Monad'
-import { Monoid } from './Monoid'
-import { Semigroup } from './Semigroup'
-import { Semigroupoid2 } from './Semigroupoid'
-import { Show } from './Show'
-import { Traversable2 } from './Traversable'
+import { Applicative, Applicative2C } from './Applicative.ts'
+import { Apply2C } from './Apply.ts'
+import { Bifunctor2 } from './Bifunctor.ts'
+import { Chain2C } from './Chain.ts'
+import { ChainRec2C } from './ChainRec.ts'
+import { Comonad2 } from './Comonad.ts'
+import { Either } from './Either.ts'
+import { Foldable2 } from './Foldable.ts'
+import { phantom } from './function.ts'
+import { HKT } from './HKT.ts'
+import { Monad2C } from './Monad.ts'
+import { Monoid } from './Monoid.ts'
+import { Semigroup } from './Semigroup.ts'
+import { Semigroupoid2 } from './Semigroupoid.ts'
+import { Show } from './Show.ts'
+import { Traversable2 } from './Traversable.ts'
 
 declare module './HKT' {
   interface URI2HKT2<L, A> {
@@ -27,7 +27,7 @@ declare module './HKT' {
 /**
  * @since 2.0.0
  */
-export const URI = 'Tuple'
+export const URI = 'Tuple.ts'
 
 /**
  * @since 2.0.0

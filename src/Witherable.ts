@@ -15,13 +15,13 @@
  *
  * Adapted from https://github.com/LiamGoodacre/purescript-filterable/blob/master/src/Data/Witherable.purs
  */
-import { HKT, Type, Type2, Type3, URIS, URIS2, URIS3 } from './HKT'
-import { Option } from './Option'
-import { Traversable, Traversable1, Traversable2, Traversable2C, Traversable3 } from './Traversable'
-import { Applicative, Applicative1, Applicative2, Applicative2C, Applicative3 } from './Applicative'
-import { Filterable, Filterable1, Filterable2, Filterable2C, Filterable3 } from './Filterable'
-import { Either } from './Either'
-import { Separated } from './Compactable'
+import { HKT, Type, Type2, Type3, URIS, URIS2, URIS3 } from './HKT.ts'
+import { Option } from './Option.ts'
+import { Traversable, Traversable1, Traversable2, Traversable2C, Traversable3 } from './Traversable.ts'
+import { Applicative, Applicative1, Applicative2, Applicative2C, Applicative3 } from './Applicative.ts'
+import { Filterable, Filterable1, Filterable2, Filterable2C, Filterable3 } from './Filterable.ts'
+import { Either } from './Either.ts'
+import { Separated } from './Compactable.ts'
 
 /**
  * @since 2.0.0

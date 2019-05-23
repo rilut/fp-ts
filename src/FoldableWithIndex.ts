@@ -23,9 +23,9 @@ import {
   FoldableComposition2C1,
   FoldableComposition22,
   FoldableComposition22C
-} from './Foldable'
-import { HKT, Type, Type2, Type3, URIS, URIS2, URIS3 } from './HKT'
-import { Monoid } from './Monoid'
+} from './Foldable.ts'
+import { HKT, Type, Type2, Type3, URIS, URIS2, URIS3 } from './HKT.ts'
+import { Monoid } from './Monoid.ts'
 
 /**
  * @since 2.0.0

@@ -1,6 +1,6 @@
-import * as Benchmark from 'benchmark'
-import { getUnionMonoid } from '../../src/Set'
-import { eqString } from '../../src/Eq'
+import * as Benchmark from 'benchmark.ts'
+import { getUnionMonoid } from '../../src/Set.ts'
+import { eqString } from '../../src/Eq.ts'
 
 const suite = new Benchmark.Suite()
 

@@ -1,17 +1,17 @@
-import { Alt3 } from './Alt'
-import { Bifunctor3 } from './Bifunctor'
-import { Either } from './Either'
-import { pipeOp, Predicate, Refinement } from './function'
-import { IO } from './IO'
-import { IOEither } from './IOEither'
-import { Monad3 } from './Monad'
-import { MonadIO3 } from './MonadIO'
-import { MonadTask3 } from './MonadTask'
-import { Option } from './Option'
-import { Reader } from './Reader'
-import { getReaderM } from './ReaderT'
-import { Task } from './Task'
-import * as TE from './TaskEither'
+import { Alt3 } from './Alt.ts'
+import { Bifunctor3 } from './Bifunctor.ts'
+import { Either } from './Either.ts'
+import { pipeOp, Predicate, Refinement } from './function.ts'
+import { IO } from './IO.ts'
+import { IOEither } from './IOEither.ts'
+import { Monad3 } from './Monad.ts'
+import { MonadIO3 } from './MonadIO.ts'
+import { MonadTask3 } from './MonadTask.ts'
+import { Option } from './Option.ts'
+import { Reader } from './Reader.ts'
+import { getReaderM } from './ReaderT.ts'
+import { Task } from './Task.ts'
+import * as TE from './TaskEither.ts'
 
 import TaskEither = TE.TaskEither
 
@@ -26,7 +26,7 @@ declare module './HKT' {
 /**
  * @since 2.0.0
  */
-export const URI = 'ReaderTaskEither'
+export const URI = 'ReaderTaskEither.ts'
 
 /**
  * @since 2.0.0

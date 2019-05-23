@@ -1,5 +1,5 @@
-import * as assert from 'assert'
-import { random, randomInt, randomBool, randomRange } from '../src/Random'
+import * as assert from 'assert.ts'
+import { random, randomInt, randomBool, randomRange } from '../src/Random.ts'
 
 describe('Random', () => {
   it('random', () => {

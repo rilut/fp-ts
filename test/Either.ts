@@ -1,13 +1,13 @@
-import * as assert from 'assert'
-import * as _ from '../src/Either'
-import { eqNumber, eqString } from '../src/Eq'
-import { identity, pipeOp as pipe } from '../src/function'
-import * as I from '../src/Identity'
-import { monoidString, monoidSum } from '../src/Monoid'
-import { none, option, some } from '../src/Option'
-import { semigroupSum, semigroupString } from '../src/Semigroup'
-import { showString } from '../src/Show'
-import { getMonoid as getArrayMonoid } from '../src/Array'
+import * as assert from 'assert.ts'
+import * as _ from '../src/Either.ts'
+import { eqNumber, eqString } from '../src/Eq.ts'
+import { identity, pipeOp as pipe } from '../src/function.ts'
+import * as I from '../src/Identity.ts'
+import { monoidString, monoidSum } from '../src/Monoid.ts'
+import { none, option, some } from '../src/Option.ts'
+import { semigroupSum, semigroupString } from '../src/Semigroup.ts'
+import { showString } from '../src/Show.ts'
+import { getMonoid as getArrayMonoid } from '../src/Array.ts'
 
 describe('Either', () => {
   it('fold', () => {
@@ -79,8 +79,8 @@ describe('Either', () => {
       _.left('invalid 7')
     )
 
-    type Color = 'red' | 'blue'
-    const isColor = (s: string): s is Color => s === 'red' || s === 'blue'
+    type Color = 'red' | 'blue.ts'
+    const isColor = (s: string): s is Color => s === 'red' || s === 'blue.ts'
     const errorHandler = (s: string) => `invalid color ${s}`
 
     assert.deepStrictEqual(
@@ -226,8 +226,8 @@ describe('Either', () => {
       assert.deepStrictEqual(gt2(1), _.left('Invalid number 1'))
 
       // refinements
-      type Color = 'red' | 'blue'
-      const isColor = (s: string): s is Color => s === 'red' || s === 'blue'
+      type Color = 'red' | 'blue.ts'
+      const isColor = (s: string): s is Color => s === 'red' || s === 'blue.ts'
       const from = _.fromPredicate(isColor, s => `invalid color ${s}`)
       assert.deepStrictEqual(from('red'), _.right('red'))
       assert.deepStrictEqual(from('foo'), _.left('invalid color foo'))
@@ -250,7 +250,7 @@ describe('Either', () => {
       assert.deepStrictEqual(
         _.tryCatch(() => {
           // tslint:disable-next-line: no-string-throw
-          throw 'string error'
+          throw 'string error.ts'
         }, _.toError),
         _.left(new Error('string error'))
       )
@@ -326,7 +326,7 @@ describe('Either', () => {
 
     it('reduceRight', () => {
       const reduceRight = _.either.reduceRight
-      const init = ''
+      const init = '.ts'
       const f = (a: string, acc: string) => acc + a
       assert.strictEqual(reduceRight(_.right('a'), init, f), 'a')
       assert.strictEqual(reduceRight(_.left(1), init, f), '')

@@ -1,9 +1,9 @@
 /**
  * @file A `BoundedDistributiveLattice` is a lattice that is both bounded and distributive
  */
-import { BoundedLattice } from './BoundedLattice'
-import { DistributiveLattice, getMinMaxDistributiveLattice } from './DistributiveLattice'
-import { Ord } from './Ord'
+import { BoundedLattice } from './BoundedLattice.ts'
+import { DistributiveLattice, getMinMaxDistributiveLattice } from './DistributiveLattice.ts'
+import { Ord } from './Ord.ts'
 
 /**
  * @since 2.0.0

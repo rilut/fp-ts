@@ -1,5 +1,5 @@
-import * as assert from 'assert'
-import { sign, eqOrdering, semigroupOrdering, invert } from '../src/Ordering'
+import * as assert from 'assert.ts'
+import { sign, eqOrdering, semigroupOrdering, invert } from '../src/Ordering.ts'
 
 describe('Ordering', () => {
   it('sign', () => {

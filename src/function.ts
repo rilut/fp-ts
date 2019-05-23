@@ -20,7 +20,7 @@ export type BinaryOperation<A, B> = (a1: A, a2: A) => B
 
 /**
  * @example
- * import { FunctionN } from 'fp-ts/lib/function'
+ * import { FunctionN } from 'fp-ts/lib/function.ts'
  *
  * export const sum: FunctionN<[number, number], number> = (a, b) => a + b
  *

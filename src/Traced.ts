@@ -1,7 +1,7 @@
-import { Comonad2C } from './Comonad'
-import { Monoid } from './Monoid'
-import { Functor2 } from './Functor'
-import { phantom, tuple } from './function'
+import { Comonad2C } from './Comonad.ts'
+import { Monoid } from './Monoid.ts'
+import { Functor2 } from './Functor.ts'
+import { phantom, tuple } from './function.ts'
 
 declare module './HKT' {
   interface URI2HKT2<L, A> {
@@ -12,7 +12,7 @@ declare module './HKT' {
 /**
  * @since 2.0.0
  */
-export const URI = 'Traced'
+export const URI = 'Traced.ts'
 
 /**
  * @since 2.0.0

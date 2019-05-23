@@ -1,22 +1,22 @@
-import * as assert from 'assert'
-import * as glob from 'glob'
-import * as path from 'path'
+import * as assert from 'assert.ts'
+import * as glob from 'glob.ts'
+import * as path from 'path.ts'
 
 const getExportName = (name: string): string => {
   if (name === 'HKT' || name === 'IO') {
     return name.toLowerCase()
   }
   if (name === 'IOEither') {
-    return 'ioEither'
+    return 'ioEither.ts'
   }
   if (name === 'IORef') {
-    return 'ioRef'
+    return 'ioRef.ts'
   }
   if (name === 'TaskEither') {
-    return 'taskEither'
+    return 'taskEither.ts'
   }
   if (name === 'StrMap') {
-    return 'strmap'
+    return 'strmap.ts'
   }
   return name.substring(0, 1).toLowerCase() + name.substring(1)
 }

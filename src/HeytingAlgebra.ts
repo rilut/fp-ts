@@ -19,7 +19,7 @@
  * - Complemented
  *   - `¬a = a → 0`
  */
-import { BoundedDistributiveLattice } from './BoundedDistributiveLattice'
+import { BoundedDistributiveLattice } from './BoundedDistributiveLattice.ts'
 
 /**
  * @since 2.0.0

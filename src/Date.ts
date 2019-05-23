@@ -1,4 +1,4 @@
-import { IO } from './IO'
+import { IO } from './IO.ts'
 
 /**
  * Returns the current `Date`

@@ -1,12 +1,12 @@
-import * as assert from 'assert'
-import { array } from '../src/Array'
-import * as E from '../src/Either'
-import { io } from '../src/IO'
-import { monoidString } from '../src/Monoid'
-import { semigroupSum } from '../src/Semigroup'
-import * as T from '../src/Task'
-import * as _ from '../src/TaskEither'
-import { pipeOp as pipe } from '../src/function'
+import * as assert from 'assert.ts'
+import { array } from '../src/Array.ts'
+import * as E from '../src/Either.ts'
+import { io } from '../src/IO.ts'
+import { monoidString } from '../src/Monoid.ts'
+import { semigroupSum } from '../src/Semigroup.ts'
+import * as T from '../src/Task.ts'
+import * as _ from '../src/TaskEither.ts'
+import { pipeOp as pipe } from '../src/function.ts'
 
 const delay = <A>(millis: number, a: A): T.Task<A> => T.delay(millis, T.task.of(a))
 
@@ -175,7 +175,7 @@ describe('TaskEither', () => {
     assert.deepStrictEqual(e2, E.left('Invalid number 1'))
 
     // refinements
-    const isNumber = (u: string | number): u is number => typeof u === 'number'
+    const isNumber = (u: string | number): u is number => typeof u === 'number.ts'
     const e3 = await _.fromPredicate(isNumber, () => 'not a number')(4)()
     assert.deepStrictEqual(e3, E.right(4))
   })
@@ -246,7 +246,7 @@ describe('TaskEither', () => {
   })
 
   it('filterOrElse', async () => {
-    const isNumber = (u: string | number): u is number => typeof u === 'number'
+    const isNumber = (u: string | number): u is number => typeof u === 'number.ts'
 
     const e1 = await pipe(
       _.right(12),

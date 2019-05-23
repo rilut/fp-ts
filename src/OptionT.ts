@@ -3,10 +3,10 @@ import {
   ApplicativeComposition11,
   ApplicativeComposition21,
   getApplicativeComposition
-} from './Applicative'
-import { HKT, Type, Type2, URIS, URIS2 } from './HKT'
-import { Monad, Monad1, Monad2 } from './Monad'
-import { fold, none, Option, option, some, URI } from './Option'
+} from './Applicative.ts'
+import { HKT, Type, Type2, URIS, URIS2 } from './HKT.ts'
+import { Monad, Monad1, Monad2 } from './Monad.ts'
+import { fold, none, Option, option, some, URI } from './Option.ts'
 
 /**
  * @since 2.0.0
